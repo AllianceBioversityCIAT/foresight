@@ -142,6 +142,25 @@ function cafeto_theme_widgets_init() {
 }
 add_action( 'widgets_init', 'cafeto_theme_widgets_init' );
 
+// Define path and URL to the ACF plugin.
+define( 'ACF_PATH', get_stylesheet_directory() . '/theme/inc/advanced-custom-fields/' );
+define( 'ACF_URL', get_stylesheet_directory_uri() . '/theme/inc/advanced-custom-fields/' );
+
+// Include the ACF plugin.
+include_once( ACF_PATH . 'acf.php' );
+
+// Customize the url setting to fix incorrect asset URLs.
+add_filter( 'acf/settings/url', 'acf_settings_url' );
+function acf_settings_url( $url ) {
+	return ACF_URL;
+}
+
+// (Optional) Hide the ACF admin menu item.
+add_filter( 'acf/settings/show_admin', 'acf_settings_show_admin' );
+function acf_settings_show_admin( $show_admin ) {
+	return false;
+}
+
 /**
  * Enqueue scripts and styles.
  */
