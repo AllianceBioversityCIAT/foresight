@@ -1,0 +1,15 @@
+// stylelint-disable value-keyword-case
+$font__main: 'Barlow', sans-serif;
+// stylelint-enable value-keyword-case
+$font__line-height-body: 1.5;
+$font__line-height-pre: 1.6;
+
+pre {
+  background: $color__background-pre;
+  font-family: $font__main;
+  line-height: $font__line-height-pre;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1.6em;
+}

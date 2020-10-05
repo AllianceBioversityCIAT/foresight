@@ -1,0 +1,46 @@
+/**
+* This source code is the confidential, proprietary information of
+* Valshare Technology LLC Limited, you may not disclose such information,
+* and may only use it in accordance with the terms of the license
+* agreement you entered into with Valshare Technology LLC Limited.
+*
+* Valshare Technology LLC Limited.
+* All Rights Reserved.
+*/
+/*--------------------------------------------------------------
+# Version
+--------------------------------------------------------------*/
+@import "variables-site/version";
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Base
+- Elements
+- Links
+- Forms
+# Variables
+- colors
+- typography
+- version
+# Components
+- Navigation
+- Posts and pages
+- Comments
+- Widgets
+- Media
+- Captions
+- Galleries
+
+--------------------------------------------------------------*/
+@import "variables-site/variables-site";
+
+/*--------------------------------------------------------------
+# Base
+--------------------------------------------------------------*/
+@import "base/base";
+
+/*--------------------------------------------------------------
+# Components
+--------------------------------------------------------------*/
+@import "components/components";

@@ -1,0 +1,9 @@
+# ignore node dependency directories
+node_modules/
+dist/
+build/
+config.json
+package-lock.json
+.idea
+vendor/
+composer.lock
