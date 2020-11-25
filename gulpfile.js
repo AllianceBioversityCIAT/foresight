@@ -1,35 +1,24 @@
 require( 'es6-promise' ).polyfill();
-
-var config = {
-  "dest": "./build"
-};
-
-try {
-    var config = require('./config.json');
-} catch (ex) {
-}
-
-var projectInfo = require( './package.json' ),
-    destFolder = (config.dest) + '/' + projectInfo.name;
-
-var gulp =        require( 'gulp' ),
-  fs =            require( 'fs' ),
-  babel =         require( 'gulp-babel' ),
-  sass =          require( 'gulp-sass' ),
-  rtlcss =        require( 'gulp-rtlcss' ),
-  postcss =       require( 'gulp-postcss' ),
-  autoprefixer =  require( 'gulp-autoprefixer' ),
-  cssnano =       require( 'cssnano' ),
-  plumber =       require( 'gulp-plumber' ),
-  gutil =         require( 'gulp-util' ),
-  rename =        require( 'gulp-rename' ),
-  concat =        require( 'gulp-concat' ),
-  sourcemaps =    require( 'gulp-sourcemaps' ),
-  uglify =        require( 'gulp-uglify' ),
-  imagemin =      require( 'gulp-imagemin' ),
-  del =           require( 'del' ),
-  bump =          require( 'gulp-bump' ),
-  zip =           require('gulp-zip');
+var buildConfig  = require( './gulp.config' ),
+    gulp         = require( 'gulp' ),
+    fs           = require( 'fs' ),
+    babel        = require( 'gulp-babel' ),
+    sass         = require( 'gulp-sass' ),
+    rtlcss       = require( 'gulp-rtlcss' ),
+    postcss      = require( 'gulp-postcss' ),
+    autoprefixer = require( 'gulp-autoprefixer' ),
+    cssnano      = require( 'cssnano' ),
+    plumber      = require( 'gulp-plumber' ),
+    gutil        = require( 'gulp-util' ),
+    rename       = require( 'gulp-rename' ),
+    concat       = require( 'gulp-concat' ),
+    sourcemaps   = require( 'gulp-sourcemaps' ),
+    uglify       = require( 'gulp-uglify' ),
+    imagemin     = require( 'gulp-imagemin' ),
+    del          = require( 'del' ),
+    bump         = require( 'gulp-bump' ),
+    zip          = require( 'gulp-zip' ),
+    mode         = require( 'gulp-mode' )();
 
 var onError = function ( err ) {
   console.log( 'An error occurred:', gutil.colors.magenta( err.message ) );
@@ -43,14 +32,14 @@ var onError = function ( err ) {
  * @return { stream } - returns a gulp stream.
  */
 function cssTask() {
-  return gulp.src( './src/static/sass/style.scss' )
-    .pipe( sourcemaps.init() )
+  return gulp.src( buildConfig.sources.allScssFiles )
+    .pipe( mode.development( sourcemaps.init() ) )
     .pipe( plumber( { errorHandler: onError } ) )
     .pipe( sass() )
     .pipe( postcss( [ autoprefixer, cssnano ] ) )
-    .pipe( sourcemaps.write( '/' ) )
-    .pipe( gulp.dest( destFolder )
-  );
+    .pipe( ( mode.development( sourcemaps.write( '/' ) ) ) )
+    .pipe( gulp.dest( buildConfig.destination.destFolder )
+    );
 }
 
 /**
@@ -59,16 +48,16 @@ function cssTask() {
  * @return { stream } - returns a gulp stream.
  */
 function cssRtlTask() {
-  return gulp.src( './src/static/sass/style.scss' )
-    .pipe( sourcemaps.init() )
+  return gulp.src( buildConfig.sources.allScssFiles )
+    .pipe( mode.development( sourcemaps.init() ) )
     .pipe( plumber( { errorHandler: onError } ) )
     .pipe( sass() )
     .pipe( rtlcss() )
     .pipe( rename( { basename: 'rtl' } ) )
     .pipe( postcss( [ autoprefixer, cssnano ] ) )
-    .pipe( sourcemaps.write( '/' ) )
-    .pipe( gulp.dest( destFolder )
-  );
+    .pipe( ( mode.development( sourcemaps.write( '/' ) ) ) )
+    .pipe( gulp.dest( buildConfig.destination.destFolder )
+    );
 }
 
 /**
@@ -77,11 +66,9 @@ function cssRtlTask() {
  * @return { stream } - returns a gulp stream.
  */
 function cssLibrariesTask() {
-  return gulp.src( [
-      './node_modules/bootstrap/dist/css/bootstrap.min.css',
-    ] )
-    .pipe( gulp.dest( destFolder + '/static/lib/css/' )
-  );
+  return gulp.src( buildConfig.sources.nodeScripts.css )
+    .pipe( gulp.dest( buildConfig.destination.nodeScripts.css )
+    );
 }
 
 /**
@@ -90,11 +77,9 @@ function cssLibrariesTask() {
  * @return { stream } - returns a gulp stream
  */
 function jsLibrariesTask() {
-  return gulp.src( [
-      './node_modules/bootstrap/dist/js/bootstrap.min.js',
-    ] )
-    .pipe( gulp.dest( destFolder + '/static/lib/js/' )
-  );
+  return gulp.src( buildConfig.sources.nodeScripts.js )
+    .pipe( gulp.dest( buildConfig.destination.nodeScripts.js )
+    );
 }
 
 /**
@@ -103,17 +88,17 @@ function jsLibrariesTask() {
  * @return { stream } - returns a gulp stream
  */
 function jsTask() {
-  return gulp.src( './src/static/js/**/*.js' )
+  return gulp.src( buildConfig.sources.allJsFiles )
     .pipe( concat( 'main.js' ) )
-    .pipe( sourcemaps.init() )
+    .pipe( mode.development( sourcemaps.init() ) )
     .pipe( babel( {
       presets: [ "@babel/preset-env" ]
     } ) )
     .pipe( rename( { suffix: '.min' } ) )
     .pipe( uglify() )
-    .pipe( sourcemaps.write( '/' ) )
-    .pipe( gulp.dest( destFolder + '/static/js/' )
-  );
+    .pipe( ( mode.development( sourcemaps.write( '/' ) ) ) )
+    .pipe( gulp.dest( buildConfig.destination.allJsFiles )
+    );
 }
 
 /**
@@ -122,11 +107,11 @@ function jsTask() {
  * @return { stream } - returns a gulp stream
  */
 function imagesTask() {
-  return gulp.src( './src/static/images/**/*.{png,jpg,gif,svg}' )
+  return gulp.src( buildConfig.sources.allImgFiles )
     .pipe( plumber( { errorHandler: onError } ) )
     .pipe( imagemin( { optimizationLevel: 7, progressive: true } ) )
-    .pipe( gulp.dest( destFolder + '/static/images/' )
-  );
+    .pipe( gulp.dest( buildConfig.destination.allImgFiles )
+    );
 }
 
 /**
@@ -135,10 +120,8 @@ function imagesTask() {
  * @return { stream } - returns a gulp stream
  */
 function vendorTask() {
-  return gulp.src( [
-    './vendor/**/*',
-  ] )
-    .pipe( gulp.dest( destFolder + '/theme/vendor/' )
+  return gulp.src( buildConfig.sources.vendorScripts )
+    .pipe( gulp.dest( buildConfig.destination.vendorScripts )
     );
 }
 
@@ -148,14 +131,9 @@ function vendorTask() {
  * @return { stream } - returns a gulp stream
  */
 function scaffolding() {
-  return gulp.src( [
-      'src/**/*',
-      '!src/static/sass/**',
-      '!src/static/js/**',
-      '!src/static/images/**'
-    ] )
-    .pipe( gulp.dest( destFolder )
-  );
+  return gulp.src( buildConfig.sources.scaffolding )
+    .pipe( gulp.dest( buildConfig.destination.destFolder )
+    );
 }
 
 /**
@@ -165,16 +143,16 @@ function scaffolding() {
 function watchTask() {
 
   // Watch Php files.
-  gulp.watch( './src/**/*.{php,twig}', scaffolding, vendorTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/**/*.{php,twig}', scaffolding, vendorTask );
 
   // Watch CSS files
-  gulp.watch( './src/static/sass/**/*.scss', cssTask, cssLibrariesTask, cssRtlTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssLibrariesTask, cssRtlTask );
 
   // Watch Javascript files.
-  gulp.watch( './src/static/js/**/*.js', jsTask, jsLibrariesTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/js/**/*.js', jsTask, jsLibrariesTask );
 
   // Watch images files.
-  gulp.watch( './src/static/images/**/*.{png,jpg,gif}', imagesTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/images/**/*.{png,jpg,gif}', imagesTask );
 }
 
 /**
@@ -183,59 +161,48 @@ function watchTask() {
  * @return { stream } - returns a gulp stream
  */
 function clean( cb ) {
-  del.sync( [ destFolder + '/**/**' ], { force: true } );
+  del.sync( [ buildConfig.destination.destFolder + '/**/**' ], { force: true } );
   cb();
 }
 
-function prerelease(){
-  return gulp.src('./package.json')
-    .pipe(bump({type:'prerelease'}))
-    .pipe(gulp.dest('./')
-  );
+function prerelease() {
+  return gulp.src( buildConfig.general.package )
+    .pipe( bump( { type: 'prerelease' } ) )
+    .pipe( gulp.dest( './' )
+    );
 }
 
-function updateWpVersion(cb){
-  var pInfo = require( './package.json' );
-  var banner = ['/*!',
-    'Theme Name: ' + pInfo.name,
-    'Description:' + pInfo.description,
-    'Author: '+ pInfo.author,
-    'Version: '+ pInfo.version,
-    'Tags: ' + (pInfo.keywords).join(' '),
-    'Requires at least: 5.0',
-    'Tested up to: 5.4',
-    '*/',
-    ''].join('\n');
-  fs.writeFile( 'src/static/sass/variables-site/_version.scss', banner, cb);
+function updateWpVersion( cb ) {
+  var banner = buildConfig.sources.banner.join( '\n' );
+  fs.writeFile( buildConfig.sources.version, banner, cb );
 }
 
-function package(){
-  var pInfo = require( './package.json' );
-  return gulp.src( destFolder + '/**', {base: config.dest} )
-		.pipe(zip( pInfo.name + '_' + pInfo.version + '.zip'))
-		.pipe(gulp.dest('dist'))
+function package() {
+  return gulp.src( buildConfig.destination.destinationFolder + '/**', { base: buildConfig.general.dest } )
+    .pipe( zip( buildConfig.general.package.name + '_' + buildConfig.general.package.version + '.zip' ) )
+    .pipe( gulp.dest( buildConfig.destination.buildPackage ) )
 }
 
-const build = gulp.series(
+const build  = gulp.series(
   clean,
   scaffolding,
   vendorTask,
-  gulp.parallel(cssTask, cssLibrariesTask, cssRtlTask, jsTask, jsLibrariesTask, imagesTask)
+  gulp.parallel( cssTask, cssLibrariesTask, cssRtlTask, jsTask, jsLibrariesTask, imagesTask )
 );
 const reload = gulp.series( build, gulp.parallel( watchTask ) );
 
 // Exports
-exports.scaffolding = scaffolding;
-exports.vendorTask = vendorTask;
-exports.cssTask = cssTask;
+exports.scaffolding      = scaffolding;
+exports.vendorTask       = vendorTask;
+exports.cssTask          = cssTask;
 exports.cssLibrariesTask = cssLibrariesTask;
-exports.cssRtlTask = cssRtlTask;
-exports.jsTask = jsTask;
-exports.jsLibrariesTask = jsLibrariesTask;
-exports.imagesTask = imagesTask;
-exports.clean = clean;
+exports.cssRtlTask       = cssRtlTask;
+exports.jsTask           = jsTask;
+exports.jsLibrariesTask  = jsLibrariesTask;
+exports.imagesTask       = imagesTask;
+exports.clean            = clean;
 
-exports.watch = reload;
-exports.build = build;
+exports.watch   = reload;
+exports.build   = build;
 exports.default = build;
 exports.package = gulp.series( updateWpVersion, build, package, prerelease );
