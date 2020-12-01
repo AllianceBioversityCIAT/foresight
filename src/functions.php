@@ -196,7 +196,7 @@ require get_template_directory() . '/theme/inc/template-functions.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/theme/inc/customizer.php';
+require get_template_directory() . '/theme/inc/customizer/customizer.php';
 
 /**
  * Load Jetpack compatibility file.
