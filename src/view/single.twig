@@ -1,0 +1,64 @@
+<div class="theme-header-scroll"></div>
+<section class="single-blog">
+	<div id="container-single-info" class="container container-single-info mt-5">
+		<div class="row py-5">
+			<div class="container-single-title py-5">
+				<h1 class="py-3">{{ post.title}}</h1>
+				<hr class="single-post-hr">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 post-content-information">
+				{{ post.content}}
+			</div>
+		</div>
+	</div>
+	<div class="container container-author-avatar">
+		<div class="row">
+			<img class="single-author-avatar" src="{{ post.author.avatar({ size: 100 }) }}" alt="{{post.author.name}}">
+			<h5 class="single-author-name">{{post.author.name}}</h5>
+		</div>
+	</div>
+	<div class="container-pagination-post">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 container-control-pagination p-0">
+					<div class="post-prev">
+						{% if prev_post.title %}
+							<h5 class="control-prev">
+								<a href="{{ prev_post.permalink }}">
+									<i class="fas fa-chevron-left"></i>
+									{{ prev_post.title }}
+								</a>
+							</h5>
+							<h5 class="control-prev-mobile">
+								<a href="{{ prev_post.permalink }}">
+									<i class="fas fa-chevron-left"></i>
+									Previous
+								</a>
+							</h5>
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-md-6 container-control-pagination p-0">
+					<div class="post-next">
+						{% if next_post %}
+							<h5 class="control-next">
+								<a href="{{ next_post.permalink }}">
+									<i class="fas fa-chevron-right"></i>
+									{{ next_post.title }}
+								</a>
+							</h5>
+							<h5 class="control-next-mobile">
+								<a href="{{ next_post.permalink }}">
+									Next
+									<i class="fas fa-chevron-right"></i>
+								</a>
+							</h5>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

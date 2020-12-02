@@ -72,6 +72,16 @@ function cssLibrariesTask() {
 }
 
 /**
+ * This function gets the svg from the library and moves them to another location.
+ *
+ * @returns { stream } - returns a gulp stream.
+ */
+function fontawesomeTask() {
+  return gulp.src( buildConfig.sources.nodeScripts.font )
+    .pipe( gulp.dest( buildConfig.destination.nodeScripts.font ) );
+}
+
+/**
  * This function gets libraries *.js files.
  * @function jsLibrariesTask
  * @return { stream } - returns a gulp stream
@@ -146,7 +156,7 @@ function watchTask() {
   gulp.watch( buildConfig.sources.sourceFolder + '/**/*.{php,twig}', scaffolding, vendorTask );
 
   // Watch CSS files
-  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssLibrariesTask, cssRtlTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssLibrariesTask, fontawesomeTask, cssRtlTask );
 
   // Watch Javascript files.
   gulp.watch( buildConfig.sources.sourceFolder + '/static/js/**/*.js', jsTask, jsLibrariesTask );
@@ -187,7 +197,7 @@ const build  = gulp.series(
   clean,
   scaffolding,
   vendorTask,
-  gulp.parallel( cssTask, cssLibrariesTask, cssRtlTask, jsTask, jsLibrariesTask, imagesTask )
+  gulp.parallel( cssTask, cssLibrariesTask, fontawesomeTask, cssRtlTask, jsTask, jsLibrariesTask, imagesTask )
 );
 const reload = gulp.series( build, gulp.parallel( watchTask ) );
 
@@ -196,6 +206,7 @@ exports.scaffolding      = scaffolding;
 exports.vendorTask       = vendorTask;
 exports.cssTask          = cssTask;
 exports.cssLibrariesTask = cssLibrariesTask;
+exports.fontawesomeTask  = fontawesomeTask;
 exports.cssRtlTask       = cssRtlTask;
 exports.jsTask           = jsTask;
 exports.jsLibrariesTask  = jsLibrariesTask;

@@ -1,0 +1,74 @@
+{% import "./view/macros/search-cards.twig" as searchCardMacro %}
+{% import "./view/macros/pagination.twig" as paginationCafeto %}
+<div class="theme-header-scroll"></div>
+<div id="primary" class="content-area">
+	<main id="main" class="site-main">
+		<section class="search">
+			<div class="cafeto-header-section"></div>
+			<div class="container p-0">
+				<div class="row title-first-search">
+					<div class="col-md-8">
+						<div class="row">
+						<div class="col-md-12">
+							<h2 class="cafeto-primary-font-color font-weight-bold">
+								Use a Keyword to find it!
+							</h2>
+						</div>
+						<div class="col-md-12">
+							<form role="search" method="get" id="searchform" class="searchform" action="{{site.link}}">
+								<input type="text" class="d-inline form-control mb-2 cafeto-w-70"
+								value="{{ function('get_search_query') }}" name="s" id="s" placeholder="Type Here"
+								size="16">
+
+								<input class="btn btn-outline-danger cafeto-menu-button"
+								type="submit" id="searchsubmit" value="Search"/>
+
+							</form>
+						</div>
+						</div>
+
+							{% if s is empty %}
+								{{ searchCardMacro.searchCard(lastPosts) }}
+							{% else %}
+								{{ searchCardMacro.searchCard(posts) }}
+								{{ paginationCafeto.paginationCafeto(posts) }}
+							{% endif %}
+
+
+
+
+					</div>
+
+					<div class="col-md-2 p-0 sidebar-search">
+						<h3 align="left">Archives</h3>
+						<hr class="cafeto-hr-red-archive" align="left">
+						{% set args = {
+							'type' : 'monthly',
+							'show_post_count' : 'true',
+							'format' : 'custom',
+							'before' : '<p class="cafeto-link-archive">',
+							'after' : '</p>',
+						} %}
+						{{ function('wp_get_archives', args) }}
+
+
+						<h3 class="mt-5" align="left">Categories</h3>
+						<hr class="cafeto-hr-red-archive" align="left">
+						{% set args = {
+							'orderby' : 'count',
+							'order' : 'DESC',
+							'show_count' : 1,
+							'title_li':'',
+							'number': 10,
+							'hierarchical' : '0'
+						} %}
+						<div class="cafeto-categories-archive">
+							{{ function('wp_list_categories', args) }}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+	</main>
+</div>

@@ -1,0 +1,44 @@
+section.search {
+    padding-top: 8rem;
+
+    .container {
+        padding: 5rem;
+        .row {
+            &.title-first-search {
+                margin-top: 10rem;
+                margin-bottom: 8rem;
+            }
+        }
+    }
+
+    p.cafeto-link-archive {
+        margin-bottom: 2% !important;
+        text-align: left;
+        width: 100%;
+        > a {
+            text-decoration: none !important;
+            font-size: 100% !important;
+            color: black;
+            &:hover {
+                color: black;
+            }
+        }
+    }
+
+    .cafeto-categories-archive {
+        > li.cat-item {
+            display: block;
+            margin-top: 2%;
+            text-align: left;
+            > a {
+                font-size: 100% !important;
+                text-decoration: none !important;
+                color: black;
+            }
+        }
+    }
+    .sidebar-search {
+        border-left: 2px solid #dc0037;
+        padding-left: 1rem !important;
+    }
+}
