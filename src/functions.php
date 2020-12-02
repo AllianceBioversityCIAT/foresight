@@ -57,6 +57,7 @@ if ( ! function_exists( 'cafeto_theme_setup' ) ) :
 		register_nav_menus(
 			array(
 				'menu-1' => esc_html__( 'Primary', SLUG_THEME ),
+				'cafeto-social-menu' => esc_html__( 'Social Menu', SLUG_THEME ),
 			)
 		);
 
@@ -167,10 +168,16 @@ function acf_settings_show_admin( $show_admin ) {
 function cafeto_theme_scripts() {
 
 	//Styles
-	wp_enqueue_style( 'valshare_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'cafeto_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
+
+	wp_enqueue_style( 'cafeto_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/css/bootstrap.min.css' );
+
+	wp_enqueue_style( 'cafeto_theme-fontawesome-style', get_template_directory_uri() . '/static/lib/css/all.css' );
 
 	//JS
-	wp_enqueue_script( 'valshare_theme-general-js', get_template_directory_uri() . '/static/js/main.min.js', array( 'jquery' ), _S_VERSION, true );
+	wp_enqueue_script( 'cafeto_theme-general-js', get_template_directory_uri() . '/static/js/main.min.js', array( 'jquery' ), _S_VERSION, true );
+
+	wp_enqueue_script( 'cafeto_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -197,6 +204,11 @@ require get_template_directory() . '/theme/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/theme/inc/customizer/customizer.php';
+
+/**
+ * Load Social Navigation.
+ */
+require get_template_directory() . '/theme/menu/social-menu.php';
 
 /**
  * Load Jetpack compatibility file.

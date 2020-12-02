@@ -8,33 +8,31 @@
  */
 
 get_header();
-?>
 
-	<main id="primary" class="site-main">
+if ( class_exists( 'Timber' ) ) {
+	$next_post    = get_next_post();
+	$prev_post    = get_previous_post();
+	$context = Timber::context();
+	$context[ 'post' ] = new Timber\Post();
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+	if ( is_object( $prev_post ) ) {
+		$context[ 'prev_post' ]    = [
+			'permalink' => get_permalink( $prev_post->ID ),
+			'title'     => $prev_post->post_title,
+		];
+	}
 
-			get_template_part( 'theme/template-parts/content', get_post_type() );
+	if ( is_object( $next_post ) ) {
+		$context[ 'next_post' ] = [
+			'permalink' => get_permalink( $next_post->ID ),
+			'title'     => $next_post->post_title,
+		];
+	}
 
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', SLUG_THEME ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', SLUG_THEME ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
+	Timber::render( './view/single.twig', $context );
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+} else {
+	echo '<h1>Timber plugin is required</h1>';
+}
 
-		endwhile; // End of the loop.
-		?>
-
-	</main><!-- #main -->
-
-<?php
-get_sidebar();
 get_footer();

@@ -1,0 +1,139 @@
+body {
+  .single-blog {
+
+    .container-author-avatar {
+      margin-top: 2rem;
+
+      .row {
+        align-items: center;
+
+        .single-author-avatar {
+          border-radius: 50%;
+          margin-right: 2rem;
+          box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+
+/*-----------------------------------------------------
+# Post Pagination.
+-------------------------------------------------------*/
+    .container-pagination-post {
+      background-color: #e6e6e6;
+      margin-top: 6rem;
+
+      .container {
+        .row {
+          .container-control-pagination {
+
+            @include respond-below(sm) {
+              width: 50%;
+            }
+
+            .post-prev {
+              h5 {
+                text-align: left;
+                padding: 4rem 1rem;
+                font-size: 1em;
+
+                a {
+                  text-decoration: none;
+                  color: #222222;
+                  position: relative;
+
+                  i {
+                    position: absolute;
+                    left: -35px;
+                    font-size: 1.5rem;
+                    color: #dc0037;
+
+                    &:hover {
+                      color: #a3022f;
+                    }
+                  }
+
+                  &:hover {
+                    color: #dc0037;
+                  }
+                }
+              }
+
+              .control-prev {
+                @include respond-below(sm) {
+                  display: none;
+                }
+              }
+
+              .control-prev-mobile {
+                display: none;
+
+                @include respond-below(sm) {
+                  display: block;
+
+                  a {
+                    i {
+                      position: static;
+                      left: 0;
+                      font-size: 1.5rem;
+                    }
+                  }
+                }
+              }
+            }
+
+            .post-next {
+              h5 {
+                text-align: right;
+                padding: 4rem 1rem;
+                font-size: 1em;
+
+                a {
+                  text-decoration: none;
+                  color: #222222;
+                  position: relative;
+
+                  i {
+                    position: absolute;
+                    right: -35px;
+                    font-size: 1.5rem;
+                    color: #dc0037;
+
+                    &:hover {
+                      color: #a3022f;
+                    }
+                  }
+
+                  &:hover {
+                    color: #dc0037;
+                  }
+                }
+              }
+
+              .control-next {
+                @include respond-below(sm) {
+                  display: none;
+                }
+              }
+
+              .control-next-mobile {
+                display: none;
+
+                @include respond-below(sm) {
+                  display: block;
+
+                  a {
+                    i {
+                      position: static;
+                      left: 0;
+                      font-size: 1.5rem;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

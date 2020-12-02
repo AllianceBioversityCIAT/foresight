@@ -13,26 +13,15 @@
  */
 
 get_header();
-?>
 
-	<main id="primary" class="site-main">
+if (class_exists('Timber')) {
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+	$context = Timber::context();
+	$context['post'] =  new Timber\Post();
 
-			get_template_part( 'theme/template-parts/content', 'page' );
+	Timber::render('./view/page.twig', $context);
+} else {
+	echo '<h1>Timber plugin is required</h1>';
+}
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
-
-	</main><!-- #main -->
-
-<?php
-get_sidebar();
 get_footer();

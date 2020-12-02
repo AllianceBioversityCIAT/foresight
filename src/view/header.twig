@@ -1,0 +1,26 @@
+<header id="theme-masthead" class="site-header"><!-- #masthead -->
+	<nav id="theme-main-menu" class="navbar fixed-top navbar-expand-lg">
+		<div class="container">
+			<a id="theme-nav-logo" class="navbar-brand" href="{{ function('get_home_url') }}">
+				<img src="{{ function('customize_theme_mod', 'theme_nav_logo' ) }}" width="167"
+						 class="d-inline-block align-top" alt="" loading="lazy">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item current-menu-item section-home-url active">
+						<a class="nav-link" href="{{ function('get_home_url') }}">Home</a>
+					</li>
+					<li id="bottom-url" class="menu-item login-bottom">
+						<a class="btn theme-menu-button" href="#">
+							Get started
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav><!-- #site-navigation -->
+</header><!-- #masthead -->

@@ -1,0 +1,134 @@
+body {
+  .cafeto-background-picture {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: cover !important;
+  }
+
+  #cafeto-single-category{
+    .general-header-title-content{
+      .title_category{
+        font-weight: 700 !important;
+      }
+
+    }
+  }
+
+  #cafeto-archive-blog {
+    .row {
+      margin: 0;
+    }
+
+    .container {
+      .general-header-title-content {
+        text-align: center;
+
+        @include respond-below( xl ) {
+          margin-bottom: 0 !important;
+          padding: 0 !important;
+        }
+
+
+
+        .cafeto-header-section {
+          color: #0D0D0D;
+          font-size: 7rem;
+          font-weight: bold;
+          letter-spacing: -6px;
+
+          @include respond-below(lg) {
+            font-size: 5.5rem;
+          }
+
+          @include respond-below(xl) {
+            font-size: 3rem;
+          }
+        }
+
+        hr {
+          border: 1px solid #DC0037;
+          background: #DC0037;
+          width: 20rem;
+
+          @include respond-below(xl) {
+            width: 10%;
+          }
+        }
+
+        h4 {
+          font-weight: bold;
+        }
+      }
+
+      .card-lastPosts {
+        .blog-card-title {
+          font-weight: bold;
+          color: #222222;
+        }
+      }
+
+    }
+
+
+
+    .container-visit-blog {
+      .row {
+        margin: 0;
+
+        @include respond-below( sm ) {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.carousel-categories-blog {
+  padding: 1rem 0;
+
+  .navigation-categories-blog {
+    text-decoration: none;
+    color: #222222;
+
+    &:focus , h4{
+      outline-offset: 0px!important;
+      outline: 0px!important;
+    }
+
+    h4 {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+}
+
+.card-allpost-blog {
+  .card-body {
+    .card-permalink {
+      text-decoration: none;
+      color: #0D0D0D;
+
+      h4 {
+        font-weight: bold;
+      }
+    }
+
+    .cafeto-menu-button:visited {
+      color: #dc3545;
+    }
+  }
+}
+.general-header-title-content {
+  text-align: center;
+  hr {
+    border: 1px solid #DC0037;
+    background: #DC0037;
+    width: 20rem;
+
+    @include respond-below(xl) {
+      width: 10%;
+    }
+  }
+}
