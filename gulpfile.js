@@ -61,35 +61,15 @@ function cssRtlTask() {
 }
 
 /**
- * This function gets libraries *css files.
- * @function cssLibrariesTask
- * @return { stream } - returns a gulp stream.
- */
-function cssLibrariesTask() {
-  return gulp.src( buildConfig.sources.nodeScripts.css )
-    .pipe( gulp.dest( buildConfig.destination.nodeScripts.css )
-    );
-}
-
-/**
- * This function gets the svg from the library and moves them to another location.
- *
- * @returns { stream } - returns a gulp stream.
- */
-function fontawesomeTask() {
-  return gulp.src( buildConfig.sources.nodeScripts.font )
-    .pipe( gulp.dest( buildConfig.destination.nodeScripts.font ) );
-}
-
-/**
  * This function gets libraries *.js files.
  * @function jsLibrariesTask
  * @return { stream } - returns a gulp stream
  */
-function jsLibrariesTask() {
-  return gulp.src( buildConfig.sources.nodeScripts.js )
-    .pipe( gulp.dest( buildConfig.destination.nodeScripts.js )
-    );
+function LibrariesTask() {
+  return gulp.src( buildConfig.sources.allLibFiles, {
+    base: './node_modules/'
+  })
+    .pipe( gulp.dest( buildConfig.destination.allLibFiles ) );
 }
 
 /**
