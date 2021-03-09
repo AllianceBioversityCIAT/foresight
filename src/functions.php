@@ -170,14 +170,14 @@ function cafeto_theme_scripts() {
 	//Styles
 	wp_enqueue_style( 'cafeto_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
 
-	wp_enqueue_style( 'cafeto_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/css/bootstrap.min.css' );
+	wp_enqueue_style( 'cafeto_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/bootstrap/dist/css/bootstrap.min.css' );
 
-	wp_enqueue_style( 'cafeto_theme-fontawesome-style', get_template_directory_uri() . '/static/lib/css/all.css' );
+	wp_enqueue_style( 'cafeto_theme-fontawesome-style', get_template_directory_uri() . '/static/lib/@fortawesome/fontawesome-free/css/all.css' );
 
 	//JS
 	wp_enqueue_script( 'cafeto_theme-general-js', get_template_directory_uri() . '/static/js/main.min.js', array( 'jquery' ), _S_VERSION, true );
 
-	wp_enqueue_script( 'cafeto_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
+	wp_enqueue_script( 'cafeto_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

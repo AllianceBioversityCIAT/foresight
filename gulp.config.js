@@ -26,16 +26,14 @@ module.exports = {
     allImgFiles: [
       './src/static/images/**/*.{png,jpg,gif,svg}'
     ],
-    nodeScripts: {
-      css: [
-        './node_modules/bootstrap/dist/css/bootstrap.min.css',
-        './node_modules/@fortawesome/fontawesome-free/css/all.css',
-      ],
-      js: [
-        './node_modules/bootstrap/dist/js/bootstrap.min.js'
-      ],
-      font: './node_modules/@fortawesome/fontawesome-free/webfonts/**',
-    },
+    allLibFiles: [
+      // Bootstrap
+      './node_modules/bootstrap/dist/css/bootstrap.min.css',
+      './node_modules/bootstrap/dist/js/bootstrap.min.js',
+      // Font Awesome
+      './node_modules/@fortawesome/fontawesome-free/css/all.css',
+      './node_modules/@fortawesome/fontawesome-free/webfonts/**',
+    ],
     vendorScripts: [
       './vendor/**/*'
     ],
@@ -64,11 +62,7 @@ module.exports = {
     allJsFiles: destinationFolder + '/static/js/',
     allScssFiles: destinationFolder + '/',
     allImgFiles: destinationFolder + '/static/images/',
-    nodeScripts: {
-      css: destinationFolder + '/static/lib/css/',
-      js: destinationFolder + '/static/lib/js/',
-      font: destinationFolder + '/static/lib/webfonts/',
-    },
+    allLibFiles: destinationFolder + '/static/lib/',
     vendorScripts: destinationFolder + '/theme/vendor/',
     buildPackage: 'dist',
   }
