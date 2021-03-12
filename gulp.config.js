@@ -43,7 +43,6 @@ module.exports = {
       '!src/static/js/**',
       '!src/static/images/**'
     ],
-    version: 'src/static/sass/variables-site/_version.scss',
     banner: [
       '/*!',
       'Theme Name: ' + package.name,
@@ -54,7 +53,7 @@ module.exports = {
       'Requires at least: 5.0',
       'Tested up to: 5.4',
       '*/',
-      ''
+      ' '
     ]
   },
   destination: {
