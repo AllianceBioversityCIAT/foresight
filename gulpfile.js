@@ -3,6 +3,7 @@ var buildConfig  = require( './gulp.config' ),
     gulp         = require( 'gulp' ),
     fs           = require( 'fs' ),
     babel        = require( 'gulp-babel' ),
+    header       = require( 'gulp-header' ),
     sass         = require( 'gulp-sass' ),
     rtlcss       = require( 'gulp-rtlcss' ),
     postcss      = require( 'gulp-postcss' ),
@@ -35,6 +36,7 @@ function cssTask() {
   return gulp.src( buildConfig.sources.allScssFiles )
     .pipe( mode.development( sourcemaps.init() ) )
     .pipe( plumber( { errorHandler: onError } ) )
+    .pipe( header( buildConfig.sources.banner.join( '\n' ) ) )
     .pipe( sass() )
     .pipe( postcss( [ autoprefixer, cssnano ] ) )
     .pipe( ( mode.development( sourcemaps.write( '/' ) ) ) )
@@ -51,6 +53,7 @@ function cssRtlTask() {
   return gulp.src( buildConfig.sources.allScssFiles )
     .pipe( mode.development( sourcemaps.init() ) )
     .pipe( plumber( { errorHandler: onError } ) )
+    .pipe( header( buildConfig.sources.banner.join( '\n' ) ) )
     .pipe( sass() )
     .pipe( rtlcss() )
     .pipe( rename( { basename: 'rtl' } ) )
@@ -62,13 +65,13 @@ function cssRtlTask() {
 
 /**
  * This function gets libraries *.js files.
- * @function jsLibrariesTask
+ * @function LibrariesTask
  * @return { stream } - returns a gulp stream
  */
 function LibrariesTask() {
   return gulp.src( buildConfig.sources.allLibFiles, {
     base: './node_modules/'
-  })
+  } )
     .pipe( gulp.dest( buildConfig.destination.allLibFiles ) );
 }
 
@@ -136,10 +139,10 @@ function watchTask() {
   gulp.watch( buildConfig.sources.sourceFolder + '/**/*.{php,twig}', scaffolding, vendorTask );
 
   // Watch CSS files
-  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssLibrariesTask, fontawesomeTask, cssRtlTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssRtlTask );
 
   // Watch Javascript files.
-  gulp.watch( buildConfig.sources.sourceFolder + '/static/js/**/*.js', jsTask, jsLibrariesTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/js/**/*.js', jsTask, LibrariesTask );
 
   // Watch images files.
   gulp.watch( buildConfig.sources.sourceFolder + '/static/images/**/*.{png,jpg,gif}', imagesTask );
@@ -162,11 +165,6 @@ function prerelease() {
     );
 }
 
-function updateWpVersion( cb ) {
-  var banner = buildConfig.sources.banner.join( '\n' );
-  fs.writeFile( buildConfig.sources.version, banner, cb );
-}
-
 function package() {
   return gulp.src( buildConfig.destination.destinationFolder + '/**', { base: buildConfig.general.dest } )
     .pipe( zip( buildConfig.general.package.name + '_' + buildConfig.general.package.version + '.zip' ) )
@@ -177,23 +175,11 @@ const build  = gulp.series(
   clean,
   scaffolding,
   vendorTask,
-  gulp.parallel( cssTask, cssLibrariesTask, fontawesomeTask, cssRtlTask, jsTask, jsLibrariesTask, imagesTask )
+  gulp.parallel( cssTask, cssRtlTask, jsTask, LibrariesTask, imagesTask )
 );
 const reload = gulp.series( build, gulp.parallel( watchTask ) );
-
-// Exports
-exports.scaffolding      = scaffolding;
-exports.vendorTask       = vendorTask;
-exports.cssTask          = cssTask;
-exports.cssLibrariesTask = cssLibrariesTask;
-exports.fontawesomeTask  = fontawesomeTask;
-exports.cssRtlTask       = cssRtlTask;
-exports.jsTask           = jsTask;
-exports.jsLibrariesTask  = jsLibrariesTask;
-exports.imagesTask       = imagesTask;
-exports.clean            = clean;
 
 exports.watch   = reload;
 exports.build   = build;
 exports.default = build;
-exports.package = gulp.series( updateWpVersion, build, package, prerelease );
+exports.package = gulp.series( build, package, prerelease );

@@ -17,6 +17,7 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "bootstrap": "^4.5.3",
     "browser-sync": "^2.26.12",
+    "gulp-header": "^2.0.9",
     "cssnano": "^4.1.10",
     "del": "^3.0.0",
     "es6-promise": "^4.2.8",
