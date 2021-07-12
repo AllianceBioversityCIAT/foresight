@@ -1,14 +1,16 @@
 {
-  "name": "cafeto_theme",
+  "name": "foresight-cgiar",
   "version": "1.0.0",
-  "description": "Cafeto theme.",
+  "description": "Foresight Theme.",
   "main": "gulpfile.js",
   "author": "Cafeto Software",
   "license": "ISC",
   "keywords": [
     "theme",
     "wordpress",
-    "cafeto"
+    "cafeto",
+    "foresight",
+    "cgiar"
   ],
   "devDependencies": {
     "@babel/compat-data": "^7.12.7",

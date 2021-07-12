@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package cafeto
+ * @package foresight
  */
 
 ?>
@@ -14,7 +14,7 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php cafeto_theme_post_thumbnail(); ?>
+	<?php foresight_theme_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php

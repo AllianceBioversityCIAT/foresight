@@ -2,7 +2,7 @@
 /**
  * Customizer Default Variables.
  *
- * @package Cafeto_theme.
+ * @package foresight_theme.
  */
 
 /**
@@ -14,7 +14,7 @@
  */
 function customize_default_variables( $option ) {
 	$df = [
-		'theme_nav_logo' => get_stylesheet_directory_uri() . '/static/images/cafeto_logo.png',
+		'theme_nav_logo' => get_stylesheet_directory_uri() . '/static/images/foresight_logo.png',
 	];
 
 	// Return default option if not empty

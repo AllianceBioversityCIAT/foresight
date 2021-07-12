@@ -2,7 +2,7 @@
 /**
  * Cafeto Home header.
  *
- * @package Cafeto_theme.
+ * @package foresight_theme.
  */
 
 /**

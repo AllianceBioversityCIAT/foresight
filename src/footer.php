@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package cafeto_theme
+ * @package foresight_theme
  */
 
 if ( class_exists( 'Timber' ) ) {

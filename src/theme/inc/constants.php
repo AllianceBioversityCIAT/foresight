@@ -1,2 +1,2 @@
 <?php
-define( 'SLUG_THEME', 'cafeto_theme' );
+define( 'SLUG_THEME', 'foresight_theme' );

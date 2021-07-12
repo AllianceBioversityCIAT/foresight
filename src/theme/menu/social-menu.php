@@ -2,21 +2,21 @@
 /**
  * Social Menu.
  *
- * @package Cafeto_theme
+ * @package foresight_theme
  */
 
-if ( ! function_exists( 'cafeto_social_icons' ) ) :
+if ( ! function_exists( 'foresight_social_icons' ) ) :
 
 	/**
 	 * Display social links in footer.
 	 *
-	 * @package Cafeto_theme
+	 * @package foresight_theme
 	 */
-	function cafeto_social_icons( $aditional_id = '', $adittional_class = '' ) {
-		if ( has_nav_menu( 'cafeto-social-menu' ) ) {
+	function foresight_social_icons( $aditional_id = '', $adittional_class = '' ) {
+		if ( has_nav_menu( 'foresight-social-menu' ) ) {
 			wp_nav_menu(
 				array(
-					'theme_location'  => 'cafeto-social-menu',
+					'theme_location'  => 'foresight-social-menu',
 					'container'       => 'nav',
 					'container_id'    => 'social',
 					'container_class' => 'social-icons',

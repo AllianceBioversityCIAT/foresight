@@ -19,8 +19,8 @@ if ( class_exists( 'Timber' ) ) {
 
 	$context[ 'post' ]        = new Timber\Post();
 	$context[ 'contentBlog' ] = [
-		'imageHeader'     => get_stylesheet_directory_uri() . '/static/images/cafeto-background-blog.jpg',
-		'imageTest'       => get_stylesheet_directory_uri() . '/static/images/cafeto-background-blog.jpg',
+		'imageHeader'     => get_stylesheet_directory_uri() . '/static/images/foresight-background-blog.jpg',
+		'imageTest'       => get_stylesheet_directory_uri() . '/static/images/foresight-background-blog.jpg',
 		'termsBlog'       => get_terms( array(
 			'taxonomy'   => 'category',
 			'hide_empty' => false,

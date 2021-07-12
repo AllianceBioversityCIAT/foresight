@@ -1,10 +1,10 @@
 <?php
 /**
- * cafeto functions and definitions
+ * foresight functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package cafeto
+ * @package foresight
  */
 
 if ( ! defined( '_S_VERSION' ) ) {
@@ -18,7 +18,7 @@ if ( ! defined( '_S_VERSION' ) ) {
  */
 require get_template_directory() . '/theme/inc/constants.php';
 
-if ( ! function_exists( 'cafeto_theme_setup' ) ) :
+if ( ! function_exists( 'foresight_theme_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
@@ -26,7 +26,7 @@ if ( ! function_exists( 'cafeto_theme_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
-	function cafeto_theme_setup() {
+	function foresight_theme_setup() {
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
@@ -57,7 +57,7 @@ if ( ! function_exists( 'cafeto_theme_setup' ) ) :
 		register_nav_menus(
 			array(
 				'menu-1' => esc_html__( 'Primary', SLUG_THEME ),
-				'cafeto-social-menu' => esc_html__( 'Social Menu', SLUG_THEME ),
+				'foresight-social-menu' => esc_html__( 'Social Menu', SLUG_THEME ),
 			)
 		);
 
@@ -82,7 +82,7 @@ if ( ! function_exists( 'cafeto_theme_setup' ) ) :
 		add_theme_support(
 			'custom-background',
 			apply_filters(
-				'cafeto_theme_custom_background_args',
+				'foresight_theme_custom_background_args',
 				array(
 					'default-color' => 'ffffff',
 					'default-image' => '',
@@ -109,7 +109,7 @@ if ( ! function_exists( 'cafeto_theme_setup' ) ) :
 		);
 	}
 endif;
-add_action( 'after_setup_theme', 'cafeto_theme_setup' );
+add_action( 'after_setup_theme', 'foresight_theme_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -118,17 +118,17 @@ add_action( 'after_setup_theme', 'cafeto_theme_setup' );
  *
  * @global int $content_width
  */
-function cafeto_theme_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'cafeto_theme_content_width', 640 );
+function foresight_theme_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'foresight_theme_content_width', 640 );
 }
-add_action( 'after_setup_theme', 'cafeto_theme_content_width', 0 );
+add_action( 'after_setup_theme', 'foresight_theme_content_width', 0 );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function cafeto_theme_widgets_init() {
+function foresight_theme_widgets_init() {
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Sidebar', SLUG_THEME ),
@@ -141,7 +141,7 @@ function cafeto_theme_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'cafeto_theme_widgets_init' );
+add_action( 'widgets_init', 'foresight_theme_widgets_init' );
 
 // Define path and URL to the ACF plugin.
 define( 'ACF_PATH', get_stylesheet_directory() . '/theme/inc/advanced-custom-fields/' );
@@ -165,25 +165,25 @@ function acf_settings_show_admin( $show_admin ) {
 /**
  * Enqueue scripts and styles.
  */
-function cafeto_theme_scripts() {
+function foresight_theme_scripts() {
 
 	//Styles
-	wp_enqueue_style( 'cafeto_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
 
-	wp_enqueue_style( 'cafeto_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/bootstrap/dist/css/bootstrap.min.css' );
+	wp_enqueue_style( 'foresight_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/bootstrap/dist/css/bootstrap.min.css' );
 
-	wp_enqueue_style( 'cafeto_theme-fontawesome-style', get_template_directory_uri() . '/static/lib/@fortawesome/fontawesome-free/css/all.css' );
+	wp_enqueue_style( 'foresight_theme-fontawesome-style', get_template_directory_uri() . '/static/lib/@fortawesome/fontawesome-free/css/all.css' );
 
 	//JS
-	wp_enqueue_script( 'cafeto_theme-general-js', get_template_directory_uri() . '/static/js/main.min.js', array( 'jquery' ), _S_VERSION, true );
+	wp_enqueue_script( 'foresight_theme-general-js', get_template_directory_uri() . '/static/js/main.min.js', array( 'jquery' ), _S_VERSION, true );
 
-	wp_enqueue_script( 'cafeto_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
+	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'cafeto_theme_scripts' );
+add_action( 'wp_enqueue_scripts', 'foresight_theme_scripts' );
 
 /**
  * Implement the Custom Header feature.

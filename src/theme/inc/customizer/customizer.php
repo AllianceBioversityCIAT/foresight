@@ -2,7 +2,7 @@
 /**
  * Cafeto Seed Theme Customizer.
  *
- * @package cafeto_theme.
+ * @package foresight_theme.
  */
 
 /**
