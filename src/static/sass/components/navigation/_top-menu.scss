@@ -1,5 +1,5 @@
 body{
-    font-family: 'Muli';
+    font-family: $font__main;
 
     #foresight-top-menu{
         padding: 0;
@@ -43,7 +43,7 @@ body{
                     
                 }
                 padding: 0;
-                font-family: 'Muli SemiBold';
+                font-family: $font__main-bold;
         
                 .nav-item{
                     padding-left: 30px;
