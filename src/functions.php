@@ -13,6 +13,11 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', $theme_version );
 }
 
+if ( ! defined( '_PLATFORM' ) ) {
+	// Platform desktop/mobile.
+	define('_PLATFORM', (wp_is_mobile()) ? 'mobile' : 'desktop' );
+}
+
 /**
  * Gets the global variables to work on the theme.
  */
@@ -56,7 +61,7 @@ if ( ! function_exists( 'foresight_theme_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', SLUG_THEME ),
+				'foresight-top-menu' => esc_html__( 'Top Menu', SLUG_THEME ),
 				'foresight-social-menu' => esc_html__( 'Social Menu', SLUG_THEME ),
 			)
 		);
@@ -168,15 +173,10 @@ function acf_settings_show_admin( $show_admin ) {
 function foresight_theme_scripts() {
 
 	//Styles
-	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
+	
 
 	wp_enqueue_style( 'foresight_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/bootstrap/dist/css/bootstrap.min.css' );
-
-	wp_enqueue_style( 'foresight_theme-fontawesome-style', get_template_directory_uri() . '/static/lib/@fortawesome/fontawesome-free/css/all.css' );
-
-	//JS
-	wp_enqueue_script( 'foresight_theme-general-js', get_template_directory_uri() . '/static/js/main.min.js', array( 'jquery' ), _S_VERSION, true );
-
+	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -184,6 +184,73 @@ function foresight_theme_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'foresight_theme_scripts' );
+
+/**
+ * Disable the emoji's
+ */
+function disable_emojis() {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+	add_filter( 'wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2 );
+}
+add_action( 'init', 'disable_emojis' );
+   
+/**
+* Filter function used to remove the tinymce emoji plugin.
+* 
+* @param array $plugins 
+* @return array Difference betwen the two arrays
+*/
+function disable_emojis_tinymce( $plugins ) {
+	if ( is_array( $plugins ) ) {
+		return array_diff( $plugins, array( 'wpemoji' ) );
+	} else {
+		return array();
+	}
+}
+   
+/**
+* Remove emoji CDN hostname from DNS prefetching hints.
+*
+* @param array $urls URLs to print for resource hints.
+* @param string $relation_type The relation type the URLs are printed for.
+* @return array Difference betwen the two arrays.
+*/
+function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
+	if ( 'dns-prefetch' == $relation_type ) {
+		/** This filter is documented in wp-includes/formatting.php */
+		$emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
+		$urls = array_diff( $urls, array( $emoji_svg_url ) );
+	}
+
+	return $urls;
+}
+
+/**
+ * Remove unused metadata
+ */
+remove_action('wp_head', 'wp_generator');
+remove_action('wp_head', 'rsd_link');
+remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'index_rel_link');
+remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+remove_action('wp_head', 'start_post_rel_link', 10, 0);
+remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0);
+
+/**
+ * Remove recent comments wp_head CSS 
+ */
+function remove_recent_comments_style() {
+    global $wp_widget_factory;
+    remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
+}
+add_action('widgets_init', 'remove_recent_comments_style');
 
 /**
  * Implement the Custom Header feature.
