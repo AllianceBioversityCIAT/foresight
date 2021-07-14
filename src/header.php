@@ -27,7 +27,8 @@
 if ( class_exists( 'Timber' ) ) {
 
 	$context = Timber::context();
-
+	$context['menu'] = new TimberMenu('foresight-top-menu');
+	$context['platform'] = _PLATFORM;
 	Timber::render( './view/header.twig', $context );
 
 } else {

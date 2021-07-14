@@ -1,0 +1,156 @@
+body{
+    font-family: 'Muli';
+
+    #foresight-top-menu{
+        padding: 0;
+        margin: 0;
+        box-shadow: 0 1px 3px $color_primary;
+        background: linear-gradient(90deg, $color_white 80%, $color_secondary 20%);
+
+
+        @include respond-below( md ) {
+            box-shadow: none;
+            background: $color_white;
+            background: linear-gradient(180deg, rgba(255,255,255,1) 70px, transparent 0%);
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .navbar-brand{
+            margin-left: 16vw;
+            
+            @include respond-below( lg ) {
+                margin-left:5vw;
+            }
+
+            @include respond-below( wg ) {
+                margin-left:5vw;
+            }
+        }
+
+        .navbar-collapse{
+            
+            @include respond-below( md ) {
+                margin-left: 50%;
+            }
+
+            .navbar-nav{
+                margin-right: 16vw;
+                @include respond-below( md ) {
+                    margin-right: 0;
+                    
+                }
+                padding: 0;
+                font-family: 'Muli SemiBold';
+        
+                .nav-item{
+                    padding-left: 30px;
+                    padding-right: 30px;
+                    padding-top: 16px;
+                    padding-bottom: 16px;
+                    background: $color_primary;
+    
+                    @include respond-below( md ) {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        padding-top: 4px;
+                        padding-bottom: 4px;
+                    }
+        
+                    .nav-link{
+                        color: $color_white;
+                        font-weight: bold;
+                        @include respond-below( md ) {
+                            text-align: right;
+                        }
+                    }
+                }
+                .current-menu-item{
+                    background: $color_accent;
+                    .nav-link{
+                        color: $color_white;
+                    }
+                }
+                .secondary-menu-item{
+                    background: $color_secondary;
+                    @include respond-below( wg ) {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .dropdown-menu{
+            background: $color_primary;
+            padding: 0;
+            border-radius: 0;
+            
+            .dropdown-item{
+                color:$color_white;
+                border-bottom: 1px solid $color_secondary;
+                font-size: 14px;
+            }
+            
+            .dropdown-item:hover {
+                background: $color_accent;
+            }
+        }
+    }
+
+
+    .navbar-toggler {
+        background: $color_accent;
+        border: none;
+        border-radius: 0px;
+        height: 70px;
+        text-align: center;
+    }
+      
+    .navbar-toggler:active,
+    .navbar-toggler:focus {
+        outline: 0;
+    }
+      
+    .navbar-toggler .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        margin: 4px 0 4px 0;
+        transition: all 0.2s;
+    }
+      
+    .navbar-light .navbar-toggler .icon-bar {
+        background: $color_white;
+    }
+      
+    .navbar-toggler .icon-bar:nth-of-type(1) {
+        transform: rotate(45deg);
+        transform-origin: 10% 10%;
+    }
+      
+    .navbar-toggler .icon-bar:nth-of-type(2) {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+      
+    .navbar-toggler .icon-bar:nth-of-type(3) {
+        transform: rotate(-45deg);
+        transform-origin: 10% 90%;
+    }
+      
+    .navbar-toggler.collapsed .icon-bar:nth-of-type(1) {
+        transform: rotate(0);
+    }
+      
+    .navbar-toggler.collapsed .icon-bar:nth-of-type(2) {
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+      
+    .navbar-toggler.collapsed .icon-bar:nth-of-type(3) {
+        transform: rotate(0);
+    }
+}
