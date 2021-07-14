@@ -75,9 +75,6 @@ body{
                 }
                 .secondary-menu-item{
                     background: $color_secondary;
-                    @include respond-below( wg ) {
-                        display: none;
-                    }
                 }
             }
         }
