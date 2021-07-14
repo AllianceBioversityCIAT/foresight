@@ -177,11 +177,6 @@ function foresight_theme_scripts() {
 
 	wp_enqueue_style( 'foresight_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/bootstrap/dist/css/bootstrap.min.css' );
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
-	//wp_enqueue_style( 'foresight_theme-fontawesome-style', get_template_directory_uri() . '/static/lib/@fortawesome/fontawesome-free/css/all.css' );
-
-	//JS
-	//wp_enqueue_script( 'foresight_theme-general-js', get_template_directory_uri() . '/static/js/main.min.js', array( 'jquery' ), _S_VERSION, true );
-
 	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
