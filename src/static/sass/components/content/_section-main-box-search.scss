@@ -1,0 +1,104 @@
+body{
+
+    #foresigh-main-box-search{
+
+        .overlay-slide {
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden;
+            float: left;
+            margin: 0px;
+
+            .img{
+                object-fit: cover;
+                object-position: 25% 0;
+                width: 100vw;
+                height: 95vh;
+            }
+        }
+        
+        .overlay-slide {
+            .container-search {
+                position: absolute;
+                box-sizing: border-box;
+                margin-left: 16vw;
+                bottom: 42vh;
+                padding: 0px;
+
+                @include respond-below( md ) {
+                    margin-left: 0;
+                    padding-right: 5vw;
+                    padding-left: 5vw;
+                    width: 100%;
+                    text-align: center;
+                }
+    
+                h1 {
+                    font-family: $font__secondary;
+                    margin: 0;
+                    font-size: 7.5rem;
+                    color: $color_white;
+                    @include respond-below( md ) {
+                        font-size:calc(18px + 10vw);
+                    }
+                }
+
+                form{
+                 display: flex;
+                 justify-items:start;   
+                }
+                
+                .control-search{
+                    background: $color_white;
+                    padding-top: 2px;
+                    padding-bottom: 2px;
+                    padding-left: 15px;
+                    padding-right: 1px;
+                    border-top-right-radius: 50px;
+                    border-bottom-right-radius: 50px;
+                    width: 540px;
+                    @include respond-below( md ) {
+                        width: 100%;
+                    }
+
+                    input[type=text]{
+                        border: none;
+                        font-family: $font__main;
+                        font-size: 1.1rem;
+                        width: 100%;
+                    }
+                    input[type=text]:focus{
+                        outline: none;
+                    }
+                    input::placeholder {
+                        color: $color_placeholder;
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+
+            .container-curated-search {
+                position: absolute;
+                box-sizing: border-box;
+                bottom: 0px;
+                padding: 10px;
+                background-color: rgba(0,0,0,0.7);
+                width: 100%;
+                height: 170px;
+    
+                 h2 {
+                    margin: 0;
+                    font-size: 18px;
+                    color: #eeeeee;
+                }
+                
+                p {
+                    font-size: 14px;
+                    color: #dddddd;
+                }
+            }
+        }
+        
+    }
+}
+
