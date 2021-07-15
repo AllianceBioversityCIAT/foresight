@@ -24,7 +24,7 @@ module.exports = {
       './src/static/sass/style.scss',
     ],
     allImgFiles: [
-      './src/static/images/**/*.{png,jpg,gif,svg}'
+      './src/static/images/**/*.{png,jpg,jpeg,gif,svg}'
     ],
     allLibFiles: [
       // Bootstrap
