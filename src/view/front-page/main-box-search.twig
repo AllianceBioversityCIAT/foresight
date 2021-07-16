@@ -1,0 +1,21 @@
+{% set content = homePage %}
+<div id="foresigh-main-box-search" class="container-fluid p-0">
+    <div class="overlay-slide">
+        <img class="img lazyload" width="1920" height="946" src="{{ Image(content.meta('background_image')).src }}" srcset="{{ Image(content.meta('background_image')).srcset }}" sizes="{{ Image(content.meta('background_image')).img_sizes }}" alt="{{ Image(content.meta('background_image')).alt }}" />
+        <div class="container-search">
+            <h1>Foresight</h1>
+            <div class="control-search">
+            <form id="frm-search" action="/" method="GET">
+                <input id="s" name="s" class="input-search" type="text" placeholder="Topic or Keyword" value="">
+                <a class="btn-search" onclick="event.preventDefault();this.closest('form').submit();"> 
+                 <img src="{{theme.link}}/static/images/search-icon.svg" width="48" height="48" alt="Search">
+                </a>
+            </form>
+            </div>
+        </div>
+        <div class="container-curated-search">
+            <h2>Curated Search</h2>
+            <p>coming soon...</p>
+        </div>
+    </div>
+</div>

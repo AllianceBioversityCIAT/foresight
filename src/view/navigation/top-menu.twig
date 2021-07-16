@@ -1,9 +1,5 @@
 <div class="container-fluid m-0 p-0">
-{% if platform == 'desktop' %}
-    <nav id="foresight-top-menu" class="navbar navbar-expand-lg navbar-light">
-{% else %}
-    <nav id="foresight-top-menu" class="navbar fixed-top navbar-expand-lg navbar-light">
-{% endif %}
+<nav id="foresight-top-menu-mobile" class="navbar fixed-top navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="{{site.url}}">
         <img src="{{theme.link}}/static/images/foresight-logo.svg" width="50" height="50" alt="{{site.name}}">
     </a>
@@ -12,30 +8,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-{% if platform == 'desktop' %}
-        <div class="collapse navbar-collapse" id="navbarTogglerMenu">
-          <ul class="navbar-nav ml-auto">
-          {% for item in menu.items %}
-            {% if item.children %}
-                <li class="nav-item {{ item.classes|join(' ') }} dropdown">
-                  <a class="nav-link dropdown-toggle" href="{{ item.link }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.title }}
-                    <img src="{{theme.link}}/static/images/menu-bars.svg" width="24" height="24" alt="Menu">
-                  </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          {% for child in item.children %}
-                              <a class="dropdown-item" href="{{ child.link }}">{{ child.title }}</a>
-                          {% endfor %}
-                      </div>
-                  </li>
-            {% else %}
-                <li class="nav-item {{ item.classes|join(' ') }}">
-                  <a class="nav-link" href="{{ item.link }}">{{ item.title }}</a>
-                </li>
-            {% endif %}
-            {% endfor %}
-          <ul>
-        </div>
-{% else %}
     <div class="collapse navbar-collapse" id="navbarTogglerMenu">
           <ul class="navbar-nav ml-auto">
           {% for item in menu.items %}
@@ -54,6 +26,37 @@
             {% endfor %}
           <ul>
         </div>
-{% endif %}
   </nav>
+  <nav id="foresight-top-menu" class="navbar fixed-top navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="{{site.url}}">
+          <img src="{{theme.link}}/static/images/foresight-logo.svg" width="50" height="50" alt="{{site.name}}">
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDesktopMenu" aria-controls="navbarDesktopMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+          <div class="collapse navbar-collapse" id="navbarDesktopMenu">
+            <ul class="navbar-nav ml-auto">
+            {% for item in menu.items %}
+              {% if item.children %}
+                  <li class="nav-item {{ item.classes|join(' ') }} dropdown">
+                      <a class="nav-link dropdown-toggle" href="{{ item.link }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.title }}
+                        <img src="{{theme.link}}/static/images/menu-bars.svg" width="24" height="24" alt="Menu">
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          {% for child in item.children %}
+                              <a class="dropdown-item" href="{{ child.link }}">{{ child.title }}</a>
+                          {% endfor %}
+                      </div>
+                  </li>
+              {% else %}
+                  <li class="nav-item {{ item.classes|join(' ') }}">
+                    <a class="nav-link" href="{{ item.link }}">{{ item.title }}</a>
+                  </li>
+              {% endif %}
+            {% endfor %}
+            <ul>
+          </div>
+    </nav>
 </div>

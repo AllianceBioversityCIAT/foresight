@@ -35,3 +35,10 @@ function foresight_theme_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'foresight_theme_pingback_header' );
+
+/**
+ * This foreach will be in charge of registering the fields of the ACF.
+ */
+foreach ( glob( dirname( __FILE__ ) . '/acf-init/*.php' ) as $filename ) {
+	require $filename;
+}
