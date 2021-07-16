@@ -1,7 +1,7 @@
+{% set content = homePage %}
 <div id="foresigh-main-box-search" class="container-fluid p-0">
-    
     <div class="overlay-slide">
-        <img class="img" src="{{theme.link}}/static/images/img-hero.jpeg" width="1920" height="946" alt="Foresight">
+        <img class="img lazyload" width="1920" height="946" src="{{ Image(content.meta('background_image')).src }}" srcset="{{ Image(content.meta('background_image')).srcset }}" sizes="{{ Image(content.meta('background_image')).img_sizes }}" alt="{{ Image(content.meta('background_image')).alt }}" />
         <div class="container-search">
             <h1>Foresight</h1>
             <div class="control-search">

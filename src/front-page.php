@@ -4,7 +4,9 @@ get_header();
 
 if ( class_exists( 'Timber' ) ) {
 
-	$context = Timber::context();
+    $post = new Timber\Post();
+    $context = Timber::context();
+    $context['homePage'] = $post;
 	Timber::render( './view/front-page.twig', $context );
 
 } else {
