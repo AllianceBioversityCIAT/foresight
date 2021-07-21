@@ -6,6 +6,7 @@ if ( class_exists( 'Timber' ) ) {
 
     $context = Timber::context();
     $context['homePage'] = new Timber\Post();
+    $context['popularSearch'] = foresight_get_keywords_search();
 	Timber::render( './view/front-page.twig', $context );
 
 } else {
