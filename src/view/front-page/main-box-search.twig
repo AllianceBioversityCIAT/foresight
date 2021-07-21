@@ -1,7 +1,7 @@
 {% set content = homePage %}
 <div id="foresigh-main-box-search" class="container-fluid p-0">
     <div class="overlay-slide">
-        <img class="img lazyload" width="1920" height="946" src="{{ Image(content.meta('background_image')).src }}" srcset="{{ Image(content.meta('background_image')).srcset }}" sizes="{{ Image(content.meta('background_image')).img_sizes }}" alt="{{ Image(content.meta('background_image')).alt }}" />
+        <img class="img" width="1920" height="946" src="{{ Image(content.meta('background_image')).src }}" srcset="{{ Image(content.meta('background_image')).srcset }}" sizes="{{ Image(content.meta('background_image')).img_sizes }}" alt="{{ Image(content.meta('background_image')).alt }}" />
         <div class="container-search">
             <h1>Foresight</h1>
             <div class="control-search">
@@ -12,10 +12,34 @@
                 </a>
             </form>
             </div>
-        </div>
+            {% if popularSearch|length > 0 %}
+            <div id="foresight-popular-search" class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Popular searches
+            </button>
+            <div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-row">
+                    {% for keyword in popularSearch %}
+                    <a class="dropdown-item" href="/?s={{ keyword }}">{{ keyword|capitalize }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+            {% endif %}
+    </div>
         <div class="container-curated-search">
-            <h2>Curated Search</h2>
-            <p>coming soon...</p>
+            <div class="row">
+                <div class="col-3 col-md-4 col-lg-8 col-xl-10 col-left"></div>
+                <div class="col-6 col-md-4 col-lg-4 col-xl-2 col-center">Curated Search
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="col-3 col-md-4 col-lg-4 col-right"></div>
+            </div>
+            <div class="slider">Hola</div>
         </div>
     </div>
 </div>
+
+

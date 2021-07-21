@@ -81,10 +81,8 @@ body{
                 position: absolute;
                 box-sizing: border-box;
                 bottom: 0px;
-                padding: 10px;
-                background-color: rgba(0,0,0,0.7);
                 width: 100%;
-                height: 170px;
+                height: 150px;
     
                  h2 {
                     margin: 0;
@@ -96,9 +94,93 @@ body{
                     font-size: 14px;
                     color: #dddddd;
                 }
+
+                .col-right{
+                    display: none;
+                    background: 
+                        linear-gradient(0deg, rgba($color_black,0.8) 15%, rgba(255,255,255,0) 15%),
+                        linear-gradient(-300deg, rgba($color_black,0.8) 20%, rgba($color_black,0) 20%);
+                    @include respond-below( md ) {
+                        display: flex;
+                    }
+                };
+                .col-center{
+                    background: rgba($color_black,0.8);
+                    color: $color_white;
+                    height: 30px;
+                    text-align: left;
+                    padding-top: 3px;
+                    @include respond-below( md ) {
+                        text-align: center;
+                    }
+
+                    .dot {
+                        height: 7px;
+                        width: 7px;
+                        background: $color_accent;
+                        border-radius: 50%;
+                        display: inline-block;
+                        @include respond-below( md ) {
+                            display: none;
+                        }
+                      }
+                };
+                .col-left{
+                    width: 100vw;
+                    background: 
+                        linear-gradient(0deg, rgba($color_black,0.8) 15%, rgba(255,255,255,0) 15%),
+                        linear-gradient(300deg, rgba($color_black,0.8) 3%, rgba(255,255,255,0) 3%);
+                    @include respond-below( md ) {
+                        background: 
+                        linear-gradient(0deg, rgba($color_black,0.8) 15%, rgba(255,255,255,0) 15%),
+                        linear-gradient(300deg, rgba($color_black,0.8) 20%, rgba(255,255,255,0) 20%);
+                    }
+                }
+
+                .slider{
+                    background:rgba($color_black, 0.8);
+                    width: 100vw;
+                    height: 100%;
+                }
             }
         }
         
+    }
+
+    #foresight-popular-search{
+        button{
+            color: $color_white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 0;
+            margin-top: 5px;
+        }
+        div.dropdown-multicol{
+            width: 60vw;
+            max-width: 900px;
+            @include respond-below( md ) {
+                width: 24vw;
+            }
+        }
+        div.dropdown-row>a.dropdown-item{
+            display:inline-block;
+            width: 9vw;
+            padding-left: 8px;
+            color: $color_white;
+            @include respond-below( md ) {
+                width: 24vw;
+            }
+        }
+
+        div.dropdown-row>a.dropdown-item:hover{
+            background: rgba($color_primary,0.5);
+        }
+
+        .dropdown-menu{
+            height:180px;
+            overflow-y:auto;
+            background: rgba($color_black,0.6);
+         }
     }
 }
 

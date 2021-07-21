@@ -173,11 +173,10 @@ function acf_settings_show_admin( $show_admin ) {
 function foresight_theme_scripts() {
 
 	//Styles
-	
-
-	wp_enqueue_style( 'foresight_theme-bootstrap-style', get_template_directory_uri() . '/static/lib/bootstrap/dist/css/bootstrap.min.css' );
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.min.js', array( 'jquery' ), 'latest', true );
+	wp_enqueue_script( 'foresight_theme-jquery', get_template_directory_uri() . '/static/lib/jquery/dist/jquery.slim.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.bundle.min.js', array( 'foresight_theme-jquery' ), _S_VERSION, true );
+	wp_enqueue_script( 'foresight_theme-lazysizes-js', get_template_directory_uri() . '/static/lib/lazysizes/lazysizes.min.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -253,6 +252,14 @@ function remove_recent_comments_style() {
 add_action('widgets_init', 'remove_recent_comments_style');
 
 /**
+ * Remove Gutenberg css
+ */
+function dequeue_gutenberg_theme_css() {
+    wp_dequeue_style( 'wp-block-library' );
+}
+add_action( 'wp_enqueue_scripts', 'dequeue_gutenberg_theme_css', 100 );
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/theme/inc/custom-header.php';
@@ -283,4 +290,35 @@ require get_template_directory() . '/theme/menu/social-menu.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/theme/inc/jetpack.php';
 }
+
+if ( ! function_exists( 'foresight_save_keywords_search' ) ) :
+	function foresight_save_keywords_search( $query_object )
+	{
+		if( $query_object->is_search() ) {
+			$transient_data = get_transient('foresight_popular_search');
+			$array_data = ($transient_data) ? unserialize($transient_data) : array();
+
+			$keywords = strtolower($query_object->query['s']); 
+			$keywords = preg_replace('/[^A-Za-z0-9\s]/', '', $keywords);
+			$keywords = explode(' ', $keywords);
+
+			foreach($keywords as $keyword){
+				if(strlen($keyword)>3 && !in_array($keyword, $array_data)){ $array_data[] = strtolower($keyword); }
+			}
+			
+			$transient_data = serialize($array_data);
+			set_transient('foresight_popular_search', $transient_data, 30 * DAY_IN_SECONDS);
+		}
+	}
+endif;
+
+if ( ! function_exists( 'foresight_get_keywords_search' ) ) :
+	function foresight_get_keywords_search()
+	{
+		$transient_data = get_transient('foresight_popular_search');
+		return unserialize($transient_data);
+	}
+endif;
+
+add_action( 'parse_query', 'foresight_save_keywords_search' );
 

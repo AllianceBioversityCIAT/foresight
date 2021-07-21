@@ -30,9 +30,14 @@ module.exports = {
       // Bootstrap
       './node_modules/bootstrap/dist/css/bootstrap.min.css',
       './node_modules/bootstrap/dist/js/bootstrap.min.js',
+      './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
       // Font Awesome
       './node_modules/@fortawesome/fontawesome-free/css/all.css',
       './node_modules/@fortawesome/fontawesome-free/webfonts/**',
+      // Lazysizes
+      './node_modules/lazysizes/lazysizes.min.js',
+      //Jquery
+      './node_modules/jquery/dist/jquery.slim.min.js',
     ],
     vendorScripts: [
       './vendor/**/*'
