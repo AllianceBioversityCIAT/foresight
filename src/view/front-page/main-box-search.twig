@@ -27,7 +27,7 @@
             </div>
             {% endif %}
     </div>
-        <div class="container-curated-search">
+    <div class="container-curated-search">
             <div class="row">
                 <div class="col-3 col-md-4 col-lg-8 col-xl-10 col-left"></div>
                 <div class="col-6 col-md-4 col-lg-4 col-xl-2 col-center">Curated Search
@@ -37,7 +37,18 @@
                 </div>
                 <div class="col-3 col-md-4 col-lg-4 col-right"></div>
             </div>
-            <div class="slider"></div>
+            <div class="slider">
+                <div class="slider-row">
+                {% for item in content.meta('slider_items') %}
+                    <div class="container-card">
+                        <img class="img-fluid" width="150" height="150" src="{{ Image(item.term_image).src }}"/>
+                        <div class="overlay">
+                            <div class="text"><a href="/?s={{ item.term_cured.name }}">{{ item.term_cured.name }}</a></div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

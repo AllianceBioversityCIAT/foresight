@@ -177,6 +177,7 @@ function foresight_theme_scripts() {
 	wp_enqueue_script( 'foresight_theme-jquery', get_template_directory_uri() . '/static/lib/jquery/dist/jquery.slim.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.bundle.min.js', array( 'foresight_theme-jquery' ), _S_VERSION, true );
 	wp_enqueue_script( 'foresight_theme-lazysizes-js', get_template_directory_uri() . '/static/lib/lazysizes/lazysizes.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'foresight_theme-js', get_template_directory_uri() . '/static/js/main.min.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
