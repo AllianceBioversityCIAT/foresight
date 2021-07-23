@@ -1,34 +1,9 @@
 /* Navigation
 --------------------------------------------- */
-@import "navigation/navigation";
 @import "navigation/top-menu";
 @import "navigation/footer";
 
 /* Posts and pages
 --------------------------------------------- */
-@import "content/posts-and-pages";
-@import "content/404";
-@import "content/single";
-@import "content/section-search";
-@import "content/page-blog-posts";
-@import "content/section-main-box-search";
-
-/* Comments
---------------------------------------------- */
-@import "comments/comments";
-
-/* Widgets
---------------------------------------------- */
-@import "widgets/widgets";
-
-/* Media
---------------------------------------------- */
-@import "media/media";
-
-/* Captions
---------------------------------------------- */
-@import "media/captions";
-
-/* Galleries
---------------------------------------------- */
-@import "media/galleries";
+@import "content/front-page/section-main-box-search";
+@import "content/front-page/section-main-post-grid";
