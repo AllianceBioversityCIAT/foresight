@@ -1,0 +1,72 @@
+{% set content = homePage %}
+{% set post = feacturePost %}
+<div id="foresigh-main-post-grid" class="container-fluid">
+    <div class="container">
+        <div class="row card-full pt-5 pt-lg-5"> 
+            <div class="col-md-6 p-0">
+                <img width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[0].thumbnail.src }}" data-srcset="{{ featuredPost[0].thumbnail.srcset }}" data-sizes="{{ featuredPost[0].thumbnail.img_sizes }}" alt="{{ featuredPost[0].thumbnail.title }}">
+            </div>
+            <div class="col-md-6 body">
+                <h2 class="title">{{ featuredPost[0].title }}</h2>
+                <p class="content">
+                {{ featuredPost[0].preview.read_more('') }}
+                </p>
+                <div class="text-right">
+                    <a class="btn more" href="{{ featuredPost[0].link }}">See more</a>
+                </div>
+            </div>
+        </div> 
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-flex">
+                <div class="card col">
+                   
+                    <div class="row card pr-sm-1 pr-md-1 pr-lg-2 pt-3"> 
+                        <div class="col-12 p-0">
+                            <img width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[1].thumbnail.src }}" data-srcset="{{ featuredPost[1].thumbnail.srcset }}" data-sizes="{{ featuredPost[1].thumbnail.img_sizes }}" alt="{{ featuredPost[1].thumbnail.title }}">
+                        </div>
+                        <div class="col-12 body shadow">
+                            <h2 class="title">{{ featuredPost[1].title }}</h2>
+                            <p class="content">
+                            {{ featuredPost[1].preview.read_more('') }}
+                            </p>
+                            <div class="text-right">
+                                <a class="btn more" href="{{ featuredPost[1].link }}">See more</a>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="card col">
+                    <div class="row card pl-sm-1 pl-md-1 pl-lg-1 pr-lg-1 pt-3"> 
+                        <div class="col-12 p-0">
+                            <img  width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[2].thumbnail.src }}" data-srcset="{{ featuredPost[2].thumbnail.srcset }}" data-sizes="{{ featuredPost[2].thumbnail.img_sizes }}" alt="{{ featuredPost[2].thumbnail.title }}">
+                        </div>
+                        <div class="col-12 body shadow">
+                            <h2 class="title">{{ featuredPost[2].title }}</h2>
+                            <p class="content">
+                                {{ featuredPost[2].preview.read_more('') }}
+                            </p>
+                            <div class="text-right">
+                                <a class="btn more" href="{{ featuredPost[2].link }}">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card col d-none d-md-none d-lg-flex">
+                    <div class="row card pl-sm-1 pl-md-1 pl-lg-2 pt-3"> 
+                        <div class="col-12 p-0">
+                            <img  width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[3].thumbnail.src }}" data-srcset="{{ featuredPost[3].thumbnail.srcset }}" data-sizes="{{ featuredPost[3].thumbnail.img_sizes }}" alt="{{ featuredPost[3].thumbnail.title }}">
+                        </div>
+                        <div class="col-12 body shadow">
+                            <h2 class="title">{{ featuredPost[3].title }}</h2>
+                            <p class="content">
+                                {{ featuredPost[3].preview.read_more('') }}
+                            </p>
+                            <div class="text-right">
+                                <a class="btn more" href="{{ featuredPost[3].link }}">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
