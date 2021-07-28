@@ -19,15 +19,9 @@
 			</div>
 			<div class="row">
 			<div class=" col-12 col-md-6 col-lg-4">
-				<form class="newsletter" action="/" method="post">
-				<p>Subscribe to our newsletter</p>
-					<div class="input-group input-group input-group-sm">
-						<input type="text" class="form-control" placeholder="Email Address" aria-label="Email Address">
-						<div class="input-group-append">
-							<button class="btn button" type="submit">OK</button>
-						</div>
-					</div>
-				</form>
+			{% filter shortcodes %}
+				[sibwp_form id=1]
+			{% endfilter %}
 			</div>
 			<div class="col-12 col-md-6 col-lg-8">
 				<ul class="social-icons float-right">

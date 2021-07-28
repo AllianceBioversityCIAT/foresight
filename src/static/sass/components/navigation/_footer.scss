@@ -58,13 +58,13 @@ body {
           color: $color_white;
         }
 
-        input[type=text]{
+        input[type=email]{
           border: none;
           font-family: $font__main;
           padding: 0px 20px;
         }
 
-        input[type=text]:focus{
+        input[type=email]:focus{
             outline: none;
         }
 
