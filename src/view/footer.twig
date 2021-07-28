@@ -1,24 +1,46 @@
-<footer id="foresight-footer-section" class="site-footer">
-	{# <div id="foresight-footer-container" class="container">
-		<div class="row site-info">
-			<div id="footer-logo" class="col-md-8">
-				<img src="{{ function('customize_theme_mod', 'theme_nav_logo' ) }}" alt="Logo" width="167">
+<footer id="foresight-footer-section">
+	<div>
+		<div class="container">
+			<div class="row">
+				<div class=" col-6 col-sm-6 col-lg-4">
+					<ul class="footer-navigation">
+					{% for item in footerMenu.items %}
+						<li><a href="{{ item.link }}" target="{{item.target}}">{{ item.title }}</a></li>
+					{% endfor %}
+					</ul>
+				</div>
+				<div class="col-6 col-sm-6 col-lg-8">
+					<ul class="footer-navigation">
+						<li>{{ contact_us_address }}</li>
+						<li>{{ contact_us_phone }}</li>
+						<li>{{ contact_us_email }}</li>
+					</ul>
+				</div>
 			</div>
-			<div class="col-md-4 footer-content-social">
-				<p>Follow us</p>
-				{{ function('foresight_social_icons') }}
+			<div class="row">
+			<div class=" col-12 col-md-6 col-lg-4">
+				<form class="newsletter" action="/" method="post">
+				<p>Subscribe to our newsletter</p>
+					<div class="input-group input-group input-group-sm">
+						<input type="text" class="form-control" placeholder="Email Address" aria-label="Email Address">
+						<div class="input-group-append">
+							<button class="btn button" type="submit">OK</button>
+						</div>
+					</div>
+				</form>
 			</div>
-		</div>  <!-- .site-info -->
-		<div class="row footer-content-copyright">
-			<p>Foresight 2021 All Rights Reserved</p>
-			<span class="sep"> | </span>
-			<a href="#">
-				Privacy Policy
-			</a>
-			<span class="sep"> | </span>
-			<a href="#">
-				Terms of Use
-			</a>
+			<div class="col-12 col-md-6 col-lg-8">
+				<ul class="social-icons float-right">
+				{% for item in socialMenu.items %}
+					<li>
+						<a href="{{ item.link }}" target="{{item.target}}">
+							<img src="{{theme.link}}/static/images/icons/{{ item.title|lower }}.svg" alt="{{ item.title }}">
+						</a>
+					</li>
+				{% endfor %}
+				</ul>
+			</div>
+			</div>
 		</div>
-	</div> #}
-</footer><!-- #colophon -->
+	</div>	
+</footer>

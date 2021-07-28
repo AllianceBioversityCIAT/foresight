@@ -63,6 +63,7 @@ if ( ! function_exists( 'foresight_theme_setup' ) ) :
 			array(
 				'foresight-top-menu' => esc_html__( 'Top Menu', SLUG_THEME ),
 				'foresight-social-menu' => esc_html__( 'Social Menu', SLUG_THEME ),
+				'foresight-footer-menu' => esc_html__( 'Footer Menu', SLUG_THEME ),
 			)
 		);
 
@@ -323,3 +324,17 @@ endif;
 
 add_action( 'parse_query', 'foresight_save_keywords_search' );
 
+/**
+ * Add option page
+ */
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Theme Settings',
+		'menu_title'	=> 'Theme Options',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+
+}
