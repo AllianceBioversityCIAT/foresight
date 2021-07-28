@@ -12,6 +12,11 @@
 if ( class_exists( 'Timber' ) ) {
 
 	$context = Timber::context();
+	$context['footerMenu'] = new TimberMenu('foresight-footer-menu');
+	$context['socialMenu'] = new TimberMenu('foresight-social-menu');
+	$context['contact_us_address'] = get_field('contact_us_address', 'options');
+	$context['contact_us_phone'] = get_field('contact_us_phone', 'options');
+	$context['contact_us_email'] = get_field('contact_us_email', 'options');
 
 	Timber::render( './view/footer.twig', $context );
 
