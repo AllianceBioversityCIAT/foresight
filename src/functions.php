@@ -175,8 +175,8 @@ function foresight_theme_scripts() {
 
 	//Styles
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_enqueue_script( 'foresight_theme-jquery', get_template_directory_uri() . '/static/lib/jquery/dist/jquery.slim.min.js', array(), _S_VERSION, true );
-	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.bundle.min.js', array( 'foresight_theme-jquery' ), _S_VERSION, true );
+	//wp_enqueue_script( 'foresight_theme-jquery', get_template_directory_uri() . '/static/lib/jquery/dist/jquery.slim.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), _S_VERSION, true );
 	wp_enqueue_script( 'foresight_theme-lazysizes-js', get_template_directory_uri() . '/static/lib/lazysizes/lazysizes.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'foresight_theme-js', get_template_directory_uri() . '/static/js/main.min.js', array(), _S_VERSION, true );
 
