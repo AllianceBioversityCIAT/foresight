@@ -216,6 +216,10 @@ body{
             width: 9vw;
             padding-left: 8px;
             color: $color_white;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            
             @include respond-below( md ) {
                 width: 24vw;
             }
