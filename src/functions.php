@@ -357,3 +357,24 @@ if( ! function_exists('foresight_popular_searches') ) :
 	add_filter( 'sm_list_popular_searches_display', 'foresight_popular_searches', 10, 2 );
 
 endif;
+
+/**
+ * Asynchronous scripts in the queue
+ **/ 
+function add_async_to_script( $tag, $handle, $src ) {
+	if ( ! is_admin() ) {
+		$tag = str_replace( ' src', ' defer src', $tag );
+	}
+    return $tag;
+}
+
+add_filter( 'script_loader_tag', 'add_async_to_script', 10, 3 );
+
+
+/**
+ * Hidden block editor for Pages
+ */
+function hide_editor() {
+	remove_post_type_support('page', 'editor');
+}
+add_action( 'admin_init', 'hide_editor' );

@@ -7,12 +7,12 @@
                 <img width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[0].thumbnail.src }}" data-srcset="{{ featuredPost[0].thumbnail.srcset }}" data-sizes="{{ featuredPost[0].thumbnail.img_sizes }}" alt="{{ featuredPost[0].thumbnail.title }}">
             </div>
             <div class="col-md-6 body">
-                <h2 class="title">{{ featuredPost[0].title }}</h2>
+                <h2 class="title"><a href="{{ featuredPost[0].link }}">{{ featuredPost[0].title }}</a></h2>
                 <p class="content">
                 {{ featuredPost[0].preview.read_more('') }}
                 </p>
                 <div class="text-right">
-                    <a class="btn more" href="{{ featuredPost[0].link }}">See more</a>
+                    <a class="btn more" href="{{ featuredPost[0].link }}">Read more</a>
                 </div>
             </div>
         </div> 
@@ -24,12 +24,12 @@
                             <img width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[1].thumbnail.src }}" data-srcset="{{ featuredPost[1].thumbnail.srcset }}" data-sizes="{{ featuredPost[1].thumbnail.img_sizes }}" alt="{{ featuredPost[1].thumbnail.title }}">
                         </div>
                         <div class="col-12 body shadow">
-                            <h2 class="title">{{ featuredPost[1].title }}</h2>
+                            <h2 class="title"><a href="{{ featuredPost[1].link }}">{{ featuredPost[1].title }}</a></h2>
                             <p class="content">
                             {{ featuredPost[1].preview.read_more('') }}
                             </p>
                             <div class="text-right">
-                                <a class="btn more" href="{{ featuredPost[1].link }}">See more</a>
+                                <a class="btn more" href="{{ featuredPost[1].link }}">Read more</a>
                             </div>
                         </div>
                     </div> 
@@ -40,12 +40,12 @@
                             <img  width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[2].thumbnail.src }}" data-srcset="{{ featuredPost[2].thumbnail.srcset }}" data-sizes="{{ featuredPost[2].thumbnail.img_sizes }}" alt="{{ featuredPost[2].thumbnail.title }}">
                         </div>
                         <div class="col-12 body shadow">
-                            <h2 class="title">{{ featuredPost[2].title }}</h2>
+                            <h2 class="title"><a href="{{ featuredPost[2].link }}">{{ featuredPost[2].title }}</a></h2>
                             <p class="content">
                                 {{ featuredPost[2].preview.read_more('') }}
                             </p>
                             <div class="text-right">
-                                <a class="btn more" href="{{ featuredPost[2].link }}">See more</a>
+                                <a class="btn more" href="{{ featuredPost[2].link }}">Read more</a>
                             </div>
                         </div>
                     </div>
@@ -56,12 +56,12 @@
                             <img  width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[3].thumbnail.src }}" data-srcset="{{ featuredPost[3].thumbnail.srcset }}" data-sizes="{{ featuredPost[3].thumbnail.img_sizes }}" alt="{{ featuredPost[3].thumbnail.title }}">
                         </div>
                         <div class="col-12 body shadow">
-                            <h2 class="title">{{ featuredPost[3].title }}</h2>
+                            <h2 class="title"><a href="{{ featuredPost[3].link }}">{{ featuredPost[3].title }}</a></h2>
                             <p class="content">
                                 {{ featuredPost[3].preview.read_more('') }}
                             </p>
                             <div class="text-right">
-                                <a class="btn more" href="{{ featuredPost[3].link }}">See more</a>
+                                <a class="btn more" href="{{ featuredPost[3].link }}">Read more</a>
                             </div>
                         </div>
                     </div>
