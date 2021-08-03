@@ -12,20 +12,9 @@
                 </a>
             </form>
             </div>
-            {% if popularSearch|length > 0 %}
             <div id="foresight-popular-search" class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Popular searches
-            </button>
-            <div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownMenuButton">
-                <div class="dropdown-row">
-                    {% for keyword in popularSearch %}
-                    <a class="dropdown-item" href="/?s={{ keyword }}">{{ keyword|capitalize }}</a>
-                    {% endfor %}
-                </div>
+            {{ function('sm_list_popular_searches', '', '', '30') }}
             </div>
-            </div>
-            {% endif %}
     </div>
     <div class="container-curated-search">
             <div class="row">

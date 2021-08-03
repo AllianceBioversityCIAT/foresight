@@ -253,13 +253,6 @@ function remove_recent_comments_style() {
 }
 add_action('widgets_init', 'remove_recent_comments_style');
 
-/**
- * Remove Gutenberg css
- */
-function dequeue_gutenberg_theme_css() {
-    wp_dequeue_style( 'wp-block-library' );
-}
-add_action( 'wp_enqueue_scripts', 'dequeue_gutenberg_theme_css', 100 );
 
 /**
  * Implement the Custom Header feature.
@@ -338,3 +331,50 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 }
+
+
+/**
+ * Popular search
+ */
+if( ! function_exists('foresight_popular_searches') ) :
+
+	function foresight_popular_searches( $display, $searches ) {
+		if ( $searches ) :
+			$output  = '<button class="btn dropdown-toggle" type="button" id="dropdownPopularSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular searches</button>';
+			$output .= '<div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownPopularSearch">';
+			$output .= '<div class="dropdown-row">';
+
+			foreach ($searches as $key => $value) {
+				$output .= '<a class="dropdown-item" href="'.$value['href'].'">'.ucfirst($value['term']).'</a>';
+			}
+
+			$output .= '</div>';
+			$output .= '</div>';
+		endif;
+
+		return $output;
+	}
+	add_filter( 'sm_list_popular_searches_display', 'foresight_popular_searches', 10, 2 );
+
+endif;
+
+/**
+ * Asynchronous scripts in the queue
+ **/ 
+function add_async_to_script( $tag, $handle, $src ) {
+	if ( ! is_admin() ) {
+		$tag = str_replace( ' src', ' defer src', $tag );
+	}
+    return $tag;
+}
+
+add_filter( 'script_loader_tag', 'add_async_to_script', 10, 3 );
+
+
+/**
+ * Hidden block editor for Pages
+ */
+function hide_editor() {
+	remove_post_type_support('page', 'editor');
+}
+add_action( 'admin_init', 'hide_editor' );

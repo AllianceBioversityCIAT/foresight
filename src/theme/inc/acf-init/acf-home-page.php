@@ -311,7 +311,17 @@ function register_custom_acf_fields_section_home_page() {
                 'style' => 'default',
                 'label_placement' => 'top',
                 'instruction_placement' => 'label',
-                'hide_on_screen' => '',
+                'hide_on_screen' => [
+                     0 => 'the_content',
+                     1 => 'excerpt',
+                     2 => 'discussion',
+                     3 => 'comments',
+                     4 => 'revisions',
+                     5 => 'format',
+                     6 => 'page_attributes',
+                     7 => 'featured_image',
+                     8 => 'send-trackbacks',
+                ],
                 'active' => true,
                 'description' => '',
             ]
