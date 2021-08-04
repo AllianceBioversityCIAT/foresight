@@ -20,9 +20,8 @@ module.exports = {
     allJsFiles: [
       './src/static/js/**/*.js',
     ],
-    allScssFiles: [
-      './src/static/sass/style.scss',
-    ],
+    principalCSSFiles: './src/static/sass/style.scss',
+    allScssFiles: './src/static/sass/main-files/**/*.scss',
     allImgFiles: [
       './src/static/images/**/*.{png,jpg,jpeg,gif,svg}'
     ],
@@ -64,7 +63,8 @@ module.exports = {
   destination: {
     destFolder: destinationFolder,
     allJsFiles: destinationFolder + '/static/js/',
-    allScssFiles: destinationFolder + '/',
+    allScssFiles: destinationFolder + '/static/css/',
+    principalCSSFiles: destinationFolder + '/',
     allImgFiles: destinationFolder + '/static/images/',
     allLibFiles: destinationFolder + '/static/lib/',
     vendorScripts: destinationFolder + '/theme/vendor/',
