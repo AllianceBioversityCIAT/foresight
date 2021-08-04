@@ -2,20 +2,19 @@
 /**
  * foresight functions and definitions
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
+ * @link    https://developer.wordpress.org/themes/basics/theme-functions/
  * @package foresight
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
+if ( !defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
 	$theme_version = wp_get_theme()->get( 'Version' );
 	define( '_S_VERSION', $theme_version );
 }
 
-if ( ! defined( '_PLATFORM' ) ) {
+if ( !defined( '_PLATFORM' ) ) {
 	// Platform desktop/mobile.
-	define('_PLATFORM', (wp_is_mobile()) ? 'mobile' : 'desktop' );
+	define( '_PLATFORM', ( wp_is_mobile() ) ? 'mobile' : 'desktop' );
 }
 
 /**
@@ -23,10 +22,9 @@ if ( ! defined( '_PLATFORM' ) ) {
  */
 require get_template_directory() . '/theme/inc/constants.php';
 
-if ( ! function_exists( 'foresight_theme_setup' ) ) :
+if ( !function_exists( 'foresight_theme_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
 	 * Note that this function is hooked into the after_setup_theme hook, which
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
@@ -61,7 +59,7 @@ if ( ! function_exists( 'foresight_theme_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'foresight-top-menu' => esc_html__( 'Top Menu', SLUG_THEME ),
+				'foresight-top-menu'    => esc_html__( 'Top Menu', SLUG_THEME ),
 				'foresight-social-menu' => esc_html__( 'Social Menu', SLUG_THEME ),
 				'foresight-footer-menu' => esc_html__( 'Footer Menu', SLUG_THEME ),
 			)
@@ -119,14 +117,14 @@ add_action( 'after_setup_theme', 'foresight_theme_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
- *
  * Priority 0 to make it available to lower priority callbacks.
  *
  * @global int $content_width
  */
 function foresight_theme_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'foresight_theme_content_width', 640 );
+	$GLOBALS[ 'content_width' ] = apply_filters( 'foresight_theme_content_width', 640 );
 }
+
 add_action( 'after_setup_theme', 'foresight_theme_content_width', 0 );
 
 /**
@@ -147,6 +145,7 @@ function foresight_theme_widgets_init() {
 		)
 	);
 }
+
 add_action( 'widgets_init', 'foresight_theme_widgets_init' );
 
 // Define path and URL to the ACF plugin.
@@ -173,17 +172,27 @@ function acf_settings_show_admin( $show_admin ) {
  */
 function foresight_theme_scripts() {
 
-	//Styles
+	global $template;
+	$template_name = basename( $template, ".php" );
+
+	//Styles.
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
-	//wp_enqueue_script( 'foresight_theme-jquery', get_template_directory_uri() . '/static/lib/jquery/dist/jquery.slim.min.js', array(), _S_VERSION, true );
+	wp_enqueue_style( 'foresight_' . $template_name, get_template_directory_uri() . '/static/css/' . $template_name . '.css', array(), _S_VERSION );
+
+	//Bootstrap Bundle.
 	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), _S_VERSION, true );
+
+	//Lazy Sizes.
 	wp_enqueue_script( 'foresight_theme-lazysizes-js', get_template_directory_uri() . '/static/lib/lazysizes/lazysizes.min.js', array(), _S_VERSION, true );
+
+	//Js
 	wp_enqueue_script( 'foresight_theme-js', get_template_directory_uri() . '/static/js/main.min.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
+
 add_action( 'wp_enqueue_scripts', 'foresight_theme_scripts' );
 
 /**
@@ -193,21 +202,23 @@ function disable_emojis() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
-	remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
 	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 	add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 	add_filter( 'wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2 );
 }
+
 add_action( 'init', 'disable_emojis' );
-   
+
 /**
-* Filter function used to remove the tinymce emoji plugin.
-* 
-* @param array $plugins 
-* @return array Difference betwen the two arrays
-*/
+ * Filter function used to remove the tinymce emoji plugin.
+ *
+ * @param array $plugins
+ *
+ * @return array Difference betwen the two arrays
+ */
 function disable_emojis_tinymce( $plugins ) {
 	if ( is_array( $plugins ) ) {
 		return array_diff( $plugins, array( 'wpemoji' ) );
@@ -215,19 +226,20 @@ function disable_emojis_tinymce( $plugins ) {
 		return array();
 	}
 }
-   
+
 /**
-* Remove emoji CDN hostname from DNS prefetching hints.
-*
-* @param array $urls URLs to print for resource hints.
-* @param string $relation_type The relation type the URLs are printed for.
-* @return array Difference betwen the two arrays.
-*/
+ * Remove emoji CDN hostname from DNS prefetching hints.
+ *
+ * @param array  $urls          URLs to print for resource hints.
+ * @param string $relation_type The relation type the URLs are printed for.
+ *
+ * @return array Difference betwen the two arrays.
+ */
 function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
 	if ( 'dns-prefetch' == $relation_type ) {
 		/** This filter is documented in wp-includes/formatting.php */
 		$emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
-		$urls = array_diff( $urls, array( $emoji_svg_url ) );
+		$urls          = array_diff( $urls, array( $emoji_svg_url ) );
 	}
 
 	return $urls;
@@ -236,22 +248,23 @@ function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
 /**
  * Remove unused metadata
  */
-remove_action('wp_head', 'wp_generator');
-remove_action('wp_head', 'rsd_link');
-remove_action('wp_head', 'wlwmanifest_link');
-remove_action('wp_head', 'index_rel_link');
-remove_action('wp_head', 'parent_post_rel_link', 10, 0);
-remove_action('wp_head', 'start_post_rel_link', 10, 0);
-remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0);
+remove_action( 'wp_head', 'wp_generator' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+remove_action( 'wp_head', 'index_rel_link' );
+remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );
+remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );
+remove_action( 'wp_head', 'adjacent_posts_rel_link', 10, 0 );
 
 /**
- * Remove recent comments wp_head CSS 
+ * Remove recent comments wp_head CSS
  */
 function remove_recent_comments_style() {
-    global $wp_widget_factory;
-    remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
+	global $wp_widget_factory;
+	remove_action( 'wp_head', array( $wp_widget_factory->widgets[ 'WP_Widget_Recent_Comments' ], 'recent_comments_style' ) );
 }
-add_action('widgets_init', 'remove_recent_comments_style');
+
+add_action( 'widgets_init', 'remove_recent_comments_style' );
 
 
 /**
@@ -286,32 +299,32 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/theme/inc/jetpack.php';
 }
 
-if ( ! function_exists( 'foresight_save_keywords_search' ) ) :
-	function foresight_save_keywords_search( $query_object )
-	{
-		if( $query_object->is_search() ) {
-			$transient_data = get_transient('foresight_popular_search');
-			$array_data = ($transient_data) ? unserialize($transient_data) : array();
+if ( !function_exists( 'foresight_save_keywords_search' ) ) :
+	function foresight_save_keywords_search( $query_object ) {
+		if ( $query_object->is_search() ) {
+			$transient_data = get_transient( 'foresight_popular_search' );
+			$array_data     = ( $transient_data ) ? unserialize( $transient_data ) : array();
 
-			$keywords = strtolower($query_object->query['s']); 
-			$keywords = preg_replace('/[^A-Za-z0-9\s]/', '', $keywords);
-			$keywords = explode(' ', $keywords);
+			$keywords = strtolower( $query_object->query[ 's' ] );
+			$keywords = preg_replace( '/[^A-Za-z0-9\s]/', '', $keywords );
+			$keywords = explode( ' ', $keywords );
 
-			foreach($keywords as $keyword){
-				if(strlen($keyword)>3 && !in_array($keyword, $array_data)){ $array_data[] = strtolower($keyword); }
+			foreach ( $keywords as $keyword ) {
+				if ( strlen( $keyword ) > 3 && !in_array( $keyword, $array_data ) ) {
+					$array_data[] = strtolower( $keyword );
+				}
 			}
-			
-			$transient_data = serialize($array_data);
-			set_transient('foresight_popular_search', $transient_data, 30 * DAY_IN_SECONDS);
+
+			$transient_data = serialize( $array_data );
+			set_transient( 'foresight_popular_search', $transient_data, 30 * DAY_IN_SECONDS );
 		}
 	}
 endif;
 
-if ( ! function_exists( 'foresight_get_keywords_search' ) ) :
-	function foresight_get_keywords_search()
-	{
-		$transient_data = get_transient('foresight_popular_search');
-		return unserialize($transient_data);
+if ( !function_exists( 'foresight_get_keywords_search' ) ) :
+	function foresight_get_keywords_search() {
+		$transient_data = get_transient( 'foresight_popular_search' );
+		return unserialize( $transient_data );
 	}
 endif;
 
@@ -320,15 +333,15 @@ add_action( 'parse_query', 'foresight_save_keywords_search' );
 /**
  * Add option page
  */
-if( function_exists('acf_add_options_page') ) {
-	
-	acf_add_options_page(array(
-		'page_title' 	=> 'Theme Settings',
-		'menu_title'	=> 'Theme Options',
-		'menu_slug' 	=> 'theme-general-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
-	));
+if ( function_exists( 'acf_add_options_page' ) ) {
+
+	acf_add_options_page( array(
+		'page_title' => 'Theme Settings',
+		'menu_title' => 'Theme Options',
+		'menu_slug'  => 'theme-general-settings',
+		'capability' => 'edit_posts',
+		'redirect'   => false
+	) );
 
 }
 
@@ -336,16 +349,16 @@ if( function_exists('acf_add_options_page') ) {
 /**
  * Popular search
  */
-if( ! function_exists('foresight_popular_searches') ) :
+if ( !function_exists( 'foresight_popular_searches' ) ) :
 
 	function foresight_popular_searches( $display, $searches ) {
 		if ( $searches ) :
-			$output  = '<button class="btn dropdown-toggle" type="button" id="dropdownPopularSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular searches</button>';
+			$output = '<button class="btn dropdown-toggle" type="button" id="dropdownPopularSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular searches</button>';
 			$output .= '<div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownPopularSearch">';
 			$output .= '<div class="dropdown-row">';
 
-			foreach ($searches as $key => $value) {
-				$output .= '<a class="dropdown-item" href="'.$value['href'].'">'.ucfirst($value['term']).'</a>';
+			foreach ( $searches as $key => $value ) {
+				$output .= '<a class="dropdown-item" href="' . $value[ 'href' ] . '">' . ucfirst( $value[ 'term' ] ) . '</a>';
 			}
 
 			$output .= '</div>';
@@ -354,18 +367,19 @@ if( ! function_exists('foresight_popular_searches') ) :
 
 		return $output;
 	}
+
 	add_filter( 'sm_list_popular_searches_display', 'foresight_popular_searches', 10, 2 );
 
 endif;
 
 /**
  * Asynchronous scripts in the queue
- **/ 
+ **/
 function add_async_to_script( $tag, $handle, $src ) {
-	if ( ! is_admin() ) {
+	if ( !is_admin() ) {
 		$tag = str_replace( ' src', ' defer src', $tag );
 	}
-    return $tag;
+	return $tag;
 }
 
 add_filter( 'script_loader_tag', 'add_async_to_script', 10, 3 );
@@ -375,6 +389,7 @@ add_filter( 'script_loader_tag', 'add_async_to_script', 10, 3 );
  * Hidden block editor for Pages
  */
 function hide_editor() {
-	remove_post_type_support('page', 'editor');
+	remove_post_type_support( 'page', 'editor' );
 }
+
 add_action( 'admin_init', 'hide_editor' );

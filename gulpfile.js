@@ -33,7 +33,7 @@ var onError = function ( err ) {
  * @return { stream } - returns a gulp stream.
  */
 function cssTask() {
-  return gulp.src( buildConfig.sources.allScssFiles )
+  return gulp.src( buildConfig.sources.principalCSSFiles )
     .pipe( mode.development( sourcemaps.init() ) )
     .pipe( plumber( { errorHandler: onError } ) )
     .pipe( header( buildConfig.sources.banner.join( '\n' ) ) )
@@ -45,12 +45,29 @@ function cssTask() {
 }
 
 /**
+ * This function compiles source *.scss files and concatenates them into a single file.
+ * @function css
+ * @return { stream } - returns a gulp stream.
+ */
+function cssAll() {
+  return gulp.src( buildConfig.sources.allScssFiles )
+    .pipe( mode.development( sourcemaps.init() ) )
+    .pipe( plumber( { errorHandler: onError } ) )
+    .pipe( header( buildConfig.sources.banner.join( '\n' ) ) )
+    .pipe( sass() )
+    .pipe( postcss( [ autoprefixer, cssnano ] ) )
+    .pipe( ( mode.development( sourcemaps.write( '/' ) ) ) )
+    .pipe( gulp.dest( buildConfig.destination.allScssFiles )
+    );
+}
+
+/**
  * This function compiles source *.scss files and concatenates them into a rtl file.
  * @function cssRtl
  * @return { stream } - returns a gulp stream.
  */
 function cssRtlTask() {
-  return gulp.src( buildConfig.sources.allScssFiles )
+  return gulp.src( buildConfig.sources.principalCSSFiles )
     .pipe( mode.development( sourcemaps.init() ) )
     .pipe( plumber( { errorHandler: onError } ) )
     .pipe( header( buildConfig.sources.banner.join( '\n' ) ) )
@@ -139,7 +156,7 @@ function watchTask() {
   gulp.watch( buildConfig.sources.sourceFolder + '/**/*.{php,twig}', scaffolding, vendorTask );
 
   // Watch CSS files
-  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssRtlTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssAll, cssRtlTask );
 
   // Watch Javascript files.
   gulp.watch( buildConfig.sources.sourceFolder + '/static/js/**/*.js', jsTask, LibrariesTask );
@@ -175,7 +192,7 @@ const build  = gulp.series(
   clean,
   scaffolding,
   vendorTask,
-  gulp.parallel( cssTask, cssRtlTask, jsTask, LibrariesTask, imagesTask )
+  gulp.parallel( cssTask, cssAll, cssRtlTask, jsTask, LibrariesTask, imagesTask )
 );
 const reload = gulp.series( build, gulp.parallel( watchTask ) );
 
