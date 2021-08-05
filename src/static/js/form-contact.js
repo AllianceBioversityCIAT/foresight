@@ -13,22 +13,22 @@ jQuery( 'body' ).ready( function ( $ ) {
             if (form.checkValidity() === false) {
               event.preventDefault();
               event.stopPropagation();
-            } /*else {
-              var idForm = $( '#driven-form-contact' );
+            } else {
+              var idForm = $( '#foresight-form-contact' );
               event.preventDefault();
               event.stopPropagation();
               $( '#contact_form_load' ).show();
 
               setTimeout( function () {
                 grecaptcha.ready( function () {
-                  grecaptcha.execute( googleRecaptcha.siteKey, { action: 'driven_contact_submit' } ).then( function ( token ) {
+                  grecaptcha.execute( googleRecaptcha.siteKey, { action: 'foresight_contact_submit' } ).then( function ( token ) {
                     idForm.append( '<input type="hidden" name="token" value="' + token + '">' );
-                    idForm.append( '<input type="hidden" name="action" value="driven_contact_submit">' );
+                    idForm.append( '<input type="hidden" name="action" value="foresight_contact_submit">' );
                     idForm.submit();
                   } );
                 } );
               }, 300 );
-            }*/
+            }
             form.classList.add('was-validated');
           }, false);
         });
