@@ -19,6 +19,11 @@
 			</div>
 			<div class="col-md-7 content-form-contact">
 				<h4>{{ post.meta('contact_form_title') }}</h4>
+				{% if contactInfo %}
+					<div id="alert-success" class="alert alert-success" role="alert">
+						Successful submission!
+					</div>
+				{% endif %}
 				<form id="foresight-form-contact" class="form-page-contact needs-validation" novalidate method="post">
 					<div class="form-row">
 						<div class="col-md-8 mb-3">
