@@ -178,6 +178,7 @@ function foresight_theme_scripts() {
 	//Styles.
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_enqueue_style( 'foresight_' . $template_name, get_template_directory_uri() . '/static/css/' . $template_name . '.css', array(), _S_VERSION );
+	wp_enqueue_style( 'foresight_theme-fonts-style', get_template_directory_uri() . '/static/lib/fonts/icons.css' );
 
 	//Bootstrap Bundle.
 	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), _S_VERSION, true );
@@ -190,6 +191,14 @@ function foresight_theme_scripts() {
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
+	}
+
+	$options_page = get_fields( 'theme-general-settings' );
+
+	// Google reCAPTCHA
+	if ( $options_page[ 'recaptcha_site_key' ] ) {
+		wp_enqueue_script( 'googleRecaptcha', 'https://www.google.com/recaptcha/api.js?render=' . $options_page[ 'recaptcha_site_key' ], 'latest', true );
+		wp_localize_script( 'foresight_theme-js', 'googleRecaptcha', array( 'siteKey' => $options_page[ 'recaptcha_site_key' ] ) );
 	}
 }
 
@@ -336,11 +345,14 @@ add_action( 'parse_query', 'foresight_save_keywords_search' );
 if ( function_exists( 'acf_add_options_page' ) ) {
 
 	acf_add_options_page( array(
-		'page_title' => 'Theme Settings',
-		'menu_title' => 'Theme Options',
-		'menu_slug'  => 'theme-general-settings',
-		'capability' => 'edit_posts',
-		'redirect'   => false
+		'page_title'      => 'Theme Settings',
+		'menu_title'      => 'Theme Options',
+		'menu_slug'       => 'theme-general-settings',
+		'capability'      => 'edit_posts',
+		'redirect'        => false,
+		'update_button'   => 'Save options',
+		'updated_message' => 'Options saved',
+		'post_id'         => 'theme-general-settings',
 	) );
 
 }

@@ -1,6 +1,6 @@
 var package = require( './package.json' ),
     config  = {
-      "dest": "./build"
+      'dest': './build'
     };
 
 try {
@@ -21,7 +21,9 @@ module.exports = {
       './src/static/js/**/*.js',
     ],
     principalCSSFiles: './src/static/sass/style.scss',
-    allScssFiles: './src/static/sass/main-files/**/*.scss',
+    allScssFiles: [
+      './src/static/sass/main-files/**/*.scss'
+    ],
     allImgFiles: [
       './src/static/images/**/*.{png,jpg,jpeg,gif,svg}'
     ],
@@ -38,15 +40,13 @@ module.exports = {
       //Jquery
       './node_modules/jquery/dist/jquery.slim.min.js',
     ],
-    vendorScripts: [
-      './vendor/**/*'
-    ],
     scaffolding: [
       'src/**/*',
       '!src/static/sass/**',
       '!src/static/js/**',
       '!src/static/images/**'
     ],
+    version: 'src/static/sass/variables-site/_version.scss',
     banner: [
       '/*!',
       'Theme Name: ' + package.name,
@@ -58,7 +58,8 @@ module.exports = {
       'Tested up to: 5.4',
       '*/',
       ' '
-    ]
+    ],
+    iconFont: './src/static/images/icons/*.svg',
   },
   destination: {
     destFolder: destinationFolder,
@@ -67,7 +68,7 @@ module.exports = {
     principalCSSFiles: destinationFolder + '/',
     allImgFiles: destinationFolder + '/static/images/',
     allLibFiles: destinationFolder + '/static/lib/',
-    vendorScripts: destinationFolder + '/theme/vendor/',
+    iconFont: destinationFolder + '/static/lib/fonts/',
     buildPackage: 'dist',
   }
 };

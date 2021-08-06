@@ -18,6 +18,8 @@ var buildConfig  = require( './gulp.config' ),
     imagemin     = require( 'gulp-imagemin' ),
     del          = require( 'del' ),
     bump         = require( 'gulp-bump' ),
+    iconfont     = require( 'gulp-iconfont' ),
+    iconfontCss  = require( 'gulp-iconfont-css' ),
     zip          = require( 'gulp-zip' ),
     mode         = require( 'gulp-mode' )();
 
@@ -53,7 +55,6 @@ function cssAll() {
   return gulp.src( buildConfig.sources.allScssFiles )
     .pipe( mode.development( sourcemaps.init() ) )
     .pipe( plumber( { errorHandler: onError } ) )
-    .pipe( header( buildConfig.sources.banner.join( '\n' ) ) )
     .pipe( sass() )
     .pipe( postcss( [ autoprefixer, cssnano ] ) )
     .pipe( ( mode.development( sourcemaps.write( '/' ) ) ) )
@@ -78,6 +79,24 @@ function cssRtlTask() {
     .pipe( ( mode.development( sourcemaps.write( '/' ) ) ) )
     .pipe( gulp.dest( buildConfig.destination.destFolder )
     );
+}
+
+function iconFont() {
+  return gulp.src( buildConfig.sources.iconFont )
+    .pipe( iconfontCss( {
+      path: './src/static/lib/fonts/icons_template.css',
+      fontName: 'themeFont',
+      targetPath: '../../lib/fonts/icons.css',
+      fontPath: './'
+    } ) )
+    .pipe( iconfont( {
+      fontName: 'themeFont', // required
+    } ) )
+    // .on('glyphs', function(glyphs, options) {
+    //   console.log(glyphs, options);
+    //   // the value for unicode in the glyphs object is a question mark in a box
+    // })
+    .pipe( gulp.dest( buildConfig.destination.iconFont ) );
 }
 
 /**
@@ -125,17 +144,6 @@ function imagesTask() {
 }
 
 /**
- * This function obtains everything that keeps selling, to transfer it to the subject.
- * @function vendor
- * @return { stream } - returns a gulp stream
- */
-function vendorTask() {
-  return gulp.src( buildConfig.sources.vendorScripts )
-    .pipe( gulp.dest( buildConfig.destination.vendorScripts )
-    );
-}
-
-/**
  * This function creates the theme folder tree.
  * @function scaffolding
  * @return { stream } - returns a gulp stream
@@ -153,10 +161,11 @@ function scaffolding() {
 function watchTask() {
 
   // Watch Php files.
-  gulp.watch( buildConfig.sources.sourceFolder + '/**/*.{php,twig}', scaffolding, vendorTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/**/*.{php,twig}', scaffolding );
 
   // Watch CSS files
-  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssAll, cssRtlTask );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssTask, cssRtlTask, iconFont );
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/sass/**/*.scss', cssAll );
 
   // Watch Javascript files.
   gulp.watch( buildConfig.sources.sourceFolder + '/static/js/**/*.js', jsTask, LibrariesTask );
@@ -176,14 +185,19 @@ function clean( cb ) {
 }
 
 function prerelease() {
-  return gulp.src( buildConfig.general.package )
+  return gulp.src( './package.json' )
     .pipe( bump( { type: 'prerelease' } ) )
     .pipe( gulp.dest( './' )
     );
 }
 
+function updateWpVersion( cb ) {
+  var banner = buildConfig.sources.banner.join( '\n' );
+  fs.writeFile( buildConfig.sources.version, banner, cb );
+}
+
 function package() {
-  return gulp.src( buildConfig.destination.destinationFolder + '/**', { base: buildConfig.general.dest } )
+  return gulp.src( buildConfig.destination.destFolder + '/**', { base: buildConfig.general.dest } )
     .pipe( zip( buildConfig.general.package.name + '_' + buildConfig.general.package.version + '.zip' ) )
     .pipe( gulp.dest( buildConfig.destination.buildPackage ) )
 }
@@ -191,12 +205,11 @@ function package() {
 const build  = gulp.series(
   clean,
   scaffolding,
-  vendorTask,
-  gulp.parallel( cssTask, cssAll, cssRtlTask, jsTask, LibrariesTask, imagesTask )
+  gulp.parallel( cssTask, cssAll, cssRtlTask, iconFont, jsTask, LibrariesTask, imagesTask )
 );
 const reload = gulp.series( build, gulp.parallel( watchTask ) );
 
 exports.watch   = reload;
 exports.build   = build;
 exports.default = build;
-exports.package = gulp.series( build, package, prerelease );
+exports.package = gulp.series( updateWpVersion, build, package, prerelease );

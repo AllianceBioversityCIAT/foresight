@@ -1,0 +1,114 @@
+<section id="page-section-contact">
+	<div class="container container-page-contact">
+		<div class="row">
+			<div class="col-md-5 content-contact">
+				<h2>{{ post.title }}</h2>
+				<div class="data-page-contact">
+					<p><i class="icon-phone"></i>{{ post.meta('contact_title_cell_phone') }}</p>
+					<p><i class="icon-email"></i>{{ post.meta('contact_title_email') }}</p>
+				</div>
+				<ul class="social-icons">
+					{% for item in socialMenu.items %}
+						<li>
+							<a href="{{ item.link }}" target="{{item.target}}">
+								<i class="icon-{{ item.title|lower }}"></i>
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="col-md-7 content-form-contact">
+				<h4>{{ post.meta('contact_form_title') }}</h4>
+				{% if contactInfo %}
+					<div id="alert-success" class="alert alert-success" role="alert">
+						Successful submission!
+					</div>
+				{% endif %}
+				<form id="foresight-form-contact" class="form-page-contact needs-validation" novalidate method="post">
+					<div class="form-row">
+						<div class="col-md-8 mb-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-user">
+											<i class="icon-user"></i>
+										</span>
+								</div>
+								<input type="text" class="form-control" id="full_name" name="full_name"
+									   placeholder="{{ post.meta('contact_form_placeholder_full_name') }}"
+									   aria-describedby="basic-user" required>
+								<div class="invalid-feedback">
+									Please add your full name.
+								</div>
+								<div class="valid-feedback">
+									Looks good!
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-8 mb-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-email">
+										<i class="icon-email"></i>
+									</span>
+								</div>
+								<input type="email" class="form-control" id="email" name="email"
+									   placeholder="{{ post.meta('contact_form_placeholder_email') }}"
+									   aria-describedby="basic-email" required>
+								<div class="invalid-feedback">
+									Please add your email
+								</div>
+								<div class="valid-feedback">
+									Looks good!
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-8 mb-4">
+							<div class="input-group">
+								<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-cell-phone">
+											<i class="icon-phone"></i></span>
+								</div>
+								<input type="tel" class="form-control" id="cell_phone" name="cell_phone"
+									   placeholder="{{ post.meta('contact_form_placeholder_cell_phone') }}"
+									   pattern="[0-9]{10}" aria-describedby="basic-cell-phone" required>
+								<div class="invalid-feedback">
+									Please add your cell phone
+								</div>
+								<div class="valid-feedback">
+									Looks good!
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-8 mb-3">
+								<textarea class="form-control" rows="5" id="description" name="description"
+										  placeholder="{{ post.meta('contact_form_placeholder_description') }}"
+										  required></textarea>
+							<div class="invalid-feedback">
+								Please add your description
+							</div>
+							<div class="valid-feedback">
+								Looks good!
+							</div>
+						</div>
+					</div>
+					<button class="btn foresight-btn-primary" type="submit">
+						<span class="spinner-border spinner-border-sm" id="contact_form_load"
+							  role="status" aria-hidden="true" style="display: none;">
+						</span>
+						{{ post.meta('contact_form_button_title') }}
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<img class="lazyload contact-background-image" width="1500" height="600" data-src="{{ Image(post.meta('contact_background_image') ).src }}"
+		 data-srcset="{{ Image( post.meta('contact_background_image') ).srcset }}"
+		 data-sizes="{{ Image( post.meta('contact_background_image') ).img_sizes }}"
+		 alt="{{ Image( post.meta('contact_background_image') ).title }}">
+</section>
