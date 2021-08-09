@@ -29,7 +29,7 @@ if ( class_exists( 'Timber' ) ) {
 		];
 	}
 
-	Timber::render( './view/single.twig', $context );
+	Timber::render( './view/single/single.twig', $context );
 
 } else {
 	echo '<h1>Timber plugin is required</h1>';
