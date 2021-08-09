@@ -12,7 +12,7 @@ if ( class_exists( 'Timber' ) ) {
 	);
 
 	$context                    = Timber::context();
-	$context[ 'posts' ]         = new Timber\PostQuery();
+	$context[ 'posts' ]         = Timber::get_posts();
 	$context[ 'popularsPosts' ] = Timber::get_posts( $populars_posts_args );
 	Timber::render( './view/archives/blog.twig', $context );
 
