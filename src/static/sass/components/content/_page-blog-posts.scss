@@ -69,17 +69,6 @@ body {
 
     }
 
-
-
-    .container-visit-blog {
-      .row {
-        margin: 0;
-
-        @include respond-below( sm ) {
-          text-align: center;
-        }
-      }
-    }
   }
 }
 
@@ -116,18 +105,6 @@ body {
 
     .foresight-menu-button:visited {
       color: #dc3545;
-    }
-  }
-}
-.general-header-title-content {
-  text-align: center;
-  hr {
-    border: 1px solid #DC0037;
-    background: #DC0037;
-    width: 20rem;
-
-    @include respond-below(xl) {
-      width: 10%;
     }
   }
 }
