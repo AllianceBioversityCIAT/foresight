@@ -85,14 +85,38 @@
 			</div>
 		</div>
 	</div>
+	<div class="container container-form-search">
+		<form role="search" method="get" class="search-form" action="{{ function( 'home_url', '/blog' ) }}">
+			<div class="form-row">
+				<div class="col-md-4">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-user">
+								<i class="icon-search-magnifier"></i>
+							</span>
+						</div>
+						<input type="search" class="form-control search-field" id="full_name" name="text" title="Search for"
+							   placeholder="What would you like to know about?" value="{{ function( 'get_search_query' ) }}"
+							   aria-describedby="basic-search">
+					</div>
+
+				</div>
+				<div class="col-md-2">
+					<button class="btn foresight-btn-primary" type="submit">
+						Search
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
 	<div class="foresight-latest-post">
 		<div class="container">
 			<h2 class="title-latest-posts">Latest Posts</h2>
 			<div class="row">
-				<div class="col-md-8 content-latest-post">
+				<div class="col-md-8">
 					<div class="all-latest-posts">
 						{% for post in posts|slice(3) %}
-							<div class="card">
+							<div class="card content-latest-post">
 								<div class="row no-gutters">
 									<div class="col-md-5 card-image-post">
 										<img class="img" width="800" height="400"
