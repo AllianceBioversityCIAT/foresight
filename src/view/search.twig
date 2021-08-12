@@ -1,74 +1,867 @@
-{% import "./view/macros/search-cards.twig" as searchCardMacro %}
-{% import "./view/macros/pagination.twig" as paginationCafeto %}
-<div class="theme-header-scroll"></div>
-<div id="primary" class="content-area">
-	<main id="main" class="site-main">
-		<section class="search">
-			<div class="foresight-header-section"></div>
-			<div class="container p-0">
-				<div class="row title-first-search">
-					<div class="col-md-8">
-						<div class="row">
-						<div class="col-md-12">
-							<h2 class="foresight-primary-font-color font-weight-bold">
-								Use a Keyword to find it!
-							</h2>
+<section id="search-page" class="search-page">
+	<div class="container-fluid container-search-page">
+		<div class="row">
+			<div id="button-collapse-sidebar" class="button-collapse-sidebar collapse-button">
+				<button class="btn btn-sidebar-collapsed" data-card="#sidebar-menu-search">
+					<i class="icon-foresight icon-arrow-right"></i>
+				</button>
+			</div>
+			<div id="sidebar-menu-search" class="col-md-3 sidebar-menu-search collapse-sidebar">
+				<div id="accordion">
+					<div class="card">
+						<div class="card-header first-item" id="headingOne">
+							<h5>Impact Area</h5>
 						</div>
-						<div class="col-md-12">
-							<form role="search" method="get" id="searchform" class="searchform" action="{{site.link}}">
-								<input type="text" class="d-inline form-control mb-2 foresight-w-70"
-								value="{{ function('get_search_query') }}" name="s" id="s" placeholder="Type Here"
-								size="16">
-
-								<input class="btn btn-outline-danger foresight-menu-button"
-								type="submit" id="searchsubmit" value="Search"/>
-
-							</form>
-						</div>
-						</div>
-
-							{% if s is empty %}
-								{{ searchCardMacro.searchCard(lastPosts) }}
-							{% else %}
-								{{ searchCardMacro.searchCard(posts) }}
-								{{ paginationCafeto.paginationCafeto(posts) }}
-							{% endif %}
-
-
-
-
-					</div>
-
-					<div class="col-md-2 p-0 sidebar-search">
-						<h3 align="left">Archives</h3>
-						<hr class="foresight-hr-red-archive" align="left">
-						{% set args = {
-							'type' : 'monthly',
-							'show_post_count' : 'true',
-							'format' : 'custom',
-							'before' : '<p class="foresight-link-archive">',
-							'after' : '</p>',
-						} %}
-						{{ function('wp_get_archives', args) }}
-
-
-						<h3 class="mt-5" align="left">Categories</h3>
-						<hr class="foresight-hr-red-archive" align="left">
-						{% set args = {
-							'orderby' : 'count',
-							'order' : 'DESC',
-							'show_count' : 1,
-							'title_li':'',
-							'number': 10,
-							'hierarchical' : '0'
-						} %}
-						<div class="foresight-categories-archive">
-							{{ function('wp_list_categories', args) }}
+						<div id="collapseOne"
+							 class="collapse first-collapse show"{# aria-labelledby="headingOne" data-parent="#accordion" #}>
+							<div class="card-body">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+									<label class="custom-control-label" for="customCheck1">Nutrition, health and food
+										security(45)</label>
+								</div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customCheck1">
+									<label class="custom-control-label" for="customCheck1">Poverty reduction,
+										livelihoods and jobs(11)</label>
+								</div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customCheck1">
+									<label class="custom-control-label" for="customCheck1">Gender equality, youth and
+										social inclusion(2)</label>
+								</div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customCheck1">
+									<label class="custom-control-label" for="customCheck1">Climate adaptation and
+										mitigation(6)</label>
+								</div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customCheck1">
+									<label class="custom-control-label" for="customCheck1">Environmental health and
+										biodiversity(12)</label>
+								</div>
+							</div>
 						</div>
 					</div>
-
+					<div class="card">
+						<div class="card-header first-item" id="headingTwo">
+							<h5>SDG (Goals)</h5>
+						</div>
+						<div id="collapseTwo"
+							 class="collapse first-collapse show" {# aria-labelledby="headingTwo" data-parent="#accordion" #}>
+							<div id="sub-accordion" class="card-body">
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1"
+												   checked>
+											<label class="custom-control-label" for="customCheck1">
+												No Poverty (45)
+											</label>
+										</div>
+										<button class="btn btn-link btn-link-icon" data-toggle="collapse"
+												data-target="#collapse124123" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-open"></i>
+										</button>
+									</div>
+									<div id="collapse124123" class="collapse second-collapse show"
+										 aria-labelledby="headingOne" data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Zero Hunger (34)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse4624" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse4624" class="collapse second-collapse" aria-labelledby="headingOne"
+										 data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Good Health and Well-Being for People (12)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse523" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse523" class="collapse second-collapse" aria-labelledby="headingOne"
+										 data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Quality Education (7)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse5432" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse5432" class="collapse second-collapse" aria-labelledby="headingOne"
+										 data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Gender Equality (1)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse687" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse687" class="collapse second-collapse" aria-labelledby="headingOne"
+										 data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Clean Water and Sanitation (2)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse95623" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse95623" class="collapse second-collapse"
+										 aria-labelledby="headingOne" data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Affordable and Clean Energy (14)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse678" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse678" class="collapse second-collapse" aria-labelledby="headingOne"
+										 data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Decent Work and Economic Growth (3)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse1241423423" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse1241423423" class="collapse second-collapse"
+										 aria-labelledby="headingOne" data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Industry, Innovation, and Infrastructure (0)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse8465562" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse8465562" class="collapse second-collapse"
+										 aria-labelledby="headingOne" data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header second-item" id="headingOne">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="customCheck1">
+											<label class="custom-control-label" for="customCheck1">
+												Reducing Inequalities (0)
+											</label>
+										</div>
+										<button class="btn btn-link collapsed btn-link-icon" data-toggle="collapse"
+												data-target="#collapse189745" aria-expanded="true"
+												aria-controls="collapseOne">
+											<i class="icon-expand-arrow-closed"></i>
+										</button>
+									</div>
+									<div id="collapse189745" class="collapse second-collapse"
+										 aria-labelledby="headingOne" data-parent="#sub-accordion">
+										<div class="card-body">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1"
+													   checked>
+												<label class="custom-control-label" for="customCheck1">
+													Colombia (6)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Perú (5)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Bolivia (9)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Argentina (3)
+												</label>
+											</div>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="customCheck1">
+												<label class="custom-control-label" for="customCheck1">
+													Ecuador (1)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header first-item" id="headingThree">
+							<h5>Approach</h5>
+							<button class="btn btn-link btn-link-icon collapsed" data-toggle="collapse"
+									data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								<i class="icon-foresight icon-expand-arrow-closed"></i>
+							</button>
+						</div>
+						<div id="collapseThree" class="collapse first-collapse" aria-labelledby="headingThree"
+							 data-parent="#accordion">
+							<div class="card-body">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+									<label class="custom-control-label" for="customCheck1">Nutrition, health and food
+										security(45)</label>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</section>
-	</main>
-</div>
+			<div class="col-md-9 content-search">
+				<div class="row row-header-search">
+					<div class="col-md-8 header-search">
+						<h1 class="search-page-title">What would you like to know about?</h1>
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search…" aria-label="search"
+								   aria-describedby="basic-search">
+							<div class="input-group-append">
+							<span class="input-group-text" id="basic-search">
+								<i class="icon-search-magnifier"></i>
+							</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 header-search-image">
+						<img class="img"
+							 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
+							 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="content-search-results">
+						<div class="result-bar">
+							<h2>Your search results <span>(45)</span></h2>
+							<div class="bar-select">
+								<select class="form-control">
+									<option>Show</option>
+								</select>
+								<select class="form-control">
+									<option>Sort</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="search-results">
+						<div class="card col-12 card-result">
+							<div class="row">
+								<div class="col-md-2 card-body-left">
+									<h5>2020</h5>
+								</div>
+								<div class="col-md-10 card-body-right">
+									<div id="first-card" class="card-body collapse">
+										<p class="card-url">cgspace.cgiar.org</p>
+										<p class="card-category">Blog</p>
+										<h5 class="card-title">
+											GAEZ+_2015 Crop Yield
+											<button class="btn btn-result" data-card="#first-card">
+												<i class="icon-expand-arrow-closed"></i>
+											</button>
+										</h5>
+										<p class="card-text">
+											… FAOSTAT yield data for all countries and crops, 2009-2100 and 2014-2016,
+											are calculated from production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA).
+										</p>
+										<div class="row no-gutters">
+											<div class="col-6 col-md-3 card-authors">
+												<h6>Author / Creator</h6>
+												<p>Pérez, Jeanneth</p>
+												<p>Infante, Francisco</p>
+												<p>Vega, Fernando E</p>
+											</div>
+											<div class="col-6 col-md-3 card-published">
+												<h6>Published</h6>
+												<p>United States:</p>
+												<p>Oxford University</p>
+												<p>Press</p>
+											</div>
+											<div class="col-6 col-md-2 card-language">
+												<h6>Language</h6>
+												<p>English</p>
+											</div>
+											<div class="col-6 col-md-4 card-stack">
+												<span>Weevils - physiology</span>
+												<span>Animals</span>
+												<span>Insect Control</span>
+												<span>Coffee - growth & development </span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card col-12 card-result">
+							<div class="row">
+								<div class="col-md-2 card-body-left">
+									<h5>2020</h5>
+								</div>
+								<div class="col-md-10 card-body-right">
+									<div id="first-card" class="card-body collapse">
+										<p class="card-url">cgspace.cgiar.org</p>
+										<p class="card-category">Blog</p>
+										<h5 class="card-title">
+											GAEZ+_2015 Crop Yield
+											<button class="btn btn-result" data-card="#first-card">
+												<i class="icon-expand-arrow-closed"></i>
+											</button>
+										</h5>
+										<p class="card-text">
+											… FAOSTAT yield data for all countries and crops, 2009-2100 and 2014-2016,
+											are calculated from production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA).
+										</p>
+										<div class="row no-gutters">
+											<div class="col-6 col-md-3 card-authors">
+												<h6>Author / Creator</h6>
+												<p>Pérez, Jeanneth</p>
+												<p>Infante, Francisco</p>
+												<p>Vega, Fernando E</p>
+											</div>
+											<div class="col-6 col-md-3 card-published">
+												<h6>Published</h6>
+												<p>United States:</p>
+												<p>Oxford University</p>
+												<p>Press</p>
+											</div>
+											<div class="col-6 col-md-2 card-language">
+												<h6>Language</h6>
+												<p>English</p>
+											</div>
+											<div class="col-6 col-md-4 card-stack">
+												<span>Weevils - physiology</span>
+												<span>Animals</span>
+												<span>Insect Control</span>
+												<span>Coffee - growth & development </span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card col-12 card-result">
+							<div class="row">
+								<div class="col-md-2 card-body-left">
+									<h5>2020</h5>
+								</div>
+								<div class="col-md-10 card-body-right">
+									<div id="first-card" class="card-body collapse">
+										<p class="card-url">cgspace.cgiar.org</p>
+										<p class="card-category">Blog</p>
+										<h5 class="card-title">
+											GAEZ+_2015 Crop Yield
+											<button class="btn btn-result" data-card="#first-card">
+												<i class="icon-expand-arrow-closed"></i>
+											</button>
+										</h5>
+										<p class="card-text">
+											… FAOSTAT yield data for all countries and crops, 2009-2100 and 2014-2016,
+											are calculated from production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA).
+										</p>
+										<div class="row no-gutters">
+											<div class="col-6 col-md-3 card-authors">
+												<h6>Author / Creator</h6>
+												<p>Pérez, Jeanneth</p>
+												<p>Infante, Francisco</p>
+												<p>Vega, Fernando E</p>
+											</div>
+											<div class="col-6 col-md-3 card-published">
+												<h6>Published</h6>
+												<p>United States:</p>
+												<p>Oxford University</p>
+												<p>Press</p>
+											</div>
+											<div class="col-6 col-md-2 card-language">
+												<h6>Language</h6>
+												<p>English</p>
+											</div>
+											<div class="col-6 col-md-4 card-stack">
+												<span>Weevils - physiology</span>
+												<span>Animals</span>
+												<span>Insect Control</span>
+												<span>Coffee - growth & development </span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card col-12 card-result">
+							<div class="row">
+								<div class="col-md-2 card-body-left">
+									<h5>2020</h5>
+								</div>
+								<div class="col-md-10 card-body-right">
+									<div id="first-card" class="card-body collapse">
+										<p class="card-url">cgspace.cgiar.org</p>
+										<p class="card-category">Blog</p>
+										<h5 class="card-title">
+											GAEZ+_2015 Crop Yield
+											<button class="btn btn-result" data-card="#first-card">
+												<i class="icon-expand-arrow-closed"></i>
+											</button>
+										</h5>
+										<p class="card-text">
+											… FAOSTAT yield data for all countries and crops, 2009-2100 and 2014-2016,
+											are calculated from production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA). We computed the 2015 crop yield
+											grids by doing a grid cell by grid cell division of crop production by crop
+											for all countries and crops, 2009-2100 and 2014-2016, are calculated from
+											production and area, not directly reported yield values
+											(http://www.fao.org/faostat/en/#data/QA).
+										</p>
+										<div class="row no-gutters">
+											<div class="col-6 col-md-3 card-authors">
+												<h6>Author / Creator</h6>
+												<p>Pérez, Jeanneth</p>
+												<p>Infante, Francisco</p>
+												<p>Vega, Fernando E</p>
+											</div>
+											<div class="col-6 col-md-3 card-published">
+												<h6>Published</h6>
+												<p>United States:</p>
+												<p>Oxford University</p>
+												<p>Press</p>
+											</div>
+											<div class="col-6 col-md-2 card-language">
+												<h6>Language</h6>
+												<p>English</p>
+											</div>
+											<div class="col-6 col-md-4 card-stack">
+												<span>Weevils - physiology</span>
+												<span>Animals</span>
+												<span>Insect Control</span>
+												<span>Coffee - growth & development </span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-popular-search">
+		<div class="container">
+			<h2>Popular Searches</h2>
+			<div class="row row-cols-sm-2 row-cols-md-4 row-cols-lg-4">
+				<div class="col">Coffee</div>
+				<div class="col">Warm</div>
+				<div class="col">Crops</div>
+				<div class="col">Warm</div>
+				<div class="col">Fruits</div>
+				<div class="col">Plants</div>
+			</div>
+		</div>
+	</div>
+</section>
