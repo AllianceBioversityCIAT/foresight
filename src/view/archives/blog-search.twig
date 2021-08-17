@@ -73,7 +73,58 @@
 						</div>
 					{% endfor %}
 				</div>
+				{% if posts.pagination.pages is not empty %}
+					<nav class="post-pagination pagination" role="navigation" aria-label="pagination">
+						{% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
+							<a class="pagination-previous pagination-arrow-first rota-horizontal" href="{{ posts.pagination.pages|first.link }}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z"/></svg>
+							</a>
+						{% else %}
+							<p class="pagination-previous pagination-arrow-first arrow-current rota-horizontal">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z"/></svg>
+							</p>
+						{% endif %}
 
+						{% if posts.pagination.prev %}
+							<a class="pagination-previous pagination-arrow-left" href="{{ posts.pagination.prev.link }}">
+								<i class="icon-arrow-left"></i>
+							</a>
+						{% else %}
+							<p class="pagination-previous pagination-arrow-left arrow-current">
+								<i class="icon-arrow-left"></i>
+							</p>
+						{% endif %}
+
+						<div class="pagination-list">
+							{% for page in posts.pagination.pages %}
+								{% if page.link %}
+									<a href="{{ page.link }}" class="pagination-link {{ page.class }}">{{ page.title }}</a>
+								{% else %}
+									<a class="pagination-link {% if 'current' in page.class %} is-current {% endif %} {{ page.class }}">{{ page.title }}</a>
+								{% endif %}
+							{% endfor %}
+						</div>
+
+						{% if posts.pagination.next %}
+							<a class="pagination-next pagination-arrow-right" href="{{ posts.pagination.next.link }}">
+								<i class="icon-arrow-right"></i>
+							</a>
+						{% else %}
+							<p class="pagination-next pagination-arrow-right arrow-current">
+								<i class="icon-arrow-right"></i>
+							</p>
+						{% endif %}
+						{% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
+							<a class="pagination-next pagination-arrow-last" href="{{ posts.pagination.pages|last.link }}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z"/></svg>
+							</a>
+						{% else %}
+							<p class="pagination-next pagination-arrow-last arrow-current">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z"/></svg>
+							</p>
+						{% endif %}
+					</nav>
+				{% endif %}
 			{% else %}
 				<h2 class="title-latest-posts">
 					The text "{{ searchText }}" was not found in the query.
