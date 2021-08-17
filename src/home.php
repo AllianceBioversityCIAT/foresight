@@ -23,10 +23,10 @@ if ( class_exists( 'Timber' ) ) {
 			'paged'               => $paged
 		);
 
-		$found_posts = get_posts( $args );
+		$context[ 'validatePosts' ] = Timber::get_posts( $args );
+		$context[ 'posts' ]         = new Timber\PostQuery( $args );
+		$context[ 'searchText' ]    = $search;
 
-		$context[ 'posts' ]      = Timber::get_posts( $args );
-		$context[ 'searchText' ] = $search;
 		Timber::render( './view/archives/blog-search.twig', $context );
 
 	} else {
