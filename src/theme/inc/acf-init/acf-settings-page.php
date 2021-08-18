@@ -170,6 +170,37 @@ function register_custom_acf_fields_settings_page() {
 							'width' => '50',
 						],
 					],
+
+					[
+						'key'      => 'field_clarisa_url_regions',
+						'label'    => 'Url Regions',
+						'name'     => 'clarisa_url_regions',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'      => 'field_clarisa_url_impact_areas',
+						'label'    => 'Url Impact Areas',
+						'name'     => 'clarisa_url_impact_areas',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'      => 'field_clarisa_url_sdgs',
+						'label'    => 'Url SDGs',
+						'name'     => 'clarisa_url_sdgs',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
 				],
 				'location'              => [
 					[
