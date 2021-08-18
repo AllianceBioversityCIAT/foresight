@@ -73,7 +73,7 @@ function register_custom_acf_fields_settings_page() {
 						'type'     => 'text',
 						'required' => 1,
 						'wrapper'  => [
-							'width' => '50',
+							'width' => '33',
 						],
 					],
 					[
@@ -83,7 +83,7 @@ function register_custom_acf_fields_settings_page() {
 						'type'     => 'text',
 						'required' => 1,
 						'wrapper'  => [
-							'width' => '50',
+							'width' => '33',
 						],
 					],
 					[
@@ -93,7 +93,112 @@ function register_custom_acf_fields_settings_page() {
 						'type'     => 'text',
 						'required' => 1,
 						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'               => 'field_settings_tab_zotero',
+						'label'             => 'Zotero API',
+						'name'              => '',
+						'type'              => 'tab',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'placement'         => 'top',
+						'endpoint'          => 0,
+					],
+					[
+						'key'      => 'field_zotero_apikey',
+						'label'    => 'API Key',
+						'name'     => 'zotero_apikey',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'      => 'field_zotero_api_version',
+						'label'    => 'API Version',
+						'name'     => 'zotero_api_version',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'      => 'field_zotero_api_user_id',
+						'label'    => 'UserID',
+						'name'     => 'zotero_api_user_id',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+
+
+					[
+						'key'               => 'field_settings_tab_clarisa',
+						'label'             => 'Clarisa API',
+						'name'              => '',
+						'type'              => 'tab',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'placement'         => 'top',
+						'endpoint'          => 0,
+					],
+					[
+						'key'      => 'field_clarisa_username',
+						'label'    => 'Username',
+						'name'     => 'clarisa_username',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
 							'width' => '50',
+						],
+					],
+					[
+						'key'      => 'field_clarisa_password',
+						'label'    => 'Password',
+						'name'     => 'clarisa_password',
+						'type'     => 'password',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '50',
+						],
+					],
+
+					[
+						'key'      => 'field_clarisa_url_regions',
+						'label'    => 'Url Regions',
+						'name'     => 'clarisa_url_regions',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'      => 'field_clarisa_url_impact_areas',
+						'label'    => 'Url Impact Areas',
+						'name'     => 'clarisa_url_impact_areas',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'      => 'field_clarisa_url_sdgs',
+						'label'    => 'Url SDGs',
+						'name'     => 'clarisa_url_sdgs',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '33',
 						],
 					],
 				],
