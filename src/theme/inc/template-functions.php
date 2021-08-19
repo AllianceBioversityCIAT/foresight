@@ -102,6 +102,82 @@ function posts_custom_column_views( $column_name, $id ){
 add_action( 'manage_posts_custom_column', 'posts_custom_column_views', 5, 2 );
 
 
+// support column clarisa_id (SDG)
+add_action( 'manage_sdg_custom_column', 'foresight_show_sdg_meta_info_in_columns', 10, 3 );
+ 
+function foresight_show_sdg_meta_info_in_columns( $string, $columns, $term_id ) {
+    switch ( $columns ) {
+        case 'CLARISA_ID' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_id', true ) );
+        break;
+    }
+}
+
+add_filter( 'manage_edit-sdg_columns', 'foresight_add_new_sdg_columns' );
+ 
+function foresight_add_new_sdg_columns( $columns ) {
+    $columns['CLARISA_ID'] = __( 'CLARISA ID' );
+    return $columns;
+}
+
+add_filter( 'manage_edit-sdg_sortable_columns', 'add_sdg_column_sortable' );
+
+function add_sdg_column_sortable( $sortable ){
+    $sortable[ 'CLARISA_ID' ] = 'CLARISA ID';
+    return $sortable;
+}
+
+// support column clarisa_id (IMPACT AREAS)
+add_action( 'manage_impact-area_custom_column', 'foresight_show_impact_area_meta_info_in_columns', 10, 3 );
+ 
+function foresight_show_impact_area_meta_info_in_columns( $string, $columns, $term_id ) {
+    switch ( $columns ) {
+        case 'CLARISA_ID' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_id', true ) );
+        break;
+    }
+}
+
+add_filter( 'manage_edit-impact-area_columns', 'foresight_add_new_impact_area_columns' );
+ 
+function foresight_add_new_impact_area_columns( $columns ) {
+    $columns['CLARISA_ID'] = __( 'CLARISA ID' );
+    return $columns;
+}
+
+add_filter( 'manage_edit-impact-area_sortable_columns', 'add_impact_area_column_sortable' );
+
+function add_impact_area_column_sortable( $sortable ){
+    $sortable[ 'CLARISA_ID' ] = 'CLARISA ID';
+    return $sortable;
+}
+
+// support column clarisa_id (REGIONS)
+add_action( 'manage_region_custom_column', 'foresight_show_region_meta_info_in_columns', 10, 3 );
+ 
+function foresight_show_region_meta_info_in_columns( $string, $columns, $term_id ) {
+    switch ( $columns ) {
+        case 'CLARISA_ID' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_id', true ) );
+        break;
+    }
+}
+
+add_filter( 'manage_edit-region_columns', 'foresight_add_new_region_columns' );
+ 
+function foresight_add_new_region_columns( $columns ) {
+    $columns['CLARISA_ID'] = __( 'CLARISA ID' );
+    return $columns;
+}
+
+add_filter( 'manage_edit-region_sortable_columns', 'add_region_column_sortable' );
+
+function add_region_column_sortable( $sortable ){
+    $sortable[ 'CLARISA_ID' ] = 'CLARISA ID';
+    return $sortable;
+}
+
+
 /**
  * Custom Post Type Publication
  */
@@ -214,7 +290,7 @@ function publish_year_register_taxonomy() {
 		'description'        => '',
 		'public'             => true,
 		'publicly_queryable' => true,
-		'hierarchical'       => true,
+		'hierarchical'       => false,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
 		'show_in_nav_menus'  => true,

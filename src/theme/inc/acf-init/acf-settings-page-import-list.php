@@ -98,11 +98,12 @@ function foresight_import_clarisa_cb() {
 	$response['body'] = json_decode($response['body']);
 	
 	foreach ($response['body'] as $key => $term) {
-		$args = array( 'description' => $term->fullName );
+		$args = array( 'description' => $term->fullName, 'slug' => 'goal-'.$term->smoCode );
 		$term_id = wp_insert_term( $term->shortName, 'sdg', $args );
 		if(!is_wp_error($term_id)){
 			$log['sdg_count']++;
 			$log['sdg_insert_term'][$key] = $term_id;
+			add_term_meta($term_id['term_id'], 'clarisa_id', $term->smoCode);
 		}else{
 			$log['sdg_insert_term'][$key] = $term_id->errors;
 		}
@@ -117,11 +118,12 @@ function foresight_import_clarisa_cb() {
 	$response['body'] = json_decode($response['body']);
 	
 	foreach ($response['body'] as $key => $term) {
-		$args = array( 'description' => $term->description );
+		$args = array( 'description' => $term->description, 'slug' => '' );
 		$term_id = wp_insert_term( $term->name, 'impact-area', $args );
 		if(!is_wp_error($term_id)){
 			$log['impact_areas_count']++;
 			$log['impact_areas_insert_term'][$key] = $term_id;
+			add_term_meta($term_id['term_id'], 'clarisa_id', $term->id);
 		}else{
 			$log['impact_areas_insert_term'][$key] = $term_id->errors;
 		}
@@ -143,22 +145,20 @@ function foresight_import_clarisa_cb() {
 			$log['regions_count']++;
 			$log['regions_insert_term'][$key] = $term_id;
 			$parent_id = $term_id['term_id'];
+			add_term_meta($term_id['term_id'], 'clarisa_id', $term->id);
 		}else{
 			$parent_id = term_exists( $term->name, 'region' )['term_id'];
 			$log['regions_insert_term'][$key] = $term_id->errors;
 		}
 
-		$args = array( 'parent' => $parent_id );
-		
 		foreach ($term->countries as $k => $country) {
-			
+
+			$args = array( 'parent' => $parent_id, 'slug' => $country->isoAlpha2 );
 			$term_id = wp_insert_term( $country->name, 'region', $args );
 			
 			if(!is_wp_error($term_id)){
 				$log['regions_count']++;
-				//$log['regions_insert_term'][$key.'-'.$k] = $term_id;
-			}else{
-				//$log['regions_insert_term'][$key.'-'.$k] = $term_id->errors;
+				add_term_meta($term_id['term_id'], 'clarisa_id', $country->isoAlpha2);
 			}
 		}
 
