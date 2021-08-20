@@ -98,16 +98,25 @@ function foresight_import_clarisa_cb() {
 	$response['body'] = json_decode($response['body']);
 	
 	foreach ($response['body'] as $key => $term) {
-		$args = array( 'description' => $term->fullName, 'slug' => 'goal-'.$term->smoCode );
-		$term_id = wp_insert_term( $term->shortName, 'sdg', $args );
-		if(!is_wp_error($term_id)){
-			$log['sdg_count']++;
-			$log['sdg_insert_term'][$key] = $term_id;
-			add_term_meta($term_id['term_id'], 'clarisa_id', $term->smoCode);
+
+		$exist_term = search_terms_by_clarisa_id( 'sdg', 'clarisa_id', $term->smoCode );
+		if(count($exist_term) == 0){
+
+			$args = array( 'description' => $term->fullName, 'slug' => 'goal-'.$term->smoCode );
+			$term_id = wp_insert_term( $term->shortName, 'sdg', $args );
+			if(!is_wp_error($term_id)){
+				$log['sdg_count']++;
+				$log['sdg_insert_term'][$key] = $term_id;
+				add_term_meta($term_id['term_id'], 'clarisa_id', $term->smoCode);
+			}else{
+				$log['sdg_insert_term'][$key] = $term_id->errors;
+			}
+			$term_id = null;
+
 		}else{
-			$log['sdg_insert_term'][$key] = $term_id->errors;
+			wp_update_term($exist_term[0]->term_id, 'sdg', array('name' => $term->shortName, 'description' => $term->fullName));
+			$log['sdg_count_updated']++;
 		}
-		$term_id = null;
 	}
 	// end import SDGs
 
@@ -118,16 +127,26 @@ function foresight_import_clarisa_cb() {
 	$response['body'] = json_decode($response['body']);
 	
 	foreach ($response['body'] as $key => $term) {
-		$args = array( 'description' => $term->description, 'slug' => '' );
-		$term_id = wp_insert_term( $term->name, 'impact-area', $args );
-		if(!is_wp_error($term_id)){
-			$log['impact_areas_count']++;
-			$log['impact_areas_insert_term'][$key] = $term_id;
-			add_term_meta($term_id['term_id'], 'clarisa_id', $term->id);
+
+		$exist_term = search_terms_by_clarisa_id( 'impact-area', 'clarisa_id', $term->id );
+
+		if(count($exist_term) == 0){
+			
+			$args = array( 'description' => $term->description, 'slug' => '' );
+			$term_id = wp_insert_term( $term->name, 'impact-area', $args );
+			if(!is_wp_error($term_id)){
+				$log['impact_areas_count']++;
+				$log['impact_areas_insert_term'][$key] = $term_id;
+				add_term_meta($term_id['term_id'], 'clarisa_id', $term->id);
+			}else{
+				$log['impact_areas_insert_term'][$key] = $term_id->errors;
+			}
+			$term_id = null;
+
 		}else{
-			$log['impact_areas_insert_term'][$key] = $term_id->errors;
+			wp_update_term($exist_term[0]->term_id, 'impact-area', array('name' => $term->name, 'description' => $term->description));
+			$log['impact_areas_count_updated']++;
 		}
-		$term_id = null;
 	}
 	// end import impact areas
 
@@ -138,28 +157,46 @@ function foresight_import_clarisa_cb() {
 	$response['body'] = json_decode($response['body']);
 	
 	foreach ($response['body'] as $key => $term) {
+
+		$exist_term = search_terms_by_clarisa_id( 'region', 'clarisa_id', $term->id );
+
+		if(count($exist_term) == 0){
+			
+			$term_id = wp_insert_term( $term->name, 'region' );
 		
-		$term_id = wp_insert_term( $term->name, 'region' );
-		
-		if(!is_wp_error($term_id)){
-			$log['regions_count']++;
-			$log['regions_insert_term'][$key] = $term_id;
-			$parent_id = $term_id['term_id'];
-			add_term_meta($term_id['term_id'], 'clarisa_id', $term->id);
+			if(!is_wp_error($term_id)){
+				$log['regions_count']++;
+				$log['regions_insert_term'][$key] = $term_id;
+				$parent_id = $term_id['term_id'];
+				add_term_meta($term_id['term_id'], 'clarisa_id', $term->id);
+			}else{
+				$parent_id = term_exists( $term->name, 'region' )['term_id'];
+				$log['regions_insert_term'][$key] = $term_id->errors;
+			}
+
 		}else{
-			$parent_id = term_exists( $term->name, 'region' )['term_id'];
-			$log['regions_insert_term'][$key] = $term_id->errors;
+			wp_update_term($exist_term[0]->term_id, 'region', array( 'name' => $term->name ));
+			$parent_id = $exist_term[0]->term_id;
+			$log['regions_count_updated']++;
 		}
+		
 
 		foreach ($term->countries as $k => $country) {
 
-			$args = array( 'parent' => $parent_id, 'slug' => $country->isoAlpha2 );
-			$term_id = wp_insert_term( $country->name, 'region', $args );
-			
-			if(!is_wp_error($term_id)){
-				$log['regions_count']++;
-				add_term_meta($term_id['term_id'], 'clarisa_id', $country->isoAlpha2);
-			}
+			$exist_term = search_terms_by_clarisa_id( 'region', 'clarisa_id', $country->isoAlpha2 );
+
+			if(count($exist_term) == 0){
+				$args = array( 'parent' => $parent_id, 'slug' => $country->isoAlpha2 );
+				$term_id = wp_insert_term( $country->name, 'region', $args );
+				
+				if(!is_wp_error($term_id)){
+					$log['regions_count']++;
+					add_term_meta($term_id['term_id'], 'clarisa_id', $country->isoAlpha2);
+				}	
+			}else{
+				wp_update_term($exist_term[0]->term_id, 'region', array( 'name' => $country->name ));
+				$log['regions_count_updated']++;
+			}	
 		}
 
 		$term_id = null;
@@ -171,14 +208,17 @@ function foresight_import_clarisa_cb() {
 	$array_log['sdg_response'] = $log['sdg_response'];
 	$array_log['sdg_insert_term'] = $log['sdg_insert_term'];
 	$array_log['sdg_count'] = $log['sdg_count'] | 0;
+	$array_log['sdg_count_updated'] = $log['sdg_count_updated'] | 0;
 	//Register log impact areas
 	$array_log['impact_areas_response'] = $log['impact_areas_response'];
 	$array_log['impact_areas_insert_term'] = $log['impact_areas_insert_term'];
 	$array_log['impact_areas_count'] = $log['impact_areas_count'] | 0;
+	$array_log['impact_areas_count_updated'] = $log['impact_areas_count_updated'] | 0;
 	//Register log regions
 	$array_log['regions_response'] = $log['regions_response'];
 	$array_log['regions_insert_term'] = $log['regions_insert_term'];
 	$array_log['regions_count'] = $log['regions_count'] | 0;
+	$array_log['regions_count_updated'] = $log['regions_count_updated'] | 0;
 
 	set_transient( 'log_clarisa', $array_log );	
 	wp_send_json( $array_log, 200 );
@@ -186,3 +226,21 @@ function foresight_import_clarisa_cb() {
 }
 
 add_action( 'wp_ajax_import-clarisa', 'foresight_import_clarisa_cb' );
+
+//Search terms by clarisa_id
+function search_terms_by_clarisa_id($taxonomy, $key, $value ){
+
+	$args = array(
+		'hide_empty' => false,
+		'meta_query' => array(
+			array(
+			   'key'       => $key,
+			   'value'     => $value,
+			   'compare'   => '='
+			)
+		),
+		'taxonomy'  => $taxonomy,
+		);
+		$terms = get_terms( $args );
+		return $terms;
+}

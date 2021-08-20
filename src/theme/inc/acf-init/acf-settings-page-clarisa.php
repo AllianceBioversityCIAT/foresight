@@ -10,14 +10,17 @@ function register_custom_acf_fields_settings_page_clarisa() {
 		$log_clarisa = 	"<b>Last update: </b>".$log_clarisa['date']."<br>".
 						"<h3>SDGs</h3>".
 						"<b>Total Imported Items: </b>".$log_clarisa['sdg_count']."<br>".
+						"<b>Total Updated Items: </b>".$log_clarisa['sdg_count_updated']."<br>".
 						"<b>Clarisa Response: </b>".json_encode($log_clarisa['sdg_response']).'<br>'.
 						"<b>Wordpress Response: </b>".json_encode($log_clarisa['sdg_insert_term']).'<br>'.
 						"<h3>Impact Areas</h3>".
 						"<b>Total Imported Items: </b>".$log_clarisa['impact_areas_count']."<br>".
+						"<b>Total Updated Items: </b>".$log_clarisa['impact_areas_count_updated']."<br>".
 						"<b>Clarisa Response: </b>".json_encode($log_clarisa['impact_areas_response']).'<br>'.
 						"<b>Wordpress Response: </b>".json_encode($log_clarisa['impact_areas_insert_term']).'<br>'.
 						"<h3>Regions</h3>".
 						"<b>Total Imported Items: </b>".$log_clarisa['regions_count']."<br>".
+						"<b>Total Updated Items: </b>".$log_clarisa['regions_count_updated']."<br>".
 						"<b>Clarisa Response: </b>".json_encode($log_clarisa['regions_response']).'<br>'.
 						"<b>Wordpress Response: </b>".json_encode($log_clarisa['regions_insert_term']).'<br>';
 						
