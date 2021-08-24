@@ -2,58 +2,6 @@
 /**
  * This function records fields for the acf.
  */
-function register_custom_acf_fields_settings_page_import_list() {
-	if ( function_exists( 'acf_add_local_field_group' ) ) {
-
-		set_transient( 'clarisa_regions', '[{"id":1,"name": "Region 1"},{"id":2,"name": "Region 2"}]' );
-		set_transient( 'clarisa_sdgs', '[{"id":1,"name": "GOAL 1"},{"id":2,"name": "GOAL 2"}]' );
-		set_transient( 'clarisa_impact_areas', '[{"id":1,"name": "Area 1"},{"id":2,"name": "Area 2"}]' );
-
-		acf_add_local_field_group(
-			[
-				'key' => 'group_foresight_settings_import_list',
-				'title' => 'IMPORT DATA',
-				'fields' => [
-					[
-						'key' => 'field_import_list',
-						'label' => '',
-						'name' => 'button_import',
-						'type' => 'button',
-						'value' => 'Import All Control List',
-						'required' => 0,
-						'conditional_logic' => 0,
-						'wrapper' => [
-							'width' => '100',
-							'class' => '',
-							'id' => '',
-						],
-					],
-				],
-				'location' => [
-					[
-						[
-							'param' => 'options_page',
-							'operator' => '==',
-							'value' => 'theme-general-settings',
-						],
-					],
-				],
-				'menu_order' => 0,
-				'position' => 'normal',
-				'style' => 'default',
-				'label_placement' => 'top',
-				'instruction_placement' => 'label',
-				'hide_on_screen' => '',
-				'active' => true,
-				'description' => '',
-			]
-		);
-	}
-}
-
-add_action( 'init', 'register_custom_acf_fields_settings_page_import_list' );
-
-
 
 function acf_enqueue_admin_script_foresight( $hook ) {
 
@@ -94,6 +42,15 @@ function foresight_import_clarisa_cb() {
 	// begin import SDGs
 	$endpoint = $options_page['clarisa_url_sdgs'];
 	$response = wp_remote_get( $endpoint, $options );
+
+	if(is_array($response->errors)){
+		$objError = new WP_Error();
+		foreach ($response->errors as $code => $message) {
+			$objError->add($code, implode(' ', $message));
+		}
+		wp_send_json_error( $objError, 500 );
+	}
+	
 	$log['sdg_response'] = $response['response'];
 	$response['body'] = json_decode($response['body']);
 	
