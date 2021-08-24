@@ -102,6 +102,82 @@ function posts_custom_column_views( $column_name, $id ){
 add_action( 'manage_posts_custom_column', 'posts_custom_column_views', 5, 2 );
 
 
+// support column clarisa_id (SDG)
+add_action( 'manage_sdg_custom_column', 'foresight_show_sdg_meta_info_in_columns', 10, 3 );
+ 
+function foresight_show_sdg_meta_info_in_columns( $string, $columns, $term_id ) {
+    switch ( $columns ) {
+        case 'CLARISA_ID' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_id', true ) );
+        break;
+    }
+}
+
+add_filter( 'manage_edit-sdg_columns', 'foresight_add_new_sdg_columns' );
+ 
+function foresight_add_new_sdg_columns( $columns ) {
+    $columns['CLARISA_ID'] = __( 'CLARISA ID' );
+    return $columns;
+}
+
+add_filter( 'manage_edit-sdg_sortable_columns', 'add_sdg_column_sortable' );
+
+function add_sdg_column_sortable( $sortable ){
+    $sortable[ 'CLARISA_ID' ] = 'CLARISA ID';
+    return $sortable;
+}
+
+// support column clarisa_id (IMPACT AREAS)
+add_action( 'manage_impact-area_custom_column', 'foresight_show_impact_area_meta_info_in_columns', 10, 3 );
+ 
+function foresight_show_impact_area_meta_info_in_columns( $string, $columns, $term_id ) {
+    switch ( $columns ) {
+        case 'CLARISA_ID' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_id', true ) );
+        break;
+    }
+}
+
+add_filter( 'manage_edit-impact-area_columns', 'foresight_add_new_impact_area_columns' );
+ 
+function foresight_add_new_impact_area_columns( $columns ) {
+    $columns['CLARISA_ID'] = __( 'CLARISA ID' );
+    return $columns;
+}
+
+add_filter( 'manage_edit-impact-area_sortable_columns', 'add_impact_area_column_sortable' );
+
+function add_impact_area_column_sortable( $sortable ){
+    $sortable[ 'CLARISA_ID' ] = 'CLARISA ID';
+    return $sortable;
+}
+
+// support column clarisa_id (REGIONS)
+add_action( 'manage_region_custom_column', 'foresight_show_region_meta_info_in_columns', 10, 3 );
+ 
+function foresight_show_region_meta_info_in_columns( $string, $columns, $term_id ) {
+    switch ( $columns ) {
+        case 'CLARISA_ID' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_id', true ) );
+        break;
+    }
+}
+
+add_filter( 'manage_edit-region_columns', 'foresight_add_new_region_columns' );
+ 
+function foresight_add_new_region_columns( $columns ) {
+    $columns['CLARISA_ID'] = __( 'CLARISA ID' );
+    return $columns;
+}
+
+add_filter( 'manage_edit-region_sortable_columns', 'add_region_column_sortable' );
+
+function add_region_column_sortable( $sortable ){
+    $sortable[ 'CLARISA_ID' ] = 'CLARISA ID';
+    return $sortable;
+}
+
+
 /**
  * Custom Post Type Publication
  */
@@ -153,17 +229,13 @@ function publication_register_post_type() {
 		'show_in_nav_menus'   => true,
 		'show_in_admin_bar'   => true,
 		'show_in_rest'        => true,
-		'icon_type'           => 'dashicons',
-		'icon'                => 'dashicons-book',
 		'query_var'           => true,
 		'can_export'          => true,
 		'delete_with_user'    => false,
-		'icon_custom'         => '',
-		'icon_svg'            => '',
 		'has_archive'         => true,
 		'rest_base'           => '',
 		'show_in_menu'        => true,
-		'menu_icon'           => '',
+		'menu_icon'            => 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj48c3ZnIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxOCAxOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxuczpzZXJpZj0iaHR0cDovL3d3dy5zZXJpZi5jb20vIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjI7Ij48cGF0aCBkPSJNNC4zNjEsMy40N2wwLjA0NiwyLjQ5OGw1LjQ4OCwtMC4wMDdsLTUuNjMxLDYuNTY5Yy0wLjY2NywwLjkxNyAtMC4xMDQsMi4wMDggMC45MjYsMi4wNTNsOC42NTgsMC4wMTdsLTAuMDE0LC0yLjUwNGwtNS45MDksLTAuMDJsNS43NSwtNi43MzJjMC41NTksLTAuOTc2IC0wLjIwOCwtMS44NzYgLTAuOTc4LC0xLjg3NWMtMS42MTYsMC4wMDIgLTguMzM2LDAuMDAxIC04LjMzNiwwLjAwMWwtMC45NjQsLTAuMmw0LjY3NywtMi42MzVjMC41NjIsLTAuMzAzIDEuMTQ0LC0wLjI5IDEuNjczLC0wLjAwNmw2LjI4LDMuNDk2YzAuNTI3LDAuNDI1IDAuNzkyLDAuNzUyIDAuODUxLDEuNDg1bDAuMDIxLDcuMzE4Yy0wLjE5LDAuNDI3IC0wLjQ4OCwwLjc5NiAtMC45MzYsMS4wODFsLTYuMjA2LDMuNDAyYy0wLjYwNSwwLjMwOCAtMS4xOCwwLjI5OSAtMS43ODQsLTAuMDM3bC02LjE2NiwtMy40MzJjLTAuNTIzLC0wLjI5IC0wLjgyMywtMC43MyAtMC44NzQsLTEuMzM3bDAuMDA3LC03LjEzN2MwLjAzLC0wLjU1OSAwLjI1OSwtMS4wMDkgMC43NjQsLTEuMzI0bDEuNjkzLC0wLjg3NGwwLjk2NCwwLjJaIiBzdHlsZT0iZmlsbDojZjAwOyIvPjwvc3ZnPg==',
 		'menu_position'       => 5,
 		'capability_type'     => 'post',
 		'supports'            => ['title', 'editor', 'thumbnail', 'excerpt', 'author'],
@@ -214,7 +286,7 @@ function publish_year_register_taxonomy() {
 		'description'        => '',
 		'public'             => true,
 		'publicly_queryable' => true,
-		'hierarchical'       => true,
+		'hierarchical'       => false,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
 		'show_in_nav_menus'  => true,

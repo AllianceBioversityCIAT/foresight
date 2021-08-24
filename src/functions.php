@@ -405,3 +405,19 @@ function hide_editor() {
 }
 
 add_action( 'admin_init', 'hide_editor' );
+
+/**
+ * Fixed wp_remote_get
+ * https://gist.github.com/timersys/4480bccf64a1147abb3d
+ * SSL routines:CONNECT_CR_SRVR_HELLO:sslv3 alert handshake failure
+ */
+function foresight_display_api_curl( &$handle, $args, $url ) {
+
+	curl_setopt($handle, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1);
+	curl_setopt($handle, CURLOPT_SSL_CIPHER_LIST, 'TLSv1');
+	curl_getinfo($handle);
+	return $handle;
+	
+}
+
+add_action( 'http_api_curl', 'foresight_display_api_curl', 10, 3 );

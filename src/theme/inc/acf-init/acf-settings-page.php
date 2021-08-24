@@ -4,6 +4,36 @@
  */
 function register_custom_acf_fields_settings_page() {
 	if ( function_exists( 'acf_add_local_field_group' ) ) {
+
+		$log_clarisa = get_transient( 'log_clarisa' );
+		$log_zotero = get_transient( 'log_zotero' );
+		
+		$log_clarisa = 	"<b>Last update: </b>".$log_clarisa['date']."<br>".
+						"<h3>SDGs</h3>".
+						"<b>Total Imported Items: </b>".$log_clarisa['sdg_count']."<br>".
+						"<b>Total Updated Items: </b>".$log_clarisa['sdg_count_updated']."<br>".
+						"<b>Clarisa Response: </b>".json_encode($log_clarisa['sdg_response']).'<br>'.
+						"<b>Wordpress Response: </b>".json_encode($log_clarisa['sdg_insert_term']).'<br>'.
+						"<h3>Impact Areas</h3>".
+						"<b>Total Imported Items: </b>".$log_clarisa['impact_areas_count']."<br>".
+						"<b>Total Updated Items: </b>".$log_clarisa['impact_areas_count_updated']."<br>".
+						"<b>Clarisa Response: </b>".json_encode($log_clarisa['impact_areas_response']).'<br>'.
+						"<b>Wordpress Response: </b>".json_encode($log_clarisa['impact_areas_insert_term']).'<br>'.
+						"<h3>Regions</h3>".
+						"<b>Total Imported Items: </b>".$log_clarisa['regions_count']."<br>".
+						"<b>Total Updated Items: </b>".$log_clarisa['regions_count_updated']."<br>".
+						"<b>Clarisa Response: </b>".json_encode($log_clarisa['regions_response']).'<br>'.
+						"<b>Wordpress Response: </b>".json_encode($log_clarisa['regions_insert_term']).'<br>';
+		
+		$log_zotero = 	"<b>Last update: </b>".$log_zotero['date']."<br>".
+						"<b>Version: </b>".$log_zotero['version']."<br>".
+						"<h3>ZOTERO ITEMS</h3>".
+						"<b>Total Imported Items: </b>".$log_zotero['zotero_count']."<br>".
+						"<b>Total Updated Items: </b>".$log_zotero['zotero_count_updated']."<br>".
+						"<b>Zotero Response: </b>".json_encode($log_zotero['zotero_response']).'<br>'.
+						"<b>Wordpress Response: </b>".json_encode($log_zotero['zotero_insert_term']);
+
+
 		acf_add_local_field_group(
 			[
 				'key'                   => 'group_foresight_settings',
@@ -137,6 +167,57 @@ function register_custom_acf_fields_settings_page() {
 							'width' => '33',
 						],
 					],
+					[
+						'key'      => 'field_zotero_api_url',
+						'label'    => 'Base URL',
+						'name'     => 'zotero_api_url',
+						'type'     => 'text',
+						'required' => 0,
+						'instructions'      => 'Base connection URL',
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key'      => 'field_zotero_api_collections',
+						'label'    => 'Collections',
+						'name'     => 'zotero_api_collections',
+						'type'     => 'text',
+						'required' => 0,
+						'instructions'      => 'Add multiple collection IDs separated by commas',
+						'wrapper'  => [
+							'width' => '33',
+						],
+					],
+					[
+						'key' => 'field_import_zotero',
+						'label' => '',
+						'name' => 'button_import_zotero',
+						'type' => 'button',
+						'value' => 'Import Zotero Items',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => [
+							'width' => '100',
+							'class' => '',
+							'id' => '',
+						],
+					],
+					[
+						'key' => 'field_zotero_log',
+						'name' => '',
+						'type' => 'message',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'message' => $log_zotero,
+						'esc_html' => 0,
+						'wrapper' => [
+							'width' => '100',
+							'class' => '',
+							'id' => '',
+						],
+					],
 
 
 					[
@@ -199,6 +280,35 @@ function register_custom_acf_fields_settings_page() {
 						'required' => 0,
 						'wrapper'  => [
 							'width' => '33',
+						],
+					],
+					[
+						'key' => 'field_import_list',
+						'label' => '',
+						'name' => 'button_import',
+						'type' => 'button',
+						'value' => 'Import All Control List',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => [
+							'width' => '100',
+							'class' => '',
+							'id' => '',
+						],
+					],
+					[
+						'key' => 'field_list_control',
+						'name' => '',
+						'type' => 'message',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'message' => $log_clarisa,
+						'esc_html' => 0,
+						'wrapper' => [
+							'width' => '100',
+							'class' => '',
+							'id' => '',
 						],
 					],
 				],
