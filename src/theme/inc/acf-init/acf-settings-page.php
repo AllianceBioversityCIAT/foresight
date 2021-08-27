@@ -25,15 +25,11 @@ function register_custom_acf_fields_settings_page() {
 						"<b>Clarisa Response: </b>".json_encode($log_clarisa['regions_response']).'<br>'.
 						"<b>Wordpress Response: </b>".json_encode($log_clarisa['regions_insert_term']).'<br>';
 		
-		$log_zotero = 	"<b>Last update: </b>".$log_zotero['date']."<br>".
-						"<b>Version: </b>".$log_zotero['version']."<br>".
-						"<h3>ZOTERO ITEMS</h3>".
-						"<b>Total Imported Items: </b>".$log_zotero['zotero_count']."<br>".
-						"<b>Total Updated Items: </b>".$log_zotero['zotero_count_updated']."<br>".
+		$log_zotero = 	"<b>Last update: </b>".$log_zotero['date']."<br><br>".
+						"<ul>".$log_zotero['zotero_count']."</ul>".
 						"<b>Zotero Response: </b>".json_encode($log_zotero['zotero_response']).'<br>'.
-						"<b>Wordpress Response: </b>".json_encode($log_zotero['zotero_insert_term']);
-
-
+						"<b>Wordpress Log: </b>".$log_zotero['zotero_wp_conflicts'].'';
+	
 		acf_add_local_field_group(
 			[
 				'key'                   => 'group_foresight_settings',
@@ -175,7 +171,7 @@ function register_custom_acf_fields_settings_page() {
 						'required' => 0,
 						'instructions'      => 'Base connection URL',
 						'wrapper'  => [
-							'width' => '33',
+							'width' => '25',
 						],
 					],
 					[
@@ -186,7 +182,29 @@ function register_custom_acf_fields_settings_page() {
 						'required' => 0,
 						'instructions'      => 'Add multiple collection IDs separated by commas',
 						'wrapper'  => [
-							'width' => '33',
+							'width' => '25',
+						],
+					],
+					[
+						'key'      => 'field_zotero_wp_category_id',
+						'label'    => 'Category',
+						'name'     => 'zotero_wp_category_id',
+						'type'     => 'text',
+						'required' => 0,
+						'instructions'      => 'Default category ID Wordpress',
+						'wrapper'  => [
+							'width' => '25',
+						],
+					],
+					[
+						'key'      => 'field_zotero_wp_author_id',
+						'label'    => 'Author',
+						'name'     => 'zotero_wp_author_id',
+						'type'     => 'text',
+						'required' => 0,
+						'instructions'      => 'Default author Wordpress',
+						'wrapper'  => [
+							'width' => '25',
 						],
 					],
 					[
