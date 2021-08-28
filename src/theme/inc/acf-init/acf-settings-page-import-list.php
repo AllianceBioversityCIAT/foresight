@@ -9,12 +9,15 @@ function acf_enqueue_admin_script_foresight( $hook ) {
         return;
     }
 	
-    wp_enqueue_script( 'acf-settings-page', get_template_directory_uri() . '/static/js-admin/acf-settings-page.js', array('jquery'), _S_VERSION, true );
+	wp_enqueue_style( 'jquery-modal', get_template_directory_uri() . '/static/assets-admin/jquery.modal.min.css' );
+	wp_enqueue_script ( 'jquery-modal', get_template_directory_uri() . '/static/assets-admin/jquery.modal.min.js', array('jquery') );
+    wp_enqueue_script( 'acf-settings-page', get_template_directory_uri() . '/static/assets-admin/acf-settings-page.js', array('jquery-modal'), _S_VERSION, true );
 	wp_localize_script( 'acf-settings-page', 'ajax_var', array(
         'url'    => admin_url( 'admin-ajax.php' ),
         'nonce'  => wp_create_nonce( 'foresight-ajax-nonce' ),
         'action_import_clarisa' => 'import-clarisa',
-		'action_import_zotero' => 'import-zotero'
+		'action_import_zotero' => 'import-zotero',
+		'action_show_tags' => 'show-tags'
     ));
 }
 
@@ -213,6 +216,52 @@ function search_terms_by_clarisa_id( $taxonomy, $key, $value ){
 
 
 /**
+ * Show tag that did not pass the taxonomy filter
+ */
+function foresight_show_tags_cb(){
+
+	// Check for nonce security
+    $nonce = sanitize_text_field( $_POST['nonce'] );
+	$objError = new WP_Error();
+
+    if ( ! wp_verify_nonce( $nonce, 'foresight-ajax-nonce' ) ) {
+		$objError->add('invalid-nonce', 'Unauthorized');
+        wp_send_json_error( $objError, 500 );
+    }
+
+	$postID = sanitize_text_field( $_POST['postID'] );
+	$tags = get_post_meta($postID, 'zotero-data', true);
+	
+	$html = '<div class="modal"><div style="height:400px;overflow: -moz-scrollbars-vertical;overflow-y:scroll">';
+	$html .= '<p><h1>Associated terms:</h1>';
+	foreach ($tags['tags'] as $key => $terms) {
+		
+		$html .= '<p><h3>Taxonomy: ['.$key.']</h3>';
+
+		foreach ($terms as $k => $v) {
+			if( $key == 'tags' ){
+				$html .= '<li>'.$v.'</li>';
+			}else{
+				$t = get_term( $v, $key );
+				$html .= '<li>'.$t->name.'</li>';
+			}
+		}
+		
+		$html .= '</ul></p>';
+	}
+
+	if(empty($tags['tags'])){
+		$html .= '<p><h2>No registered tags.</h2></p>';
+	}
+
+	$html .= '</div></div>';
+	wp_send_json($html, 200);
+}
+
+add_action( 'wp_ajax_show-tags', 'foresight_show_tags_cb' );
+
+
+/**
  * Import content from Zotero to Wordpress
  */
 function foresight_import_zotero_cb() {
@@ -347,7 +396,7 @@ function foresight_import_zotero_cb() {
 					if($post_id == -1){
 						$array_log['zotero_wp_conflicts'] .= '<li><b style="color:red">slug already exists: </b>'.sanitize_title( $item['data']['title'] ).'</li>';
 					}else{
-						$array_log['zotero_wp_conflicts'] .= '<li><b style="color:green">Successful: </b>'.sanitize_title( $item['data']['title'] ).'</li>';
+						$array_log['zotero_wp_conflicts'] .= '<li><b style="color:green">Successful: </b>'.sanitize_title( $item['data']['title'] ).' <a href="#" data-post-id="'.$post_id.'" class="modal-show-tag" id="foresight-modal-tag">Show summary</a></li>';
 					}
 					
 				}else{ // UPDATE PUBLICATION
@@ -355,7 +404,7 @@ function foresight_import_zotero_cb() {
 					$post_id = foresight_update_publication( $post_id, $item['data'] );
 					
 					if($post_id > 0){
-						$array_log['zotero_wp_conflicts'] .= '<li><b style="color:green">Successful: </b>'.sanitize_title( $item['data']['title'] ).'</li>';
+						$array_log['zotero_wp_conflicts'] .= '<li><b style="color:green">Successful: </b>'.sanitize_title( $item['data']['title'] ).' <a href="#" data-post-id="'.$post_id.'" class="modal-show-tag" id="foresight-modal-tag">Show summary</a></li>';
 					}
 				}
 			}
@@ -420,6 +469,7 @@ function foresight_create_publication( $autor_id, $category_id, $args ){
 	$post_args = array(
 		'post_author'  => $autor_id,
 		'post_category'=> array($category_id),
+		'tags_input'   => $args['tags']['tags'],
 		'post_title'   => $args['title'],
 		'post_name'	   => sanitize_title( $args['title'] ),
 		'post_content' => $args['abstractNote'],
@@ -458,6 +508,7 @@ function foresight_update_publication( $post_id, $args ){
 		'post_title'   => $args['title'],
 		'post_name'	   => sanitize_title( $args['title'] ),
 		'post_content' => $args['abstractNote'],
+		'tags_input'   => $args['tags']['tags'],
 		'meta_input'   => array(
 			'zotero-data' => $args,
 		),

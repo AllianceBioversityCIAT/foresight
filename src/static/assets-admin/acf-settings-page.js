@@ -53,6 +53,24 @@ jQuery( document ).ready(function($) {
                 }
               }
         });
-	  }); 
+	  });
+
+
+      $('.modal-show-tag').on( 'click', function(event) {
+        event.preventDefault();
+        this.blur(); // Manually remove focus from clicked link.
+        
+        $.ajax({
+            type: "post",
+            url: ajax_var.url,
+            data: "action=" + ajax_var.action_show_tags + "&nonce=" + ajax_var.nonce + "&postID=" + $(this).attr("data-post-id"),
+            success: function(html){
+                $(html).appendTo('body').modal();
+            },
+            error: function (xhr) {
+                alert(xhr);
+            }
+        });
+      });
 
 });
