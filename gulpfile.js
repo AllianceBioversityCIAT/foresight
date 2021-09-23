@@ -172,6 +172,9 @@ function watchTask() {
 
   // Watch images files.
   gulp.watch( buildConfig.sources.sourceFolder + '/static/images/**/*.{png,jpg,gif}', imagesTask );
+
+  // Watch Algolia files.
+  gulp.watch( buildConfig.sources.sourceFolder + '/static/algolia/*.{css,js,jpg,png}', scaffolding );
 }
 
 /**

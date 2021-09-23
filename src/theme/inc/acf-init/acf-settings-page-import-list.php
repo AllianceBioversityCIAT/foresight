@@ -131,7 +131,7 @@ function foresight_import_clarisa_cb() {
 				$log['regions_count']++;
 				$log['regions_insert_term'][$key] = $term_id;
 				$parent_id = $term_id['term_id'];
-				add_term_meta($term_id['term_id'], 'clarisa_id', $term->id);
+				add_term_meta($term_id['term_id'], 'clarisa_id', $term->acronym);
 			}else{
 				$parent_id = term_exists( $term->name, 'region' )['term_id'];
 				$log['regions_insert_term'][$key] = $term_id->errors;
@@ -278,7 +278,7 @@ function foresight_import_zotero_cb() {
 	$options_page  			= get_fields( 'theme-general-settings' );
 	$zotero_apikey 			= $options_page['zotero_apikey'];
 	$zotero_api_version 	= $options_page['zotero_api_version'];
-	$zotero_api_user_id 	= $options_page['zotero_api_user_id'];
+	$zotero_api_group_id 	= $options_page['zotero_api_group_id'];
 	$zotero_api_url 		= $options_page['zotero_api_url'];
 	$zotero_wp_author_id	= $options_page['zotero_wp_author_id'];
 	$zotero_wp_category_id	= $options_page['zotero_wp_category_id'];
@@ -294,7 +294,7 @@ function foresight_import_zotero_cb() {
 	// Begin import Zotero
 	foreach ( $zotero_api_collections as $collection_id ) {
 		$last_version[$collection_id] = get_transient( 'zotero_version_'.$collection_id ) | '0';
-		$endpoint = $zotero_api_url . "/users/" . $zotero_api_user_id.'/collections/'.$collection_id.'/items?limit=100&format=json&since='.$last_version[$collection_id];
+		$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment&limit=100&format=json&since='.$last_version[$collection_id];
 		
 		$response = wp_remote_get( $endpoint, $options );
 		
@@ -326,7 +326,8 @@ function foresight_import_zotero_cb() {
 				
 				$post_id = get_publication_by_key( $item['data']['key'] ); // validate if publication exist (zotero key)
 				$item['data']['year'] = ( !empty($item['meta']['parsedDate']) ) ? (explode('-', $item['meta']['parsedDate'])[0]) : "";
-				
+				$item['data']['zoteroUrl'] = $item['links']['alternate']['href'];
+
 				switch ($item['data']['itemType']) {
 					case 'case':
 						$item['data']['title'] = $item['data']['caseName'];
@@ -461,7 +462,7 @@ function get_last_version_collection( $items, $current_version ){
 }
 
 /**
- * Create new publication 
+ * Create new publication in Wordpress
  * @param array $post
  * @return number ID
  */
@@ -498,7 +499,7 @@ function foresight_create_publication( $autor_id, $category_id, $args ){
 }
 
 /**
- * Update publication
+ * Update publication in Wordpress
  * @param array $post
  * @return bool
  */

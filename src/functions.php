@@ -175,6 +175,10 @@ function foresight_theme_scripts() {
 	global $template;
 	$template_name = basename( $template, ".php" );
 
+	if($template_name == 'search'){
+		$template_name = 'page-search';
+	}
+
 	//Styles.
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_enqueue_style( 'foresight_' . $template_name, get_template_directory_uri() . '/static/css/' . $template_name . '.css', array(), _S_VERSION );
