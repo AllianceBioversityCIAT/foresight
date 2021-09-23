@@ -7,3 +7,4 @@ package-lock.json
 .idea
 vendor/
 composer.lock
+src/static/algolia/

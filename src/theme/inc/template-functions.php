@@ -177,6 +177,42 @@ function add_region_column_sortable( $sortable ){
     return $sortable;
 }
 
+/**
+ * Search friendly url
+ */
+function foresight_change_search_url() {
+    if ( is_search() && ! empty( $_GET['s']) ) {
+        wp_safe_redirect( home_url( "/search/" ) . urlencode( get_query_var( 's' ) ) );
+        exit();
+    }
+}
+
+add_action( 'template_redirect', 'foresight_change_search_url' );
+
+
+/**
+ * Register Metabox Zotero URL
+ */
+function foresight_register_publication_meta_box() {
+    add_meta_box(
+        'zotero-url',
+        esc_html__( 'Zotero Link', 'text-domain' ),
+        'publication_zotero_url_cb',
+        'publication',
+        'normal',
+        'core'
+        );
+}
+add_action( 'add_meta_boxes', 'foresight_register_publication_meta_box' );
+ 
+function publication_zotero_url_cb($post) {
+    // Metabox content
+	$metadata = get_post_meta( get_the_ID(), 'zotero-data', true );
+	if(!empty($metadata['zoteroUrl'])){
+		echo '<a href="'.$metadata['zoteroUrl'].'" target="_blank">'.$metadata['zoteroUrl'].'</a>';
+	}
+}
+
 
 /**
  * Custom Post Type Publication

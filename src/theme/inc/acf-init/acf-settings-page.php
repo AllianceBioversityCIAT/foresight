@@ -154,9 +154,9 @@ function register_custom_acf_fields_settings_page() {
 						],
 					],
 					[
-						'key'      => 'field_zotero_api_user_id',
-						'label'    => 'UserID',
-						'name'     => 'zotero_api_user_id',
+						'key'      => 'field_zotero_api_group_id',
+						'label'    => 'Group ID',
+						'name'     => 'zotero_api_group_id',
 						'type'     => 'text',
 						'required' => 0,
 						'wrapper'  => [
@@ -189,7 +189,10 @@ function register_custom_acf_fields_settings_page() {
 						'key'      => 'field_zotero_wp_category_id',
 						'label'    => 'Category',
 						'name'     => 'zotero_wp_category_id',
-						'type'     => 'text',
+						'type'     => 'taxonomy',
+						'taxonomy' => 'category',
+						'add_term' => 0,
+						'field_type' => 'select',
 						'required' => 0,
 						'instructions'      => 'Default category ID Wordpress',
 						'wrapper'  => [
@@ -200,7 +203,7 @@ function register_custom_acf_fields_settings_page() {
 						'key'      => 'field_zotero_wp_author_id',
 						'label'    => 'Author',
 						'name'     => 'zotero_wp_author_id',
-						'type'     => 'text',
+						'type'     => 'user',
 						'required' => 0,
 						'instructions'      => 'Default author Wordpress',
 						'wrapper'  => [
