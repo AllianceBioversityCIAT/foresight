@@ -62,15 +62,15 @@ function foresight_import_clarisa_cb() {
 	
 	foreach ($response['body'] as $key => $term) {
 
-		$exist_term = search_terms_by_clarisa_id( 'sdg', 'clarisa_id', $term->smoCode );
+		$exist_term = search_terms_by_clarisa_id( 'sdg', 'clarisa_id', $term->usndCode );
 		if(count($exist_term) == 0){
 
-			$args = array( 'description' => $term->fullName, 'slug' => 'goal-'.$term->smoCode );
+			$args = array( 'description' => $term->fullName, 'slug' => 'goal-'.$term->usndCode );
 			$term_id = wp_insert_term( $term->shortName, 'sdg', $args );
 			if(!is_wp_error($term_id)){
 				$log['sdg_count']++;
 				$log['sdg_insert_term'][$key] = $term_id;
-				add_term_meta($term_id['term_id'], 'clarisa_id', $term->smoCode);
+				add_term_meta($term_id['term_id'], 'clarisa_id', $term->usndCode);
 			}else{
 				$log['sdg_insert_term'][$key] = $term_id->errors;
 			}
