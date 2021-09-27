@@ -374,7 +374,7 @@ if ( !function_exists( 'foresight_popular_searches' ) ) :
 			$output .= '<div class="dropdown-row">';
 
 			foreach ( $searches as $key => $value ) {
-				$output .= '<a class="dropdown-item" href="' . $value[ 'href' ] . '">' . ucfirst( $value[ 'term' ] ) . '</a>';
+				$output .= '<a class="dropdown-item" href="search/?'.ALGOLIA_INDEX.'[query]=%22'.$value[ 'term' ].'%22' . '">' . ucfirst( $value[ 'term' ] ) . '</a>';
 			}
 
 			$output .= '</div>';
