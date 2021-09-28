@@ -296,7 +296,8 @@ function foresight_import_zotero_cb() {
 		$limit = 100;
 		$start = $limit;
 		$last_version[$collection_id] = get_transient( 'zotero_version_'.$collection_id ) | '0';
-		$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment&limit='.$limit.'&format=json&since='.$last_version[$collection_id];
+		/** exlude attachment and notes */
+		$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment%20%7C%7C%20note&limit='.$limit.'&format=json&since='.$last_version[$collection_id];
 		
 		$response = wp_remote_get( $endpoint, $options );
 		
@@ -325,7 +326,7 @@ function foresight_import_zotero_cb() {
 		if($total_results > $limit){
 			$total_pages 	= ceil($total_results / $limit);
 			for ($i=1; $i < $total_pages; $i++) {
-				$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment&limit='.$limit.'&format=json&start='.($start * $i).'&since='.$last_version[$collection_id];
+				$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment%20%7C%7C%20note&limit='.$limit.'&format=json&start='.($start * $i).'&since='.$last_version[$collection_id];
 				$response = wp_remote_get( $endpoint, $options );
 
 				// handle connection error
