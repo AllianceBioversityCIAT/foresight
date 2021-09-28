@@ -32,7 +32,7 @@
                     <div class="container-card">
                         <img class="img-fluid" width="150" height="150" src="{{ Image(item.term_image).src }}"/>
                         <div class="overlay">
-                            <div class="text"><a href="/search/{{ item.term_cured.name }}">{{ item.term_cured.name }}</a></div>
+                            <div class="text"><a href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ item.term_cured.name }}%22">{{ item.term_cured.name }}</a></div>
                         </div>
                     </div>
                 {% endfor %}
