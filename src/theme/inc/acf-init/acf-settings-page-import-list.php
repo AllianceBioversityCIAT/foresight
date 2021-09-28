@@ -293,8 +293,10 @@ function foresight_import_zotero_cb() {
 
 	// Begin import Zotero
 	foreach ( $zotero_api_collections as $collection_id ) {
+		$limit = 100;
+		$start = $limit;
 		$last_version[$collection_id] = get_transient( 'zotero_version_'.$collection_id ) | '0';
-		$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment&limit=100&format=json&since='.$last_version[$collection_id];
+		$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment&limit='.$limit.'&format=json&since='.$last_version[$collection_id];
 		
 		$response = wp_remote_get( $endpoint, $options );
 		
@@ -313,6 +315,39 @@ function foresight_import_zotero_cb() {
 		}
 
 		$items[$collection_id] = json_decode($response['body'], true);
+
+		$headerResult 	= wp_remote_retrieve_headers($response);
+		$total_results 	= $headerResult['total-results'];
+		
+		/** begin pagination 
+		 * Zotero uses pagination for results with more than 100 records
+		*/
+		if($total_results > $limit){
+			$total_pages 	= ceil($total_results / $limit);
+			for ($i=1; $i < $total_pages; $i++) {
+				$endpoint = $zotero_api_url . "/groups/" . $zotero_api_group_id.'/collections/'.$collection_id.'/items?itemType=-attachment&limit='.$limit.'&format=json&start='.($start * $i).'&since='.$last_version[$collection_id];
+				$response = wp_remote_get( $endpoint, $options );
+
+				// handle connection error
+				if ( is_wp_error( $response ) ){
+					foreach ($response->errors as $code => $message) {
+						$objError->add($code, implode(' ', $message));
+					}
+					wp_send_json_error( $objError, 500 );
+				}
+
+				// handle data error
+				if($response['response']['code'] != '200'){
+					$objError->add($response['response']['code'], $response['body']);
+					wp_send_json_error( $objError, 500 );
+				}
+
+				$items_page = json_decode($response['body'], true);
+				$items[$collection_id] = array_merge($items[$collection_id], $items_page);
+			}
+		}
+		/** end pagination */
+
 		$version = get_last_version_collection($items[$collection_id], $last_version[$collection_id]);
 		$array_log['zotero_count'] .= '<p><b>Collection: </b>'.$collection_id.'<br><b>Version: </b>'.$version.'<br><b>Items updated: </b> '.count($items[$collection_id]).'</p>';
 		
