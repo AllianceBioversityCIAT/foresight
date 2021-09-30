@@ -213,6 +213,143 @@ function publication_zotero_url_cb($post) {
 	}
 }
 
+//Disabled theme picker
+remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
+
+//Disabled admin bar
+add_filter('show_admin_bar', '__return_false');
+
+/**
+ * Change logo for wp-login
+ */
+function foresight_login_logo() { ?>
+    <style type="text/css">
+        .login h1 a {
+            width: auto !important;            
+            background-image: url("<?php echo get_template_directory_uri();?>/static/images/foresight-logo.svg") !important;
+            background-size: auto !important;
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'foresight_login_logo' );
+
+/* REMOVE WIDGETS DASBOARD */
+function remove_dashboard_meta() {
+	remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+	remove_meta_box( 'dashboard_site_health', 'dashboard', 'normal');
+
+	// Disable support for comments and trackbacks in post types
+    foreach (get_post_types() as $post_type) {
+        if (post_type_supports($post_type, 'comments')) {
+            remove_post_type_support($post_type, 'comments');
+            remove_post_type_support($post_type, 'trackbacks');
+        }
+    }
+
+	global $pagenow;
+
+    if ($pagenow === 'edit-comments.php') {
+        wp_redirect(admin_url());
+        exit;
+    }
+}
+add_action( 'admin_init', 'remove_dashboard_meta' );
+
+/**
+ * Change Copyright footer
+ */
+function copyright_footer_admin () {
+    echo 'Copyright © 2022 International Center for Tropical Agriculture - CIAT';
+}
+
+add_filter('admin_footer_text', 'copyright_footer_admin');
+
+
+/**
+ * Remove comments page in menu
+ */ 
+add_action('admin_menu', function () {
+    remove_menu_page('edit-comments.php');
+	
+	remove_menu_page('profile.php');
+	$current_user = wp_get_current_user();
+	if(in_array('contributor',$current_user->roles)) {
+		remove_menu_page('tools.php');
+		remove_menu_page('index.php');
+	}
+});
+
+/**
+ * Set default page after login: role contributor
+ */
+function admin_default_page( $redirect_to, $request, $user ) {
+	
+	if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+        //check for admins
+        if ( in_array( 'administrator', $user->roles ) ) {
+            return $redirect_to;
+        } else {
+            return '/wp-admin/edit.php';
+        }
+    } else {
+        return $redirect_to;
+    }
+}
+  
+add_filter('login_redirect', 'admin_default_page', 10, 3);
+
+//Disabled optional settings
+add_action( 'admin_head', function(){
+    ob_start(); ?>
+    <style>
+        #your-profile > h2,
+		#application-passwords-section,
+		#menu-media,
+		#wp-admin-bar-comments,
+		.user-rich-editing-wrap,
+		.user-syntax-highlighting-wrap,
+		.user-comment-shortcuts-wrap,
+		.user-admin-bar-front-wrap,
+		.user-language-wrap,
+        .user-url-wrap,
+        .user-description-wrap,
+		.user-facebook-wrap,
+		.user-instagram-wrap,
+		.user-linkedin-wrap,
+		.user-myspace-wrap,
+		.user-pinterest-wrap,
+		.user-soundcloud-wrap,
+		.user-tumblr-wrap,
+		.user-twitter-wrap,
+		.user-youtube-wrap,
+		.user-wikipedia-wrap
+    	{
+            display: none;
+        }
+    </style>
+    <?php ob_end_flush();
+});
+
+
+add_action('add_meta_boxes', 'yoast_is_toast', 99);
+
+function yoast_is_toast(){
+    //capability of 'manage_plugins' equals admin, therefore if NOT administrator
+    //hide the meta box from all other roles on the following 'post_type' 
+    //such as post, page, custom_post_type, etc
+    if (!current_user_can('manage_plugins')) {
+        remove_meta_box('wpseo_meta', 'post', 'normal');
+    }
+}
 
 /**
  * Custom Post Type Publication
@@ -273,7 +410,16 @@ function publication_register_post_type() {
 		'show_in_menu'        => true,
 		'menu_icon'            => 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj48c3ZnIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxOCAxOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxuczpzZXJpZj0iaHR0cDovL3d3dy5zZXJpZi5jb20vIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjI7Ij48cGF0aCBkPSJNNC4zNjEsMy40N2wwLjA0NiwyLjQ5OGw1LjQ4OCwtMC4wMDdsLTUuNjMxLDYuNTY5Yy0wLjY2NywwLjkxNyAtMC4xMDQsMi4wMDggMC45MjYsMi4wNTNsOC42NTgsMC4wMTdsLTAuMDE0LC0yLjUwNGwtNS45MDksLTAuMDJsNS43NSwtNi43MzJjMC41NTksLTAuOTc2IC0wLjIwOCwtMS44NzYgLTAuOTc4LC0xLjg3NWMtMS42MTYsMC4wMDIgLTguMzM2LDAuMDAxIC04LjMzNiwwLjAwMWwtMC45NjQsLTAuMmw0LjY3NywtMi42MzVjMC41NjIsLTAuMzAzIDEuMTQ0LC0wLjI5IDEuNjczLC0wLjAwNmw2LjI4LDMuNDk2YzAuNTI3LDAuNDI1IDAuNzkyLDAuNzUyIDAuODUxLDEuNDg1bDAuMDIxLDcuMzE4Yy0wLjE5LDAuNDI3IC0wLjQ4OCwwLjc5NiAtMC45MzYsMS4wODFsLTYuMjA2LDMuNDAyYy0wLjYwNSwwLjMwOCAtMS4xOCwwLjI5OSAtMS43ODQsLTAuMDM3bC02LjE2NiwtMy40MzJjLTAuNTIzLC0wLjI5IC0wLjgyMywtMC43MyAtMC44NzQsLTEuMzM3bDAuMDA3LC03LjEzN2MwLjAzLC0wLjU1OSAwLjI1OSwtMS4wMDkgMC43NjQsLTEuMzI0bDEuNjkzLC0wLjg3NGwwLjk2NCwwLjJaIiBzdHlsZT0iZmlsbDojZjAwOyIvPjwvc3ZnPg==',
 		'menu_position'       => 5,
-		'capability_type'     => 'post',
+		'capabilities' => array(
+			'edit_post' => 'edit_publication',
+			'edit_posts' => 'edit_publications',
+			'edit_others_posts' => 'edit_other_publications',
+			'publish_posts' => 'publish_publications',
+			'read_post' => 'read_publication',
+			'read_private_posts' => 'read_private_publications',
+			'delete_post' => 'delete_publication'
+		),
+		'map_meta_cap'        => true,
 		'supports'            => ['title', 'editor', 'thumbnail', 'excerpt', 'author'],
 		'taxonomies'          => ['post_tag', 'category', 'publish-year', 'product-type', 'agrifood-system', 'approach', 'region', 'sdg', 'impact-area'],
 		'rewrite'             => [
