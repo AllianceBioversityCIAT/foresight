@@ -14,11 +14,7 @@
 				on {{ post.date }}
 			</span>
 			<span class="date">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 20 18.35">
-					<path id="ic_favorite_24px" transform="translate(-2 -3)" fill="#f07"
-						d="M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5A5.447,5.447,0,0,1,7.5,3,5.988,5.988,0,0,1,12,5.09,5.988,5.988,0,0,1,16.5,3,5.447,5.447,0,0,1,22,8.5c0,3.78-3.4,6.86-8.55,11.54Z"/>
-				</svg>
-				1,556 Likes
+				{{ function('do_shortcode', '[love_me]') }}
 			</span>
 		</div>
 		<div class="post-tag">
@@ -59,15 +55,8 @@
 										<div class="posted-by">
 											<span class="date">Posted by <b>{{ related.author }}</b> on {{ related.date }}</span>
 											<span class="date">
-													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-														 viewbox="0 0 20 18.35">
-														<path id="ic_favorite_24px"
-															  d="M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5A5.447,5.447,0,0,1,7.5,3,5.988,5.988,0,0,1,12,5.09,5.988,5.988,0,0,1,16.5,3,5.447,5.447,0,0,1,22,8.5c0,3.78-3.4,6.86-8.55,11.54Z"
-															  transform="translate(-2 -3)"
-															  fill="#f07"/>
-													</svg>
-													1,556 Likes
-												</span>
+												{{ function('do_shortcode', '[love_me post_id="' ~ related.ID ~ '"]') }}
+											</span>
 										</div>
 										<p class="card-text">
 											{{ related.preview.read_more('') }}
