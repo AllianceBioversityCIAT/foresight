@@ -193,10 +193,6 @@ function foresight_theme_scripts() {
 	//Js
 	wp_enqueue_script( 'foresight_theme-js', get_template_directory_uri() . '/static/js/main.min.js', array(), _S_VERSION, true );
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-
 	$options_page = get_fields( 'theme-general-settings' );
 
 	// Google reCAPTCHA
@@ -352,7 +348,7 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 		'page_title'      => 'Theme Settings',
 		'menu_title'      => 'Theme Options',
 		'menu_slug'       => 'theme-general-settings',
-		'capability'      => 'edit_posts',
+		'capability'      => 'edit_publications',
 		'redirect'        => false,
 		'update_button'   => 'Save options',
 		'updated_message' => 'Options saved',
