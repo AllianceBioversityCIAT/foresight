@@ -20,8 +20,8 @@
 		<div class="post-tag">
 			{% for tag in post.terms( {query:{taxonomy:'post_tag', orderby:'name', order: 'ASC'}}) %}
 				<span>
-					<a href="{{ tag.link }}">
-						{{ tag.name }}{{ ( loop.last ) ? '.': ',' }}
+					<a href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ tag.name }}%22">
+						{{ tag.name }}
 					</a>
 				</span>
 			{% endfor %}
