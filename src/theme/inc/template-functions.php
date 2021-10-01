@@ -488,7 +488,7 @@ function publish_year_register_taxonomy() {
 		'public'             => true,
 		'publicly_queryable' => true,
 		'hierarchical'       => false,
-		'show_ui'            => true,
+		'show_ui'            => false,
 		'show_in_menu'       => true,
 		'show_in_nav_menus'  => true,
 		'meta_box_cb'        => true,
