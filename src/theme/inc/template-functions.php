@@ -859,4 +859,7 @@ function impact_areas_register_taxonomy() {
 	register_taxonomy( 'impact-area', ['post', 'publication'], $args );
 }
 
-add_filter( 'wpseo_primary_term_taxonomies', '__return_empty_array' );
+
+add_filter('wpseo_primary_term_taxonomies', function ($all_taxonomies, $post_type) {
+	return $post_type === 'post' ? array() : $all_taxonomies;
+}, 10, 2);
