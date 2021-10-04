@@ -114,7 +114,7 @@ function register_custom_acf_fields_section_home_page() {
 								'name'              => 'image_logo',
 								'type'              => 'image',
 								'instructions'      => '<b style="color:#ff5555">First image: (320 x 160) px</b> <br> Other images: (160 x 160) px',
-								'required'          => 0,
+								'required'          => 1,
 								'conditional_logic' => 0,
 								'wrapper'           => [
 									'width' => '',
@@ -138,7 +138,7 @@ function register_custom_acf_fields_section_home_page() {
 								'label'             => 'Label',
 								'type'              => 'text',
 								'instructions'      => '',
-								'required'          => 0,
+								'required'          => 1,
 								'conditional_logic' => 0,
 								'wrapper'           => [
 									'width' => '',
