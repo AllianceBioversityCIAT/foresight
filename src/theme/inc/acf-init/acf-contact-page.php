@@ -54,7 +54,7 @@ function register_custom_acf_fields_page_contact() {
 						'label'         => 'Placeholder Full Name.',
 						'name'          => 'contact_form_placeholder_full_name',
 						'type'          => 'text',
-						'required'      => 0,
+						'required'      => 1,
 						'wrapper'       => [
 							'width' => '50',
 						],
@@ -65,7 +65,7 @@ function register_custom_acf_fields_page_contact() {
 						'label'         => 'Placeholder Email.',
 						'name'          => 'contact_form_placeholder_email',
 						'type'          => 'text',
-						'required'      => 0,
+						'required'      => 1,
 						'wrapper'       => [
 							'width' => '50',
 						],
@@ -76,7 +76,7 @@ function register_custom_acf_fields_page_contact() {
 						'label'         => 'Placeholder Cell Phone.',
 						'name'          => 'contact_form_placeholder_cell_phone',
 						'type'          => 'text',
-						'required'      => 0,
+						'required'      => 1,
 						'wrapper'       => [
 							'width' => '50',
 						],
@@ -87,7 +87,7 @@ function register_custom_acf_fields_page_contact() {
 						'label'         => 'Placeholder Description.',
 						'name'          => 'contact_form_placeholder_description',
 						'type'          => 'text',
-						'required'      => 0,
+						'required'      => 1,
 						'wrapper'       => [
 							'width' => '50',
 						],
@@ -98,7 +98,7 @@ function register_custom_acf_fields_page_contact() {
 						'label'         => 'Button Title.',
 						'name'          => 'contact_form_button_title',
 						'type'          => 'text',
-						'required'      => 0,
+						'required'      => 1,
 						'wrapper'       => [
 							'width' => '50',
 						],
@@ -132,7 +132,7 @@ function register_custom_acf_fields_page_contact() {
 						'label'         => 'Greetings',
 						'name'          => 'contact_email_greetings',
 						'type'          => 'text',
-						'required'      => 0,
+						'required'      => 1,
 						'wrapper'       => [
 							'width' => '50',
 						],
@@ -143,7 +143,7 @@ function register_custom_acf_fields_page_contact() {
 						'label'         => 'Subject',
 						'name'          => 'contact_email_subject',
 						'type'          => 'text',
-						'required'      => 0,
+						'required'      => 1,
 						'wrapper'       => [
 							'width' => '50',
 						],
@@ -153,7 +153,7 @@ function register_custom_acf_fields_page_contact() {
 						'key'          => 'field_contact_email_description',
 						'label'        => 'Email Description',
 						'name'         => 'contact_email_description',
-						'required' => 0,
+						'required' => 1,
 						'type'     => 'textarea',
 						'wrapper'  => [
 							'width' => '50',
