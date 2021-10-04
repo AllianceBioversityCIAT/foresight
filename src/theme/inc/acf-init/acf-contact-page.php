@@ -109,7 +109,7 @@ function register_custom_acf_fields_page_contact() {
 						'name'              => 'contact_background_image',
 						'label'             => 'Background Image',
 						'type'              => 'image',
-						'instructions'      => '',
+						'instructions'      => 'Select image (1950 x 648) px',
 						'required'          => 1,
 						'conditional_logic' => 0,
 						'return_format'     => 'id',
