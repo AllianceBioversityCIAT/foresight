@@ -264,6 +264,17 @@ function remove_dashboard_meta() {
 }
 add_action( 'admin_init', 'remove_dashboard_meta' );
 
+/** 
+ * Remove roles unused
+*/
+function remove_roles_foresight() {
+	remove_role( 'subscriber' );
+	remove_role( 'editor' );
+	remove_role( 'author' );
+}
+
+add_action( 'admin_init', 'remove_roles_foresight' );
+
 /**
  * Change Copyright footer
  */
