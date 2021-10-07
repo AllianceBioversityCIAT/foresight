@@ -7,9 +7,11 @@
 						<div class="carousel-item {% if loop.first %} active {% endif %}">
 							<div class="row">
 								<div class="col-12 col-md-6 order-md-2">
-									<img class="img" width="800" height="400"
-										 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
-										 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+									<a href="{{ post.link }}">
+										<img class="img" width="800" height="400"
+											 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
+											 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+									</a>
 								</div>
 								<div class="col-12 col-md-6 order-md-1">
 									<div class="category">
@@ -108,9 +110,11 @@
 							<div class="card content-latest-post">
 								<div class="row no-gutters">
 									<div class="col-md-5 card-image-post">
-										<img class="img" width="800" height="400"
-											 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
-											 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+										<a href="{{ post.link }}">
+											<img class="img" width="800" height="400"
+												 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
+												 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+										</a>
 									</div>
 									<div class="col-md-7 card-content-post">
 										<div class="card-body">
@@ -148,10 +152,12 @@
 								<div class="card">
 									<div class="row no-gutters">
 										<div class="col-5 card-image-post">
-											<img class="img" width="800" height="400"
-												 src="{{ posts.thumbnail.src }}" srcset="{{ posts.thumbnail.srcset }}"
-												 sizes="{{ posts.thumbnail.img_sizes }}"
-												 alt="{{ posts.thumbnail.title }}"/>
+											<a href="{{ posts.link }}">
+												<img class="img" width="800" height="400"
+													 src="{{ posts.thumbnail.src }}" srcset="{{ posts.thumbnail.srcset }}"
+													 sizes="{{ posts.thumbnail.img_sizes }}"
+													 alt="{{ posts.thumbnail.title }}"/>
+											</a>
 										</div>
 										<div class="col-7 card-content-post">
 											<div class="card-body">

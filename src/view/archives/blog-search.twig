@@ -35,9 +35,11 @@
 						<div class="card col-md-6 content-latest-post">
 							<div class="row no-gutters">
 								<div class="col-md-5 card-image-post">
-									<img class="img" width="800" height="400"
-										 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
-										 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+									<a href="{{ post.link }}">
+										<img class="img" width="800" height="400"
+											 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
+											 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+									</a>
 								</div>
 								<div class="col-md-7 card-content-post">
 									<div class="card-body">
