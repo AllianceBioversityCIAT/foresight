@@ -388,7 +388,7 @@ endif;
  * Asynchronous scripts in the queue
  **/
 function add_async_to_script( $tag, $handle, $src ) {
-	if ( !is_admin() ) {
+	if ( !is_admin() && !($GLOBALS['pagenow'] === 'wp-login.php') ) {
 		$tag = str_replace( ' src', ' defer src', $tag );
 	}
 	return $tag;
