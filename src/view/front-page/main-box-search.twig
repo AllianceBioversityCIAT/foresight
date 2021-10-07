@@ -30,10 +30,14 @@
                 <div class="slider-row">
                 {% for item in content.meta('slider_items') %}
                     <div class="container-card">
-                        <img class="img-fluid" width="150" height="150" src="{{ Image(item.term_image).src }}"/>
-                        <div class="overlay">
-                            <div class="text"><a href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ item.term_cured.name }}%22">{{ item.term_cured.name }}</a></div>
-                        </div>
+						<a href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ item.term_cured.name }}%22">
+							<img class="img-fluid" width="150" height="150" src="{{ Image(item.term_image).src }}"/>
+							<div class="overlay">
+								<div class="text">
+									{{ item.term_cured.name }}
+								</div>
+							</div>
+						</a>
                     </div>
                 {% endfor %}
                 </div>
