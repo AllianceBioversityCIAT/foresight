@@ -41,9 +41,11 @@
 						<div class="card">
 							<div class="row no-gutters">
 								<div class="col-md-5 card-image-post">
-									<img class="img" width="800" height="400"
-										 src="{{ related.thumbnail.src }}" srcset="{{ related.thumbnail.srcset }}"
-										 sizes="{{ related.thumbnail.img_sizes }}" alt="{{ related.thumbnail.title }}"/>
+									<a href="{{ related.link }}">
+										<img class="img" width="800" height="400"
+											 src="{{ related.thumbnail.src }}" srcset="{{ related.thumbnail.srcset }}"
+											 sizes="{{ related.thumbnail.img_sizes }}" alt="{{ related.thumbnail.title }}"/>
+									</a>
 								</div>
 								<div class="col-md-7 card-content-post">
 									<div class="card-body">

@@ -1,81 +1,67 @@
 {% set content = homePage %}
-{% set post = feacturePost %}
 <div id="foresigh-main-post-grid" class="container-fluid">
-    <div class="container">
-        <div class="row card-full pt-5 pt-lg-5"> 
-            <div class="col-md-6 p-0">
-                <img width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[0].thumbnail.src }}" data-srcset="{{ featuredPost[0].thumbnail.srcset }}" data-sizes="{{ featuredPost[0].thumbnail.img_sizes }}" alt="{{ featuredPost[0].thumbnail.title }}">
-            </div>
-            <div class="col-md-6 body">
-                <h2 class="title"><a href="{{ featuredPost[0].link }}">{{ featuredPost[0].title }}</a></h2>
-                <p class="content">
-                {{ featuredPost[0].preview.read_more('') }}
-                </p>
-                <div class="text-right">
-                    <a class="btn more" href="{{ featuredPost[0].link }}">Read more</a>
-                </div>
-            </div>
-        </div> 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-flex">
-                <div class="card col">
-                   
-                    <div class="row card pr-sm-1 pr-md-1 pr-lg-2 pt-3"> 
-                        <div class="col-12 p-0">
-                            <img width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[1].thumbnail.src }}" data-srcset="{{ featuredPost[1].thumbnail.srcset }}" data-sizes="{{ featuredPost[1].thumbnail.img_sizes }}" alt="{{ featuredPost[1].thumbnail.title }}">
-                        </div>
-                        <div class="col-12 body shadow">
-                            <h2 class="title"><a href="{{ featuredPost[1].link }}">{{ featuredPost[1].title }}</a></h2>
-                            <p class="content">
-                            {{ featuredPost[1].preview.read_more('') }}
-                            </p>
-                            <div class="text-right">
-                                <a class="btn more" href="{{ featuredPost[1].link }}">Read more</a>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-                <div class="card col">
-                    <div class="row card pl-sm-1 pl-md-1 pl-lg-1 pr-lg-1 pt-3"> 
-                        <div class="col-12 p-0">
-                            <img  width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[2].thumbnail.src }}" data-srcset="{{ featuredPost[2].thumbnail.srcset }}" data-sizes="{{ featuredPost[2].thumbnail.img_sizes }}" alt="{{ featuredPost[2].thumbnail.title }}">
-                        </div>
-                        <div class="col-12 body shadow">
-                            <h2 class="title"><a href="{{ featuredPost[2].link }}">{{ featuredPost[2].title }}</a></h2>
-                            <p class="content">
-                                {{ featuredPost[2].preview.read_more('') }}
-                            </p>
-                            <div class="text-right">
-                                <a class="btn more" href="{{ featuredPost[2].link }}">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card col d-none d-md-none d-lg-flex">
-                    <div class="row card pl-sm-1 pl-md-1 pl-lg-2 pt-3"> 
-                        <div class="col-12 p-0">
-                            <img  width="850" height="485" class="img-fluid lazyload" data-src="{{ featuredPost[3].thumbnail.src }}" data-srcset="{{ featuredPost[3].thumbnail.srcset }}" data-sizes="{{ featuredPost[3].thumbnail.img_sizes }}" alt="{{ featuredPost[3].thumbnail.title }}">
-                        </div>
-                        <div class="col-12 body shadow">
-                            <h2 class="title"><a href="{{ featuredPost[3].link }}">{{ featuredPost[3].title }}</a></h2>
-                            <p class="content">
-                                {{ featuredPost[3].preview.read_more('') }}
-                            </p>
-                            <div class="text-right">
-                                <a class="btn more" href="{{ featuredPost[3].link }}">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <div class="row">
-            <div class="col-12 link-all">
-            <a class="btn" href="/blog" role="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32.1 49.4"> <g id="Arrow_Small_Up" data-name="Arrow Small Up" transform="translate(32.1) rotate(90)"> <path id="Path_36" data-name="Path 36" d="M24.7,32.1,0,7.367,7.357,0,24.7,17.366,42.043,0,49.4,7.367Z" transform="translate(49.4 32.1) rotate(180)" fill="#c8c502"/> </g></svg>
-            View all blogs
-            </a>
-            </div>
-        </div>
-        <hr>
-    </div>
+	<div class="container">
+		<div class="row card-full pt-5 pt-lg-5">
+			{% for post in featuredPost|slice(0, 1) %}
+				<div class="col-md-6 p-0">
+					<a href="{{ post.link }}">
+						<img width="850" height="485" class="img-fluid lazyload" data-src="{{ post.thumbnail.src }}"
+							 data-srcset="{{ post.thumbnail.srcset }}" data-sizes="{{ post.thumbnail.img_sizes }}"
+							 alt="{{ post.thumbnail.title }}">
+					</a>
+				</div>
+				<div class="col-md-6 body">
+					<h2 class="title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
+					<p class="content">
+						{{ post.preview.read_more('') }}
+					</p>
+					<div class="text-right">
+						<a class="btn more" href="{{ post.link }}">Read more</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-flex">
+			{% for post in featuredPost|slice(1, 4) %}
+				<div class="card col">
+					<div class="row card pr-sm-1 pr-md-1 pr-lg-2 pt-3">
+						<div class="col-12 p-0">
+							<a href="{{ post.link }}">
+								<img width="850" height="485" class="img-fluid lazyload"
+									 data-src="{{ post.thumbnail.src }}"
+									 data-srcset="{{ post.thumbnail.srcset }}"
+									 data-sizes="{{ post.thumbnail.img_sizes }}"
+									 alt="{{ post.thumbnail.title }}">
+							</a>
+						</div>
+						<div class="col-12 body shadow">
+							<h2 class="title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
+							<p class="content">
+								{{ post.preview.read_more('') }}
+							</p>
+							<div class="text-right">
+								<a class="btn more" href="{{ post.link }}">Read more</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="row">
+			<div class="col-12 link-all">
+				<a class="btn" href="/blog" role="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32.1 49.4">
+						<g id="Arrow_Small_Up" data-name="Arrow Small Up" transform="translate(32.1) rotate(90)">
+							<path id="Path_36" data-name="Path 36"
+								  d="M24.7,32.1,0,7.367,7.357,0,24.7,17.366,42.043,0,49.4,7.367Z"
+								  transform="translate(49.4 32.1) rotate(180)" fill="#c8c502"/>
+						</g>
+					</svg>
+					View all blogs
+				</a>
+			</div>
+		</div>
+		<hr>
+	</div>
 </div>
 
