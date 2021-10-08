@@ -3,7 +3,7 @@
  * The template for displaying archive pages
  *
  * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
- * @package driven_properties_theme
+ * @package foresight_theme.
  */
 
 get_header();

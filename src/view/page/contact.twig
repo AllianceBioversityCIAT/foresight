@@ -33,15 +33,13 @@
 											<i class="icon-user"></i>
 										</span>
 								</div>
-								<input type="text" class="form-control" id="full_name" name="full_name"
-									   placeholder="{{ post.meta('contact_form_placeholder_full_name') }}"
+								<input type="text" class="form-control" id="full_name" name="full_name" minlength="3"
+									   pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
+									   placeholder="{{ post.meta('contact_form_placeholder_full_name') }} *"
 									   aria-describedby="basic-user" required>
-								<div class="invalid-feedback">
-									Please add your full name.
-								</div>
-								<div class="valid-feedback">
-									Looks good!
-								</div>
+							</div>
+							<div id="alert-error-full-name" class="alert-error" role="alert">
+								This field is required and with a minimum of 3 characters.
 							</div>
 						</div>
 					</div>
@@ -54,14 +52,12 @@
 									</span>
 								</div>
 								<input type="email" class="form-control" id="email" name="email"
-									   placeholder="{{ post.meta('contact_form_placeholder_email') }}"
+									   pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+									   placeholder="{{ post.meta('contact_form_placeholder_email') }} *"
 									   aria-describedby="basic-email" required>
-								<div class="invalid-feedback">
-									Please add your email
-								</div>
-								<div class="valid-feedback">
-									Looks good!
-								</div>
+							</div>
+							<div id="alert-error-email" class="alert-error" role="alert">
+								Required field. Please provide a valid email.
 							</div>
 						</div>
 					</div>
@@ -74,26 +70,19 @@
 								</div>
 								<input type="tel" class="form-control" id="cell_phone" name="cell_phone"
 									   placeholder="{{ post.meta('contact_form_placeholder_cell_phone') }}"
-									   pattern="[0-9]{10}" aria-describedby="basic-cell-phone" required>
-								<div class="invalid-feedback">
-									Please add your cell phone
-								</div>
-								<div class="valid-feedback">
-									Looks good!
-								</div>
+									   aria-describedby="basic-cell-phone">
+							</div>
+							<div id="alert-error-phone" class="alert-error" role="alert">
+								Please provide a valid phone and with a minimum of 10 characters.
 							</div>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="col-md-8 mb-3">
 								<textarea class="form-control" rows="5" id="description" name="description"
-										  placeholder="{{ post.meta('contact_form_placeholder_description') }}"
-										  required></textarea>
-							<div class="invalid-feedback">
-								Please add your description
-							</div>
-							<div class="valid-feedback">
-								Looks good!
+										  placeholder="{{ post.meta('contact_form_placeholder_description') }}"></textarea>
+							<div id="alert-error-description" class="alert-error" role="alert">
+								This field is a minimum of 10 characters.
 							</div>
 						</div>
 					</div>
