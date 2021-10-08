@@ -123,6 +123,14 @@ body {
           }
         }
 
+        .active-menu-home {
+          background: $color_fourth;
+
+          .nav-link {
+            color: $color_white;
+          }
+        }
+
         .secondary-menu-item {
           background: $color_secondary;
         }
