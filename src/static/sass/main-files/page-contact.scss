@@ -21,10 +21,6 @@ body {
             i {
               margin-right: .5rem;
             }
-
-            &:last-child {
-              margin-left: 2rem;
-            }
           }
         }
 
@@ -40,6 +36,10 @@ body {
             display: inline-block;
             text-align: center;
             margin: 0 .5rem;
+
+            &:first-child {
+              margin-left: 0;
+            }
           }
 
           a {
@@ -89,6 +89,10 @@ body {
               border: 2px solid #707070;
               background-color: $color_white;
             }
+
+            #alert-error-email, #alert-error-full-name, #alert-error-description, #alert-error-phone {
+              display: none;
+            }
           }
 
           .foresight-btn-primary {
@@ -109,5 +113,12 @@ body {
       bottom: 0;
       z-index: -1;
     }
+  }
+
+  .alert-error {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
   }
 }
