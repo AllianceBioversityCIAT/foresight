@@ -24,7 +24,7 @@ body {
     width: 360px;
     padding: 2rem;
     background-color: white;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
     margin-top: 7rem;
     margin-bottom: 6rem;
 
@@ -53,16 +53,16 @@ body {
     }
   }
 
-	#intro {
-		display: flex;
-		justify-items: center;
-		align-items: center;
+  #intro {
+    display: flex;
+    justify-items: center;
+    align-items: center;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     width: 50%;
 
-    @include respond-below( sm ) {
+    @include respond-below(sm) {
       display: none;
     }
 
@@ -101,5 +101,5 @@ body {
         }
       }
     }
-	}
+  }
 }
