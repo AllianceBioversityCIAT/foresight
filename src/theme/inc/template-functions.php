@@ -222,7 +222,9 @@ add_filter('show_admin_bar', '__return_false');
 /**
  * Change logo for wp-login
  */
-function foresight_login_logo() { ?>
+function foresight_login_logo() { 
+	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/static/css/login.css' );
+	?>
     <style type="text/css">
         .login h1 a {
             width: auto !important;            
@@ -874,3 +876,41 @@ function impact_areas_register_taxonomy() {
 add_filter('wpseo_primary_term_taxonomies', function ($all_taxonomies, $post_type) {
 	return $post_type === 'post' ? array() : $all_taxonomies;
 }, 10, 2);
+
+/**
+ * Change url logo in login screen
+ */
+function custom_login_logo_url() {
+	return get_bloginfo( 'url' );
+}
+
+add_filter( 'login_headerurl', 'custom_login_logo_url' );
+
+function custom_login_logo_url_title() {
+	return get_bloginfo( 'name' );
+}
+
+add_filter( 'login_headertitle', 'custom_login_logo_url_title' );
+
+function smallenvelop_login_message( $message ) {
+    if ( empty($message) ){
+        return '<div id="intro2"><strong>Please login to continue</strong></div>';
+    } else {
+        return $message;
+    }
+}
+
+add_filter( 'login_message', 'smallenvelop_login_message' );
+
+
+
+add_action('login_footer', 'my_addition_to_login_footer');
+function my_addition_to_login_footer() {
+     echo '<div id="intro">
+	 		<div>
+			 	<h1>Welcome to CGIAR Foresight.</h1>
+				<h3>Strategic foresight and modeling to support food systems decision making.</h3>
+				<p>To enter you must be registered on our website, if you still do not have an account please write to <br><a href="#">alliance-foresight-website@cgiar.org</a> we will be attentive to answer your questions.</p>
+	 		</div>
+		</div>';
+}
