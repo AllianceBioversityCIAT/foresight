@@ -104,7 +104,7 @@ add_action( 'manage_posts_custom_column', 'posts_custom_column_views', 5, 2 );
 
 // support column clarisa_id (SDG)
 add_action( 'manage_sdg_custom_column', 'foresight_show_sdg_meta_info_in_columns', 10, 3 );
- 
+
 function foresight_show_sdg_meta_info_in_columns( $string, $columns, $term_id ) {
     switch ( $columns ) {
         case 'CLARISA_ID' :
@@ -114,7 +114,7 @@ function foresight_show_sdg_meta_info_in_columns( $string, $columns, $term_id ) 
 }
 
 add_filter( 'manage_edit-sdg_columns', 'foresight_add_new_sdg_columns' );
- 
+
 function foresight_add_new_sdg_columns( $columns ) {
     $columns['CLARISA_ID'] = __( 'CLARISA ID' );
     return $columns;
@@ -129,7 +129,7 @@ function add_sdg_column_sortable( $sortable ){
 
 // support column clarisa_id (IMPACT AREAS)
 add_action( 'manage_impact-area_custom_column', 'foresight_show_impact_area_meta_info_in_columns', 10, 3 );
- 
+
 function foresight_show_impact_area_meta_info_in_columns( $string, $columns, $term_id ) {
     switch ( $columns ) {
         case 'CLARISA_ID' :
@@ -139,7 +139,7 @@ function foresight_show_impact_area_meta_info_in_columns( $string, $columns, $te
 }
 
 add_filter( 'manage_edit-impact-area_columns', 'foresight_add_new_impact_area_columns' );
- 
+
 function foresight_add_new_impact_area_columns( $columns ) {
     $columns['CLARISA_ID'] = __( 'CLARISA ID' );
     return $columns;
@@ -154,7 +154,7 @@ function add_impact_area_column_sortable( $sortable ){
 
 // support column clarisa_id (REGIONS)
 add_action( 'manage_region_custom_column', 'foresight_show_region_meta_info_in_columns', 10, 3 );
- 
+
 function foresight_show_region_meta_info_in_columns( $string, $columns, $term_id ) {
     switch ( $columns ) {
         case 'CLARISA_ID' :
@@ -164,7 +164,7 @@ function foresight_show_region_meta_info_in_columns( $string, $columns, $term_id
 }
 
 add_filter( 'manage_edit-region_columns', 'foresight_add_new_region_columns' );
- 
+
 function foresight_add_new_region_columns( $columns ) {
     $columns['CLARISA_ID'] = __( 'CLARISA ID' );
     return $columns;
@@ -204,7 +204,7 @@ function foresight_register_publication_meta_box() {
         );
 }
 add_action( 'add_meta_boxes', 'foresight_register_publication_meta_box' );
- 
+
 function publication_zotero_url_cb($post) {
     // Metabox content
 	$metadata = get_post_meta( get_the_ID(), 'zotero-data', true );
@@ -222,12 +222,12 @@ add_filter('show_admin_bar', '__return_false');
 /**
  * Change logo for wp-login
  */
-function foresight_login_logo() { 
+function foresight_login_logo() {
 	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/static/css/login.css' );
 	?>
     <style type="text/css">
         .login h1 a {
-            width: auto !important;            
+            width: auto !important;
             background-image: url("<?php echo get_template_directory_uri();?>/static/images/foresight-logo.svg") !important;
             background-size: auto !important;
         }
@@ -266,7 +266,7 @@ function remove_dashboard_meta() {
 }
 add_action( 'admin_init', 'remove_dashboard_meta' );
 
-/** 
+/**
  * Remove roles unused
 */
 function remove_roles_foresight() {
@@ -289,10 +289,10 @@ add_filter('admin_footer_text', 'copyright_footer_admin');
 
 /**
  * Remove comments page in menu
- */ 
+ */
 add_action('admin_menu', function () {
     remove_menu_page('edit-comments.php');
-	
+
 	remove_menu_page('profile.php');
 	$current_user = wp_get_current_user();
 	if(in_array('contributor',$current_user->roles)) {
@@ -305,7 +305,7 @@ add_action('admin_menu', function () {
  * Set default page after login: role contributor
  */
 function admin_default_page( $redirect_to, $request, $user ) {
-	
+
 	if ( isset( $user->roles ) && is_array( $user->roles ) ) {
         //check for admins
         if ( in_array( 'administrator', $user->roles ) ) {
@@ -317,7 +317,7 @@ function admin_default_page( $redirect_to, $request, $user ) {
         return $redirect_to;
     }
 }
-  
+
 add_filter('login_redirect', 'admin_default_page', 10, 3);
 
 //Disabled optional settings
@@ -357,7 +357,7 @@ add_action('add_meta_boxes', 'yoast_is_toast', 99);
 
 function yoast_is_toast(){
     //capability of 'manage_plugins' equals admin, therefore if NOT administrator
-    //hide the meta box from all other roles on the following 'post_type' 
+    //hide the meta box from all other roles on the following 'post_type'
     //such as post, page, custom_post_type, etc
     if (!current_user_can('manage_plugins')) {
         remove_meta_box('wpseo_meta', 'post', 'normal');
@@ -367,7 +367,6 @@ function yoast_is_toast(){
 /**
  * Rule for redirect to home page after logout
  */
-
 function auto_redirect_after_logout(){
   wp_safe_redirect( home_url() );
   exit;
@@ -375,7 +374,9 @@ function auto_redirect_after_logout(){
 
 add_action('wp_logout','auto_redirect_after_logout');
 
-/* hook to disable the fullscreen mode in editor. */
+/**
+ * Hook to disable the fullscreen mode in editor.
+ */
 function foresight_disable_editor_fullscreen_by_default() {
 	$script = "jQuery( window ).load(function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
 	wp_add_inline_script( 'wp-blocks', $script );
@@ -386,7 +387,6 @@ add_action( 'enqueue_block_editor_assets','foresight_disable_editor_fullscreen_b
 /**
  * Custom Post Type Publication
  */
-add_action( 'init', 'publication_register_post_type' );
 function publication_register_post_type() {
 	$labels = [
 		'name'                     => esc_html__( 'Publications', 'foresight' ),
@@ -462,11 +462,11 @@ function publication_register_post_type() {
 	register_post_type( 'publication', $args );
 }
 
+add_action( 'init', 'publication_register_post_type' );
 
 /**
  * Publish Year Taxonomy
  */
-add_action( 'init', 'publish_year_register_taxonomy' );
 function publish_year_register_taxonomy() {
 	$labels = [
 		'name'                       => esc_html__( 'Publish Years', 'foresight' ),
@@ -520,12 +520,11 @@ function publish_year_register_taxonomy() {
 	register_taxonomy( 'publish-year', ['post', 'publication'], $args );
 }
 
-
+add_action( 'init', 'publish_year_register_taxonomy' );
 
 /**
  * Product Type Taxonomy
  */
-add_action( 'init', 'product_type_register_taxonomy' );
 function product_type_register_taxonomy() {
 	$labels = [
 		'name'                       => esc_html__( 'Product Types', 'foresight' ),
@@ -579,12 +578,11 @@ function product_type_register_taxonomy() {
 	register_taxonomy( 'product-type', ['post', 'publication'], $args );
 }
 
-
+add_action( 'init', 'product_type_register_taxonomy' );
 
 /**
  * Agrifood System Taxonomy
  */
-add_action( 'init', 'agrifood_systems_register_taxonomy' );
 function agrifood_systems_register_taxonomy() {
 	$labels = [
 		'name'                       => esc_html__( 'Agrifood Systems', 'foresight' ),
@@ -638,12 +636,11 @@ function agrifood_systems_register_taxonomy() {
 	register_taxonomy( 'agrifood-system', ['post', 'publication'], $args );
 }
 
-
+add_action( 'init', 'agrifood_systems_register_taxonomy' );
 
 /**
  * Approach Taxonomy
  */
-add_action( 'init', 'approaches_register_taxonomy' );
 function approaches_register_taxonomy() {
 	$labels = [
 		'name'                       => esc_html__( 'Approaches', 'foresight' ),
@@ -697,12 +694,11 @@ function approaches_register_taxonomy() {
 	register_taxonomy( 'approach', ['post', 'publication'], $args );
 }
 
+add_action( 'init', 'approaches_register_taxonomy' );
 
 /**
  * Region Taxonomy
  */
-
-add_action( 'init', 'regions_register_taxonomy' );
 function regions_register_taxonomy() {
 	$labels = [
 		'name'                       => esc_html__( 'Regions', 'foresight' ),
@@ -756,11 +752,11 @@ function regions_register_taxonomy() {
 	register_taxonomy( 'region', ['post', 'publication'], $args );
 }
 
+add_action( 'init', 'regions_register_taxonomy' );
 
 /**
  * SDG Taxonomy
  */
-add_action( 'init', 'sdg_register_taxonomy' );
 function sdg_register_taxonomy() {
 	$labels = [
 		'name'                       => esc_html__( 'SDGs', 'foresight' ),
@@ -814,11 +810,11 @@ function sdg_register_taxonomy() {
 	register_taxonomy( 'sdg', ['post', 'publication'], $args );
 }
 
+add_action( 'init', 'sdg_register_taxonomy' );
 
 /**
  * Impact Area Taxonomy
  */
-add_action( 'init', 'impact_areas_register_taxonomy' );
 function impact_areas_register_taxonomy() {
 	$labels = [
 		'name'                       => esc_html__( 'Impact Areas', 'foresight' ),
@@ -872,6 +868,7 @@ function impact_areas_register_taxonomy() {
 	register_taxonomy( 'impact-area', ['post', 'publication'], $args );
 }
 
+add_action( 'init', 'impact_areas_register_taxonomy' );
 
 add_filter('wpseo_primary_term_taxonomies', function ($all_taxonomies, $post_type) {
 	return $post_type === 'post' ? array() : $all_taxonomies;
@@ -902,15 +899,34 @@ function smallenvelop_login_message( $message ) {
 
 add_filter( 'login_message', 'smallenvelop_login_message' );
 
-
-
-add_action('login_footer', 'my_addition_to_login_footer');
+/**
+ * This function adds content to the login.
+ */
 function my_addition_to_login_footer() {
-     echo '<div id="intro">
-	 		<div>
-			 	<h1>Welcome to CGIAR Foresight.</h1>
-				<h3>Strategic foresight and modeling to support food systems decision making.</h3>
-				<p>To enter you must be registered on our website, if you still do not have an account please write to <br><a href="#">alliance-foresight-website@cgiar.org</a> we will be attentive to answer your questions.</p>
+	$options_page = get_fields( 'theme-general-settings' );
+
+     echo '<div id="intro" style="background-image: url('. $options_page[ 'login_background_image' ]['url'] .'">
+	 		<div class="content-right-login">
+	 			<div class="background-color-login"></div>
+				<div class="content-info">
+					<h1>'. $options_page[ 'login_title' ].'</h1>
+					<h5>'. $options_page[ 'login_sub_title' ].'</h5>
+					<p>'. $options_page[ 'login_description' ].'</p>
+				</div>
 	 		</div>
 		</div>';
+
+	 get_footer();
 }
+
+add_action('login_footer', 'my_addition_to_login_footer');
+
+
+/**
+ * This works by adding the website header to the login.
+ */
+function add_header_login() {
+	get_template_part( 'header' );
+}
+
+add_action('login_head', 'add_header_login' );

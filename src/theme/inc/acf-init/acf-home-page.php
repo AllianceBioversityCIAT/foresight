@@ -17,11 +17,6 @@ function register_custom_acf_fields_section_home_page() {
 						'instructions'      => '',
 						'required'          => 0,
 						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						],
 						'placement'         => 'top',
 						'endpoint'          => 0,
 					],
@@ -244,11 +239,6 @@ function register_custom_acf_fields_section_home_page() {
 						'instructions'      => '',
 						'required'          => 0,
 						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						],
 						'placement'         => 'top',
 						'endpoint'          => 0,
 					],
@@ -260,11 +250,6 @@ function register_custom_acf_fields_section_home_page() {
 						'instructions'      => '',
 						'required'          => 1,
 						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						],
 						'post_type'         => [
 							0 => 'page',
 						],
@@ -280,11 +265,6 @@ function register_custom_acf_fields_section_home_page() {
 						'instructions'      => 'Select image (1950 × 648) px',
 						'required'          => 1,
 						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						],
 						'return_format'     => 'array',
 						'preview_size'      => 'thumbnail',
 						'library'           => 'all',
