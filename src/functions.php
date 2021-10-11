@@ -181,7 +181,11 @@ function foresight_theme_scripts() {
 
 	//Styles.
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_enqueue_style( 'foresight_' . $template_name, get_template_directory_uri() . '/static/css/' . $template_name . '.css', array(), _S_VERSION );
+
+	if ( $GLOBALS['pagenow'] != 'wp-login.php' ) {
+		wp_enqueue_style( 'foresight_' . $template_name, get_template_directory_uri() . '/static/css/' . $template_name . '.css', array(), _S_VERSION );
+	}
+
 	wp_enqueue_style( 'foresight_theme-fonts-style', get_template_directory_uri() . '/static/lib/fonts/icons.css' );
 
 	//Bootstrap Bundle.
@@ -417,7 +421,7 @@ function foresight_display_api_curl( &$handle, $args, $url ) {
 	curl_setopt($handle, CURLOPT_SSL_CIPHER_LIST, 'TLSv1');
 	curl_getinfo($handle);
 	return $handle;
-	
+
 }
 
 add_action( 'http_api_curl', 'foresight_display_api_curl', 10, 3 );

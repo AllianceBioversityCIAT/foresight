@@ -6,30 +6,29 @@ function register_custom_acf_fields_settings_page() {
 	if ( function_exists( 'acf_add_local_field_group' ) ) {
 
 		$log_clarisa = get_transient( 'log_clarisa' );
-		$log_zotero = get_transient( 'log_zotero' );
-		
-		$log_clarisa = 	"<b>Last update: </b>".$log_clarisa['date']."<br>".
-						"<h3>SDGs</h3>".
-						"<b>Total Imported Items: </b>".$log_clarisa['sdg_count']."<br>".
-						"<b>Total Updated Items: </b>".$log_clarisa['sdg_count_updated']."<br>".
-						"<b>Clarisa Response: </b>".json_encode($log_clarisa['sdg_response']).'<br>'.
-						"<b>Wordpress Response: </b>".json_encode($log_clarisa['sdg_insert_term']).'<br>'.
-						"<h3>Impact Areas</h3>".
-						"<b>Total Imported Items: </b>".$log_clarisa['impact_areas_count']."<br>".
-						"<b>Total Updated Items: </b>".$log_clarisa['impact_areas_count_updated']."<br>".
-						"<b>Clarisa Response: </b>".json_encode($log_clarisa['impact_areas_response']).'<br>'.
-						"<b>Wordpress Response: </b>".json_encode($log_clarisa['impact_areas_insert_term']).'<br>'.
-						"<h3>Regions</h3>".
-						"<b>Total Imported Items: </b>".$log_clarisa['regions_count']."<br>".
-						"<b>Total Updated Items: </b>".$log_clarisa['regions_count_updated']."<br>".
-						"<b>Clarisa Response: </b>".json_encode($log_clarisa['regions_response']).'<br>'.
-						"<b>Wordpress Response: </b>".json_encode($log_clarisa['regions_insert_term']).'<br>';
-		
-		$log_zotero = 	"<b>Last update: </b>".$log_zotero['date']."<br><br>".
-						"<ul>".$log_zotero['zotero_count']."</ul>".
-						"<b>Zotero Response: </b>".json_encode($log_zotero['zotero_response']).'<br>'.
-						"<b>Wordpress Log: </b>".$log_zotero['zotero_wp_conflicts'].'';
-	
+		$log_zotero  = get_transient( 'log_zotero' );
+		$log_clarisa = "<b>Last update: </b>" . $log_clarisa[ 'date' ] . "<br>" .
+			"<h3>SDGs</h3>" .
+			"<b>Total Imported Items: </b>" . $log_clarisa[ 'sdg_count' ] . "<br>" .
+			"<b>Total Updated Items: </b>" . $log_clarisa[ 'sdg_count_updated' ] . "<br>" .
+			"<b>Clarisa Response: </b>" . json_encode( $log_clarisa[ 'sdg_response' ] ) . '<br>' .
+			"<b>Wordpress Response: </b>" . json_encode( $log_clarisa[ 'sdg_insert_term' ] ) . '<br>' .
+			"<h3>Impact Areas</h3>" .
+			"<b>Total Imported Items: </b>" . $log_clarisa[ 'impact_areas_count' ] . "<br>" .
+			"<b>Total Updated Items: </b>" . $log_clarisa[ 'impact_areas_count_updated' ] . "<br>" .
+			"<b>Clarisa Response: </b>" . json_encode( $log_clarisa[ 'impact_areas_response' ] ) . '<br>' .
+			"<b>Wordpress Response: </b>" . json_encode( $log_clarisa[ 'impact_areas_insert_term' ] ) . '<br>' .
+			"<h3>Regions</h3>" .
+			"<b>Total Imported Items: </b>" . $log_clarisa[ 'regions_count' ] . "<br>" .
+			"<b>Total Updated Items: </b>" . $log_clarisa[ 'regions_count_updated' ] . "<br>" .
+			"<b>Clarisa Response: </b>" . json_encode( $log_clarisa[ 'regions_response' ] ) . '<br>' .
+			"<b>Wordpress Response: </b>" . json_encode( $log_clarisa[ 'regions_insert_term' ] ) . '<br>';
+
+		$log_zotero = "<b>Last update: </b>" . $log_zotero[ 'date' ] . "<br><br>" .
+			"<ul>" . $log_zotero[ 'zotero_count' ] . "</ul>" .
+			"<b>Zotero Response: </b>" . json_encode( $log_zotero[ 'zotero_response' ] ) . '<br>' .
+			"<b>Wordpress Log: </b>" . $log_zotero[ 'zotero_wp_conflicts' ] . '';
+
 		acf_add_local_field_group(
 			[
 				'key'                   => 'group_foresight_settings',
@@ -164,79 +163,79 @@ function register_custom_acf_fields_settings_page() {
 						],
 					],
 					[
-						'key'      => 'field_zotero_api_url',
-						'label'    => 'Base URL',
-						'name'     => 'zotero_api_url',
-						'type'     => 'text',
-						'required' => 0,
-						'instructions'      => 'Base connection URL',
-						'wrapper'  => [
+						'key'          => 'field_zotero_api_url',
+						'label'        => 'Base URL',
+						'name'         => 'zotero_api_url',
+						'type'         => 'text',
+						'required'     => 0,
+						'instructions' => 'Base connection URL',
+						'wrapper'      => [
 							'width' => '25',
 						],
 					],
 					[
-						'key'      => 'field_zotero_api_collections',
-						'label'    => 'Collections',
-						'name'     => 'zotero_api_collections',
-						'type'     => 'text',
-						'required' => 0,
-						'instructions'      => 'Add multiple collection IDs separated by commas',
-						'wrapper'  => [
+						'key'          => 'field_zotero_api_collections',
+						'label'        => 'Collections',
+						'name'         => 'zotero_api_collections',
+						'type'         => 'text',
+						'required'     => 0,
+						'instructions' => 'Add multiple collection IDs separated by commas',
+						'wrapper'      => [
 							'width' => '25',
 						],
 					],
 					[
-						'key'      => 'field_zotero_wp_category_id',
-						'label'    => 'Category',
-						'name'     => 'zotero_wp_category_id',
-						'type'     => 'taxonomy',
-						'taxonomy' => 'category',
-						'add_term' => 0,
-						'field_type' => 'select',
-						'required' => 0,
-						'instructions'      => 'Default category ID Wordpress',
-						'wrapper'  => [
+						'key'          => 'field_zotero_wp_category_id',
+						'label'        => 'Category',
+						'name'         => 'zotero_wp_category_id',
+						'type'         => 'taxonomy',
+						'taxonomy'     => 'category',
+						'add_term'     => 0,
+						'field_type'   => 'select',
+						'required'     => 0,
+						'instructions' => 'Default category ID Wordpress',
+						'wrapper'      => [
 							'width' => '25',
 						],
 					],
 					[
-						'key'      => 'field_zotero_wp_author_id',
-						'label'    => 'Author',
-						'name'     => 'zotero_wp_author_id',
-						'type'     => 'user',
-						'required' => 0,
-						'instructions'      => 'Default author Wordpress',
-						'wrapper'  => [
+						'key'          => 'field_zotero_wp_author_id',
+						'label'        => 'Author',
+						'name'         => 'zotero_wp_author_id',
+						'type'         => 'user',
+						'required'     => 0,
+						'instructions' => 'Default author Wordpress',
+						'wrapper'      => [
 							'width' => '25',
 						],
 					],
 					[
-						'key' => 'field_import_zotero',
-						'label' => '',
-						'name' => 'button_import_zotero',
-						'type' => 'button',
-						'value' => 'Import Zotero Items',
-						'required' => 0,
+						'key'               => 'field_import_zotero',
+						'label'             => '',
+						'name'              => 'button_import_zotero',
+						'type'              => 'button',
+						'value'             => 'Import Zotero Items',
+						'required'          => 0,
 						'conditional_logic' => 0,
-						'wrapper' => [
+						'wrapper'           => [
 							'width' => '100',
 							'class' => '',
-							'id' => '',
+							'id'    => '',
 						],
 					],
 					[
-						'key' => 'field_zotero_log',
-						'name' => '',
-						'type' => 'message',
-						'instructions' => '',
-						'required' => 0,
+						'key'               => 'field_zotero_log',
+						'name'              => '',
+						'type'              => 'message',
+						'instructions'      => '',
+						'required'          => 0,
 						'conditional_logic' => 0,
-						'message' => $log_zotero,
-						'esc_html' => 0,
-						'wrapper' => [
+						'message'           => $log_zotero,
+						'esc_html'          => 0,
+						'wrapper'           => [
 							'width' => '100',
 							'class' => '',
-							'id' => '',
+							'id'    => '',
 						],
 					],
 
@@ -304,33 +303,89 @@ function register_custom_acf_fields_settings_page() {
 						],
 					],
 					[
-						'key' => 'field_import_list',
-						'label' => '',
-						'name' => 'button_import',
-						'type' => 'button',
-						'value' => 'Import All Control List',
-						'required' => 0,
+						'key'               => 'field_import_list',
+						'label'             => '',
+						'name'              => 'button_import',
+						'type'              => 'button',
+						'value'             => 'Import All Control List',
+						'required'          => 0,
 						'conditional_logic' => 0,
-						'wrapper' => [
+						'wrapper'           => [
 							'width' => '100',
 							'class' => '',
-							'id' => '',
+							'id'    => '',
 						],
 					],
 					[
-						'key' => 'field_list_control',
-						'name' => '',
-						'type' => 'message',
-						'instructions' => '',
-						'required' => 0,
+						'key'               => 'field_list_control',
+						'name'              => '',
+						'type'              => 'message',
+						'instructions'      => '',
+						'required'          => 0,
 						'conditional_logic' => 0,
-						'message' => $log_clarisa,
-						'esc_html' => 0,
-						'wrapper' => [
+						'message'           => $log_clarisa,
+						'esc_html'          => 0,
+						'wrapper'           => [
 							'width' => '100',
 							'class' => '',
-							'id' => '',
+							'id'    => '',
 						],
+					],
+					[
+						'key'               => 'field_login_tab',
+						'label'             => 'Login',
+						'name'              => 'login_tab',
+						'type'              => 'tab',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'placement'         => 'top',
+						'endpoint'          => 0,
+					],
+					[
+						'key'               => 'field_login_background_image',
+						'label'             => 'Background Image',
+						'name'              => 'login_background_image',
+						'type'              => 'image',
+						'instructions'      => 'Select an image to display as a cover on the front page (1920 x 946] px',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'return_format'     => 'array',
+						'preview_size'      => 'thumbnail',
+						'library'           => 'all',
+						'mime_types'        => 'png,jpg,jpeg',
+					],
+					[
+						'key'      => 'field_login_title',
+						'label'    => 'Title',
+						'name'     => 'login_title',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '50',
+						],
+					],
+					[
+						'key'      => 'field_login_sub_title',
+						'label'    => 'Sub Title',
+						'name'     => 'login_sub_title',
+						'type'     => 'text',
+						'required' => 0,
+						'wrapper'  => [
+							'width' => '50',
+						],
+					],
+					[
+						'key'           => 'field_login_description',
+						'label'         => 'Description',
+						'name'          => 'login_description',
+						'type'          => 'textarea',
+						'required'      => 0,
+						'default_value' => '',
+						'placeholder'   => '',
+						'maxlength'     => '',
+						'rows'          => '4',
+						'new_lines'     => '',
 					],
 				],
 				'location'              => [
