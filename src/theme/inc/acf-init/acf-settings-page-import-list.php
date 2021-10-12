@@ -118,27 +118,28 @@ function foresight_import_clarisa_cb() {
 	$response = wp_remote_get( $endpoint, $options );
 	$log['regions_response'] = $response['response'];
 	$response['body'] = json_decode($response['body']);
+	$response['body'] = array_reverse($response['body'], true);
 	
 	foreach ($response['body'] as $key => $term) {
 
-		$exist_term = search_terms_by_clarisa_id( 'region', 'clarisa_id', $term->id );
+		$exist_term = search_terms_by_clarisa_id( 'region', 'clarisa_region_id', $term->id );
 
 		if(count($exist_term) == 0){
 			
-			$term_id = wp_insert_term( $term->name, 'region' );
+			$term_id = wp_insert_term( $term->name, 'region', array('slug' => $term->acronym ) );
 		
 			if(!is_wp_error($term_id)){
 				$log['regions_count']++;
 				$log['regions_insert_term'][$key] = $term_id;
 				$parent_id = $term_id['term_id'];
-				add_term_meta($term_id['term_id'], 'clarisa_id', $term->acronym);
+				add_term_meta($term_id['term_id'], 'clarisa_region_id', $term->id);
 			}else{
 				$parent_id = term_exists( $term->name, 'region' )['term_id'];
 				$log['regions_insert_term'][$key] = $term_id->errors;
 			}
 
 		}else{
-			wp_update_term($exist_term[0]->term_id, 'region', array( 'name' => $term->name ));
+			wp_update_term($exist_term[0]->term_id, 'region', array( 'name' => $term->name, 'slug' => $term->acronym ));
 			$parent_id = $exist_term[0]->term_id;
 			$log['regions_count_updated']++;
 		}
@@ -146,7 +147,7 @@ function foresight_import_clarisa_cb() {
 
 		foreach ($term->countries as $k => $country) {
 
-			$exist_term = search_terms_by_clarisa_id( 'region', 'clarisa_id', $country->isoAlpha2 );
+			$exist_term = search_terms_by_clarisa_id( 'region', 'clarisa_country_code', $country->code );
 
 			if(count($exist_term) == 0){
 				$args = array( 'parent' => $parent_id, 'slug' => $country->isoAlpha2 );
@@ -154,10 +155,10 @@ function foresight_import_clarisa_cb() {
 				
 				if(!is_wp_error($term_id)){
 					$log['regions_count']++;
-					add_term_meta($term_id['term_id'], 'clarisa_id', $country->isoAlpha2);
+					add_term_meta($term_id['term_id'], 'clarisa_country_code', $country->code);
 				}	
 			}else{
-				wp_update_term($exist_term[0]->term_id, 'region', array( 'name' => $country->name ));
+				wp_update_term($exist_term[0]->term_id, 'region', array( 'parent' => $parent_id, 'name' => $country->name, 'slug' => $country->isoAlpha2 ));
 				$log['regions_count_updated']++;
 			}	
 		}
