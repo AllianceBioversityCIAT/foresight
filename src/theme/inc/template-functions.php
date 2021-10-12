@@ -224,6 +224,8 @@ add_filter('show_admin_bar', '__return_false');
  */
 function foresight_login_logo() {
 	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/static/css/login.css' );
+
+	$options_page = get_fields( 'theme-general-settings' );
 	?>
     <style type="text/css">
         .login h1 a {
@@ -231,6 +233,11 @@ function foresight_login_logo() {
             background-image: url("<?php echo get_template_directory_uri();?>/static/images/foresight-logo.svg") !important;
             background-size: auto !important;
         }
+
+		.login #page {
+			background-image: url("<?php echo $options_page[ 'login_second_background_image' ]['url']; ?>");
+			background-size: cover;
+		}
     </style>
 <?php }
 add_action( 'login_enqueue_scripts', 'foresight_login_logo' );
