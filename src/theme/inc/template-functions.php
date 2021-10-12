@@ -157,8 +157,11 @@ add_action( 'manage_region_custom_column', 'foresight_show_region_meta_info_in_c
 
 function foresight_show_region_meta_info_in_columns( $string, $columns, $term_id ) {
     switch ( $columns ) {
-        case 'CLARISA_ID' :
-            echo esc_html( get_term_meta( $term_id, 'clarisa_id', true ) );
+        case 'CLARISA_REGION_ID' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_region_id', true ) );
+        break;
+		case 'CLARISA_COUNTRY_CODE' :
+            echo esc_html( get_term_meta( $term_id, 'clarisa_country_code', true ) );
         break;
     }
 }
@@ -166,15 +169,9 @@ function foresight_show_region_meta_info_in_columns( $string, $columns, $term_id
 add_filter( 'manage_edit-region_columns', 'foresight_add_new_region_columns' );
 
 function foresight_add_new_region_columns( $columns ) {
-    $columns['CLARISA_ID'] = __( 'CLARISA ID' );
+    $columns['CLARISA_REGION_ID'] = __( 'REGION ID' );
+	$columns['CLARISA_COUNTRY_CODE'] = __( 'COUNTRY CODE' );
     return $columns;
-}
-
-add_filter( 'manage_edit-region_sortable_columns', 'add_region_column_sortable' );
-
-function add_region_column_sortable( $sortable ){
-    $sortable[ 'CLARISA_ID' ] = 'CLARISA ID';
-    return $sortable;
 }
 
 /**
