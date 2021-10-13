@@ -65,7 +65,7 @@ function foresight_import_clarisa_cb() {
 		$exist_term = search_terms_by_clarisa_id( 'sdg', 'clarisa_id', $term->usndCode );
 		if(count($exist_term) == 0){
 
-			$args = array( 'description' => $term->fullName, 'slug' => 'goal-'.$term->usndCode );
+			$args = array( 'description' => $term->fullName, 'slug' => 'sdg-'.$term->usndCode );
 			$term_id = wp_insert_term( $term->shortName, 'sdg', $args );
 			if(!is_wp_error($term_id)){
 				$log['sdg_count']++;
