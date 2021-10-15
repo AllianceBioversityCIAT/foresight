@@ -330,7 +330,9 @@ add_action( 'admin_head', function(){
     <style>
         #your-profile > h2,
 		#application-passwords-section,
+		<?php if( !current_user_can('administrator') ) {  ?>
 		#menu-media,
+		<?php } ?>
 		#wp-admin-bar-comments,
 		.user-rich-editing-wrap,
 		.user-syntax-highlighting-wrap,
