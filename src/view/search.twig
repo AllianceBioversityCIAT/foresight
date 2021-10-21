@@ -56,3 +56,57 @@
         Filters
       </button>
     </aside>
+    <script>
+     function applyFilter(algolia_index, type, key, value){
+
+      let url = window.location;
+      let params = url.search.slice(1);
+      
+      if(params != ""){
+        
+        let result = [];
+        params.split("&").forEach(function(part) {
+          let item = part.split("=");
+          let item_key = decodeURIComponent(item[0]);
+          let item_value = decodeURIComponent(item[1]);
+          result[item_key] = item_value;
+        });
+
+        let size = Object.keys(result).length;
+        let reload_page = true;
+        
+        for(var i=0; i < size; i++){
+
+          let indx = Object.keys(result)[i];
+  
+          if(result[indx] == value && indx.indexOf(key) > 0 ){
+            reload_page = false;
+            break;
+          }
+
+        }
+
+        if(reload_page == true){
+          if(type == 'refinementList'){
+            let n = randomNumber(10,20);
+            result[algolia_index+"["+type+"]["+key+"]["+n+"]"] = decodeURIComponent(value);
+          }else{
+            result[algolia_index+"["+type+"]["+key+"][]"] = decodeURIComponent(value);
+          }
+          
+          let new_url = Object.keys(result).map(function(k) {
+            return encodeURIComponent(k) + '=' + encodeURIComponent(result[k])
+          }).join('&');
+          window.location.search = new_url;
+        }
+
+      }else{
+        window.location.search = algolia_index+'['+type+']['+key+'][0]='+value;
+      }
+    }
+
+    function randomNumber(min, max){
+      const r = Math.random()*(max-min) + min
+      return Math.floor(r)
+    }
+    </script>
