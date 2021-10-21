@@ -69,7 +69,13 @@
           let item = part.split("=");
           let item_key = decodeURIComponent(item[0]);
           let item_value = decodeURIComponent(item[1]);
-          result[item_key] = item_value;
+          if(item_key.indexOf('refinementList') > 0){
+            result[item_key] = item_value;
+          }else{
+            if(key != 'tags.region.lvl0'){
+              result[item_key] = item_value;
+            }
+          }
         });
 
         let size = Object.keys(result).length;
