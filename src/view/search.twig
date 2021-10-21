@@ -56,8 +56,57 @@
         Filters
       </button>
     </aside>
-    <script>
-     function applyFilter(algolia_index, type, key, value){
+  <div class="overlay" id="overlayRender">
+    <div class="overlay__inner">
+    <div class="overlay__content"><span class="spinner"></span></div>
+    </div>
+  </div>  
+  <style>
+  .overlay {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgb(255,255,255);
+    z-index:999
+}
+
+.overlay__inner {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.overlay__content {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner {
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+    border-width: 3px;
+    border-color: #c8c502;
+    border-top-color: #fff;
+    animation: spin 0.5s infinite linear;
+    border-radius: 100%;
+    border-style: solid;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+  </style>
+  <script>
+    function applyFilter(algolia_index, type, key, value){
 
       let url = window.location;
       let params = url.search.slice(1);
@@ -115,4 +164,4 @@
       const r = Math.random()*(max-min) + min
       return Math.floor(r)
     }
-    </script>
+  </script>
