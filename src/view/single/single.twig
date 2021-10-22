@@ -13,9 +13,6 @@
 				<b>{{ post.author }}</b>
 				on {{ post.date }}
 			</span>
-			<span class="date">
-				{{ function('do_shortcode', '[love_me]') }}
-			</span>
 		</div>
 		<div class="post-tag">
 			{% for tag in post.terms( {query:{taxonomy:'post_tag', orderby:'name', order: 'ASC'}}) %}
