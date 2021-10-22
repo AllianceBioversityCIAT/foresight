@@ -42,9 +42,6 @@
 											<b>{{ post.author }}</b>
 											on {{ post.date }}
 										</span>
-										<span class="date">
-											{{ function('do_shortcode', '[love_me post_id="' ~ post.ID ~ '"]') }}
-										</span>
 									</div>
 									<p class="content">
 										{{ post.preview.read_more('') }}
@@ -77,7 +74,7 @@
 		</div>
 	</div>
 	<div class="container container-form-search">
-		<form role="search" method="get" class="search-form" action="{{ function( 'home_url', '/blog' ) }}">
+		<form role="search" method="get" class="search-form" action="{{ function( 'home_url', '?s=' ) }}">
 			<div class="form-row">
 				<div class="col-sm-12 col-md-7 col-lg-5">
 					<div class="input-group">
@@ -86,7 +83,7 @@
 								<i class="icon-search-magnifier"></i>
 							</span>
 						</div>
-						<input type="search" class="form-control search-field" id="full_name" name="text" title="Search for"
+						<input type="search" class="form-control search-field" id="full_name" name="s" title="Search for"
 							   placeholder="What would you like to know about?" value="{{ function( 'get_search_query' ) }}"
 							   aria-describedby="basic-search">
 					</div>
@@ -125,9 +122,6 @@
 											</h3>
 											<div class="posted-by">
 												<span class="date">Posted by <b>{{ post.author }}</b> on {{ post.date }}</span>
-												<span class="date">
-													{{ function('do_shortcode', '[love_me post_id="' ~ post.ID ~ '"]') }}
-												</span>
 											</div>
 											<p class="card-text">
 												{{ post.preview.read_more('') }}
