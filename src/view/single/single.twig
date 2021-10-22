@@ -13,6 +13,9 @@
 				<b>{{ post.author }}</b>
 				on {{ post.date }}
 			</span>
+			<span class="date">
+				{{ function('do_shortcode', '[love_me]') }}
+			</span>
 		</div>
 		<div class="post-tag">
 			{% for tag in post.terms( {query:{taxonomy:'post_tag', orderby:'name', order: 'ASC'}}) %}
@@ -53,9 +56,6 @@
 										</h3>
 										<div class="posted-by">
 											<span class="date">Posted by <b>{{ related.author }}</b> on {{ related.date }}</span>
-											<span class="date">
-												{{ function('do_shortcode', '[love_me post_id="' ~ related.ID ~ '"]') }}
-											</span>
 										</div>
 										<p class="card-text">
 											{{ related.preview.read_more('') }}
