@@ -5,6 +5,10 @@ on:
       - task/*
 jobs:
   build:
+    name: Deploy to Development
+    environment:
+      name: Development
+      url: https://devcgforesight.wpengine.com
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -15,11 +19,13 @@ jobs:
           node-version: 14
       - name: Build   
         run: |
+          ls
+          pwd
           npm install
           npm install --global gulp-cli
           gulp build
-        # env:
-        #   NODE_ENV: production
+        env:
+          NODE_ENV: production
         # Modify the artifacts paths to match your project structure
         # Make sure the 'build/**' pattern matches the desired files
         # that you want to store as artifacts.
@@ -30,29 +36,29 @@ jobs:
         #   paths:
         #    - build/**
 
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  #     - name: Set up Git
-  #       run: |
-  #         git config user.email "devops@cafetosoftware.com"
-  #         git config user.name "DevOps Cafeto Team"
+      - name: Set up Git
+        run: |
+          git config user.email "devops@cafetosoftware.com"
+          git config user.name "DevOps Cafeto Team"
 
-  #     - name: Deploy to WP Engine
-  #       run: |
-  #         # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
-  #         rm -rf .git
-  #         # COMMIT THE COMPLETED BUILD ARTIFACT TO WPENGINE'S GIT
-  #         mkdir deploy && cd deploy/
-  #         git clone ${{ secrets.GIT_REMOTE }} .
-  #         rm -rf *
-  #         mkdir -p wp-content/themes
-  #         mv ${{ env.BITBUCKET_CLONE_DIR }}/build/* wp-content/themes
-  #         git add .
-  #         git commit -m 'Deploy from GitHub Actions'
-  #         git push origin master
+      - name: Deploy to WP Engine
+        run: |
+          # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
+          rm -rf .git
+          # COMMIT THE COMPLETED BUILD ARTIFACT TO WPENGINE'S GIT
+          mkdir deploy && cd deploy/
+          git clone ${{ secrets.GIT_REMOTE }} .
+          rm -rf *
+          mkdir -p wp-content/themes
+          mv build/* wp-content/themes
+          git add .
+          git commit -m 'Deploy from GitHub Actions'
+          git push origin master
