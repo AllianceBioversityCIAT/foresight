@@ -44,11 +44,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  
 
       - name: Set up Git
         run: |
           git config user.email "devops@cafetosoftware.com"
-          git config user.name "DevOps Cafeto Team"
+          git config user.name "devcgforesight-github-actions"
 
       - name: Deploy to WP Engine
         run: |
