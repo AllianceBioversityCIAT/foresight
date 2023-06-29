@@ -12,21 +12,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-        run: |
+      - run: |
           npm install
           npm install --global gulp-cli
           gulp build
-        env:
-          NODE_ENV: production
+        # env:
+        #   NODE_ENV: production
         # Modify the artifacts paths to match your project structure
         # Make sure the 'build/**' pattern matches the desired files
         # that you want to store as artifacts.
         # For example, if you want to include the 'wp-content/themes' directory,
         # you can use 'build/wp-content/themes/**'
         # Add more artifact paths if needed.
-         artifacts:
-           paths:
-             - build/**
+        # artifacts:
+        #   paths:
+        #    - build/**
 
   # deploy:
   #   needs: build
