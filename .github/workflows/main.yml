@@ -23,12 +23,14 @@ jobs:
           npm install --global gulp-cli
           gulp build
           ls
+          ls/build
       - uses: actions/upload-artifact@v3
+        name: Upload Artifact
         with:
           name: wp-build
           path: build/*
 
-  deploy:
+  deploy-dev:
     name: Deploy to Development
     environment:
       name: Development
@@ -46,6 +48,7 @@ jobs:
           name: wp-build
       - name: Display structure of downloading files
         run: |
+          ls
           pwd
           ls -R
       
@@ -66,11 +69,12 @@ jobs:
           # COMMIT THE COMPLETED BUILD ARTIFACT TO WPENGINE'S GIT
           mkdir deploy && cd deploy/
           git clone ${{ secrets.GIT_REMOTE }} .
-          ls
+          ls -alh
+          ls -R
           pwd
           rm -rf *
           mkdir -p wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/build/* wp-content/themes
+          mv /home/runner/work/foresight-theme/foresight-theme/* wp-content/themes
           git add .
           git commit -m 'Deploy from GitHub Actions'
           git push origin master
