@@ -5,10 +5,7 @@ on:
       - task/*
 jobs:
   build:
-    name: Deploy to Development
-    environment:
-      name: Development
-      url: https://devcgforesight.wpengine.com
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,8 +21,8 @@ jobs:
           npm install
           npm install --global gulp-cli
           gulp build
-        env:
-          NODE_ENV: production
+        # env:
+        #   NODE_ENV: production
         # Modify the artifacts paths to match your project structure
         # Make sure the 'build/**' pattern matches the desired files
         # that you want to store as artifacts.
@@ -37,6 +34,10 @@ jobs:
         #    - build/**
 
   deploy:
+    name: Deploy to Development
+    environment:
+      name: Development
+      url: https://devcgforesight.wpengine.com
     needs: build
     runs-on: ubuntu-latest
 
@@ -58,7 +59,7 @@ jobs:
           git clone ${{ secrets.GIT_REMOTE }} .
           rm -rf *
           mkdir -p wp-content/themes
-          mv build/* wp-content/themes
+          mv /home/runner/work/foresight-theme/foresight-theme/build/* wp-content/themes
           git add .
           git commit -m 'Deploy from GitHub Actions'
           git push origin master
