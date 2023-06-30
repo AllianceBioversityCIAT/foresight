@@ -64,7 +64,7 @@ jobs:
           # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
           git config --global user.email "da-support@cafetosoftware.com"
           git config --global user.name "Digital Agency"
-          COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
+          # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           tree
           pwd
