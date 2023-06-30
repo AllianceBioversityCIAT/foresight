@@ -1,0 +1,22 @@
+name: Deploy to Foresight WP Engine
+on:
+  push:
+    branches:
+      - feature/*
+
+jobs:
+  build:
+    name: Build Wordpress Theme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Build   
+        run: |
+          npm install
+          npm install --global gulp-cli
+          gulp build
