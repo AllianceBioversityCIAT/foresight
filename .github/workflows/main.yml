@@ -70,11 +70,11 @@ jobs:
           mkdir deploy && cd deploy/
           git clone ${{ secrets.GIT_REMOTE }} .
           ls -alh
-          ls -R
+          tree
           pwd
           rm -rf *
           mkdir -p wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/* wp-content/themes
+          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar/* wp-content/themes
           git add .
           git commit -m 'Deploy from GitHub Actions'
           git push origin master
