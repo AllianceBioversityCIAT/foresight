@@ -1,8 +1,8 @@
-name: Deploy to WP Engine
+name: Deploy to Foresight WP Engine
 on:
   push:
     branches:
-      - task/*
+      - main
   pull_request:
     branches:
       - main
@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    name: Build Wordpress Themde
+    name: Build Wordpress Theme
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
