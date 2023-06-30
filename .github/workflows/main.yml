@@ -57,26 +57,18 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-host: git.wpengine.com 
 
-      # - name: Set up Git
-      #   run: |
-      #     git config user.email "devops@cafetosoftware.com"
-      #     git config user.name "devcgforesight-github-actions"
-
       - name: Deploy to WP Engine
         run: |
           # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
           rm -rf .git
-          # COMMIT THE COMPLETED BUILD ARTIFACT TO WPENGINE'S GIT
-          mkdir deploy && cd deploy/
-          git clone ${{ secrets.GIT_REMOTE }} .
-          git config user.email "devops@cafetosoftware.com"
-          git config user.name "devcgforesight-github-actions"
-          ls -alh
+          # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
+          git config --global user.email "da-support@cafetosoftware.com"
+          git config --global user.name "Digital Agency"
+          COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
+          cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           tree
           pwd
-          rm -rf *
-          mkdir -p wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar/* wp-content/themes/ciat_foresight_theme/
-          git add .
-          git commit -m 'Deploy from GitHub Actions'
+          rm -rf * && mkdir -p wp-content/themes
+          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar/* wp-content/themes/ciat_foresight_theme
+          git add . && git commit -m 'Deploy from GitHub Actions'
           git push origin master
