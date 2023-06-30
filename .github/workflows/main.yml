@@ -69,6 +69,8 @@ jobs:
           tree
           pwd
           rm -rf * && mkdir -p wp-content/themes
+          pwd
+          tree
           mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar/* wp-content/themes/ciat_foresight_theme
-          git add . && git commit -m 'Deploy from GitHub Actions'
+          git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
