@@ -7,6 +7,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 
 jobs:
   build:
@@ -60,8 +65,8 @@ jobs:
           # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
           rm -rf .git
           # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
-          git config --global user.email "da-support@cafetosoftware.com"
-          git config --global user.name "Digital Agency"
+          git config --global user.email "devops@cafetosoftware.com"
+          git config --global user.name "DevOps Cafeto Team"
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           rm -rf * && mkdir -p wp-content/themes
@@ -99,8 +104,8 @@ jobs:
           # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
           rm -rf .git
           # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
-          git config --global user.email "da-support@cafetosoftware.com"
-          git config --global user.name "Digital Agency"
+          git config --global user.email "devops@cafetosoftware.com"
+          git config --global user.name "DevOps Cafeto Team"
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           rm -rf * && mkdir -p wp-content/themes
@@ -138,8 +143,8 @@ jobs:
           # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
           rm -rf .git
           # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
-          git config --global user.email "da-support@cafetosoftware.com"
-          git config --global user.name "Digital Agency"
+          git config --global user.email "devops@cafetosoftware.com"
+          git config --global user.name "DevOps Cafeto Team"
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           rm -rf * && mkdir -p wp-content/themes
