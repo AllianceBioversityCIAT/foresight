@@ -50,17 +50,17 @@ jobs:
         run: |
           ls
           pwd
-          ls -R
+          tree
       
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-host: git.wpengine.com 
 
-      - name: Set up Git
-        run: |
-          git config user.email "devops@cafetosoftware.com"
-          git config user.name "devcgforesight-github-actions"
+      # - name: Set up Git
+      #   run: |
+      #     git config user.email "devops@cafetosoftware.com"
+      #     git config user.name "devcgforesight-github-actions"
 
       - name: Deploy to WP Engine
         run: |
@@ -76,7 +76,7 @@ jobs:
           pwd
           rm -rf *
           mkdir -p wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar/* wp-content/themes/ciat_foresight_theme
+          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar/* wp-content/themes/ciat_foresight_theme/
           git add .
           git commit -m 'Deploy from GitHub Actions'
           git push origin master
