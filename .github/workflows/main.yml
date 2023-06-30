@@ -3,9 +3,14 @@ on:
   push:
     branches:
       - task/*
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   build:
-    name: Build Wordpress Theme
+    name: Build Wordpress Themde
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -103,4 +108,41 @@ jobs:
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
 
-          
+  deploy-prod:
+    name: Deploy to Production
+    environment:
+      name: Production
+      url: foresight.cgiar.org
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Downloading build Artifact  
+        uses: actions/download-artifact@v3
+        with:
+          name: wp-build
+      - name: Display structure of downloading files
+        run: |
+          tree
+      
+      - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-host: git.wpengine.com 
+
+      - name: Deploy to WP Engine
+        run: |
+          # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
+          rm -rf .git
+          # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
+          git config --global user.email "da-support@cafetosoftware.com"
+          git config --global user.name "Digital Agency"
+          # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
+          cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
+          rm -rf * && mkdir -p wp-content/themes
+          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
+          git add . && git commit -m "Deploy from GitHub Actions"
+          git push origin master
