@@ -78,6 +78,14 @@ jobs:
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
 
+      - uses: /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar
+        name: Security Scan
+        with:
+          api-provider: wpscan
+          api-token: ${{ secrets.WPSCAN_API_TOKEN }}
+          type: theme
+          name: Foresight-theme
+
   deploy-staging:
     name: Deploy to Staging
     environment:
@@ -117,13 +125,13 @@ jobs:
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
           
-      - uses: jazzsequence/action-wordpress-vulnerability-scanner
-        name: Security Scan
-        with:
-          api-provider: 'wpscan'
-          api-token: ${{ secrets.WPSCAN_API_TOKEN }}
-          type: 'theme'
-          name: Foresight-theme
+      # - uses: /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar
+      #   name: Security Scan
+      #   with:
+      #     api-provider: wpscan
+      #     api-token: ${{ secrets.WPSCAN_API_TOKEN }}
+      #     type: theme
+      #     name: Foresight-theme
 
   deploy-prod:
     name: Deploy to Production
