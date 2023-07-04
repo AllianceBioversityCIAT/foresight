@@ -71,6 +71,13 @@ jobs:
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
           tree
+      - uses: ./wp-content/themes/foresight-cgiar/
+        name: Security Scan
+        with:
+          api-provider: 'wpscan'
+          api-token: ${{ secrets.WPSCAN_API_TOKEN }}
+          type: 'theme'
+          name: 'Foresight-theme'
   deploy-staging:
     name: Deploy to Staging
     environment:
