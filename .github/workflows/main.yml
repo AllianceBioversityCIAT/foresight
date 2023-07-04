@@ -77,8 +77,9 @@ jobs:
           mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
+          tree
 
-      - uses: /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar
+      - uses: /home/runner/work/foresight-theme/foresight-theme/wp-content/themes
         name: Security Scan
         with:
           api-provider: wpscan
