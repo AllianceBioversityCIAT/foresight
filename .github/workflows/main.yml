@@ -16,8 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        
+        uses: actions/checkout@v3   
       - uses: jazzsequence/action-wordpress-vulnerability-scanner@v1
         name: Security Scan
         with:
