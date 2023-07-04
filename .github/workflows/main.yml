@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3   
+        uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -70,9 +70,7 @@ jobs:
           mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
-          pwd
           tree
-
   deploy-staging:
     name: Deploy to Staging
     environment:
@@ -111,7 +109,6 @@ jobs:
           mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
-          
   deploy-prod:
     name: Deploy to Production
     environment:
@@ -132,7 +129,7 @@ jobs:
         run: |
           tree
       
-      - uses: kielabokkie/ssh-key-and-known-hosts-action
+      - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-host: git.wpengine.com 
