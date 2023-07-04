@@ -20,11 +20,10 @@ jobs:
       - uses: jazzsequence/action-wordpress-vulnerability-scanner@v1
         name: Security Scan
         with:
-          api-provider: 'wpscan'
+          api-provider: wpscan
           api-token: ${{ secrets.WPSCAN_API_TOKEN }}
-          type: 'theme'
-          name: 'Foresight-them
-
+          type: theme
+          name: Foresight-them
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -124,7 +123,7 @@ jobs:
           api-provider: 'wpscan'
           api-token: ${{ secrets.WPSCAN_API_TOKEN }}
           type: 'theme'
-          name: 'Foresight-theme
+          name: Foresight-theme
 
   deploy-prod:
     name: Deploy to Production
