@@ -73,14 +73,6 @@ jobs:
           pwd
           tree
 
-      # - uses: /home/runner/work/foresight-theme/foresight-theme/wp-content/themes
-      #   name: Security Scan
-      #   with:
-      #     api-provider: wpscan
-      #     api-token: ${{ secrets.WPSCAN_API_TOKEN }}
-      #     type: theme
-      #     name: Foresight-theme
-
   deploy-staging:
     name: Deploy to Staging
     environment:
