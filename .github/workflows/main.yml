@@ -117,7 +117,7 @@ jobs:
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
           
-      - uses: jazzsequence/action-wordpress-vulnerability-scanner@v1
+      - uses: jazzsequence/action-wordpress-vulnerability-scanner
         name: Security Scan
         with:
           api-provider: 'wpscan'
@@ -145,7 +145,7 @@ jobs:
         run: |
           tree
       
-      - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+      - uses: kielabokkie/ssh-key-and-known-hosts-action
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-host: git.wpengine.com 
