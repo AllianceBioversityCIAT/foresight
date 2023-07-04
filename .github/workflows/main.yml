@@ -17,6 +17,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - uses: jazzsequence/action-wordpress-vulnerability-scanner@v1
+        name: Security Scan
+        with:
+          api-provider: 'wpscan'
+          api-token: ${{ secrets.WPSCAN_API_TOKEN }}
+          type: 'theme'
+          name: 'Foresight-them
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -109,6 +118,14 @@ jobs:
           mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
+          
+      - uses: jazzsequence/action-wordpress-vulnerability-scanner@v1
+        name: Security Scan
+        with:
+          api-provider: 'wpscan'
+          api-token: ${{ secrets.WPSCAN_API_TOKEN }}
+          type: 'theme'
+          name: 'Foresight-theme
 
   deploy-prod:
     name: Deploy to Production
