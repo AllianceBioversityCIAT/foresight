@@ -52,13 +52,13 @@ jobs:
         run: |
           tree
 
-      - uses: ./foresight-cgiar/
-        name: Security Scan
-        with:
-          api-provider: 'wpscan'
-          api-token: ${{ secrets.WPSCAN_API_TOKEN }}
-          type: 'theme'
-          name: 'Foresight-theme'
+      # - uses: ./foresight-cgiar/
+      #   name: Security Scan
+      #   with:
+      #     api-provider: 'wpscan'
+      #     api-token: ${{ secrets.WPSCAN_API_TOKEN }}
+      #     type: 'theme'
+      #     name: 'Foresight-theme'
       
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
