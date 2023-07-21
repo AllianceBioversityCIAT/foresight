@@ -296,6 +296,11 @@ require get_template_directory() . '/theme/inc/template-tags.php';
 require get_template_directory() . '/theme/inc/template-functions.php';
 
 /**
+ * Functions related to API REST in WordPress
+ */
+require get_template_directory() . '/theme/inc/template-functions-api.php';
+
+/**
  * Customizer additions.
  */
 require get_template_directory() . '/theme/inc/customizer/customizer.php';
