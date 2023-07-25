@@ -1,0 +1,186 @@
+<main id="foresight-archive">
+	<div id="foresight-head-slider">
+		<div class="container">
+			<div id="carousel-head-post" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner">
+					{% for post in posts|slice( 0, 3) %}
+						<div class="carousel-item {% if loop.first %} active {% endif %}">
+							<div class="row">
+								<div class="col-12 col-md-6 order-md-2">
+									<a href="{{ post.link }}">
+										<img class="img" width="800" height="400"
+											 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
+											 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+									</a>
+								</div>
+								<div class="col-12 col-md-6 order-md-1">
+									<div class="category">
+										{% for category in post.terms( {query:{taxonomy:'category', orderby:'name', order: 'ASC'}}) %}
+											<span>
+												<a href="{{ category.link }}">
+													{{ category.name }}
+												</a>
+											</span>
+										{% endfor %}
+									</div>
+									{% if loop.first %}
+										<h1 class="title">
+											<a href="{{ post.link }}">
+												{{ post.title }}
+											</a>
+										</h1>
+									{% else %}
+										<h2 class="title">
+											<a href="{{ post.link }}">
+												{{ post.title }}
+											</a>
+										</h2>
+									{% endif %}
+									<div class="posted-by">
+										<span class="date">
+											Posted by
+											<b>{{ post.author }}</b>
+											on {{ post.date }}
+										</span>
+									</div>
+									<p class="content">
+										{{ post.preview.read_more('') }}
+									</p>
+									<div class="read-more">
+										<a class="btn more" href="{{ post.link }}">
+											Read more
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<a class="carousel-control-prev d-none d-md-flex" href="#carousel-head-post" role="button"
+				   data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">
+					Previous
+				</span>
+				</a>
+				<a class="carousel-control-next d-none d-md-flex" href="#carousel-head-post" role="button"
+				   data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">
+					Next
+				</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="container container-form-search">
+		<form role="search" method="get" class="search-form" action="{{ function( 'home_url', '?s=' ) }}">
+			<div class="form-row">
+				<div class="col-sm-12 col-md-7 col-lg-5">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-user">
+								<i class="icon-search-magnifier"></i>
+							</span>
+						</div>
+						<input type="search" class="form-control search-field" id="full_name" name="s" title="Search for"
+							   placeholder="What would you like to know about?" value="{{ function( 'get_search_query' ) }}"
+							   aria-describedby="basic-search">
+					</div>
+
+				</div>
+				<div class="col-sm-12 col-md-5 col-lg-5">
+					<button class="btn foresight-btn-primary" type="submit">
+						Search
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="foresight-latest-post">
+		<div class="container">
+			<h2 class="title-latest-posts">Latest Posts</h2>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="all-latest-posts">
+						{% for post in posts|slice(3) %}
+							<div class="card content-latest-post">
+								<div class="row no-gutters">
+									<div class="col-md-5 card-image-post">
+										<a href="{{ post.link }}">
+											<img class="img" width="800" height="400"
+												 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
+												 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
+										</a>
+									</div>
+									<div class="col-md-7 card-content-post">
+										<div class="card-body">
+											<h3 class="card-title">
+												<a href="{{ post.link }}">
+													{{ post.title }}
+												</a>
+											</h3>
+											<div class="posted-by">
+												<span class="date">Posted by <b>{{ post.author }}</b> on {{ post.date }}</span>
+											</div>
+											<p class="card-text">
+												{{ post.preview.read_more('') }}
+											</p>
+											<div class="read-more">
+												<a class="btn more" href="{{ post.link }}">
+													Read more
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-md-4 content-popular-post">
+					<div class="all-popular-post">
+						<h3 class="title-popular"><span>Popular</span></h3>
+						<div class="content-cards">
+							{% for posts in popularsPosts %}
+								<div class="card">
+									<div class="row no-gutters">
+										<div class="col-5 card-image-post">
+											<a href="{{ posts.link }}">
+												<img class="img" width="800" height="400"
+													 src="{{ posts.thumbnail.src }}" srcset="{{ posts.thumbnail.srcset }}"
+													 sizes="{{ posts.thumbnail.img_sizes }}"
+													 alt="{{ posts.thumbnail.title }}"/>
+											</a>
+										</div>
+										<div class="col-7 card-content-post">
+											<div class="card-body">
+												<h3 class="card-title">
+													<a href="{{ posts.link }}">
+														{{ posts.title }}
+													</a>
+												</h3>
+												<div class="posted-by">
+													<span class="date">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24"
+															 height="24" viewBox="0 0 24 24">
+															<path fill="#FFAA00"
+																  d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z"/>
+														</svg>
+													</span>
+													<span class="date">
+														Posted by <b>{{ posts.author }}</b> on {{ posts.date }}
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

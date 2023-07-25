@@ -1,0 +1,124 @@
+@import "../variables-site/variables-site";
+
+body {
+  section#page-section-contact {
+    position: relative;
+
+    .container-page-contact {
+      padding-top: 12rem;
+      padding-bottom: 12rem;
+
+      .content-contact {
+        h2 {
+          font-weight: bold;
+        }
+
+        .data-page-contact {
+          display: flex;
+          flex-wrap: wrap;
+
+          p {
+            i {
+              margin-right: .5rem;
+            }
+          }
+        }
+
+        .social-icons {
+          margin-top:10px;
+          padding: 0;
+
+          li {
+            height: 50px;
+            width: 50px;
+            background-color: $color_third;
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            margin: 0 .5rem;
+
+            &:first-child {
+              margin-left: 0;
+            }
+          }
+
+          a {
+            color: $color_white;
+            font-size: 2rem;
+
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      .content-form-contact {
+        @include respond-below( sm ) {
+          margin-top: 2rem;
+        }
+
+        h4 {
+          font-weight: bold;
+          margin-bottom: 2rem;
+        }
+
+        form {
+          .form-row {
+            .input-group {
+
+              .input-group-prepend {
+                .input-group-text {
+                  color: $color_accent;
+                  padding: .1rem .75rem;
+                  border: none;
+                  border-radius: 0;
+                  border-bottom: 2px solid #707070;
+                  background-color: $color_white;
+                }
+              }
+
+              .form-control {
+                border: none;
+                border-bottom: 2px solid #707070;
+                background-color: $color_white;
+              }
+            }
+
+            textarea {
+              border: 2px solid #707070;
+              background-color: $color_white;
+            }
+
+            #alert-error-email, #alert-error-full-name, #alert-error-description, #alert-error-phone {
+              display: none;
+            }
+          }
+
+          .foresight-btn-primary {
+            background-color: $color_accent;
+            color: $color_white;
+            font-weight: bold;
+            padding: .5rem 2.75rem;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+
+    .contact-background-image {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      bottom: 0;
+      z-index: -1;
+    }
+  }
+
+  .alert-error {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+  }
+}

@@ -1,0 +1,408 @@
+h2 {
+  color: #21243d;
+  font-family: Hind, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Header */
+
+.header {
+  align-items: center;
+  background-image: url('./images/cover-desktop.jpg');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 300px;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.header h1{
+  font-size: 4rem;
+  font-family: BebasNeue,sans-serif;
+}
+
+.header-logo {
+  margin: 0;
+}
+
+.header-title {
+  font-size: 38px;
+  font-weight: 300;
+}
+
+/* Containers */
+
+.container-main {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+.container-filters {
+  flex: 1;
+  margin-right: 60px;
+  max-width: 260px;
+}
+
+.container-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  min-height: 80px;
+}
+.container-header h2{
+  font-size: 1.5rem;
+}
+
+.container-results {
+  flex: 3;
+}
+
+.container-options {
+  border-bottom: 1px solid #ebecf3;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.container-options .container-option:not(:first-child) {
+  margin-left: 48px;
+}
+
+.container-footer {
+  margin: 4rem 0;
+}
+
+/* Footer */
+.hit-info-container > footer{
+  padding-bottom: 2rem;
+  border-bottom: 1px dashed #21243d33;
+}
+
+/* Styles the SFFV highlightings */
+
+em {
+  font-style: normal;
+}
+
+em,
+mark {
+  background: rgba(226, 164, 0, 0.4);
+}
+
+/* Clear refinements container */
+
+.clear-filters {
+  align-items: center;
+  display: flex;
+  font-size: 1rem;
+}
+
+.clear-filters svg {
+  margin-right: 8px;
+}
+
+/* Panel */
+
+.container-body .ais-Panel {
+  border-top: 1px solid #ebecf3;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.ais-Panel-header {
+  font-family: Hind, sans-serif;
+}
+
+/* Search box */
+
+.header .ais-SearchBox {
+  height: 64px;
+  width: 740px;
+}
+
+.header .ais-SearchBox .ais-SearchBox-input {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 48px 0 rgba(0, 0, 0, 0.2);
+  font-family: Hind, sans-serif;
+  height: 64px;
+  /*
+    The "Hind" font family is vertically off-balance.
+    Adding 4px of padding top makes it more vertically aligned.
+  */
+  padding: 4px 48px 0 64px;
+}
+
+.header .ais-SearchBox-submit {
+  padding: 0 1rem 0 2rem;
+  width: 64px;
+}
+
+.header .ais-SearchBox .ais-SearchBox-input::placeholder {
+  color: rgba(33, 36, 61, 0.24);
+  opacity: 1; /* Firefox */
+}
+
+.ais-SearchBox-input:-ms-input-placeholder {
+  color: rgba(33, 36, 61, 0.24);
+}
+
+.ais-SearchBox-input::-ms-input-placeholder {
+  color: rgba(33, 36, 61, 0.24);
+}
+
+.ais-SearchBox-submit {
+  color: #e2a400;
+}
+
+.ais-RefinementList .ais-SearchBox-input {
+  font-family: Hind, sans-serif;
+  /*
+    The "Hind" font family is vertically off-balance.
+    Adding some padding top makes it more vertically aligned.
+  */
+  padding-top: 2px;
+}
+
+/* Stats */
+.ais-Stats-text{
+  font-size: 18px;
+  font-weight: bold;
+  color: #21243d;
+}
+
+/* Hits */
+
+.hit {
+  color: #21243d;
+  font-size: 14px;
+  line-height: 18px;
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  grid-gap: 3px;
+}
+
+.hit h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #373F41;
+}
+
+.hit-category {
+  color: #21243d;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 8px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.hit-description {
+  margin-top: 2px;
+}
+
+.hit-info-container {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.hit-info-container a {
+  text-decoration:none;
+  color: #21243d;
+}
+
+.hit-info-container a:hover {
+  text-decoration:none;
+  color: #385600cc;
+}
+
+.hit-image-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  font-size: 1.2rem;
+  color: #C3CBCD;
+}
+
+.hit-image {
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.hit-em {
+  color: #737B7D;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.hits-empty-state {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 300px;
+}
+
+.hits-empty-state-title {
+  font-family: Hind;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.hits-empty-state-description {
+  color: rgba(35, 37, 51, 0.6);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.hits-empty-state .ais-ClearRefinements {
+  margin-top: 1rem;
+}
+
+.hits-empty-state .ais-ClearRefinements-button--disabled {
+  display: none;
+}
+
+.hits-empty-state .ais-ClearRefinements-button {
+  background: rgba(10, 8, 41, 0.04);
+  border-radius: 3px;
+  color: #21243d;
+  min-height: 48px;
+  padding: 16px 24px;
+}
+
+/* Collapse */
+.accordion > input[type="checkbox"] {
+  position: absolute;
+  left: -100vw;
+}
+
+.accordion .content {
+  overflow-y: hidden;
+  height: 0;
+  transition: height 0.3s ease;
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr; 
+  gap: 10px 10px; 
+  grid-template-areas: 
+    "author published language"
+    "tags tags tags"; 
+}
+
+.accordion .content .tags { grid-area: tags; }
+.accordion .content .author { grid-area: author; margin-bottom: 1rem; }
+.accordion .content .published { grid-area: published; }
+.accordion .content .language { grid-area: language; }
+
+.accordion .content .label {
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.accordion .content .label {
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.accordion .content .metadata ul {
+  list-style-type: none;
+  padding: 0;
+  text-transform: capitalize;
+}
+
+.accordion .content .metadata p::first-letter {
+  text-transform: capitalize;
+}
+
+.accordion .content .metadata .keyword {
+  display: inline-block;
+  color: #373f41;
+  font-size: 0.7rem;
+  border-radius: 10px;
+  background-color: #C8C50244;
+  padding: 0 .5rem;
+  margin-top: .2rem;
+  cursor: pointer;
+}
+
+.accordion .content .metadata .sdg-icons {
+  margin-top: 0.7rem;
+}
+
+.accordion > input[type="checkbox"]:checked ~ .content {
+  height: auto;
+  overflow: visible;
+}
+
+.accordion label {
+  display: block;
+}
+
+.accordion .handle label:before {
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  content: "► Show more";
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 0.8rem;
+  line-height: 1.556em;
+  vertical-align: middle;
+  cursor:pointer;
+}
+
+.accordion > input[type="checkbox"]:checked ~ .handle label:before {
+  content: "▼ Show less";
+  cursor: pointer;
+}
+
+
+/********/
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: gray;
+  color: #fff;
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+/* Hide all mobile-specific design on desktop */
+
+@media (min-width: 900px) {
+  [data-layout='mobile'] {
+    display: none;
+  }
+}

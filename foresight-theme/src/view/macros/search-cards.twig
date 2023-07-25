@@ -1,0 +1,30 @@
+{% macro searchCard(lastPosts) %}
+<div class="row row-cols-1 justify-content-center mt-3">
+	{% set nextColumn = 0 %}
+	<div class="card-deck mb-4">
+		{% for lastPost in lastPosts %}
+			{% if nextColumn > 1 %}
+			</div>
+			<div class="card-deck mb-4">
+				{% set nextColumn = 0 %}
+			{% endif %}
+			<div class="card text-left">
+				<div class="card-body">
+					<h5 class="card-title mb-0">{{lastPost.post_title}}</h5>
+					<p class="card-text">
+						<small class="text-muted">by {{ lastPost.author.name }}</small>
+					</p>
+					<hr class="foresight-primary-hr foresight-w-70 ml-0">
+					<p class="card-text">{{  lastPost.preview.length(20).force.read_more(false) }}</p>
+				</div>
+				<div class="pl-3 pb-3">
+					<a class="btn foresight-btn-card" href="{{ lastPost.link }}">
+						READ MORE.
+					</a>
+				</div>
+			</div>
+			{% set nextColumn = nextColumn + 1 %}
+		{% endfor %}
+	</div>
+</div>
+{% endmacro %}

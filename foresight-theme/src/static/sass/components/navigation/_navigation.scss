@@ -1,0 +1,33 @@
+body {
+  nav.foresight-pagination {
+    margin-top: 4rem;
+
+    ul.pagination {
+      li.page-item {
+        a,
+        span {
+          border: none;
+          color: #dc0238;
+          font-size: 1.2rem;
+
+          &:hover {
+            color: #b1022a;
+          }
+        }
+
+        span.page-number {
+          font-weight: bold;
+        }
+      }
+
+      li.page-item.disabled {
+        a,
+        span {
+          border: none;
+          color: #e6e6e6;
+        }
+      }
+    }
+  }
+}
+

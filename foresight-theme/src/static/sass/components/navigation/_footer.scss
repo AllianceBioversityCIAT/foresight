@@ -1,0 +1,77 @@
+body {
+  footer#foresight-footer-section {
+    background-color: $color_black;
+    color: $color_white;
+
+    .container{
+      padding-bottom: 20px;
+      font-size: 1rem;
+
+      .footer-navigation {
+        list-style: none;
+        font-size: 1rem;
+        padding-left: 0;
+        
+        li {
+          padding: 5px 0;
+        }
+
+        @include respond-below( md ) {
+          font-size: 0.8rem;
+        }
+
+        a {
+          color: $color_white;
+          text-decoration: none;
+        }
+      }
+
+      .social-icons {
+        margin-top:10px;
+
+         li {
+          height: 30px;
+          width: 30px;
+          background-color: $color_white;
+          border-radius: 50%;
+          display: inline-block;
+          text-align: center;
+          padding-top: 2px;
+          margin-left: 0.5rem;
+          margin-top: 1rem;
+         }
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .newsletter{
+
+        @include respond-below( md ) {
+          font-size: 0.8rem;
+        }
+
+        .button{
+          background: $color_accent;
+          color: $color_white;
+        }
+
+        input[type=email]{
+          border: none;
+          font-family: $font__main;
+          padding: 0px 20px;
+        }
+
+        input[type=email]:focus{
+            outline: none;
+        }
+
+        input::placeholder {
+            color: $color_placeholder;
+        }
+      }
+    }
+  }
+}

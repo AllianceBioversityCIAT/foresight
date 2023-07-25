@@ -1,0 +1,8 @@
+body {
+  a {
+    &:hover {
+      color: $color_accent;
+      text-decoration: underline $color_accent;
+    }
+  }
+}

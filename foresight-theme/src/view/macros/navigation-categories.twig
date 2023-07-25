@@ -1,0 +1,20 @@
+{% macro navigation_categories ( termsBlog )  %}
+
+<div class="container-fluid p-3 mt-5 background-gray-foresight-blog">
+	<div class="container">
+		{% if termsBlog|length >= 4 %}
+			{% set techStackLength = 4 %}
+		{% else %}
+			{% set techStackLength = termsBlog|length %}
+		{% endif %}
+		<div class="carousel-categories-blog" data-slick="{{ techStackLength }}">
+			{% for categories in termsBlog %}
+				<a href="{{ "/category/" ~ categories.slug }} " class="navigation-categories-blog">
+					<h4 class="text-center">{{ categories.name }}</h4>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endmacro %}

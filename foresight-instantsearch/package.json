@@ -1,0 +1,31 @@
+{
+  "name": "instantsearch-ecommerce",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html --port 3000 --no-source-maps",
+    "build": "parcel build index.html --no-minify --no-source-maps --no-content-hash --public-url .",
+    "postbuild": "sh ./postbuild.sh $npm_package_postbuild_path",
+    "lint": "eslint --ext .js,.ts,.tsx ."
+  },
+  "postbuild_path": "../foresight-theme/src/static",
+  "dependencies": {
+    "algoliasearch": "4.10.4",
+    "instantsearch.js": "4.30.0",
+    "search-insights": "^2.7.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "10.0.3",
+    "eslint": "6.8.0",
+    "eslint-config-algolia": "13.4.0",
+    "eslint-config-prettier": "6.9.0",
+    "eslint-plugin-import": "2.19.1",
+    "eslint-plugin-prettier": "3.1.2",
+    "html-webpack-plugin": "^5.3.2",
+    "parcel-bundler": "1.12.5",
+    "prettier": "1.19.1",
+    "typescript": "4.4.3",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
+  }
+}
