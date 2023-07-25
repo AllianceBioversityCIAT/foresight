@@ -7,4 +7,12 @@ package-lock.json
 .idea
 vendor/
 composer.lock
-src/static/algolia/
+/foresight-theme/src/static/algolia
+/coverage
+*/.cache
+.DS_Store
+.env*
+.editorconfig
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
