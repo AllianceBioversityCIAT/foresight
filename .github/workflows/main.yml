@@ -27,7 +27,7 @@ jobs:
         run: |
             pwd
             ls
-            cd ../foresight-instansearch
+            cd foresight-instantsearch
             npm install
             npm run build
             tree ..
@@ -105,8 +105,8 @@ jobs:
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           rm -rf * && mkdir -p wp-content/themes && mkdir -p wp-content/plugins
-          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/foresight-plugin-algolia wp-content/plugins
+          mv /home/runner/work/foresight/foresight-theme/foresight-cgiar wp-content/themes
+          mv /home/runner/work/foresight/foresight-theme/foresight-plugin-algolia wp-content/plugins
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
           tree ..
