@@ -104,6 +104,7 @@ jobs:
             # Install dependencies
             sudo apt install -y jq
             echo '{"dest": "../foresight-cgiar/static"}' > config.json
+            cat config.json
             npm install
             npm run build
             tree ..
@@ -171,6 +172,7 @@ jobs:
             # Install dependencies
             sudo apt install -y jq
             echo '{"dest": "../foresight-cgiar/static"}' > config.json
+            cat config.json
             npm install
             npm run build
             tree ..
