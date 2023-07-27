@@ -51,7 +51,7 @@ jobs:
             composer update
             cd ..
             npm install
-            npm install --global gulp-cliate
+            npm install --global gulp-cli
             gulp build
       - uses: actions/upload-artifact@v3
         name: Upload Artifact
