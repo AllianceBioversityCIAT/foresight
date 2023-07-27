@@ -89,6 +89,7 @@ jobs:
             pwd
             ls
             cd foresight-instantsearch
+            chmod ug+x postbuild_pipeline.sh
             npm install
             npm run build
             tree ..
