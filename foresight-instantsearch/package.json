@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel index.html --port 3000 --no-source-maps",
     "build": "parcel build index.html --no-minify --no-source-maps --no-content-hash --public-url .",
-    "postbuild": "sh ./postbuild.sh",
+    "postbuild": "./postbuild.sh",
     "lint": "eslint --ext .js,.ts,.tsx ."
   },
   "dependencies": {
