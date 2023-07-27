@@ -122,8 +122,11 @@ jobs:
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           rm -rf * && mkdir -p wp-content/themes && mkdir -p wp-content/plugins
-          mv /home/runner/work/foresight/foresight-theme/foresight-cgiar wp-content/themes
-          mv /home/runner/work/foresight/foresight-theme/algolia_foresight wp-content/plugins
+          ls
+          pwd
+          tree
+          mv /home/runner/work/foresight/foresight/foresight-cgiar wp-content/themes
+          mv /home/runner/work/foresight/foresight/algolia_foresight wp-content/plugins
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
           tree ..
