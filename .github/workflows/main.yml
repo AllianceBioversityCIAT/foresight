@@ -17,20 +17,49 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 14
-      - name: Build   
+      
+      - name: Setup Composer
+        uses: php-actions/composer@v6   
+
+      - name: Build instantsearch
         run: |
+            cd foresight-instansearch
+            npm install
+            npm run build
+            tree ..
+
+      - name: Build plugins
+        run: |
+            pwd
+            cd foresight-plugin-algolia
+            npm install
+            npm install --global gulp-cli
+            cd src
+            composer update
+            cd ..
+            gulp build
+      - uses: actions/upload-artifact@v3
+        name: Upload Artifact
+        with:
+          name: plugin-build
+          path: foresight-plugin-algolia/build/*
+
+      - name: Build Theme  
+        run: |
+          cd foresight-theme
           npm install
           npm install --global gulp-cli
           gulp build
       - uses: actions/upload-artifact@v3
         name: Upload Artifact
         with:
-          name: wp-build
-          path: build/*
+          name: theme-build
+          path: foresight-theme/build/*
 
   deploy-dev:
     name: Deploy to Development
@@ -74,11 +103,12 @@ jobs:
           git config --global user.name "DevOps Cafeto Team"
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
-          rm -rf * && mkdir -p wp-content/themes
+          rm -rf * && mkdir -p wp-content/themes && mkdir -p wp-content/plugins
           mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
+          mv /home/runner/work/foresight-theme/foresight-theme/foresight-plugin-algolia wp-content/plugins
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
-          tree
+          tree ..
 
   deploy-staging:
     name: Deploy to Staging
