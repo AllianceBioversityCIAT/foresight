@@ -94,12 +94,13 @@ jobs:
             cd foresight-instantsearch
             # Create and add environment variables on .env
             touch .env
-            echo ALGOLIA_APPLICATION_ID=“${{ vars.ALGOLIA_APPLICATION_ID }}” >> .env
-            echo ALGOLIA_SEARCH_KEY=“${{ vars.ALGOLIA_SEARCH_KEY }}” >> .env
-            echo ALGOLIA_INDEX=“${{ vars.ALGOLIA_INDEX }}” >> .env
-            echo ALGOLIA_INDEX_ORDER_BY_YEAR_ASC=“${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_ASC }}” >> .env
-            echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=“${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }}” >> .env
-            echo SDG_PATH_URL=“${{ vars.SDG_PATH_URL }}” >> .env
+            echo ALGOLIA_APPLICATION_ID=${{ vars.ALGOLIA_APPLICATION_ID }} >> .env
+            echo ALGOLIA_SEARCH_KEY=${{ vars.ALGOLIA_SEARCH_KEY }} >> .env
+            echo ALGOLIA_INDEX=${{ vars.ALGOLIA_INDEX }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_ASC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_ASC }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
+            echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
+            cat .env
             # Install dependencies
             npm install
             npm run build
