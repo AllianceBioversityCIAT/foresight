@@ -102,6 +102,8 @@ jobs:
             echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
             cat .env
             # Install dependencies
+            sudo apt install -y jq
+            echo '{"dest": "../foresight-cgiar/static"}' > config.json
             npm install
             npm run build
             tree ..
@@ -235,6 +237,8 @@ jobs:
             echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
             echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
             # Install dependencies
+            sudo apt install -y jq
+            echo '{"dest": "../foresight-cgiar/static"}' > config.json
             npm install
             npm run build
             tree ..
