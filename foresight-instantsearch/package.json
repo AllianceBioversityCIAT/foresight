@@ -9,7 +9,6 @@
     "lint": "eslint --ext .js,.ts,.tsx ."
   },
   "postbuild_path": "../foresight-cgiar/static",
-  "postbuild_ci_path": "../foresight-cgiar/static",
   "dependencies": {
     "algoliasearch": "4.19.1",
     "instantsearch.js": "4.56.8",

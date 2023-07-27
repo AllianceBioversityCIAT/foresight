@@ -27,7 +27,7 @@ jobs:
         run: |
             # INSTALL COMPOSER
             sudo apt update
-            sudo apt install php-cli unzip -y
+            sudo apt install php8.1-cli unzip -y
             curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
             HASH=`curl -sS https://composer.github.io/installer.sig`
             php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
@@ -105,13 +105,6 @@ jobs:
             npm install
             npm run build
             tree ..
-      # - uses: ./foresight-cgiar/
-      #   name: Security Scan
-      #   with:
-      #     api-provider: 'wpscan'
-      #     api-token: ${{ secrets.WPSCAN_API_TOKEN }}
-      #     type: 'theme'
-      #     name: 'Foresight-theme'
       
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
@@ -161,7 +154,23 @@ jobs:
       - name: Display structure of downloading files
         run: |
             tree
-      
+
+      - name: Build instantsearch
+        run: |
+            cd foresight-instantsearch
+            # Create and add environment variables on .env
+            touch .env
+            echo ALGOLIA_APPLICATION_ID=${{ vars.ALGOLIA_APPLICATION_ID }} >> .env
+            echo ALGOLIA_SEARCH_KEY=${{ vars.ALGOLIA_SEARCH_KEY }} >> .env
+            echo ALGOLIA_INDEX=${{ vars.ALGOLIA_INDEX }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_ASC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_ASC }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
+            echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
+            # Install dependencies
+            npm install
+            npm run build
+            tree ..
+
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -211,7 +220,23 @@ jobs:
       - name: Display structure of downloading files
         run: |
             tree
-      
+
+      - name: Build instantsearch
+        run: |
+            cd foresight-instantsearch
+            # Create and add environment variables on .env
+            touch .env
+            echo ALGOLIA_APPLICATION_ID=${{ vars.ALGOLIA_APPLICATION_ID }} >> .env
+            echo ALGOLIA_SEARCH_KEY=${{ vars.ALGOLIA_SEARCH_KEY }} >> .env
+            echo ALGOLIA_INDEX=${{ vars.ALGOLIA_INDEX }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_ASC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_ASC }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
+            echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
+            # Install dependencies
+            npm install
+            npm run build
+            tree ..
+
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
