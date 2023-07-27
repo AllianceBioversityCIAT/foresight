@@ -5,10 +5,10 @@
   "scripts": {
     "start": "parcel index.html --port 3000 --no-source-maps",
     "build": "parcel build index.html --no-minify --no-source-maps --no-content-hash --public-url .",
-    "postbuild": "sh ./postbuild.sh $npm_package_postbuild_ci_path",
+    "postbuild": "sh ./postbuild.sh $npm_package_postbuild_path",
     "lint": "eslint --ext .js,.ts,.tsx ."
   },
-  "postbuild_path": "../foresight-theme/src/static",
+  "postbuild_path": "../foresight-cgiar/static",
   "postbuild_ci_path": "../foresight-cgiar/static",
   "dependencies": {
     "algoliasearch": "4.19.1",
