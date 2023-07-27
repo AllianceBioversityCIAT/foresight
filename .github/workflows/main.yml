@@ -46,6 +46,8 @@ jobs:
             sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
             pwd
             cd /home/runner/work/foresight/foresight/foresight-instantsearch/src
+            pwd
+            ls
             composer update
             cd ..
             npm install
