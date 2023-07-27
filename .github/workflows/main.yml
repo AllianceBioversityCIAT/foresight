@@ -26,7 +26,8 @@ jobs:
       - name: Build instantsearch
         run: |
             pwd
-            cd foresight-instansearch
+            ls
+            cd ../foresight-instansearch
             npm install
             npm run build
             tree ..
