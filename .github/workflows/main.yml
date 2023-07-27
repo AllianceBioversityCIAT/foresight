@@ -21,10 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
-      
-      - name: Setup Composer
-        uses: php-actions/composer@v6   
+          node-version: 14  
 
       - name: Build instantsearch
         run: |
@@ -32,16 +29,18 @@ jobs:
             npm install
             npm run build
             tree ..
+            cd ../foresight-plugin-algolia/src
+
+      - name: Setup Composer
+        uses: php-actions/composer@v6 
 
       - name: Build plugins
         run: |
             pwd
-            cd foresight-plugin-algolia
-            npm install
-            npm install --global gulp-cli
-            cd src
             composer update
             cd ..
+            npm install
+            npm install --global gulp-cliate
             gulp build
       - uses: actions/upload-artifact@v3
         name: Upload Artifact
