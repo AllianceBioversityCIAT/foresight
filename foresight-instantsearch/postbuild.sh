@@ -1,7 +1,7 @@
 #!/bin/bash
 absolute_path=($(jq -r '.dest' config.json))
-echo $absolute_path
-mkdir -p $absolute_path/algolia
+# echo $absolute_path
+# mkdir -p $absolute_path/algolia
 # mv -f ./dist/app.mobile.*.css $absolute_path/algolia/app.mobile.css
 # mv -f ./dist/app.desktop.*.css $absolute_path/algolia/app.desktop.css
 # mv -f ./dist/theme.*.css $absolute_path/algolia/theme.css
