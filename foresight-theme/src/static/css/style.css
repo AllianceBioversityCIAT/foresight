@@ -1,0 +1,16 @@
+/**
+* This source code is the confidential, proprietary information of
+* AllianceBioversityCIAT, you may not disclose such information,
+* and may only use it in accordance with the terms of the license
+* agreement you entered into with AllianceBioversityCIAT.
+*
+* AllianceBioversityCIAT.
+* All Rights Reserved.
+*/
+
+@import "tailwindcss/base.css";
+@import "tailwindcss/components.css";
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "tailwindcss/utilities.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@700;800&display=swap");

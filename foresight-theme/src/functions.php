@@ -188,14 +188,14 @@ function foresight_theme_scripts() {
 
 	wp_enqueue_style( 'foresight_theme-fonts-style', get_template_directory_uri() . '/static/lib/fonts/icons.css' );
 
-	//Bootstrap Bundle.
-	wp_enqueue_script( 'foresight_theme-bootstrap-js', get_template_directory_uri() . '/static/lib/bootstrap/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), _S_VERSION, true );
-
+	// Fontawesomwe
+	wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/static/lib/@fortawesome/fontawesome-free/css/all.min.css', false, _S_VERSION );
+	// Flowbite
+	wp_enqueue_script( 'flowbite', get_template_directory_uri() . '/static/lib/flowbite/dist/flowbite.min.js', array(), _S_VERSION, true );
 	//Lazy Sizes.
 	wp_enqueue_script( 'foresight_theme-lazysizes-js', get_template_directory_uri() . '/static/lib/lazysizes/lazysizes.min.js', array(), _S_VERSION, true );
-
 	//Js
-	wp_enqueue_script( 'foresight_theme-js', get_template_directory_uri() . '/static/js/main.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'foresight_theme-js', get_template_directory_uri() . '/static/js/main.min.js', array('jquery'), _S_VERSION, true );
 
 	$options_page = get_fields( 'theme-general-settings' );
 

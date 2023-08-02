@@ -20,28 +20,25 @@ module.exports = {
     allJsFiles: [
       './src/static/js/**/*.js',
     ],
-    principalCSSFiles: './src/static/sass/style.scss',
-    allScssFiles: [
-      './src/static/sass/main-files/**/*.scss'
-    ],
+    principalCSSFiles: './src/static/css/style.css',
     allImgFiles: [
       './src/static/images/**/*.{png,jpg,jpeg,gif,svg}'
     ],
     allLibFiles: [
-      // Bootstrap
-      './node_modules/bootstrap/dist/css/bootstrap.min.css',
-      './node_modules/bootstrap/dist/js/bootstrap.min.js',
-      './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
       // Font Awesome
-      './node_modules/@fortawesome/fontawesome-free/css/all.css',
+      './node_modules/@fortawesome/fontawesome-free/css/all.min.css',
       './node_modules/@fortawesome/fontawesome-free/webfonts/**',
       // Lazysizes
       './node_modules/lazysizes/lazysizes.min.js',
       //Jquery
       './node_modules/jquery/dist/jquery.slim.min.js',
+      // Flowbite
+      './node_modules/flowbite/dist/flowbite.min.js',
+      './node_modules/flowbite/dist/flowbite.min.css',
     ],
     scaffolding: [
       'src/**/*',
+      '!src/static/css/**',
       '!src/static/sass/**',
       '!src/static/js/**',
       '!src/static/images/**'
@@ -54,8 +51,8 @@ module.exports = {
       'Author: ' + package.author,
       'Version: ' + package.version,
       'Tags: ' + ( package.keywords ).join( ' ' ),
-      'Requires at least: 5.0',
-      'Tested up to: 5.4',
+      'Requires at least: 6.2.2',
+      'Tested up to: 6.2.2',
       '*/',
       ' '
     ],
@@ -64,7 +61,6 @@ module.exports = {
   destination: {
     destFolder: destinationFolder,
     allJsFiles: destinationFolder + '/static/js/',
-    allScssFiles: destinationFolder + '/static/css/',
     principalCSSFiles: destinationFolder + '/',
     allImgFiles: destinationFolder + '/static/images/',
     allLibFiles: destinationFolder + '/static/lib/',

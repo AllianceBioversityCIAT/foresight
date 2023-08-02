@@ -1,0 +1,154 @@
+@layer components {
+  /* Primary buttons */
+  .btn-primary-small {
+    @apply rounded-[3px]
+    !bg-yellow-primary 
+    px-[15px] 
+    py-2  
+    font-open 
+    text-[13px] 
+    font-bold 
+    text-black
+    transition-colors
+    hover:!bg-yellow-dark;
+  }
+
+  .btn-primary {
+    @apply !bg-yellow-primary
+    px-[15px] 
+    py-2.5
+    font-open
+    text-[13px]
+    font-bold
+    text-black
+    transition-colors
+    hover:!bg-yellow-dark;
+  }
+
+  .btn-primary-large {
+    @apply !bg-yellow-primary
+    px-[17px]
+    py-3
+    font-open
+    text-[13px]
+    font-bold
+    text-black
+    transition-colors
+    hover:!bg-yellow-dark;
+  }
+
+  /* Dark buttons */
+  .btn-dark-small {
+    @apply rounded-[3px] 
+    border-2
+    border-black 
+    !bg-black 
+    px-[13px]
+    py-2
+    font-open text-[13px] 
+    font-bold
+    text-white
+    transition-colors 
+    hover:border-black
+    hover:!bg-white
+    hover:text-black;
+  }
+
+  .btn-dark {
+    @apply border-2 
+    border-black 
+    !bg-black
+    px-[13px]
+    py-2.5 
+    font-open
+    text-[13px]
+    font-bold
+    text-white
+    transition-colors
+    hover:border-black
+    hover:!bg-white
+    hover:text-black;
+  }
+
+  .btn-dark-large {
+    @apply border-2
+    border-black
+    !bg-black
+    px-[15px]
+    py-3
+    font-open 
+    text-[13px]
+    font-bold
+    text-white
+    transition-colors
+    hover:border-black
+    hover:!bg-white
+    hover:text-black;
+  }
+
+  /* Secondary buttons */
+  .btn-secondary-small {
+    @apply rounded-[3px] 
+    border-2
+    border-green 
+    !bg-green 
+    px-[13px]
+    py-2
+    font-open text-[13px] 
+    font-bold
+    text-white
+    transition-colors 
+    hover:border-green
+    hover:!bg-white
+    hover:text-green;
+  }
+
+  .btn-secondary {
+    @apply border-2 
+    border-green 
+    !bg-green
+    px-[13px]
+    py-2.5 
+    font-open
+    text-[13px]
+    font-bold
+    text-white
+    transition-colors
+    hover:border-green
+    hover:!bg-white
+    hover:text-green;
+  }
+
+  .btn-secondary-large {
+    @apply border-2
+    border-green
+    !bg-green
+    px-[15px]
+    py-3
+    font-open 
+    text-[13px]
+    font-bold
+    text-white
+    transition-colors
+    hover:border-green
+    hover:!bg-white
+    hover:text-green;
+  }
+
+  .btn-secondary-large {
+    @apply border-2
+    border-green
+    !bg-green
+    px-[15px]
+    py-3
+    font-open 
+    text-[13px]
+    font-bold
+    text-white
+    transition-colors
+    hover:border-green
+    hover:!bg-white
+    hover:text-green;
+  }
+}
+

@@ -7,9 +7,11 @@ function register_custom_acf_fields_settings_page() {
 
 		$log_clarisa = get_transient( 'log_clarisa' );
 		$log_zotero  = get_transient( 'log_zotero' );
-		$log_clarisa = "<b>Last update: </b>" . $log_clarisa[ 'date' ] . "<br>" .
+
+		if( !empty($log_clarisa) ){
+			$log_clarisa = "<b>Last update: </b>" . $log_clarisa[ 'date' ] . "<br>" .
 			"<h3>SDGs</h3>" .
-			"<b>Total Imported Items: </b>" . $log_clarisa[ 'sdg_count' ] . "<br>" .
+			"<b>Total Imported Items: </b>" . $log_clarisa[ 'sdg_count' ] ?? '0' . "<br>" .
 			"<b>Total Updated Items: </b>" . $log_clarisa[ 'sdg_count_updated' ] . "<br>" .
 			"<b>Clarisa Response: </b>" . json_encode( $log_clarisa[ 'sdg_response' ] ) . '<br>' .
 			"<b>Wordpress Response: </b>" . json_encode( $log_clarisa[ 'sdg_insert_term' ] ) . '<br>' .
@@ -23,11 +25,14 @@ function register_custom_acf_fields_settings_page() {
 			"<b>Total Updated Items: </b>" . $log_clarisa[ 'regions_count_updated' ] . "<br>" .
 			"<b>Clarisa Response: </b>" . json_encode( $log_clarisa[ 'regions_response' ] ) . '<br>' .
 			"<b>Wordpress Response: </b>" . json_encode( $log_clarisa[ 'regions_insert_term' ] ) . '<br>';
+		}
 
-		$log_zotero = "<b>Last update: </b>" . $log_zotero[ 'date' ] . "<br><br>" .
+		if( !empty($log_zotero) ){
+			$log_zotero = "<b>Last update: </b>" . $log_zotero[ 'date' ] . "<br><br>" .
 			"<ul>" . $log_zotero[ 'zotero_count' ] . "</ul>" .
 			"<b>Zotero Response: </b>" . json_encode( $log_zotero[ 'zotero_response' ] ) . '<br>' .
 			"<b>Wordpress Log: </b>" . $log_zotero[ 'zotero_wp_conflicts' ] . '';
+		}
 
 		acf_add_local_field_group(
 			[
