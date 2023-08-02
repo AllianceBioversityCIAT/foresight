@@ -17,20 +17,44 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - name: Build   
+          node-version: 14  
+
+      - name: Build plugins
         run: |
+            # INSTALL COMPOSER
+            sudo apt update
+            sudo apt install php8.1-cli unzip -y
+            curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+            HASH=`curl -sS https://composer.github.io/installer.sig`
+            php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+            sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+            cd /home/runner/work/foresight/foresight/foresight-plugin-algolia/src
+            composer update
+            cd ..
+            npm install
+            npm install --global gulp-cli
+            gulp build
+      - uses: actions/upload-artifact@v3
+        name: Upload Artifact
+        with:
+          name: plugin-build
+          path: foresight-plugin-algolia/build/*
+
+      - name: Build Theme  
+        run: |
+          cd foresight-theme
           npm install
           npm install --global gulp-cli
           gulp build
       - uses: actions/upload-artifact@v3
         name: Upload Artifact
         with:
-          name: wp-build
-          path: build/*
+          name: theme-build
+          path: foresight-theme/build/*
 
   deploy-dev:
     name: Deploy to Development
@@ -47,18 +71,43 @@ jobs:
       - name: Downloading build Artifact  
         uses: actions/download-artifact@v3
         with:
-          name: wp-build
+          name: theme-build
       - name: Display structure of downloading files
         run: |
-          tree
+            tree
 
-      # - uses: ./foresight-cgiar/
-      #   name: Security Scan
-      #   with:
-      #     api-provider: 'wpscan'
-      #     api-token: ${{ secrets.WPSCAN_API_TOKEN }}
-      #     type: 'theme'
-      #     name: 'Foresight-theme'
+      - name: Downloading build Artifact  
+        uses: actions/download-artifact@v3
+        with:
+          name: plugin-build
+      - name: Display structure of downloading files
+        run: |
+            tree
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14  
+
+      - name: Build instantsearch
+        run: |
+            cd foresight-instantsearch
+            # Create and add environment variables on .env
+            touch .env
+            echo ALGOLIA_APPLICATION_ID=${{ vars.ALGOLIA_APPLICATION_ID }} >> .env
+            echo ALGOLIA_SEARCH_KEY=${{ vars.ALGOLIA_SEARCH_KEY }} >> .env
+            echo ALGOLIA_INDEX=${{ vars.ALGOLIA_INDEX }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_ASC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_ASC }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
+            echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
+            cat .env
+            # Install dependencies
+            sudo apt install -y jq
+            echo '{"dest": "../foresight-cgiar/static"}' > config.json
+            cat config.json
+            npm install
+            npm run build
+            tree ..
       
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
@@ -74,11 +123,12 @@ jobs:
           git config --global user.name "DevOps Cafeto Team"
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
-          rm -rf * && mkdir -p wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
+          rm -rf * && mkdir -p wp-content/themes && mkdir -p wp-content/plugins
+          mv /home/runner/work/foresight/foresight/foresight-cgiar wp-content/themes
+          mv /home/runner/work/foresight/foresight/algolia_foresight wp-content/plugins
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
-          tree
+          tree ..
 
   deploy-staging:
     name: Deploy to Staging
@@ -95,11 +145,38 @@ jobs:
       - name: Downloading build Artifact  
         uses: actions/download-artifact@v3
         with:
-          name: wp-build
+          name: theme-build
       - name: Display structure of downloading files
         run: |
-          tree
-      
+            tree
+
+      - name: Downloading build Artifact  
+        uses: actions/download-artifact@v3
+        with:
+          name: plugin-build
+      - name: Display structure of downloading files
+        run: |
+            tree
+
+      - name: Build instantsearch
+        run: |
+            cd foresight-instantsearch
+            # Create and add environment variables on .env
+            touch .env
+            echo ALGOLIA_APPLICATION_ID=${{ vars.ALGOLIA_APPLICATION_ID }} >> .env
+            echo ALGOLIA_SEARCH_KEY=${{ vars.ALGOLIA_SEARCH_KEY }} >> .env
+            echo ALGOLIA_INDEX=${{ vars.ALGOLIA_INDEX }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_ASC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_ASC }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
+            echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
+            # Install dependencies
+            sudo apt install -y jq
+            echo '{"dest": "../foresight-cgiar/static"}' > config.json
+            cat config.json
+            npm install
+            npm run build
+            tree ..
+
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -107,17 +184,21 @@ jobs:
 
       - name: Deploy to WP Engine
         run: |
-          # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
-          rm -rf .git
-          # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
-          git config --global user.email "devops@cafetosoftware.com"
-          git config --global user.name "DevOps Cafeto Team"
-          # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
-          cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
-          rm -rf * && mkdir -p wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
-          git add . && git commit -m "Deploy from GitHub Actions"
-          git push origin master
+            # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
+            rm -rf .git
+            # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
+            git config --global user.email "devops@cafetosoftware.com"
+            git config --global user.name "DevOps Cafeto Team"
+            # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
+            cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
+            rm -rf * && mkdir -p wp-content/themes && mkdir -p wp-content/plugins
+            mv /home/runner/work/foresight/foresight/foresight-cgiar wp-content/themes
+            mv /home/runner/work/foresight/foresight/algolia_foresight wp-content/plugins
+            git add . && git commit -m "Deploy from GitHub Actions"
+            git push origin master
+            tree ..
+
+
   deploy-prod:
     name: Deploy to Production
     environment:
@@ -133,11 +214,37 @@ jobs:
       - name: Downloading build Artifact  
         uses: actions/download-artifact@v3
         with:
-          name: wp-build
+          name: theme-build
       - name: Display structure of downloading files
         run: |
-          tree
-      
+            tree
+
+      - name: Downloading build Artifact  
+        uses: actions/download-artifact@v3
+        with:
+          name: plugin-build
+      - name: Display structure of downloading files
+        run: |
+            tree
+
+      - name: Build instantsearch
+        run: |
+            cd foresight-instantsearch
+            # Create and add environment variables on .env
+            touch .env
+            echo ALGOLIA_APPLICATION_ID=${{ vars.ALGOLIA_APPLICATION_ID }} >> .env
+            echo ALGOLIA_SEARCH_KEY=${{ vars.ALGOLIA_SEARCH_KEY }} >> .env
+            echo ALGOLIA_INDEX=${{ vars.ALGOLIA_INDEX }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_ASC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_ASC }} >> .env
+            echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
+            echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
+            # Install dependencies
+            sudo apt install -y jq
+            echo '{"dest": "../foresight-cgiar/static"}' > config.json
+            npm install
+            npm run build
+            tree ..
+
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -145,14 +252,16 @@ jobs:
 
       - name: Deploy to WP Engine
         run: |
-          # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
-          rm -rf .git
-          # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
-          git config --global user.email "devops@cafetosoftware.com"
-          git config --global user.name "DevOps Cafeto Team"
-          # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
-          cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
-          rm -rf * && mkdir -p wp-content/themes
-          mv /home/runner/work/foresight-theme/foresight-theme/foresight-cgiar wp-content/themes
-          git add . && git commit -m "Deploy from GitHub Actions"
-          git push origin master
+            # REMOVE GIT FROM BUILD DIR SO WE CAN PIPE TO WPENGINE'S GIT
+            rm -rf .git
+            # ADD FAKE USER DETAILS, OTHERWISE GIT COMPLAINS
+            git config --global user.email "devops@cafetosoftware.com"
+            git config --global user.name "DevOps Cafeto Team"
+            # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
+            cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
+            rm -rf * && mkdir -p wp-content/themes && mkdir -p wp-content/plugins
+            mv /home/runner/work/foresight/foresight/foresight-cgiar wp-content/themes
+            mv /home/runner/work/foresight/foresight/algolia_foresight wp-content/plugins
+            git add . && git commit -m "Deploy from GitHub Actions"
+            git push origin master
+            tree ..
