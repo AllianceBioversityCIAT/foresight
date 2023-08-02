@@ -28,6 +28,8 @@ module.exports = {
       // Font Awesome
       './node_modules/@fortawesome/fontawesome-free/css/all.min.css',
       './node_modules/@fortawesome/fontawesome-free/webfonts/**',
+      //Slick
+      './node_modules/slick-carousel/slick/**',
       // Lazysizes
       './node_modules/lazysizes/lazysizes.min.js',
       //Jquery

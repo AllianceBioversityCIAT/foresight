@@ -188,6 +188,10 @@ function foresight_theme_scripts() {
 
 	wp_enqueue_style( 'foresight_theme-fonts-style', get_template_directory_uri() . '/static/lib/fonts/icons.css' );
 
+	// Slick
+	wp_enqueue_style( 'slick', get_template_directory_uri() . '/static/lib/slick-carousel/slick/slick.css', false, _S_VERSION );
+	wp_enqueue_style( 'slick-theme', get_template_directory_uri() . '/static/lib/slick-carousel/slick/slick-theme.css', false, _S_VERSION );
+	wp_enqueue_script( 'slick', get_template_directory_uri() . '/static/lib/slick-carousel/slick/slick.min.js', array('jquery'), _S_VERSION, true );
 	// Fontawesomwe
 	wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/static/lib/@fortawesome/fontawesome-free/css/all.min.css', false, _S_VERSION );
 	// Flowbite
