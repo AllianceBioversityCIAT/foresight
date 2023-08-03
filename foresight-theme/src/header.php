@@ -10,7 +10,7 @@
  */
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 	<head>
@@ -24,14 +24,15 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<body>
+	<body class="w-full min-w-[320px]">
 		<?php wp_body_open(); ?>
 		<div id="page" class="site">
-			<?php
+<?php
 if ( class_exists( 'Timber' ) ) {
 
 	$context = Timber::context();
 	$context['menu'] = new TimberMenu('foresight-top-menu');
+	$context['socialMenu'] = new TimberMenu('foresight-social-menu');
 	$context['platform'] = _PLATFORM;
 	Timber::render( './view/header.twig', $context );
 
