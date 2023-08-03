@@ -9,15 +9,14 @@
 	<meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/static/images/favicon-270x270.png" />
 	<?php wp_head(); ?>
 </head>
-<body>
-
-	
+<body class="w-full min-w-[320px]">
 
 
-<nav class="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
-		<div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2">
+
+<nav class="bg-white fixed w-full z-20 top-0 left-0">
+		<div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto">
 			<a href="#" class="flex items-center">
-				<img class="h-20" src="<?= get_template_directory_uri() ?>/static/images/foresight-logo-dark.png" alt="logo">
+				<img class="h-20 p-2" src="<?= get_template_directory_uri() ?>/static/images/foresight-logo-dark.png" alt="logo">
 			</a>
 			<div class="flex px-4 lg:order-2">
 				<div class="hidden lg:flex">
@@ -43,7 +42,7 @@
 			</div>
 			
 
-			<div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-dropdown2">
+			<div class="items-center justify-between border-gray lg:border-none border-t hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-dropdown2">
 				<!-- Main Menu -->
 				<ul class="flex flex-col font-bold px-2 lg:p-0 mt-4 lg:flex-row lg:space-x-8">
 					<li>
@@ -95,10 +94,17 @@
 				</div>
 			</div>
 		</div>
-	</nav>
+</nav>
 
-
-
+<!-- Hero -->
+<section class="h-screen flex flex-col pt-20 3xl:container 3xl:mx-auto">
+	<div class="px-20 lg:px-44 flex flex-1 items-center justify-center lg:justify-start bg-center bg-cover bg-no-repeat bg-[url('https://devcgforesight.wpengine.com/wp-content/uploads/2023/08/hero-image.jpeg')] bg-black-100/70 bg-blend-multiply">
+		<h1 class="font-montserrat font-extrabold text-yellow-primary px-1 break-words lg:text-left text-[40px] lg:text-[55px] text-center">Foresight Portal</h1>
+	</div>
+	<div class="bg-black text-white h-32 3xl:container 3xl:mx-auto hidden lg:flex">
+		SUBMENU
+	</div>
+</section>
 
 
 
