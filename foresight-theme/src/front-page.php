@@ -106,9 +106,21 @@
 	</div>
 </section>
 
+<?php
 
+	if ( class_exists( 'Timber' ) ) {
 
-<?php wp_footer(); ?>
+		$context = Timber::context();
+
+		Timber::render( './view/front-page.twig', $context );
+
+	} else {
+		echo '<h1>Timber plugin is required</h1>';
+	}
+
+wp_footer();
+
+?>
 </body>
 </html>
 
