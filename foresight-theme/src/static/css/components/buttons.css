@@ -134,21 +134,5 @@
     hover:!bg-white
     hover:text-green;
   }
-
-  .btn-secondary-large {
-    @apply border-2
-    border-green
-    !bg-green
-    px-[15px]
-    py-3
-    font-open 
-    text-[13px]
-    font-bold
-    text-white
-    transition-colors
-    hover:border-green
-    hover:!bg-white
-    hover:text-green;
-  }
 }
 
