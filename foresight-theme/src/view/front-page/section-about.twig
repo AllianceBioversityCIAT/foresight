@@ -1,0 +1,15 @@
+<section class="pt-24 pb-28">
+  <div class="container mx-auto relative px-4">
+    <div class="grid grid-cols-4 gap-4 items-center">
+      <div class="col-span-1 max-sm:col-span-4">
+          <img class="mx-auto max-sm:mx-0  h-60 max-sm:h-40" src="{{ Image( frontPage.meta('about_company_image') ).src }}"
+            srcset="{{ Image( frontPage.meta('about_company_image') ).srcset }}"
+            sizes="{{ Image( frontPage.meta('about_company_image') ).img_sizes }}"
+            alt="{{ Image( frontPage.meta('about_company_image') ).title }}">
+      </div>
+      <div class="col-span-3 max-sm:col-span-4">
+        {{ frontPage.meta('about_company_text') }}
+      </div>
+    </div>
+  </div>
+</section>
