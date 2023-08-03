@@ -15,6 +15,11 @@ module.exports = {
 
                 black: {
                     DEFAULT: '#000000',
+                    100: '#201717',
+                },
+                gray: {
+                    DEFAULT: '#A5A5A6',
+                    100: '#545454',
                 },
                 green: '#2E7636',
                 purple: '#3F1364',
