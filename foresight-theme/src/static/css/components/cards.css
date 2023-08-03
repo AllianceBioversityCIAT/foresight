@@ -1,6 +1,30 @@
 @layer components {
   .card {
     @apply 
-    !bg-yellow-primary 
+    !bg-yellow-primary;
+  }
+
+  p {
+    @apply
+    mb-4
+    last:mb-0;
+  }
+
+  ol {
+    @apply
+    list-inside
+    list-decimal
+    mb-2;
+  }
+
+  ul {
+    @apply
+    list-inside
+    mb-2;
+  }
+
+  li {
+    @apply
+    mb-1;
   }
 }
