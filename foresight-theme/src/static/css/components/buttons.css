@@ -10,6 +10,8 @@
     font-bold 
     text-black
     transition-colors
+    cursor-pointer
+    inline-block
     hover:!bg-yellow-dark;
   }
 
@@ -22,6 +24,8 @@
     font-bold
     text-black
     transition-colors
+    cursor-pointer
+    inline-block
     hover:!bg-yellow-dark;
   }
 
@@ -34,6 +38,8 @@
     font-bold
     text-black
     transition-colors
+    cursor-pointer
+    inline-block
     hover:!bg-yellow-dark;
   }
 
@@ -51,6 +57,8 @@
     transition-colors 
     hover:border-black
     hover:!bg-white
+    cursor-pointer
+    inline-block
     hover:text-black;
   }
 
@@ -67,6 +75,8 @@
     transition-colors
     hover:border-black
     hover:!bg-white
+    cursor-pointer
+    inline-block
     hover:text-black;
   }
 
@@ -83,6 +93,8 @@
     transition-colors
     hover:border-black
     hover:!bg-white
+    cursor-pointer
+    inline-block
     hover:text-black;
   }
 
@@ -100,6 +112,8 @@
     transition-colors 
     hover:border-green
     hover:!bg-white
+    cursor-pointer
+    inline-block
     hover:text-green;
   }
 
@@ -116,6 +130,8 @@
     transition-colors
     hover:border-green
     hover:!bg-white
+    cursor-pointer
+    inline-block
     hover:text-green;
   }
 
@@ -132,6 +148,8 @@
     transition-colors
     hover:border-green
     hover:!bg-white
+    cursor-pointer
+    inline-block
     hover:text-green;
   }
 
@@ -148,6 +166,8 @@
     transition-colors
     hover:border-green
     hover:!bg-white
+    cursor-pointer
+    inline-block
     hover:text-green;
   }
 }

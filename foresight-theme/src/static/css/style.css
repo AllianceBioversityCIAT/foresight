@@ -14,3 +14,47 @@
 @import "./components/cards.css";
 @import "tailwindcss/utilities.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@700;800&display=swap");
+
+
+.carousel-full-slick .slick-dots {
+	display: flex;
+	justify-content: center;
+	bottom: -45px;
+}
+
+.carousel-full-slick .slick-dots li {
+  width: 30px;
+  height: 4px;
+}
+
+.carousel-full-slick .slick-dots li button {
+  padding: 0;
+  background-color: #D9D9D9;
+  width: 30px;
+  height: 4px;
+}
+
+.carousel-full-slick .slick-dots li.slick-active button {
+  background-color: white;
+}
+
+.carousel-full-slick .slick-dots li button::before {
+  content: none;
+}
+
+.caroulse-full-container .caroulse-full-next {
+  right: -25px;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
+}
+
+.caroulse-full-container .caroulse-full-prev {
+  left: -25px;
+  top: 50%;
+  transform: translate(0, -50%) rotate(-180deg);
+  cursor: pointer;
+  -webkit-transform: translate(0, -50%) rotate(-180deg);
+  -moz-transform: translate(0, -50%) rotate(-180deg);
+  -ms-transform: translate(0, -50%) rotate(-180deg);
+}
