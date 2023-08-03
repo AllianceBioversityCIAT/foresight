@@ -111,6 +111,7 @@
 	if ( class_exists( 'Timber' ) ) {
 
 		$context = Timber::context();
+		$context[ 'frontPage' ] = new Timber\Post();
 
 		Timber::render( './view/front-page.twig', $context );
 

@@ -2,6 +2,8 @@
   /* Primary buttons */
   .btn-primary-small {
     @apply rounded-[3px]
+    border-2
+    border-yellow-primary
     !bg-yellow-primary 
     px-[15px] 
     py-2  
@@ -16,7 +18,10 @@
   }
 
   .btn-primary {
-    @apply !bg-yellow-primary
+    @apply
+    border-2
+    border-yellow-primary  
+    !bg-yellow-primary
     px-[15px] 
     py-2.5
     font-open
@@ -30,7 +35,10 @@
   }
 
   .btn-primary-large {
-    @apply !bg-yellow-primary
+    @apply
+    border-2
+    border-yellow-primary
+    !bg-yellow-primary
     px-[17px]
     py-3
     font-open
@@ -41,6 +49,64 @@
     cursor-pointer
     inline-block
     hover:!bg-yellow-dark;
+  }
+
+    /* White buttons */
+  .btn-white-small {
+    @apply 
+    rounded-[3px] 
+    border-2
+    border-black 
+    !bg-white
+    px-[13px]
+    py-2
+    font-open text-[13px] 
+    font-bold
+    text-black
+    transition-colors 
+    hover:border-black
+    hover:!bg-black
+    cursor-pointer
+    inline-block
+    hover:text-white;
+  }
+
+  .btn-white {
+    @apply 
+    border-2 
+    border-black 
+    !bg-white
+    px-[13px]
+    py-2.5 
+    font-open
+    text-[13px]
+    font-bold
+    text-black
+    transition-colors
+    hover:border-black
+    hover:!bg-black
+    cursor-pointer
+    inline-block
+    hover:text-white;
+  }
+
+  .btn-white-large {
+    @apply 
+    border-2
+    border-black
+    !bg-white
+    px-[15px]
+    py-3
+    font-open 
+    text-[13px]
+    font-bold
+    text-black
+    transition-colors
+    hover:border-black
+    hover:!bg-black
+    cursor-pointer
+    inline-block
+    hover:text-white;
   }
 
   /* Dark buttons */
