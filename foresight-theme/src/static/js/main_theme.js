@@ -85,4 +85,11 @@ if (slider) {
         prevArrow: $('.caroulse-full-prev'),
         nextArrow: $('.caroulse-full-next'),
     })
+
+    $('.see-more-btn').click(function () {
+        var idTab = $(this).data('id')
+        var $content = document.getElementById(idTab)
+        $('#' + idTab).slideToggle('slow')
+        $(this).text($(this).text() == 'Read Less' ? 'Read More' : 'Read Less')
+    })
 })(jQuery)
