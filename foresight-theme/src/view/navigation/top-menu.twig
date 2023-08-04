@@ -56,8 +56,8 @@
 				<div class="flex bg-black lg:hidden">
 					<ul class="bg-black flex my-10 px-4 gap-5">
 						{% for item in socialMenu.items %}
-						<li><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
-					{% endfor %}
+							<li><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>
