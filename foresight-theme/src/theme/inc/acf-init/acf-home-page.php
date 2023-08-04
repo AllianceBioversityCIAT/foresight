@@ -464,6 +464,80 @@ function register_custom_acf_fields_section_home_page() {
 				'description'           => '',
 			]
 		);
+
+		acf_add_local_field_group(
+			[
+				'key'                   => 'group_menu_items',
+				'title'                 => 'Settings',
+				'fields'                => [
+					array(
+						'key' => 'field_64cbd4437fd6e',
+						'label' => 'Type Modal',
+						'name' => 'type_modal',
+						'aria-label' => '',
+						'type' => 'true_false',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'message' => '',
+						'default_value' => 0,
+						'ui_on_text' => 'Yes',
+						'ui_off_text' => 'No',
+						'ui' => 1,
+					),
+					array(
+						'key' => 'field_64cd50f135ef9',
+						'label' => 'Modal text',
+						'name' => 'modal_text',
+						'aria-label' => '',
+						'type' => 'text',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => array(
+							array(
+								array(
+									'field' => 'field_64cbd4437fd6e',
+									'operator' => '==',
+									'value' => '1',
+								),
+							),
+						),
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'maxlength' => '',
+						'placeholder' => '',
+						'prepend' => '',
+						'append' => '',
+					),
+				],
+				'location'              => [
+					[
+						[
+							'param'    => 'nav_menu_item',
+							'operator' => '==',
+							'value'    => 'location/foresight-footer-menu',
+						],
+					],
+				],
+				'menu_order'            => 0,
+				'position'              => 'normal',
+				'style'                 => 'default',
+				'label_placement'       => 'top',
+				'instruction_placement' => 'label',
+				'hide_on_screen'        => '',
+				'active'                => true,
+				'description'           => '',
+			]
+		);
 	}
 }
 

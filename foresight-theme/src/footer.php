@@ -15,9 +15,9 @@ if ( class_exists( 'Timber' ) ) {
 	$context['footerMenu'] = new TimberMenu('foresight-footer-menu');
 	$context['socialMenu'] = new TimberMenu('foresight-social-menu');
 	$options_page =	get_fields( 'theme-general-settings' );
-	$context['contact_us_address'] = $options_page[ 'contact_us_address' ];
-	$context['contact_us_phone'] = $options_page[ 'contact_us_phone' ];
-	$context['contact_us_email'] = $options_page[ 'contact_us_email' ];
+	$context['footer_company_image'] = $options_page[ 'footer_company_image' ];
+	$context['footerCompanyText'] = $options_page[ 'footer_company_text' ];
+	$context['footerTitleNewsletter'] = $options_page[ 'footer_title_newsletter' ];
 
 	Timber::render( './view/footer.twig', $context );
 
