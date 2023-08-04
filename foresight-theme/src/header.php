@@ -30,7 +30,16 @@
 <?php
 if ( class_exists( 'Timber' ) ) {
 
-	$context = Timber::context();
+	$context 	= Timber::context();
+	$post		= new Timber\Post();
+
+	if (isset($post->hero_image) || strlen($post->hero_image)){
+		$post->hero_image = new Timber\Image($post->hero_image);
+	}else{
+		$post->hero_image = get_template_directory_uri().'/src/static/images/hero-image.jpeg';
+	}
+
+	$context['post'] = $post;
 	$context['menu'] = new TimberMenu('foresight-top-menu');
 	$context['socialMenu'] = new TimberMenu('foresight-social-menu');
 	$context['platform'] = _PLATFORM;
