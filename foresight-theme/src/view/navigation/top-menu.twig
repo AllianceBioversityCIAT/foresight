@@ -7,8 +7,8 @@
 			<div class="flex px-4 lg:order-2">
 				<div class="hidden lg:flex">
 					<ul class="flex flex-row gap-2.5 items-center justify-center">
-					{% for item in socialMenu.items %}
-						<li><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
+					{% for item in social_menu.items %}
+						<li class="text-green"><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
 					{% endfor %}
 					</ul>
 				</div>
@@ -26,7 +26,7 @@
 			</div>
 			<div class="items-center justify-between border-gray-400 lg:border-none border-t hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-dropdown2">
 				<ul class="flex flex-col font-bold px-2 lg:p-0 mt-4 lg:flex-row lg:space-x-8">
-					{% for item in menu.items %}
+					{% for item in top_menu.items %}
 						{% if item.link and item.children is empty %}
 							<li>
 								<a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="block py-2 pl-3 pr-4 text-black lg:p-0 {{ item.classes|join(' ') }}" aria-current="page">{{ item.title }}</a>
@@ -55,7 +55,7 @@
 				</ul>
 				<div class="flex bg-black lg:hidden">
 					<ul class="bg-black flex my-10 px-4 gap-5">
-						{% for item in socialMenu.items %}
+						{% for item in social_menu.items %}
 							<li><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
 						{% endfor %}
 					</ul>

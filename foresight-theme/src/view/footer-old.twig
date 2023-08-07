@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class=" col-6 col-sm-6 col-lg-4">
 					<ul class="footer-navigation">
-					{% for item in footerMenu.items %}
+					{% for item in footer_menu.items %}
 						<li><a href="{{ item.link }}" target="{{item.target}}">{{ item.title }}</a></li>
 					{% endfor %}
 					</ul>
@@ -25,7 +25,7 @@
 			</div>
 			<div class="col-12 col-md-6 col-lg-8">
 				<ul class="social-icons float-right">
-				{% for item in socialMenu.items %}
+				{% for item in social_menu.items %}
 					<li>
 						<a href="{{ item.link }}" target="{{item.target}}">
 							<img src="{{theme.link}}/static/images/icons/{{ item.title|lower }}.svg" alt="{{ item.title }}">

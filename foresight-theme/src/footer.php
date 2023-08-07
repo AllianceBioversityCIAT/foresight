@@ -12,12 +12,12 @@
 if ( class_exists( 'Timber' ) ) {
 
 	$context = Timber::context();
-	$context['footerMenu'] = new TimberMenu('foresight-footer-menu');
-	$context['socialMenu'] = new TimberMenu('foresight-social-menu');
+	$context['footer_menu'] = new TimberMenu('foresight-footer-menu');
+	$context['social_menu'] = new TimberMenu('foresight-social-menu');
 	$options_page =	get_fields( 'theme-general-settings' );
 	$context['footer_company_image'] = $options_page[ 'footer_company_image' ];
-	$context['footerCompanyText'] = $options_page[ 'footer_company_text' ];
-	$context['footerTitleNewsletter'] = $options_page[ 'footer_title_newsletter' ];
+	$context['footer_company_text'] = $options_page[ 'footer_company_text' ];
+	$context['footer_title_newsletter'] = $options_page[ 'footer_title_newsletter' ];
 
 	Timber::render( './view/footer.twig', $context );
 

@@ -3,29 +3,4 @@
     @apply 
     !bg-yellow-primary;
   }
-
-  p {
-    @apply
-    mb-4
-    text-base
-    last:mb-0;
-  }
-
-  ol {
-    @apply
-    list-inside
-    list-decimal
-    mb-2;
-  }
-
-  ul {
-    @apply
-    list-inside
-    mb-2;
-  }
-
-  li {
-    @apply
-    mb-1;
-  }
 }

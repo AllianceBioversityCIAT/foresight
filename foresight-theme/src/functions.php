@@ -60,6 +60,7 @@ if ( !function_exists( 'foresight_theme_setup' ) ) :
 		register_nav_menus(
 			array(
 				'foresight-top-menu'    => esc_html__( 'Top Menu', SLUG_THEME ),
+				'foresight-secondary-menu' => esc_html__( 'Secondary Menu', SLUG_THEME ),
 				'foresight-social-menu' => esc_html__( 'Social Menu', SLUG_THEME ),
 				'foresight-footer-menu' => esc_html__( 'Footer Menu', SLUG_THEME ),
 			)
@@ -202,7 +203,7 @@ add_action( 'wp_enqueue_scripts', 'foresight_theme_scripts' );
 /**
  * Disable the emoji's
  */
-function disable_emojis() {
+function disable_unused_tools() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -210,11 +211,12 @@ function disable_emojis() {
 	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	remove_filter( 'acf_the_content', 'wpautop');
 	add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 	add_filter( 'wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2 );
 }
 
-add_action( 'init', 'disable_emojis' );
+add_action( 'init', 'disable_unused_tools' );
 
 /**
  * Filter function used to remove the tinymce emoji plugin.

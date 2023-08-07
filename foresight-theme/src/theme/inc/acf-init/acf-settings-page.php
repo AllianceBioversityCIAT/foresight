@@ -452,7 +452,7 @@ function register_custom_acf_fields_settings_page() {
 						'default_value' => '',
 						'tabs' => 'all',
 						'toolbar' => 'full',
-						'media_upload' => 1,
+						'media_upload' => 0,
 						'delay' => 0,
 					],
 					[

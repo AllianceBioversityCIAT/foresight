@@ -1,0 +1,60 @@
+@layer base {
+	h1 {
+		@apply 
+		sm:text-[28px]
+		md:text-[36px]
+		lg:text-[55px]
+		text-[24px]
+		font-extrabold
+		font-montserrat;
+	}
+	h2 {
+		@apply text-[40px]
+		font-bold
+		font-montserrat;
+	}
+	h3 {
+		@apply text-[36px]
+		font-bold
+		font-montserrat;
+	}
+	h4 {
+		@apply text-[28px]
+		font-bold
+		font-montserrat;
+	}
+	h5 {
+		@apply text-[22px]
+		font-bold
+		font-montserrat;
+	}
+	h6 {
+		@apply text-[17px]
+		font-bold
+		font-montserrat;
+	}
+
+	p {
+		@apply
+		mb-4
+		text-base
+		font-open
+		font-normal
+		last:mb-0;
+	}
+	ol {
+		@apply
+		list-inside
+		list-decimal
+		mb-2;
+	}
+	ul {
+		@apply
+		list-inside
+		mb-2;
+	}
+	li {
+		@apply
+		mb-1;
+	}
+  }
