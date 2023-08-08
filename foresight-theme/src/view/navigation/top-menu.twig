@@ -6,7 +6,7 @@
 			</a>
 			<div class="flex px-4 lg:order-2">
 				<div class="hidden lg:flex">
-					<ul class="flex flex-row gap-2.5 items-center justify-center">
+					<ul class="flex flex-row gap-x-4 items-center justify-center">
 					{% for item in social_menu.items %}
 						<li class="text-green"><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
 					{% endfor %}
@@ -25,7 +25,7 @@
 				</button>
 			</div>
 			<div class="items-center justify-between border-gray-400 lg:border-none border-t hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-dropdown2">
-				<ul class="flex flex-col font-bold px-2 lg:p-0 mt-4 lg:flex-row lg:space-x-8">
+				<ul class="flex flex-col font-bold px-2 lg:p-0 mt-2 lg:flex-row lg:space-x-8">
 					{% for item in top_menu.items %}
 						{% if item.link and item.children is empty %}
 							<li>
@@ -53,10 +53,53 @@
 						{% endif %}
 					{% endfor %}
 				</ul>
+
+				<!-- begin secondary menu mobile -->
+				<div class="w-full bg-black text-white sticky top-20 z-10 lg:hidden">
+					<nav class="px-4 flex flex-row pt-6">
+						<ul class="flex flex-col flex-wrap gap-y-3">
+						{% for item in secondary_menu.items %}
+							{% if item.link and item.children is empty %}
+							<li>
+								<h6 class="max-lg:font-normal"><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}" aria-current="page">{{ item.title }}</a></h6>
+							</li>
+							{% endif %}
+							{% if item.children %}
+							<li>
+								<button id="secondary-menu-btn-{{ item.title|sanitize }}-mobile" data-dropdown-toggle="secondary-menu-{{ item.title|sanitize }}-mobile" class="flex items-center justify-between text-white {{ item.classes|join(' ') }}">
+									<h6 class="max-lg:font-normal">{{ item.title }}</h6>
+									<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+									</svg>
+								</button>
+								<div id="secondary-menu-{{ item.title|sanitize }}-mobile" class="z-10 hidden bg-white divide-y divide-gray-100 shadow max-w-lg">
+									<ul class="grid grid-cols-1 grid-flow-row auto-cols-auto gap-x-0 text-black" aria-labelledby="dropdownLargeButton">
+										{% for child in item.children %}
+										<li>
+											<h6 class="px-4 py-2">{{ child.title }}</h6>
+												<ul>
+												{% for child_three in child.children %}
+													<li>
+														<a href="{{ child_three.link }}" target="{{ child_three.target ?? '_self' }}" class="block px-4 py-1 text-base hover:bg-gray-100 {{ child_three.classes|join(' ') }}">{{ child_three.title }}</a>
+													</li>	
+												{% endfor %}
+												</ul>
+										</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</li>
+							{% endif %}
+						{% endfor %}
+						</ul>
+					</nav>
+				</div>
+				<!-- end secondary menu mobile -->
+
 				<div class="flex bg-black lg:hidden">
 					<ul class="bg-black flex my-10 px-4 gap-5">
 						{% for item in social_menu.items %}
-							<li><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
+							<li class="text-green"><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a></li>
 						{% endfor %}
 					</ul>
 				</div>

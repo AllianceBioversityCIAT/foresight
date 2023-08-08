@@ -42,6 +42,7 @@ if ( class_exists( 'Timber' ) ) {
 	$context['post'] = $post;
 	$context['top_menu'] = new TimberMenu('foresight-top-menu');
 	$context['social_menu'] = new TimberMenu('foresight-social-menu');
+	$context['secondary_menu'] = new TimberMenu('foresight-secondary-menu');
 	$context['platform'] = _PLATFORM;
 	Timber::render( './view/header.twig', $context );
 

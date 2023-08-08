@@ -1,0 +1,44 @@
+<!-- begin secondary menu -->
+<div class="w-full bg-black text-white sticky top-20 z-10 hidden lg:block">
+	<nav class="container mx-auto px-4 flex flex-row pt-6">
+	<div class="hidden lg:block">
+		<a href="/" class="mr-16 font-montserrat font-bold text-yellow-primary fa-solid fa-house text-2xl"></a>
+	</div>
+		<ul class="flex flex-col lg:flex-row flex-wrap lg:gap-x-14 xl:gap-x-28 gap-y-3">
+		{% for item in secondary_menu.items %}
+			{% if item.link and item.children is empty %}
+			<li>
+				<h6 class="max-lg:font-normal"><a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}" aria-current="page">{{ item.title }}</a></h6>
+			</li>
+			{% endif %}
+			{% if item.children %}
+			<li>
+				<button id="secondary-menu-btn-{{ item.title|sanitize }}" data-dropdown-toggle="secondary-menu-{{ item.title|sanitize }}" class="flex items-center justify-between text-white {{ item.classes|join(' ') }}">
+					<h6 class="max-lg:font-normal">{{ item.title }}</h6>
+					<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+					</svg>
+				</button>
+				<div id="secondary-menu-{{ item.title|sanitize }}" class="z-10 hidden bg-white divide-y divide-gray-100 shadow max-w-lg">
+					<ul class="grid {{ (item.children|length > 1) ? 'grid-cols-2' : 'grid-cols-1' }} grid-flow-row auto-cols-auto gap-x-0 text-black" aria-labelledby="dropdownLargeButton">
+						{% for child in item.children %}
+						<li>
+							<h6 class="px-4 py-2">{{ child.title }}</h6>
+								<ul>
+								{% for child_three in child.children %}
+									<li>
+										<a href="{{ child_three.link }}" target="{{ child_three.target ?? '_self' }}" class="block px-4 py-1 text-base hover:bg-gray-100 {{ child_three.classes|join(' ') }}">{{ child_three.title }}</a>
+									</li>	
+								{% endfor %}
+								</ul>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	</nav>
+</div>
+<!-- end secondary menu -->
