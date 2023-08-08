@@ -144,7 +144,7 @@ class wp_acf_field_button extends acf_field {
 	<span id="spinner_<?php echo esc_attr($field['id']) ?>" class="spinner"></span>
 	<input type="button" class="button button-primary button-large" id="<?php echo esc_attr($field['id']) ?>"
 		name="<?php echo esc_attr($field['name']) ?>" value="<?php echo esc_attr($field['value']) ?>"
-		<?php if ($field['callback'] != ""): ?> onClick="<?php echo esc_attr($field['callback']) ?>" <?php endif; ?> />
+		<?php if (!empty($field['callback'])): ?> onClick="<?php echo esc_attr($field['callback']) ?>" <?php endif; ?> />
 </div>
 
 <?php

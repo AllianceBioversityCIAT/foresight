@@ -1,22 +1,22 @@
 <footer id="foresight-footer-section" class="bg-[#1F1F1F] py-14">
   <div class="container mx-auto relative px-4">
     <div class="grid grid-cols-2 gap-4 pb-14 border-b border-solid border-white/25">
-      <div class="col-span-1 max-sm:col-span-2 flex flex-col">
+      <div class="col-span-1 max-lg:col-span-2 flex flex-col">
           <img class=" h-14 w-14" src="{{ Image( footer_company_image ).src }}"
             srcset="{{ Image( footer_company_image ).srcset }}"
             sizes="{{ Image( footer_company_image ).img_sizes }}"
             alt="{{ Image( footer_company_image ).title }}">
-          <div class="mt-4 text-white">
-            {{ footerCompanyText }}
+          <div class="mt-4 max-w-[520px] text-white font-montserrat font-normal text-xs">
+            {{ footer_company_text }}
           </div>
           <h6 class="text-white mt-11 font-bold text-lg">
-            {{ footerTitleNewsletter }}
+            {{ footer_title_newsletter }}
           </h6>
           </div>
-      <div class="col-span-1 max-sm:col-span-2">
-        <div class="flex justify-end max-sm:justify-start">
+      <div class="col-span-1 max-lg:col-span-2">
+        <div class="flex justify-end max-lg:justify-start">
 					<ul class="flex gap-5">
-						{% for item in socialMenu.items %}
+						{% for item in social_menu.items %}
               <li class="text-white border rounded-full border-white/25 w-12 h-12 justify-center flex items-center hover:bg-yellow">
                 <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a>
               </li>
@@ -27,7 +27,7 @@
     </div>
     <div class="flex flex-wrap pt-6">
     
-      {% for item in footerMenu.items %}
+      {% for item in footer_menu.items %}
         <div class="first:pl-0 px-4">
 
           {% if item.meta('type_modal') is not empty %}

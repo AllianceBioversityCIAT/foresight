@@ -11,7 +11,7 @@ if ( class_exists( 'Timber' ) ) {
 	$id_page                 = get_the_ID();
 	$context                 = Timber::context();
 	$context[ 'post' ]       = new Timber\Post();
-	$context[ 'socialMenu' ] = new TimberMenu( 'foresight-social-menu' );
+	$context[ 'social_menu' ] = new TimberMenu( 'foresight-social-menu' );
 	$options_page            = get_fields( 'theme-general-settings' );
 
 	if ( $_POST ) {
