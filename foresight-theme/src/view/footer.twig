@@ -9,11 +9,21 @@
           <div class="mt-4 max-w-[520px] text-white font-montserrat font-normal text-xs">
             {{ footer_company_text }}
           </div>
-          <h6 class="text-white mt-11 font-bold text-lg">
+          <h6 class="text-white mt-11 mb-5 font-bold text-lg">
             {{ footer_title_newsletter }}
           </h6>
+            <div class="relative max-w-sm">
+              <form action="https://cgiar.us21.list-manage.com/subscribe?u=a6e95ec52e112fc08b43c3f89&id=91bdb4d430" method="GET" target="_blank">
+                <input type="search" id="register-newsletter" class="block p-4 w-full z-20 text-md text-gray-900 bg-gray-50 rounded-lg" placeholder="Sign Up for news and updates" required>
+                <button type="submit" class="absolute top-0 right-0 p-4 h-full text-sm font-medium text-white bg-green rounded-r-lg hover:bg-green/80">
+                <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.5594 13.0596L13.0594 20.5596C12.7687 20.8549 12.3844 21.0002 12 21.0002C11.6156 21.0002 11.2322 20.8537 10.9397 20.5607C10.3537 19.9748 10.3537 19.0256 10.9397 18.4396L15.8812 13.5002H1.5C0.671719 13.5002 7.62939e-05 12.8299 7.62939e-05 12.0002C7.62939e-05 11.1705 0.671719 10.5002 1.5 10.5002H15.8812L10.9406 5.55957C10.3547 4.97363 10.3547 4.02441 10.9406 3.43848C11.5266 2.85254 12.4758 2.85254 13.0617 3.43848L20.5617 10.9385C21.1453 11.5268 21.1453 12.4736 20.5594 13.0596Z" fill="white"/>
+                </svg>
+                </button>
+              </form>
+            </div>
           </div>
-      <div class="col-span-1 max-lg:col-span-2">
+      <div class="col-span-1 mt-6 max-lg:col-span-2">
         <div class="flex justify-end max-lg:justify-start">
 					<ul class="flex gap-5">
 						{% for item in social_menu.items %}
