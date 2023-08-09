@@ -55,8 +55,18 @@
 		font-montserrat
 		text-[17px]
 		not-italic
-		font-bold;
+		font-bold
+		uppercase;
 	  }
+
+	 .item_secondary_menu_mobile {
+		@apply
+		font-open
+		text-base
+		not-italic
+		font-normal
+		uppercase;
+	 }
 	/* end menus */
 
 

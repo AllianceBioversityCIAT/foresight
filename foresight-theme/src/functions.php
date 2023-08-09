@@ -385,18 +385,6 @@ if ( !function_exists( 'foresight_popular_searches' ) ) :
 
 endif;
 
-/**
- * Asynchronous scripts in the queue
- **/
-function add_async_to_script( $tag, $handle, $src ) {
-	if ( !is_admin() && !($GLOBALS['pagenow'] === 'wp-login.php') ) {
-		$tag = str_replace( ' src', ' defer src', $tag );
-	}
-	return $tag;
-}
-
-add_filter( 'script_loader_tag', 'add_async_to_script', 10, 3 );
-
 
 /**
  * Hidden block editor for Pages
