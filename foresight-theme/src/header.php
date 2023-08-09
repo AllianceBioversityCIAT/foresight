@@ -25,6 +25,19 @@
 	</head>
 
 	<body class="font-open w-full min-w-[320px]">
+	<noscript>
+		<div class="bg-green fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
+			<div class="flex items-center p-4 m-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
+				<svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+					<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+				</svg>
+				<span class="sr-only">Warning</span>
+				<div>
+					<span class="font-medium">Warning:</span> The browser you’re using doesn’t support JavaScript, or has JavaScript turned off.
+				</div>
+			</div>
+		</div>
+	</noscript>
 		<?php wp_body_open(); ?>
 		<div id="page" class="site">
 <?php

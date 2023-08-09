@@ -48,13 +48,27 @@
 		list-decimal
 		mb-2;
 	}
+
+	/* begin menus */
+	.item_top_menu {
+		@apply
+		font-montserrat
+		text-[17px]
+		not-italic
+		font-bold;
+	  }
+	/* end menus */
+
+
+	/* 
 	ul {
 		@apply
 		list-inside
 		mb-2;
-	}
+	} 
 	li {
 		@apply
 		mb-1;
-	}
+	} 
+	*/
   }
