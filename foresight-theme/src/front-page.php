@@ -4,7 +4,6 @@ get_header();
 if ( class_exists( 'Timber' ) ) {
 
     $context = Timber::context();
-    $context['homePage'] = new Timber\Post();
 	$context['frontPage'] = new Timber\Post();
     $context['popularSearch'] = foresight_get_keywords_search();
     $featured_post_args = array(

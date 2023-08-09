@@ -92,4 +92,46 @@ if (slider) {
         $('#' + idTab).slideToggle('slow')
         $(this).text($(this).text() == 'Read Less' ? 'Read More' : 'Read Less')
     })
+
+    $('.cards-slick-slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: false,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        speed: 1000,
+        dots: true,
+        prevArrow: $('.cards-slick-prev'),
+        nextArrow: $('.cards-slick-next'),
+        responsive: [
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    })
 })(jQuery)

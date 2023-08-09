@@ -16,7 +16,7 @@
 @import "tailwindcss/utilities.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;700;800&display=swap");
 
-
+/* full carousel */
 .carousel-full-slick .slick-dots {
 	display: flex;
 	justify-content: center;
@@ -58,4 +58,52 @@
   -webkit-transform: translate(0, -50%) rotate(-180deg);
   -moz-transform: translate(0, -50%) rotate(-180deg);
   -ms-transform: translate(0, -50%) rotate(-180deg);
+}
+
+/* carousel cards */
+.cards-slick-slider .slick-dots {
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding-top: 25px;
+}
+
+.cards-slick-slider .slick-dots li button {
+  padding: 0;
+  background-color: white;
+  border: 1px solid #079048;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+}
+
+.cards-slick-slider .slick-dots li.slick-active button {
+  background-color: #079048;
+}
+
+.cards-slick-slider .slick-dots li button::before {
+  content: none;
+}
+
+.carousel-container .cards-slick-next {
+  right: -25px;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
+}
+
+.carousel-container .cards-slick-prev {
+  left: -25px;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+.carousel-container .cards-slick-prev.slick-disabled,
+.carousel-container .cards-slick-next.slick-disabled {
+  display: none !important;
 }
