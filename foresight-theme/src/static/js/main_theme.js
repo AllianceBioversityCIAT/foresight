@@ -128,7 +128,7 @@ if (slider) {
             {
                 breakpoint: 1280,
                 settings: {
-                    slidesToShow: 4,
+                    slidesToShow: 3,
                     slidesToScroll: 1,
                 },
             },
