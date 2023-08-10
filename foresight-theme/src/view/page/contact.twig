@@ -1,103 +1,81 @@
-<section id="page-section-contact">
-	<div class="container container-page-contact">
-		<div class="row">
-			<div class="col-md-5 content-contact">
-				<h2>{{ post.title }}</h2>
-				<div class="data-page-contact">
-					<p><i class="icon-phone"></i>{{ post.meta('contact_title_cell_phone') }}</p>
-					<p><i class="icon-email"></i>{{ post.meta('contact_title_email') }}</p>
+<section id="page-section-contact" class="my-16">
+  <div class="container mx-auto relative px-4 divide-y">
+		<div class="grid grid-cols-2 gap-4 px-4 max-sm:flex max-sm:flex-col-reverse">
+			<div class="col-span-1 max-sm:col-span-2">
+				<h2 class="max-sm:hidden">{{ post.title }}</h2>
+				<div class="data-page-contact mt-9">
+					<p class="text-base font-bold flex flex-row">
+						<svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M23.9625 18.1406L22.8727 22.8656C22.7196 23.5336 22.1325 24.0009 21.4448 24.0009C9.61875 24 0 14.3812 0 2.55469C0 1.8675 0.467297 1.27969 1.13531 1.12734L5.86031 0.0375012C6.54844 -0.121967 7.25156 0.23522 7.5375 0.886875L9.71813 5.97281C9.97303 6.57187 9.80109 7.26984 9.29719 7.6814L6.77344 9.7078C8.36625 12.9525 11.0044 15.5906 14.25 17.1844L16.3162 14.6625C16.7235 14.1572 17.4267 13.9823 18.0258 14.2418L23.1117 16.4219C23.7234 16.7437 24.1219 17.4562 23.9625 18.1406Z" fill="black"/>
+						</svg>
+						{{ post.meta('contact_title_cell_phone') }}
+					</p>
+					<p class="text-base font-bold flex flex-row">
+						<svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							∫<path d="M12 16.5C11.2252 16.5 10.4503 16.2458 9.78938 15.7308L0 8.11875V18.75C0 19.9922 1.00734 21 2.25 21H21.75C22.9927 21 24 19.9927 24 18.75V8.11875L14.2125 15.7359C13.5516 16.2469 12.7734 16.5 12 16.5ZM0.763594 6.81094L10.7105 14.55C11.4694 15.1406 12.5325 15.1406 13.2914 14.55L23.2383 6.81094C23.6766 6.43594 24 5.85938 24 5.25C24 4.00734 22.9922 3 21.75 3H2.25C1.00734 3 0 4.00734 0 5.25C0 5.85938 0.281719 6.43594 0.763594 6.81094Z" fill="black"/>
+						</svg>
+						{{ post.meta('contact_title_email') }}
+					</p>
 				</div>
-				<ul class="social-icons">
-					{% for item in social_menu.items %}
-						<li>
-							<a href="{{ item.link }}" target="{{item.target}}">
-								<i class="icon-{{ item.title|lower }}"></i>
-							</a>
-						</li>
-					{% endfor %}
-				</ul>
 			</div>
-			<div class="col-md-7 content-form-contact">
-				<h4>{{ post.meta('contact_form_title') }}</h4>
+			<div class="col-span-1 max-sm:col-span-2">
+				<h2 class="hidden max-sm:inline-block max-sm:mb-11">{{ post.title }}</h2>
+
 				{% if contactInfo %}
 					<div id="alert-success" class="alert alert-success" role="alert">
 						Successful submission!
 					</div>
 				{% endif %}
 				<form id="foresight-form-contact" class="form-page-contact needs-validation" novalidate method="post">
-					<div class="form-row">
-						<div class="col-md-8 mb-3">
-							<div class="input-group">
-								<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-user">
-											<i class="icon-user"></i>
-										</span>
-								</div>
-								<input type="text" class="form-control" id="full_name" name="full_name" minlength="3"
-									   pattern="^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
-									   placeholder="{{ post.meta('contact_form_placeholder_full_name') }} *"
-									   aria-describedby="basic-user" required>
-							</div>
-							<div id="alert-error-full-name" class="alert-error" role="alert">
-								This field is required and with a minimum of 3 characters.
-							</div>
+					<div class="form-row mb-4">
+						<div class="input-group flex flex-col">
+							<label class="mb-2.5 font-bold text-sm">{{ post.meta('contact_form_placeholder_full_name') }} <span class="text-red-600">*</span></label>
+							<input type="text" class="form-control bg-[#FBFBFB] border-[#D1D0D2] rounded" id="full_name" name="full_name" minlength="3"
+										aria-describedby="basic-user" required>
+						</div>
+						<div id="alert-error-full-name" class="alert-error hidden text-red-600" role="alert">
+							This field is required and with a minimum of 3 characters.
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="col-md-8 mb-3">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="basic-email">
-										<i class="icon-email"></i>
-									</span>
-								</div>
-								<input type="email" class="form-control" id="email" name="email"
-									   pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-									   placeholder="{{ post.meta('contact_form_placeholder_email') }} *"
-									   aria-describedby="basic-email" required>
-							</div>
-							<div id="alert-error-email" class="alert-error" role="alert">
-								Required field. Please provide a valid email.
-							</div>
+					<div class="form-row mb-4">
+						<div class="input-group flex flex-col">
+							<label class="mb-2.5 font-bold text-sm">{{ post.meta('contact_form_placeholder_email') }} <span class="text-red-600">*</span></label>
+							<input type="email" class="form-control bg-[#FBFBFB] border-[#D1D0D2] rounded" id="email" name="email"
+										aria-describedby="basic-email" required>
+						</div>
+						<div id="alert-error-email" class="alert-error hidden text-red-600" role="alert">
+							Required field. Please provide a valid email.
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="col-md-8 mb-4">
-							<div class="input-group">
-								<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-cell-phone">
-											<i class="icon-phone"></i></span>
-								</div>
-								<input type="tel" class="form-control" id="cell_phone" name="cell_phone"
-									   placeholder="{{ post.meta('contact_form_placeholder_cell_phone') }}"
-									   aria-describedby="basic-cell-phone">
-							</div>
-							<div id="alert-error-phone" class="alert-error" role="alert">
-								Please provide a valid phone and with a minimum of 10 characters.
-							</div>
+					<div class="form-row mb-4">
+						<div class="input-group flex flex-col">
+							<label class="mb-2.5 font-bold text-sm">{{ post.meta('contact_form_placeholder_cell_phone') }}</label>
+							<input type="tel" class="form-control bg-[#FBFBFB] border-[#D1D0D2] rounded" id="cell_phone" name="cell_phone"
+										aria-describedby="basic-cell-phone">
+						</div>
+						<div id="alert-error-phone" class="alert-error hidden text-red-600" role="alert">
+							Please provide a valid phone and with a minimum of 10 characters.
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="col-md-8 mb-3">
-								<textarea class="form-control" rows="5" id="description" name="description"
-										  placeholder="{{ post.meta('contact_form_placeholder_description') }}"></textarea>
-							<div id="alert-error-description" class="alert-error" role="alert">
+					<div class="form-row mb-4">
+						<div class="input-group flex flex-col">
+							<label class="mb-2.5 font-bold text-sm">{{ post.meta('contact_form_placeholder_description') }}</label>
+							<textarea class="form-control bg-[#FBFBFB] border-[#D1D0D2] rounded" rows="5" id="description" name="description"></textarea>
+							<div id="alert-error-description" class="alert-error hidden text-red-600" role="alert">
 								This field is a minimum of 10 characters.
 							</div>
 						</div>
 					</div>
-					<button class="btn foresight-btn-primary" type="submit">
-						<span class="spinner-border spinner-border-sm" id="contact_form_load"
-							  role="status" aria-hidden="true" style="display: none;">
-						</span>
-						{{ post.meta('contact_form_button_title') }}
-					</button>
+					<div class="text-right mt-28 max-sm:mt-6 max-sm:text-center">
+						<button class="btn-primary-small max-sm:w-full" type="submit">
+							<span class="spinner-border spinner-border-sm" id="contact_form_load"
+									role="status" aria-hidden="true" style="display: none;">
+							</span>
+							{{ post.meta('contact_form_button_title') }}
+						</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<img class="lazyload contact-background-image" width="1500" height="600" data-src="{{ Image(post.meta('contact_background_image') ).src }}"
-		 data-srcset="{{ Image( post.meta('contact_background_image') ).srcset }}"
-		 data-sizes="{{ Image( post.meta('contact_background_image') ).img_sizes }}"
-		 alt="{{ Image( post.meta('contact_background_image') ).title }}">
 </section>

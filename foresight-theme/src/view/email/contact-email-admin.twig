@@ -371,16 +371,16 @@
 							<table role="presentation" border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td>
-										<p>Hola,</p>
-										<p>Un nuevo usuario se ha contactado con {{ site.name }}</p>
-										<p>Estos son sus datos:</p>
+										<p>Hi,</p>
+										<p>A new user has contacted {{ site.name }}</p>
+										<p>These are their data:</p>
 										<div class="content-block">
 											<p>
-												<strong>Nombre Completo: </strong>
+												<strong>Full Name: </strong>
 												{{ contactInfo.full_name }}
 											</p>
 											<p>
-												<strong>Correo Electrónico: </strong>
+												<strong>Email: </strong>
 												{{ contactInfo.email }}
 											</p>
 											<p>
@@ -389,16 +389,16 @@
 											</p>
 											{% if contactInfo.check_form_contact %}
 												<p>
-													<strong>Servicio: </strong>
+													<strong>Services: </strong>
 													{{ contactInfo.check_form_contact }}
 												</p>
 											{% endif %}
 											<p>
-												<strong>Descripción: </strong>
+												<strong>Description: </strong>
 												{{ contactInfo.description }}
 											</p>
 											<p>
-												<strong>Página desde donde se envía el correo electrónico: </strong>
+												<strong>Page from which the e-mail is sent: </strong>
 												<a href="{{ webSiteLink }}" style="color: #191819">
 													{{ webSiteTitle }}
 												</a>
