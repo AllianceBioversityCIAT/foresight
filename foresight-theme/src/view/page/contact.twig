@@ -1,5 +1,5 @@
 <section id="page-section-contact" class="my-16">
-  <div class="container mx-auto relative px-4 divide-y">
+  <div class="container mx-auto relative px-4">
 		<div class="grid grid-cols-2 gap-4 px-4 max-sm:flex max-sm:flex-col-reverse">
 			<div class="col-span-1 max-sm:col-span-2">
 				<h2 class="max-sm:hidden">{{ post.title }}</h2>
@@ -22,7 +22,7 @@
 				<h2 class="hidden max-sm:inline-block max-sm:mb-11">{{ post.title }}</h2>
 
 				{% if contactInfo %}
-					<div id="alert-success" class="alert alert-success" role="alert">
+					<div id="alert-success" class="alert alert-success text-[#16a34a] mb-6" role="alert">
 						Successful submission!
 					</div>
 				{% endif %}
