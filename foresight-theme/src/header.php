@@ -20,11 +20,12 @@
 		<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/static/images/favicon.png" sizes="32x32" />
 		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/static/images/favicon-180x180.png" />
 		<meta name="msapplication-TileImage" content="<?php echo get_template_directory_uri(); ?>/static/images/favicon-270x270.png" />
-
+		<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com/">
 		<?php wp_head(); ?>
 	</head>
 
-	<body class="font-open w-full min-w-[320px]">
+	<body <?php body_class('font-open w-full min-w-[320px]'); ?>>
 	<noscript>
 		<div class="bg-green fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
 			<div class="flex items-center p-4 m-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
@@ -45,12 +46,6 @@ if ( class_exists( 'Timber' ) ) {
 
 	$context 	= Timber::context();
 	$post		= new Timber\Post();
-
-	if (isset($post->hero_image) && strlen($post->hero_image)){
-		$post->hero_image = new Timber\Image($post->hero_image);
-	}else{
-		$post->hero_image = get_template_directory_uri().'/static/images/hero-image.jpeg';
-	}
 
 	$context['post'] = $post;
 	$context['top_menu'] = new TimberMenu('foresight-top-menu');

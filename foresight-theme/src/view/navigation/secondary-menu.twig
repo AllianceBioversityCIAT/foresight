@@ -4,7 +4,7 @@
 	<div class="hidden lg:block">
 		<a href="/" class="mr-16 font-montserrat font-bold text-yellow-primary fa-solid fa-house text-2xl"></a>
 	</div>
-		<ul class="flex flex-col lg:flex-row flex-wrap lg:gap-x-14 xl:gap-x-36 gap-y-3">
+		<ul class="flex flex-col lg:flex-row flex-wrap lg:gap-x-14 gap-y-3">
 		{% for item in secondary_menu.items %}
 			{% if item.link and item.children is empty %}
 			<li>
@@ -19,8 +19,8 @@
 						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
 					</svg>
 				</button>
-				<div id="secondary-menu-{{ item.title|sanitize }}" class="z-10 hidden bg-white rounded-md divide-y shadow-lg max-w-lg">
-					<ul class="grid {{ (item.children|length > 1) ? 'grid-cols-2' : 'grid-cols-1' }} grid-flow-row auto-cols-auto gap-x-0 text-black" aria-labelledby="dropdownLargeButton">
+				<div id="secondary-menu-{{ item.title|sanitize }}" class="z-10 hidden bg-white rounded-md divide-y border drop-shadow-md max-w-lg">
+					<ul class="grid {{ (item.children|length > 1) ? 'grid-cols-2' : 'grid-cols-1' }} grid-flow-row auto-cols-auto gap-x-0 text-black pb-3" aria-labelledby="dropdownLargeButton">
 						{% for child in item.children %}
 						<li>
 							<h6 class="px-4 py-2">{{ child.title }}</h6>
