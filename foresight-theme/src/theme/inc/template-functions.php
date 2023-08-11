@@ -216,29 +216,6 @@ remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
 //Disabled admin bar
 add_filter('show_admin_bar', '__return_false');
 
-/**
- * Change logo for wp-login
- */
-function foresight_login_logo() {
-	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/static/css/login.css' );
-
-	$options_page = get_fields( 'theme-general-settings' );
-	?>
-    <style type="text/css">
-        .login h1 a {
-            width: auto !important;
-            background-image: url("<?php echo get_template_directory_uri();?>/static/images/foresight-logo.svg") !important;
-            background-size: auto !important;
-        }
-
-		.login #page {
-			background-image: url("<?php echo $options_page[ 'login_second_background_image' ]['url']; ?>");
-			background-size: cover;
-		}
-    </style>
-<?php }
-add_action( 'login_enqueue_scripts', 'foresight_login_logo' );
-
 /* REMOVE WIDGETS DASBOARD */
 function remove_dashboard_meta() {
 	remove_action( 'welcome_panel', 'wp_welcome_panel' );
@@ -881,29 +858,13 @@ add_filter('wpseo_primary_term_taxonomies', function ($all_taxonomies, $post_typ
 }, 10, 2);
 
 /**
- * Change url logo in login screen
+ * Change logo for wp-login
  */
-function custom_login_logo_url() {
-	return get_bloginfo( 'url' );
+function foresight_login_logo() {
+	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/static/css/login.css' );
+
 }
-
-add_filter( 'login_headerurl', 'custom_login_logo_url' );
-
-function custom_login_logo_url_title() {
-	return get_bloginfo( 'name' );
-}
-
-add_filter( 'login_headertitle', 'custom_login_logo_url_title' );
-
-function smallenvelop_login_message( $message ) {
-    if ( empty($message) ){
-        return '<div id="intro2"><strong>Please login to continue</strong></div>';
-    } else {
-        return $message;
-    }
-}
-
-add_filter( 'login_message', 'smallenvelop_login_message' );
+add_action( 'login_enqueue_scripts', 'foresight_login_logo' );
 
 /**
  * This function adds content to the login.
@@ -911,16 +872,7 @@ add_filter( 'login_message', 'smallenvelop_login_message' );
 function my_addition_to_login_footer() {
 	$options_page = get_fields( 'theme-general-settings' );
 
-     echo '<div id="intro" style="background-image: url('. $options_page[ 'login_background_image' ]['url'] .'">
-	 		<div class="content-right-login">
-	 			<div class="background-color-login"></div>
-				<div class="content-info">
-					<h1>'. $options_page[ 'login_title' ].'</h1>
-					<h5>'. $options_page[ 'login_sub_title' ].'</h5>
-					<p>'. $options_page[ 'login_description' ].'</p>
-				</div>
-	 		</div>
-		</div>';
+     echo '<div id="intro" style="background-image: url('. $options_page[ 'login_background_image' ]['url'] .'"></div>';
 
 	 get_footer();
 }
@@ -932,7 +884,7 @@ add_action('login_footer', 'my_addition_to_login_footer');
  * This works by adding the website header to the login.
  */
 function add_header_login() {
-	get_template_part( 'header' );
+	get_template_part( 'header-login' );
 }
 
 add_action('login_head', 'add_header_login' );
