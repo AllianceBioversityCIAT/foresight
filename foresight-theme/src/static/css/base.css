@@ -37,7 +37,8 @@
 	p {
 		@apply
 		mb-4
-		text-base
+		lg:text-base
+		text-sm
 		font-open
 		font-normal
 		last:mb-0;

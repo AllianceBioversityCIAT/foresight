@@ -4,7 +4,7 @@
 	<div class="hidden lg:block">
 		<a href="/" class="mr-16 font-montserrat font-bold text-yellow-primary fa-solid fa-house text-2xl"></a>
 	</div>
-		<ul class="flex flex-col lg:flex-row flex-wrap lg:gap-x-14 xl:gap-x-36 gap-y-3">
+		<ul class="flex flex-col lg:flex-row flex-wrap lg:gap-x-14 gap-y-3">
 		{% for item in secondary_menu.items %}
 			{% if item.link and item.children is empty %}
 			<li>

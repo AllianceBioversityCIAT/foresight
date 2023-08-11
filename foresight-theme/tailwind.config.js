@@ -13,7 +13,7 @@ module.exports = {
                     dark: '#EFB848',
                 },
                 black: {
-                    DEFAULT: '#000000',
+                    DEFAULT: '#1F1F1F',
                     100: '#201717',
                 },
                 green: '#2E7636',
@@ -23,9 +23,18 @@ module.exports = {
                 open: ["'Open Sans'", 'sans-serif'],
                 montserrat: ['Montserrat', 'sans-serif'],
             },
-            screens: {
-                '3xl': '2560px',
-            },
+        },
+        screens: {
+            sm: '640px',
+            // => @media (min-width: 640px) { ... }
+            md: '768px',
+            // => @media (min-width: 768px) { ... }
+            lg: '1074px',
+            // => @media (min-width: 1074px) { ... }
+        },
+        container: {
+            center: true,
+            padding: '1rem',
         },
     },
     safelist: [

@@ -88,7 +88,7 @@ function customize_add_control_text( $wp_customize, $section_id, $setting_id, $c
             'type'        => 'text',
             'input_attrs' => array(
                 'class'       => $control_id.'-class',
-                'placeholder' => esc_html__( 'Enter '.strtolower( $control_title ).'...', SLUG_THEME ),
+                'placeholder' => esc_html__( 'Enter '.strtolower( $control_title ), SLUG_THEME ),
             ),
         )
     ) );
@@ -115,7 +115,7 @@ function customize_add_control_textarea( $wp_customize, $section_id, $setting_id
             'type'        => 'textarea',
             'input_attrs' => array(
                 'class'       => $control_id.'-class',
-                'placeholder' => esc_html__( 'Enter '.strtolower( $control_title ).'...', SLUG_THEME ),
+                'placeholder' => esc_html__( 'Enter '.strtolower( $control_title ), SLUG_THEME ),
             ),
         )
     ) );
