@@ -387,15 +387,6 @@ endif;
 
 
 /**
- * Hidden block editor for Pages
- */
-function hide_editor() {
-	remove_post_type_support( 'page', 'editor' );
-}
-
-add_action( 'admin_init', 'hide_editor' );
-
-/**
  * Fixed wp_remote_get
  * https://gist.github.com/timersys/4480bccf64a1147abb3d
  * SSL routines:CONNECT_CR_SRVR_HELLO:sslv3 alert handshake failure

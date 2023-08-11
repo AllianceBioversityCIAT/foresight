@@ -1,28 +1,32 @@
 <?php
 /**
- * Cafeto Home header.
+ * Foresight site footer.
  *
  * @package foresight_theme.
  */
 
 /**
- * Add customization support for the home section of the theme.
+ * Add customization support for the footer section of the theme.
  *
  * @param $wp_customize Theme Customizer object.
  */
-function register_customizer_section_header( $wp_customize ) {
-	$custom_panel_home_header = 'custom-panel-home-header';
+function register_customizer_section_footer( $wp_customize ) {
+
 	$custom_section_home_nav = 'custom-section-home-nav';
+	customize_add_section( $wp_customize, null, $custom_section_home_nav, 'Footer' );
 
-	customize_add_panel( $wp_customize, $custom_panel_home_header, '[Theme] Panel Home Header' );
+	customize_add_setting( $wp_customize, 'theme_footer_logo', '#theme-footer-logo' );
+	customize_add_setting( $wp_customize, 'theme_footer_about', '#theme-footer-text' );
+	customize_add_setting( $wp_customize, 'theme_footer_newsletter', '#theme-footer-newsletter' );
 
-	customize_add_section( $wp_customize, $custom_panel_home_header, $custom_section_home_nav, 'Logo and Bottom' );
+	customize_add_control_image( $wp_customize, $custom_section_home_nav, 'theme_footer_logo',
+		'theme_nav_logo_control', 'Footer Logo'  );
+	
+	customize_add_control_textarea( $wp_customize, $custom_section_home_nav, 'theme_footer_about',
+		'theme_nav_description_control', 'About Foresight'  );
 
-	//Logo.
-	customize_add_setting( $wp_customize, 'theme_nav_logo', '#theme-nav-logo' );
-
-	customize_add_control_image( $wp_customize, $custom_section_home_nav, 'theme_nav_logo',
-		'theme_nav_logo_control', 'Theme Logo.'  );
+	customize_add_control_text( $wp_customize, $custom_section_home_nav, 'theme_footer_newsletter',
+		'theme_nav_newsletter_control', 'Newsletter Link'  );
 }
 
-add_action('customize_register', 'register_customizer_section_header');
+add_action('customize_register', 'register_customizer_section_footer');

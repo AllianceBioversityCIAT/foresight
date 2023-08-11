@@ -1,26 +1,28 @@
-<footer id="foresight-footer-section" class="bg-[#1F1F1F] py-14">
+{% set footer_logo = Image( site.theme.theme_mod('theme_footer_logo')) %}
+{% set footer_about = site.theme.theme_mod('theme_footer_about') %}
+{% set footer_newsletter = site.theme.theme_mod('theme_footer_newsletter') %}
+
+<footer id="foresight-footer-section" class="bg-black py-14">
   <div class="container mx-auto relative px-4">
     <div class="grid grid-cols-2 gap-4 pb-14 border-b border-solid border-white/25">
       <div class="col-span-1 max-lg:col-span-2 flex flex-col">
-          <img class=" h-14 w-14" src="{{ Image( footer_company_image ).src }}"
-            srcset="{{ Image( footer_company_image ).srcset }}"
-            sizes="{{ Image( footer_company_image ).img_sizes }}"
-            alt="{{ Image( footer_company_image ).title }}">
+          <img class=" h-14 w-14" src="{{ footer_logo.src }}"
+            srcset="{{ footer_logo.srcset }}"
+            sizes="{{ footer_logo.img_sizes }}"
+            alt="{{ footer_logo.title }}">
           <div class="mt-4 max-w-[520px] text-white font-montserrat font-normal text-xs">
-            {{ footer_company_text }}
+            {{ footer_about }}
           </div>
           <h6 class="text-white mt-11 mb-5 font-bold text-lg">
             {{ footer_title_newsletter }}
           </h6>
-            <div class="relative max-w-sm">
-              <form action="https://cgiar.us21.list-manage.com/subscribe?u=a6e95ec52e112fc08b43c3f89&id=91bdb4d430" method="GET" target="_blank">
-                <input type="search" id="register-newsletter" class="block p-4 w-full z-20 text-md text-gray-900 bg-gray-50 rounded-lg" placeholder="Sign Up for news and updates" required>
-                <button type="submit" class="absolute top-0 right-0 p-4 h-full text-sm font-medium text-white bg-green rounded-r-lg hover:bg-green/80">
-                <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.5594 13.0596L13.0594 20.5596C12.7687 20.8549 12.3844 21.0002 12 21.0002C11.6156 21.0002 11.2322 20.8537 10.9397 20.5607C10.3537 19.9748 10.3537 19.0256 10.9397 18.4396L15.8812 13.5002H1.5C0.671719 13.5002 7.62939e-05 12.8299 7.62939e-05 12.0002C7.62939e-05 11.1705 0.671719 10.5002 1.5 10.5002H15.8812L10.9406 5.55957C10.3547 4.97363 10.3547 4.02441 10.9406 3.43848C11.5266 2.85254 12.4758 2.85254 13.0617 3.43848L20.5617 10.9385C21.1453 11.5268 21.1453 12.4736 20.5594 13.0596Z" fill="white"/>
-                </svg>
-                </button>
-              </form>
+            <div class="relative max-w-sm">  
+                <a href="{{ footer_newsletter }}" target="_blank" class="text-white bg-green hover:bg-green/70 text-center inline-flex items-center font-sans font-normal text-sm rounded-lg px-5 py-3 focus:outline-none">
+                  Subscribe to the Newsletter 
+                  <svg class="w-5 h-5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                  </svg>
+                </a>
             </div>
           </div>
       <div class="col-span-1 mt-6 max-lg:col-span-2">

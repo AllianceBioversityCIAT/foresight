@@ -18,7 +18,7 @@ function register_custom_acf_fields_hero_image() {
 						'instructions' => 'Select an image to display as a cover on the header <b>(1920 x 946]</b> px',
 						'required' => 0,
 						'conditional_logic' => 0,
-						'return_format' => 'url',
+						'return_format' => 'id',
 						'preview_size' => 'thumbnail',
 						'library' => 'all',
 						'min_width' => '',
