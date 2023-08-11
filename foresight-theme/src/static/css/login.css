@@ -1,0 +1,156 @@
+#page {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5rem;
+  background-color: white;
+}
+
+#login h1 {
+  display: none;
+}
+
+#login label[for="user_login"], #login label[for="user_pass"] {
+  color: #1F1F1F;
+  font-family: Open Sans;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.00081rem;
+}
+
+#login input[type="password"]:focus, #login input[type="text"]:focus {
+  box-shadow: none !important;
+}
+
+#login input#user_login {
+  margin-top: 10px;
+  margin-bottom: 28px;
+  border-color: #D1D0D2;
+  background-color: #FBFBFB;
+  width: 100%;
+}
+
+#login #login_error {
+  margin-bottom: 40px;
+}
+
+#login .wp-pwd {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#login .user-pass-wrap {
+  margin-bottom: 37px;
+}
+
+#login .wp-pwd button.button {
+  width: 10%;
+  height: 34px;
+  padding-bottom: 8px;
+  border: 1px solid #D1D0D2;
+  background-color: #FBFBFB;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-left: none;
+}
+
+@media screen and (max-width: 782px) {
+  .wp-pwd button.wp-hide-pw {
+    right: 0;
+  }
+
+  input[type=checkbox], input[type=radio] {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .wp-pwd [type=password], .wp-pwd [type=text] {
+    line-height: 2;
+    padding-right: 1rem;
+  }
+}
+
+#login input#user_pass {
+  border-color: #D1D0D2;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #FBFBFB;
+  width: 90%;
+}
+
+#login .forgetmenot label[for="rememberme"] {
+  color: #1F1F1F;
+  font-family: Open Sans;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.00081rem;
+  margin-left: 5px;
+}
+
+#login .forgetmenot input[type=checkbox]:checked {
+  background-color: #0075FF;
+}
+
+#login .forgetmenot input[type=checkbox]:checked::before {
+  content: none !important;
+}
+
+#login .forgetmenot {
+  display: flex;
+  align-items: end;
+  margin-bottom: 37px;
+}
+
+#login input[type="submit"] {
+  border-radius: 0.1875rem;
+  background: #FFC84F;
+  width: 100%;
+  text-align: center;
+  padding: .5rem;
+  color: #111;
+  font-family: Open Sans;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.00081rem;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+div#intro {
+  width: 50%;
+  background-size: cover;
+  height: auto;
+}
+
+#login #nav a, #login #backtoblog a, .privacy-policy-page-link a {
+  color: #111;
+  font-family: Open Sans;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.00081rem;
+}
+
+#login .privacy-policy-page-link {
+  margin-top: 37px;
+  margin-bottom: 200px;
+  text-align: center;
+}
+
+#login #nav a:hover, #login #backtoblog a:hover, .privacy-policy-page-link a:hover {
+  color: #FFC84F;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 782px) {
+  #login .privacy-policy-page-link {
+    margin-bottom: 100px;
+  }
+}
