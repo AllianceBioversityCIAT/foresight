@@ -86,13 +86,6 @@ if (slider) {
         nextArrow: $('.caroulse-full-next'),
     })
 
-    $('.see-more-btn').click(function () {
-        var idTab = $(this).data('id')
-        var $content = document.getElementById(idTab)
-        $('#' + idTab).slideToggle('slow')
-        $(this).text($(this).text() == 'Read Less' ? 'Read More' : 'Read Less')
-    })
-
     $('.cards-slick-slider').slick({
         slidesToShow: 4,
         slidesToScroll: 4,
