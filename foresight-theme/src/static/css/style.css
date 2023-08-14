@@ -62,10 +62,10 @@
 
 /* carousel cards */
 .cards-slick-slider .slick-dots {
+  position: relative;
 	display: flex;
 	justify-content: center;
 	margin: 0;
-	padding-top: 25px;
 }
 
 .cards-slick-slider .slick-dots li button {
@@ -77,6 +77,10 @@
   width: 15px;
 }
 
+.cards-slick-slider {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .cards-slick-slider .slick-dots li.slick-active button {
   background-color: #079048;
 }

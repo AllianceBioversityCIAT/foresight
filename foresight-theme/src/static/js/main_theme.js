@@ -90,7 +90,7 @@ if (slider) {
         slidesToShow: 4,
         slidesToScroll: 4,
         infinite: false,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000,
         speed: 1000,
         dots: true,
@@ -108,21 +108,21 @@ if (slider) {
                 breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToScroll: 2,
                 },
             },
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToScroll: 2,
                 },
             },
             {
                 breakpoint: 1280,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 1,
+                    slidesToScroll: 3,
                 },
             },
         ],
