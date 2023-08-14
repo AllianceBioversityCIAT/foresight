@@ -103,3 +103,12 @@
 .carousel-container .cards-slick-next.slick-disabled {
   display: none !important;
 }
+
+/* details - summary */
+details.description[open] summary::before {
+  content: attr(data-open);
+}
+
+details.description:not([open]) summary::before {
+  content: attr(data-close);
+}
