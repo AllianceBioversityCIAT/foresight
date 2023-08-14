@@ -1,12 +1,12 @@
 {% set content = frontPage %}
-<div class="carousel-container container mx-auto max-h-80 relative">
-	<div class="cards-slick-slider h-72 max-h-80">
+<div class="carousel-container container max-h-80 relative">
+	<div class="cards-slick-slider grid grid-flow-col gap-4 w-full">
 		{% for item in content.meta('slider_items') %}
-		<div>
+		<div class="px-2">
 			<a href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ item.term_cured.name }}%22">
 				<div class="card-carousel flex flex-col max-w-[250px] border boder-gray3 mx-auto">
 					<div class="card-image h-44 max-h-44">
-						<img class="h-44 max-h-44 w-full object-cover object-center" src="{{ Image(item.term_image).src }}" width="150" height="150" alt="foresight-image" />
+						<img class="h-44 max-h-44 w-full object-fill object-center" src="{{ Image(item.term_image).src }}" width="150" height="150" alt="foresight-image" />
 					</div>
 					<div class="bg-white h-20 ">
 						<p class="text-center text-black font-bold text-base mt-2.5">{{ item.term_cured.name }}</p>
