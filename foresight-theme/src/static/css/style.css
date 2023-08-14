@@ -116,3 +116,6 @@ details.description[open] summary::before {
 details.description:not([open]) summary::before {
   content: attr(data-close);
 }
+details summary::-webkit-details-marker {
+  display:none;
+}
