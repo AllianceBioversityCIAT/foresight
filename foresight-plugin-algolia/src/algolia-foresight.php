@@ -106,10 +106,17 @@ function algolia_post_to_record(WP_Post $post) {
 	if($post->post_type == 'post'){
 		
 		$post_meta 		= get_post_meta($post->ID, 'zotero-data');
-		$post_thumb_url = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' )[0];
+		$post_thumb_id	= get_post_thumbnail_id($post->ID);
+		$post_thumb_url	= $post_thumb_id > 0 ? wp_get_attachment_image_src( $post_thumb_id, 'medium' )[0] : '';
+		
+		if(!empty($post_meta)){
+			$record= [
+				'item_type' => ucfirst(preg_replace( '/([a-z0-9])([A-Z])/', "$1 $2", $post_meta[0]['itemType'])),
+			];
+		}
+		
 		$record = [
 			'objectID' => implode('#', [ $post->post_type, $post->ID ]),
-			'item_type' => ucfirst(preg_replace( '/([a-z0-9])([A-Z])/', "$1 $2", $post_meta[0]['itemType'])),
 			'post_type' => $post->post_type,
 			'post_title' => $post->post_title,
 			'post_date' => $post->post_date,
