@@ -1,44 +1,51 @@
 import { hits } from 'instantsearch.js/es/widgets';
 
 export const post = hits({
-	container: '[data-widget="hits"]',
-	templates: {
-		item:
-			`
+  container: '[data-widget="hits"]',
+  templates: {
+    item:
+      `
 	<article class="hit">
-	  <header class="hit-image-container">
-	    <span>
-	      <strong>{{year}}</strong>
-	    </span>
-	  </header>
 
 	  <div class="hit-info-container">
 	    <p class="hit-category">{{tags.region.lvl0}}</p>
-
 	    {{#DOI}}
-	      <span class="hit-em hit-rating">{{item_type}}</span>
-	      <img height="16" width="16" src='http://www.google.com/s2/favicons?sz=24&domain={{icon_domain_source}}' />
-	      <h1>
-	        <a href="{{DOI}}" target="_blank">{{#helpers.highlight}}{ "attribute": "post_title" }{{/helpers.highlight}}
-	        <svg width="16px" height="16px" viewBox="0 0 24 24"><g id="external_link" class="icon_svg-stroke" stroke="#666" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 13.5 17 19.5 5 19.5 5 7.5 11 7.5"></polyline><path d="M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5"></path></g></svg>
-	        </a>
-	      </h1>
+		  <div class="flex gap-2 items-center">
+		  	<svg width="16" height="16" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<g clip-path="url(#clip0_215_1333)">
+				<path d="M21 15.75V2.25C21 1.00734 19.9922 0 18.75 0H4.5C2.01469 0 0 2.01469 0 4.5V19.5C0 21.9853 2.01469 24 4.5 24H19.5C20.3283 24 21 23.3283 21 22.5422C21 21.9928 20.6903 21.5334 20.25 21.2719V17.4581C20.7094 17.0063 21 16.4156 21 15.75ZM6.70781 6H15.7078C16.1625 6 16.5 6.3375 16.5 6.75C16.5 7.1625 16.1625 7.5 15.75 7.5H6.70781C6.3375 7.5 6 7.1625 6 6.75C6 6.3375 6.3375 6 6.70781 6ZM6.70781 9H15.7078C16.1625 9 16.5 9.3375 16.5 9.75C16.5 10.1625 16.1625 10.5 15.75 10.5H6.70781C6.3375 10.5 6 10.1625 6 9.75C6 9.3375 6.3375 9 6.70781 9ZM18 21H4.5C3.67172 21 3 20.3283 3 19.5C3 18.6717 3.67172 18 4.5 18H18V21Z" fill="black"/>
+				</g>
+				<defs>
+				<clipPath id="clip0_215_1333">
+				<rect width="21" height="24" fill="white"/>
+				</clipPath>
+				</defs>
+			</svg>
+		  	<h5>{{year}}</h5>
+		  </div>
+	      <h5>
+	        <a href="{{DOI}}" target="_blank">{{#helpers.highlight}}{ "attribute": "post_title" }{{/helpers.highlight}}</a>
+	      </h5>
 	    {{/DOI}}
 	    {{^DOI}}
-	      {{#item_type}}
-	      <span class="hit-em hit-rating">{{item_type}}</span>
-	      {{/item_type}}
-	      {{^item_type}}
-	      <span class="hit-em hit-rating">Blog</span>
-	      {{/item_type}}
-	      <img height="16" width="16" src='http://www.google.com/s2/favicons?sz=24&domain={{icon_domain_source}}' />
-	      <h1>
-	        <a href="{{url}}" target="_blank">{{#helpers.highlight}}{ "attribute": "post_title" }{{/helpers.highlight}}
-	        <svg width="16px" height="16px" viewBox="0 0 24 24"><g id="external_link" class="icon_svg-stroke" stroke="#666" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 13.5 17 19.5 5 19.5 5 7.5 11 7.5"></polyline><path d="M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5"></path></g></svg>
-	        </a>
-	      </h1>
+			<div class="flex gap-2 items-center">
+				<svg width="16" height="16" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g clip-path="url(#clip0_215_1333)">
+					<path d="M21 15.75V2.25C21 1.00734 19.9922 0 18.75 0H4.5C2.01469 0 0 2.01469 0 4.5V19.5C0 21.9853 2.01469 24 4.5 24H19.5C20.3283 24 21 23.3283 21 22.5422C21 21.9928 20.6903 21.5334 20.25 21.2719V17.4581C20.7094 17.0063 21 16.4156 21 15.75ZM6.70781 6H15.7078C16.1625 6 16.5 6.3375 16.5 6.75C16.5 7.1625 16.1625 7.5 15.75 7.5H6.70781C6.3375 7.5 6 7.1625 6 6.75C6 6.3375 6.3375 6 6.70781 6ZM6.70781 9H15.7078C16.1625 9 16.5 9.3375 16.5 9.75C16.5 10.1625 16.1625 10.5 15.75 10.5H6.70781C6.3375 10.5 6 10.1625 6 9.75C6 9.3375 6.3375 9 6.70781 9ZM18 21H4.5C3.67172 21 3 20.3283 3 19.5C3 18.6717 3.67172 18 4.5 18H18V21Z" fill="black"/>
+					</g>
+					<defs>
+					<clipPath id="clip0_215_1333">
+					<rect width="21" height="24" fill="white"/>
+					</clipPath>
+					</defs>
+				</svg>
+				<h5>{{year}}</h5>
+			</div>
+			<h5>
+	        	<a href="{{url}}" target="_blank">{{#helpers.highlight}}{ "attribute": "post_title" }{{/helpers.highlight}}</a>
+	      	</h5>
 	    {{/DOI}}
-	    <p class="hit-description">{{#helpers.snippet}}{ "attribute": "post_content" }{{/helpers.snippet}}</p>
+	    <p class="mt-5">{{#helpers.snippet}}{ "attribute": "post_content" }{{/helpers.snippet}}</p>
 	    <footer>
 	    <section class="accordion">
 	      <input type="checkbox" name="collapse" id="handle{{ __hitIndex }}">
@@ -51,8 +58,8 @@ export const post = hits({
 	          <ul>
 	            {{#authors}}
 	              <li><a href="?` +
-			process.env.ALGOLIA_INDEX +
-			`[query]=%22{{lastName}}%22 %22{{firstName}}%22">{{lastName}}, {{firstName}}</a></li>
+      process.env.ALGOLIA_INDEX +
+      `[query]=%22{{lastName}}%22 %22{{firstName}}%22">{{lastName}}, {{firstName}}</a></li>
 	            {{/authors}}
 	          </ul>
 	        </div>
@@ -69,32 +76,32 @@ export const post = hits({
 	        <span class="label">Tags:</span>
 	          {{#tags.post_tag}}
 	          <span class="keyword"><a href="?` +
-			process.env.ALGOLIA_INDEX +
-			`[query]=%22{{.}}%22">{{.}}</a></span>
+      process.env.ALGOLIA_INDEX +
+      `[query]=%22{{.}}%22">{{.}}</a></span>
 	          {{/tags.post_tag}}<br>
 	        {{/tags.post_tag.length}}
 	        {{#tags.impact-area.length}}
 	        <span class="label">Impact Areas:</span>
 	          {{#tags.impact-area}}
 	          <span class="keyword"><a onClick="applyFilter('` +
-			process.env.ALGOLIA_INDEX +
-			`','refinementList', 'tags.impact-area', '{{.}}')">{{.}}</a></span>
+      process.env.ALGOLIA_INDEX +
+      `','refinementList', 'tags.impact-area', '{{.}}')">{{.}}</a></span>
 	          {{/tags.impact-area}}<br>
 	        {{/tags.impact-area.length}}
 	        {{#tags.approach.length}}
 	        <span class="label">Approach:</span>
 	          {{#tags.approach}}
 	          <span class="keyword"><a onClick="applyFilter('` +
-			process.env.ALGOLIA_INDEX +
-			`', 'refinementList', 'tags.approach', '{{.}}')">{{.}}</a></span>
+      process.env.ALGOLIA_INDEX +
+      `', 'refinementList', 'tags.approach', '{{.}}')">{{.}}</a></span>
 	          {{/tags.approach}}<br>
 	        {{/tags.approach.length}}
 	        {{#tags.agrifood-system.length}}
 	        <span class="label">Agrifood Systems:</span>
 	          {{#tags.agrifood-system}}
 	          <span class="keyword"><a onClick="applyFilter('` +
-			process.env.ALGOLIA_INDEX +
-			`', 'refinementList', 'tags.agrifood-system','{{.}}')">{{.}}</a></span>
+      process.env.ALGOLIA_INDEX +
+      `', 'refinementList', 'tags.agrifood-system','{{.}}')">{{.}}</a></span>
 	          {{/tags.agrifood-system}}<br>
 	        {{/tags.agrifood-system.length}}
 
@@ -102,8 +109,8 @@ export const post = hits({
 	        <span class="label">Product Types:</span>
 	          {{#tags.product-type.lvl0}}
 	          <span class="keyword"><a onClick="applyFilter('` +
-			process.env.ALGOLIA_INDEX +
-			`', 'hierarchicalMenu', 'tags.product-type.lvl0','{{.}}')">{{.}}</a></span>
+      process.env.ALGOLIA_INDEX +
+      `', 'hierarchicalMenu', 'tags.product-type.lvl0','{{.}}')">{{.}}</a></span>
 	          {{/tags.product-type.lvl0}}<br>
 	        {{/tags.product-type.lvl0.length}}
 
@@ -118,25 +125,25 @@ export const post = hits({
 
 	        {{#tags.region.lvl0}}
 	        <span class="keyword"><a onClick="applyFilter('` +
-			process.env.ALGOLIA_INDEX +
-			`', 'hierarchicalMenu', 'tags.region.lvl0','{{.}}')">{{.}}</a></span>
+      process.env.ALGOLIA_INDEX +
+      `', 'hierarchicalMenu', 'tags.region.lvl0','{{.}}')">{{.}}</a></span>
 	        {{/tags.region.lvl0}}
 
 	        {{#countries}}
 	        <span class="keyword"><a onClick="applyFilter('` +
-			process.env.ALGOLIA_INDEX +
-			`', 'hierarchicalMenu', 'tags.region.lvl0','{{1}}')">{{0}}</a></span>
+      process.env.ALGOLIA_INDEX +
+      `', 'hierarchicalMenu', 'tags.region.lvl0','{{1}}')">{{0}}</a></span>
 	        {{/countries}}<br>
 
 	        {{#tags.sdg.length}}
 	        <p class="sdg-icons">
 	          {{#sdg_icon}}
 	            <a class="tooltip" onClick="applyFilter('` +
-			process.env.ALGOLIA_INDEX +
-			`', 'refinementList', 'tags.sdg','{{1}}')">
+      process.env.ALGOLIA_INDEX +
+      `', 'refinementList', 'tags.sdg','{{1}}')">
 	              <img src="` +
-			process.env.SDG_PATH_URL +
-			`{{0}}.jpg" alt="{{1}}" width="48" height="48">
+      process.env.SDG_PATH_URL +
+      `{{0}}.jpg" alt="{{1}}" width="48" height="48">
 	              <span class="tooltiptext">{{1}}</span>
 	            </a>
 	          {{/sdg_icon}}
@@ -149,13 +156,13 @@ export const post = hits({
 	  </div>
 	</article>
 	`,
-		empty(searchResults) {
-			const hasRefinements = searchResults.getRefinements().length > 0;
-			const description = hasRefinements
-				? 'Try to reset your applied filters.'
-				: 'Please try another query.';
+    empty(searchResults) {
+      const hasRefinements = searchResults.getRefinements().length > 0;
+      const description = hasRefinements
+        ? 'Try to reset your applied filters.'
+        : 'Please try another query.';
 
-			return `
+      return `
 	  <div class="hits-empty-state">
 	    <svg
 	      xmlns="http://www.w3.org/2000/svg"
@@ -241,6 +248,6 @@ export const post = hits({
 	    </p>
 	  </div>
 	`;
-		},
-	},
+    },
+  },
 });
