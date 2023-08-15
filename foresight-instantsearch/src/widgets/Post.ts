@@ -47,11 +47,14 @@ export const post = hits({
 	    {{/DOI}}
 	    <p class="mt-5">{{#helpers.snippet}}{ "attribute": "post_content" }{{/helpers.snippet}}</p>
 	    <footer>
-	    <section class="accordion">
-	      <input type="checkbox" name="collapse" id="handle{{ __hitIndex }}">
-	      <div class="handle">
-	        <label for="handle{{ __hitIndex }}"></label>
-	      </div>
+		<details class="accordion description relative [&_svg]:open:-rotate-180">
+		<summary data-open="Show less" data-close="Show more" class="absolute bottom-0 left-0 -mb-8 flex cursor-pointer list-none items-center justify-end gap-2">
+		  <div>
+			<svg class="rotate-0 transform text-black-100 transition-all duration-300" fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+			  <polyline points="6 9 12 15 18 9"></polyline>
+			</svg>
+		  </div>
+		</summary>
 	      <div class="content">
 	        <div class="metadata author">
 	          <span class="label">Author/Creator:</span>
@@ -151,7 +154,7 @@ export const post = hits({
 	        {{/tags.sdg.length}}
 	        </div>
 	      </div>
-	    </section>
+		  </details>
 	    </footer>
 	  </div>
 	</article>
