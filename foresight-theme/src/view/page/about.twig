@@ -21,7 +21,7 @@
 
       {% for item in post.meta('offers') %}
         <div class="col-span-1 max-sm:col-span-2">
-          <div class="flex flex-row gap-7">
+          <div class="flex flex-row max-sm:flex-col gap-7 max-sm:gap-4 max-sm:mb-11">
             <img class="lazyload w-12 h-12" width="50" height="50" data-src="{{ Image(item.offer_icon).src }}" data-srcset="{{ Image(item.offer_icon).srcset }}" data-sizes="{{ Image(item.offer_icon).img_sizes }}" alt="{{ Image(item.offer_icon).title }}">
             <h5>{{ item.offer_label}}</h5>
           </div>

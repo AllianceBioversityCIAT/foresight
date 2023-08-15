@@ -11,11 +11,13 @@
 
       {% for item in post.meta('logos_repeater') %}
         <div class="col-span-1 max-sm:col-span-3 text-center self-end">
-            <img class="mx-auto" src="{{ Image( item.logo_partner ).src }}"
+            <a href="{{ item.partner_link }}" target="_blank">
+              <img class="mx-auto" src="{{ Image( item.logo_partner ).src }}"
               srcset="{{ Image( item.logo_partner ).srcset }}"
               sizes="{{ Image( item.logo_partner ).img_sizes }}"
               alt="{{ Image( item.logo_partner ).title }}">
               <p class="font-bold text-base">{{item.title_partner}}</p>
+            </a>
         </div>
       {% endfor %}
     </div>
