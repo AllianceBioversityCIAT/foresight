@@ -365,19 +365,15 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 if ( !function_exists( 'foresight_popular_searches' ) ) :
 
 	function foresight_popular_searches( $display, $searches ) {
-		if ( $searches ) :
-			$output = '<button class="btn dropdown-toggle" type="button" id="dropdownPopularSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Popular searches</button>';
-			$output .= '<div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownPopularSearch">';
-			$output .= '<div class="dropdown-row">';
+		$output = '<option value="">Select keyword</option>';
 
+		if ( $searches ){
 			foreach ( $searches as $key => $value ) {
-				$output .= '<a class="dropdown-item" href="search/?'.ALGOLIA_INDEX.'[query]=%22'.$value[ 'term' ].'%22' . '">' . ucfirst( $value[ 'term' ] ) . '</a>';
+				$output .= '<option value="' . $value[ 'term' ] . '">'.$value[ 'term' ].'</option>';
 			}
-
-			$output .= '</div>';
-			$output .= '</div>';
-		endif;
-
+		} else {
+			$output .= '<option value="">Nothing yet</option>';
+		}
 		return $output;
 	}
 
