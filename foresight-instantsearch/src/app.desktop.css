@@ -5,50 +5,7 @@ h2 {
   font-weight: bold;
 }
 
-/* Header */
-
-.header {
-  align-items: center;
-  background-image: url('./images/cover-desktop.jpg');
-  background-position: center;
-  background-size: cover;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 300px;
-  padding: 0.5rem 1rem;
-  text-align: center;
-}
-
-.header h1{
-  font-size: 4rem;
-  font-family: BebasNeue,sans-serif;
-}
-
-.header-logo {
-  margin: 0;
-}
-
-.header-title {
-  font-size: 38px;
-  font-weight: 300;
-}
-
-/* Containers */
-
-.container-main {
-  display: flex;
-  margin: 0 auto;
-  max-width: 1300px;
-}
-
-.container-filters {
-  flex: 1;
-  margin-right: 60px;
-  max-width: 260px;
-}
-
+/** container **/
 .container-header {
   align-items: center;
   display: flex;
@@ -58,15 +15,10 @@ h2 {
 .container-header h2{
   font-size: 1.5rem;
 }
-
-.container-results {
-  flex: 3;
-}
-
 .container-options {
   border-bottom: 1px solid #ebecf3;
   display: flex;
-  justify-content: flex-end;
+  justify-content:space-between;
   margin-bottom: 30px;
 }
 
@@ -80,7 +32,7 @@ h2 {
 
 /* Footer */
 .hit-info-container > footer{
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
   border-bottom: 1px dashed #21243d33;
 }
 
@@ -100,7 +52,9 @@ mark {
 .clear-filters {
   align-items: center;
   display: flex;
-  font-size: 1rem;
+  flex-direction: column;
+  font-size: 0.813rem;
+  padding: 0;
 }
 
 .clear-filters svg {
@@ -108,66 +62,16 @@ mark {
 }
 
 /* Panel */
-
 .container-body .ais-Panel {
   border-top: 1px solid #ebecf3;
   padding-bottom: 2rem;
   padding-top: 2rem;
 }
 
-.ais-Panel-header {
-  font-family: Hind, sans-serif;
-}
-
 /* Search box */
-
-.header .ais-SearchBox {
-  height: 64px;
-  width: 740px;
-}
-
-.header .ais-SearchBox .ais-SearchBox-input {
-  background-color: #fff;
+.ais-SearchBox .ais-SearchBox-input {
   border-radius: 8px;
-  box-shadow: 0 4px 48px 0 rgba(0, 0, 0, 0.2);
-  font-family: Hind, sans-serif;
-  height: 64px;
-  /*
-    The "Hind" font family is vertically off-balance.
-    Adding 4px of padding top makes it more vertically aligned.
-  */
-  padding: 4px 48px 0 64px;
-}
-
-.header .ais-SearchBox-submit {
-  padding: 0 1rem 0 2rem;
-  width: 64px;
-}
-
-.header .ais-SearchBox .ais-SearchBox-input::placeholder {
-  color: rgba(33, 36, 61, 0.24);
-  opacity: 1; /* Firefox */
-}
-
-.ais-SearchBox-input:-ms-input-placeholder {
-  color: rgba(33, 36, 61, 0.24);
-}
-
-.ais-SearchBox-input::-ms-input-placeholder {
-  color: rgba(33, 36, 61, 0.24);
-}
-
-.ais-SearchBox-submit {
-  color: #e2a400;
-}
-
-.ais-RefinementList .ais-SearchBox-input {
-  font-family: Hind, sans-serif;
-  /*
-    The "Hind" font family is vertically off-balance.
-    Adding some padding top makes it more vertically aligned.
-  */
-  padding-top: 2px;
+  border: 1px solid #D1D0D2;
 }
 
 /* Stats */
@@ -178,22 +82,6 @@ mark {
 }
 
 /* Hits */
-
-.hit {
-  color: #21243d;
-  font-size: 14px;
-  line-height: 18px;
-  display: grid;
-  grid-template-columns: 1fr 7fr;
-  grid-gap: 3px;
-}
-
-.hit h1 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #373F41;
-}
-
 .hit-category {
   color: #21243d;
   font-size: 10px;
@@ -220,16 +108,7 @@ mark {
 
 .hit-info-container a:hover {
   text-decoration:none;
-  color: #385600cc;
-}
-
-.hit-image-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  font-size: 1.2rem;
-  color: #C3CBCD;
+  color: #2E7636;
 }
 
 .hit-image {
@@ -283,14 +162,7 @@ mark {
 }
 
 /* Collapse */
-.accordion > input[type="checkbox"] {
-  position: absolute;
-  left: -100vw;
-}
-
 .accordion .content {
-  overflow-y: hidden;
-  height: 0;
   transition: height 0.3s ease;
   display: grid; 
   grid-auto-columns: 1fr; 
@@ -342,32 +214,6 @@ mark {
   margin-top: 0.7rem;
 }
 
-.accordion > input[type="checkbox"]:checked ~ .content {
-  height: auto;
-  overflow: visible;
-}
-
-.accordion label {
-  display: block;
-}
-
-.accordion .handle label:before {
-  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  content: "► Show more";
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 0.8rem;
-  line-height: 1.556em;
-  vertical-align: middle;
-  cursor:pointer;
-}
-
-.accordion > input[type="checkbox"]:checked ~ .handle label:before {
-  content: "▼ Show less";
-  cursor: pointer;
-}
-
-
 /********/
 /* Tooltip container */
 .tooltip {
@@ -401,7 +247,7 @@ mark {
 }
 /* Hide all mobile-specific design on desktop */
 
-@media (min-width: 900px) {
+@media (min-width: 1074px) {
   [data-layout='mobile'] {
     display: none;
   }

@@ -11,7 +11,7 @@ const paginationWithMultiplePages = panel({
 
 export const pagination = paginationWithMultiplePages({
   container: '[data-widget="pagination"]',
-  scrollTo: '.container-main',
+  scrollTo: '#container-main',
   padding: 2,
   showFirst: false,
   showLast: false,
