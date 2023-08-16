@@ -50,6 +50,13 @@
 		mb-2;
 	}
 
+	.line-clamp-vertical {
+		-webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+	}
+
 	/* begin menus */
 	.item_top_menu {
 		@apply

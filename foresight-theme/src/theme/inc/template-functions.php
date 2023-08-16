@@ -880,6 +880,31 @@ function my_addition_to_login_footer() {
 add_action('login_footer', 'my_addition_to_login_footer');
 
 
+function add_content_after($content) {
+  $POST_ID = get_the_ID();
+  $posts_per_page = get_field( 'card_number_lp', $POST_ID );
+  $args = array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'ignore_sticky_posts' => 'true',
+		'order'               => 'DESC',
+		'posts_per_page'      => $posts_per_page,
+	);
+  
+  ob_start();
+	$context = Timber::context();
+  $context[ 'perPage' ] = $posts_per_page;
+  $context[ 'posts' ] = Timber::get_posts( $args );
+	$context['post']    =  new Timber\Post();
+
+	Timber::render('./view/macros/latest-posts.twig', $context);
+  $after_content = ob_get_clean();
+
+  return $content . $after_content;
+}
+
+add_filter('the_content', 'add_content_after');
+
 /**
  * This works by adding the website header to the login.
  */
@@ -888,3 +913,28 @@ function add_header_login() {
 }
 
 add_action('login_head', 'add_header_login' );
+
+function more_posts_ajax() {
+	$postName        = $_POST[ 'postName' ];
+	$perPage        = $_POST[ 'perPage' ];
+	header( "Content-Type: text/html" );
+
+	$args = [
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'ignore_sticky_posts' => 'true',
+		'order'               => 'DESC',
+		'posts_per_page' => $perPage,
+		's'              => $postName,
+	];
+
+	$context = Timber::context();
+  $context[ 'posts' ] = Timber::get_posts( $args );
+
+	Timber::render('./view/macros/cards-blog.twig', $context);
+
+	exit;
+}
+
+add_action( 'wp_ajax_nopriv_more_posts_ajax', 'more_posts_ajax' );
+add_action( 'wp_ajax_more_posts_ajax', 'more_posts_ajax' );
