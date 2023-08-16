@@ -4,11 +4,11 @@
     {% for item in posts %}
 	
       <div class="col-span-1 max-sm:col-span-3 border">
-        <img class="min-h-[230px]" width="350" height="230"
+        <img class="min-h-[230px] object-cover" width="350" height="230"
           src="{{ item.thumbnail.src }}" srcset="{{ item.thumbnail.srcset }}"
           sizes="{{ item.thumbnail.img_sizes }}" alt="{{ item.thumbnail.title }}"/>
         <div class="p-6">
-          <h5 class="line-clamp-vertical">
+          <h5 class="line-clamp-4">
             {{ item.post_title }}
           </h5>
           <p class="my-8">{{ item.date|date("m.d.Y") }}</p>
