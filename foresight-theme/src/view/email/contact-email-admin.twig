@@ -1,3 +1,4 @@
+{% set logo = Image(site.theme.theme_mod('custom_logo','')) %}
 <!doctype html>
 <html>
 <head>
@@ -363,8 +364,8 @@
 					role="presentation" class="main">
 
 					<!-- START MAIN CONTENT AREA -->
-					<td style="background-color: #C8C502; padding: 1rem;text-align: center;">
-						<img width="80" src="{{ theme.link }}/static/images/foresight-logo.svg">
+					<td style="background-color: #FFC84F; padding: 1rem;text-align: center;">
+						<img src="{{ logo.src }}" srcset="{{ logo.srcset }}" sizes="{{ logo.img_sizes }}" width="{{ logo.width }}" height="{{ image.height }}" alt="{{ logo.alt }}" />
 					</td>
 					<tr>
 						<td class="wrapper">
@@ -384,7 +385,7 @@
 												{{ contactInfo.email }}
 											</p>
 											<p>
-												<strong>Celular: </strong>
+												<strong>Phone: </strong>
 												{{ contactInfo.cell_phone }}
 											</p>
 											{% if contactInfo.check_form_contact %}

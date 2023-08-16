@@ -38,7 +38,7 @@ if ( class_exists( 'Timber' ) ) {
 			$response_mail_user = wp_mail( $email_user, $subject_user, $message_user, $headers );
 
 			ob_start();
-			$context[ 'subjectDriven' ] = 'Nuevo contacto en la página de ' . get_the_title();
+			$context[ 'subjectDriven' ] = 'Contact us ' . get_bloginfo('name');
 			$context[ 'webSiteTitle' ]  = get_the_title();
 			$context[ 'webSiteLink' ]   = get_permalink();
 			Timber::render( './view/email/contact-email-admin.twig', $context );
