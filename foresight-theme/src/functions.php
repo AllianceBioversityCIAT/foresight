@@ -188,6 +188,8 @@ function foresight_theme_scripts() {
 	wp_enqueue_script( 'foresight_theme-lazysizes-js', get_template_directory_uri() . '/static/lib/lazysizes/lazysizes.min.js', array(), _S_VERSION, true );
 	//Js
 	wp_enqueue_script( 'foresight_theme-js', get_template_directory_uri() . '/static/js/main.min.js', array('jquery'), _S_VERSION, true );
+	wp_add_inline_script( 'foresight_theme-js', 'ajax_object =' . json_encode( array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) ) );
+
 
 	$options_page = get_fields( 'theme-general-settings' );
 

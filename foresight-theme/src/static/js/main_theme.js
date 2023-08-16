@@ -127,4 +127,37 @@ if (slider) {
             },
         ],
     })
+
+    if ($('#search-posts').length) {
+        $('#search-posts').on('change keyup', function () {
+            searchPostAjax()
+        })
+    }
+
+    /**
+     * This function performs an ajax query to render the html result on the page.
+     */
+    function searchPostAjax() {
+        var $postName = $('#search-posts').val()
+        var $perPage = $('#search-posts').attr('data-per-page')
+        console.log($perPage)
+
+        var $data = {
+            action: 'more_posts_ajax',
+            postName: $postName,
+            perPage: $perPage,
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: ajax_object.ajax_url,
+            data: $data,
+            beforeSend: function () {
+                $('.search-load').show()
+            },
+        }).complete(function (response) {
+            $('.search-load').hide()
+            $('.posts__col-cards').html(response) // CHANGE THIS!
+        })
+    }
 })(jQuery)

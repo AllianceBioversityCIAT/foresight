@@ -1,31 +1,27 @@
+{% if posts is not empty %}
 
-{% macro cards_blog (posts, imageDefault) %}
-{% for post in posts %}
-	<div class="card card-allpost-blog mt-5 mb-3">
-		<div class="row no-gutters">
-			<div class="col-md-4 ">
-				{% set image = TimberImage(post.thumbnail) %}
-				<a href="{{ function( 'get_page_link', post.ID ) }}" class="card-permalink">
-					<img src="{{ post.thumbnail.src|resize(380)|default(imageDefault) }}"
-						 class="card-img imgBlogPosts" alt="{{ post.thumbnail.title|default('Cafeto Image Default') }}">
-				</a>
-			</div>
-			<div class="col-md-8">
-				<div class="card-body">
-					<a href="{{ function( 'get_page_link', post.ID ) }}" class="card-permalink">
-						<h4 class="card-title">{{post.post_title}}</h4>
-					</a>
-					<p class="card-text text-muted">
-						By
-						{{ function('get_the_author_meta','display_name', post.post_author) }}
-					</p>
-					<hr class="blog-hr postblogHr mb-4 m-0">
-					<p class="card-text">{{ post.preview.chars(150).read_more(false) }}</p>
-					<a href="{{ function( 'get_page_link', post.ID ) }}" class="btn btn-outline-danger foresight-menu-button">Read More</a>
-				</div>
-			</div>
-		</div>
-	</div>
-{% endfor %}
+  <div class="grid grid-cols-3 auto-rows-auto gap-4 mt-12">
+    {% for item in posts %}
+	
+      <div class="col-span-1 max-sm:col-span-3 border">
+        <img class="min-h-[230px]" width="350" height="230"
+          src="{{ item.thumbnail.src }}" srcset="{{ item.thumbnail.srcset }}"
+          sizes="{{ item.thumbnail.img_sizes }}" alt="{{ item.thumbnail.title }}"/>
+        <div class="p-6">
+          <h5 class="line-clamp-vertical">
+            {{ item.post_title }}
+          </h5>
+          <p class="my-8">{{ item.date|date("m.d.Y") }}</p>
+          <a class="btn-primary-small" href="{{ item.link }}">READ MORE</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 
-{% endmacro %}
+{% else %}
+
+  <div class="flex flex-col items-center justify-center w-full h-56">
+    <h3>Sorry!</h3>
+    <p>We could not find any results matching your search.</p>
+  </div>
+{% endif %}
