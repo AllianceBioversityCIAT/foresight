@@ -50,11 +50,21 @@
 		mb-2;
 	}
 
-	.line-clamp-vertical {
-		-webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    overflow: hidden;
+	#foresight-post 
+	article 
+	.article-body{
+		@apply
+		flex
+		flex-col
+		space-y-5;
+	}
+
+	#foresight-page 
+	.article-body {
+		@apply
+		flex
+		flex-col
+		space-y-5;
 	}
 
 	/* begin menus */
@@ -77,16 +87,8 @@
 	 }
 	/* end menus */
 
-
-	/* 
-	ul {
+	.pld-like-dislike-wrap {
 		@apply
-		list-inside
-		mb-2;
-	} 
-	li {
-		@apply
-		mb-1;
-	} 
-	*/
+		!m-0;
+	}
   }

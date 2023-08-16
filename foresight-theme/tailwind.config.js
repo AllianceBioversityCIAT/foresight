@@ -57,6 +57,7 @@ module.exports = {
         'btn-secondary',
         'btn-secondary-large',
         'text-green',
+        'pld-like-dislike-wrap',
     ],
     plugins: [require('flowbite/plugin')],
 }

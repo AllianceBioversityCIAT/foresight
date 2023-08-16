@@ -1,79 +1,23 @@
-<section class="single-blog">
-	<div class="container container-single-info">
-		<span class="dot"></span>
-		<span class="dot"></span>
-		<span class="dot"></span>
-		<h1 class="single-title">{{ post.title }}</h1>
-    	{% if post.thumbnail %}
-		<img class="img single-image" width="550" height="450"
-			 src="{{ post.thumbnail.src }}" srcset="{{ post.thumbnail.srcset }}"
-			 sizes="{{ post.thumbnail.img_sizes }}" alt="{{ post.thumbnail.title }}"/>
-		{% endif %}
-		<div class="posted-by">
-			<span class="date">
-				Posted by
-				<b>{{ post.author }}</b>
-				on {{ post.date }}
-			</span>
-			<span class="date">
-				{{ function('do_shortcode', '[likebtn theme="disk" dislike_enabled="0" icon_dislike_show="0" tooltip_enabled="0" bp_notify="0"]') }}
-			</span>
-		</div>
-		<div class="post-tag">
-			{% for tag in post.terms( {query:{taxonomy:'post_tag', orderby:'name', order: 'ASC'}}) %}
-				<span>
-					<a href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ tag.name }}%22">
-						{{ tag.name }}
-					</a>
-				</span>
-			{% endfor %}
-		</div>
-		<div class="post-content">
-			{{ post.content }}
-		</div>
-		<hr class="post-hr">
-		<div class="all-latest-posts">
-			<span class="dot"></span>
-			<span class="dot"></span>
-			<span class="dot"></span>
-			<h2 class="related-title">Related Blogs</h2>
-			<div class="row">
-				{% for related in relatedPosts %}
-					<div class="col-md-6">
-						<div class="card">
-							<div class="row no-gutters">
-								<div class="col-md-5 card-image-post">
-									<a href="{{ related.link }}">
-										<img class="img" width="800" height="400"
-											 src="{{ related.thumbnail.src }}" srcset="{{ related.thumbnail.srcset }}"
-											 sizes="{{ related.thumbnail.img_sizes }}" alt="{{ related.thumbnail.title }}"/>
-									</a>
-								</div>
-								<div class="col-md-7 card-content-post">
-									<div class="card-body">
-										<h3 class="card-title">
-											<a href="{{ related.link }}">
-												{{ related.title }}
-											</a>
-										</h3>
-										<div class="posted-by">
-											<span class="date">Posted by <b>{{ related.author }}</b> on {{ related.date }}</span>
-										</div>
-										<p class="card-text">
-											{{ related.preview.read_more('') }}
-										</p>
-										<div class="read-more">
-											<a class="btn more" href="{{ related.link }}">
-												Read more
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
+<main id="foresight-post">
+	<article class="container relative pt-8 pb-16 lg:pt-24 lg:pb-32 break-words" itemscope itemtype="http://schema.org/BlogPosting">
+		<div>
+			<div class="flex gap-1">
+				Posted by <span itemprop="author">{{ post.author }}</span> on 
+				<time itemprop="datePublished" datetime="{{ post.post_date }}">{{ post.post_date|date("Y-m-d") }}</time>
+				<div class="ml-2">{{ function('do_shortcode', '[posts_like_dislike id='~ post.id ~']') }}</div>
 			</div>
 		</div>
-	</div>
-</section>
+		<div class="post-tag mb-8 flex-grow">
+				{% for tag in post.terms( {query:{taxonomy:'post_tag', orderby:'name', order: 'ASC'}}) %}
+					<small class="bg-purple px-2 rounded-xl mr-2">
+						<a class="text-white break-words" href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ tag.name }}%22">
+							{{ tag.name }}
+						</a>
+					</small>
+				{% endfor %}
+		</div>	
+		<div class="article-body" itemprop="articleBody">
+			{{ post.content }}
+		</div>
+	</article>
+</main>

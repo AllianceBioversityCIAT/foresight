@@ -305,7 +305,7 @@ function get_post_tags( $post_id ){
 					$str_value = $levels[$i - 4]. $separator .  $levels[$i - 3] . $separator . $levels[$i - 2] . $separator . $levels[$i - 1] . $separator . $v;
 				}
 
-				if( !in_array($str_value, $tags[$taxonomy]['lvl' . $i]) ){
+				if (empty($tags[$taxonomy]['lvl' . $i])) {
 					$tags[$taxonomy]['lvl' . $i][] = $str_value;
 				}
 			}
