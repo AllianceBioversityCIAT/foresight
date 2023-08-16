@@ -1,0 +1,64 @@
+<section class="my-16">
+  <div class="container relative">
+    <div class="grid grid-cols-4 gap-y-4">
+      <div class="col-span-1 max-sm:col-span-4">
+        <h6 class="mb-5">
+          <a href="{{ site.link }}" target="{{ item.target ?? '_self' }}" 
+            class="{{ item.classes|join(' ') }} underline underline-offset-2 hover:text-yellow-500" aria-current="page">
+            HOME
+          </a>
+        </h6>
+
+        {% for item in secondaryMenu.items %}
+
+          {% if item.link and item.children is empty %}
+            <h6 class="mb-5">
+              <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }} hover:text-yellow-500 underline underline-offset-2" aria-current="page">
+                {{ item.title }}
+              </a>
+            </h6>
+          {% endif %}
+        {% endfor %}
+
+        {% for item in topMenu.items %}
+
+          {% if item.link and item.children is empty %}
+            <h6 class="mb-5">
+              <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }} hover:text-yellow-500 underline underline-offset-2" aria-current="page">
+                {{ item.title }}
+              </a>
+            </h6>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="col-span-3 max-sm:col-span-4 grid grid-cols-3 gap-4 auto-rows-auto">
+
+        {% for item in secondaryMenu.items %}
+
+          {% if item.children %}
+            <div class="col-span-1 max-sm:col-span-4">
+              <h6 class="mb-2">
+                <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }} hover:text-yellow-500 underline underline-offset-2" aria-current="page">
+                  {{ item.title }}
+                </a>
+              </h6>
+              {% for child in item.children %}
+                <p class="font-bold py-2 mt-4 mb-6" style="{{ loop.first ? 'display: none;' }}">{{ child.title }}</p>
+
+                {% for child_three in child.children %}
+                  <div class="block mb-2">
+                    <a href="{{ child_three.link }}" target="{{ child_three.target ?? '_self' }}" 
+                      class="py-1 text-base hover:text-yellow-500 underline underline-offset-1 {{ child_three.classes|join(' ') }}">
+                      {{ child_three.title }}
+                    </a>
+                  </div>
+								{% endfor %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+</section>
