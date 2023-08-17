@@ -28,7 +28,7 @@ function register_custom_acf_fields_page_contact() {
 						'wrapper'       => [
 							'width' => '50',
 						],
-						'default_value' => 'PBX: 9999999',
+						'default_value' => '',
 					],
 					[
 						'key'           => 'field_contact_title_email',
@@ -39,15 +39,7 @@ function register_custom_acf_fields_page_contact() {
 						'wrapper'       => [
 							'width' => '50',
 						],
-						'default_value' => 'xxxxx@gmail.com',
-					],
-					[
-						'key'           => 'field_contact_form_title',
-						'label'         => 'Form Title.',
-						'name'          => 'contact_form_title',
-						'type'          => 'text',
-						'required'      => 1,
-						'default_value' => 'Escríbenos',
+						'default_value' => '',
 					],
 					[
 						'key'           => 'field_contact_form_placeholder_full_name',
@@ -58,7 +50,7 @@ function register_custom_acf_fields_page_contact() {
 						'wrapper'       => [
 							'width' => '50',
 						],
-						'default_value' => 'Nombre Completo',
+						'default_value' => '',
 					],
 					[
 						'key'           => 'field_contact_form_placeholder_email',
@@ -69,7 +61,7 @@ function register_custom_acf_fields_page_contact() {
 						'wrapper'       => [
 							'width' => '50',
 						],
-						'default_value' => 'Correo Electrónico',
+						'default_value' => '',
 					],
 					[
 						'key'           => 'field_contact_form_placeholder_cell_phone',
@@ -80,7 +72,7 @@ function register_custom_acf_fields_page_contact() {
 						'wrapper'       => [
 							'width' => '50',
 						],
-						'default_value' => 'Celular',
+						'default_value' => '',
 					],
 					[
 						'key'           => 'field_contact_form_placeholder_description',
@@ -91,7 +83,7 @@ function register_custom_acf_fields_page_contact() {
 						'wrapper'       => [
 							'width' => '50',
 						],
-						'default_value' => 'Escribenos!',
+						'default_value' => '',
 					],
 					[
 						'key'           => 'field_contact_form_button_title',
@@ -102,7 +94,7 @@ function register_custom_acf_fields_page_contact() {
 						'wrapper'       => [
 							'width' => '50',
 						],
-						'default_value' => 'Enviar',
+						'default_value' => '',
 					],
 					[
 						'key'               => 'field_contact_background_image',
