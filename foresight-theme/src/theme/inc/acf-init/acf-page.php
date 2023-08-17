@@ -1,6 +1,6 @@
 <?php
 /**
- * Published year field for Posts and Publications
+ * Static Page
  * This function records fields for the acf.
  */
 function register_custom_acf_fields_hero_image() {
@@ -8,11 +8,11 @@ function register_custom_acf_fields_hero_image() {
 		acf_add_local_field_group(
 			[
 				'key' => 'group_hero_image',
-				'title' => 'Header Image',
+				'title' => 'Options Header',
 				'fields' => [
 					[
 						'key' => 'field_hero_image',
-						'label' => '',
+						'label' => 'Hero Image',
 						'name' => 'hero_image',
 						'type' => 'image',
 						'instructions' => 'Select an image to display as a cover on the header <b>(1920 x 946]</b> px',
@@ -29,6 +29,20 @@ function register_custom_acf_fields_hero_image() {
 						'max_size' => '',
 						'mime_types' => '',
 					],
+					[
+						'key'           => 'field_hero_title',
+						'label'         => 'Hero Title',
+						'name'          => 'hero_title',
+						'type'          => 'text',
+						'required'      => 0,
+						'placeholder'	=> 'Resource',
+						'wrapper'           => [
+						  'width' => '50',
+						  'class' => '',
+						  'id'    => '',
+						],
+						'default_value'     => '',
+					  ],
 				],
 				'location' => [
 					[

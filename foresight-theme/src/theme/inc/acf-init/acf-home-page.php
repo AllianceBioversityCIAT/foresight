@@ -1,5 +1,6 @@
 <?php
 /**
+ * Front Page
  * This function records fields for the acf.
  */
 function register_custom_acf_fields_section_home_page() {

@@ -1,6 +1,6 @@
 <!-- begin hero block -->
 <div class="relative">
-		{% if (post.hero_image is not empty) %}
+	{% if (post.hero_image is not empty) %}
 		{% set post_image = Image(post.hero_image) %}
 		<img class="w-full h-[565px] object-cover object-center -z-1 brightness-50" loading="lazy" src="{{ post_image.src }}" srcset="{{ post_image.srcset }}" sizes="{{ post_image.img_sizes }}" width="{{ post_image.width }}" height="{{ post_image.height }}" alt="{{ post_image.alt }}" />
 	{% else %}
@@ -14,9 +14,15 @@
 	{% endif %}
 	<div class="absolute w-full h-full top-0">
 		<div class="container mx-auto px-4 h-full flex items-center justify-center lg:justify-start">
-			<h1 class="drop-shadow-lg text-yellow-primary break-words">{{ post.title }}</h1>
+			<h2 class="drop-shadow-lg text-[36px] md:text-[45px] lg:text-[55px] text-center font-extrabold text-yellow-primary break-words">
+			{% if post.post_type == 'post'%}
+				{{ post.hero_title ? post.hero_title : 'Resource' }}
+			{% else %}
+				{{ post.hero_title ? post.hero_title : post.title }}
+			{% endif %}
+			</h2>
 		</div>
 	</div>
 </div>
-	
+
 <!-- end hero block -->

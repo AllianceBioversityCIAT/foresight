@@ -1,5 +1,6 @@
 <?php
 /**
+ * Contact Page
  * This function records fields for the acf.
  */
 function register_custom_acf_fields_page_contact() {

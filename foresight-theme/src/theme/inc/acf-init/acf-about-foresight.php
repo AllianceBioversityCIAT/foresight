@@ -1,5 +1,6 @@
 <?php
-/**
+/** 
+ * About Foresight Page
  * This function records fields for the acf.
  */
 
