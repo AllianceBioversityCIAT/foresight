@@ -69,9 +69,11 @@ jQuery( 'body' ).ready( function ( $ ) {
 
               setTimeout( function () {
                 grecaptcha.ready( function () {
+                  var btnSend = $( '#contact_btn_submit' );
                   grecaptcha.execute( googleRecaptcha.siteKey, { action: 'foresight_contact_submit' } ).then( function ( token ) {
                     idForm.append( '<input type="hidden" name="token" value="' + token + '">' );
                     idForm.append( '<input type="hidden" name="action" value="foresight_contact_submit">' );
+                    btnSend.html('<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...').prop('disabled',true);
                     idForm.submit();
                   } );
                 } );
