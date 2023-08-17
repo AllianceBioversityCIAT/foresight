@@ -13,7 +13,7 @@ $image_ID = get_field( 'for_card_image' );
 $card_title = !empty(get_field( 'for_card_title' )) ? get_field( 'for_card_title' ) : 'Enter your title here or leave blank';
 $card_subtitle = !empty(get_field( 'for_card_subtitle' )) ? get_field( 'for_card_subtitle' ) : 'Enter your subtitle here or leave blank';
 $card_description = !empty(get_field( 'for_card_description' )) ? get_field( 'for_card_description' ) : 'Enter your description here or leave blank';
-$card_link = !empty(get_field( 'for_card_link' )) ? get_field( 'for_card_link' ) : 'Enter your link here or leave blank';
+$card_link = get_field( 'for_card_link' );
 
 // Create id attribute allowing for custom "anchor" value.
 $args['id'] = 'card-slider-' . $block['id'];
@@ -31,8 +31,12 @@ if ( ! empty( $block['align'] ) ) {
 }
 $args['classes'] = $classes;
 
+if ( ! empty( $card_link ) && !is_admin() ) {
+  ?>
+    <a href="<?php echo $card_link; ?>">
+  <?php
+}
 ?>
-
 <div id="<?php echo esc_attr( $args['id'] ); ?>" class="grid grid-cols-2 shadow-lg <?php echo esc_attr( $args['classes'] ); ?>">
   <div class="col-span-1 max-md:col-span-2">
     <?php echo wp_get_attachment_image( $image_ID, 'full', '', array( 'class' => 'w-full h-full min-h-full min-h-[371px] max-md:min-h-full max-md:h-60 object-cover object-top' ) ); ?>
@@ -52,3 +56,9 @@ $args['classes'] = $classes;
     </div>
   </div>
 </div>
+
+<?php
+
+if ( ! empty( $card_link ) ) {
+  echo '</a>';
+}
