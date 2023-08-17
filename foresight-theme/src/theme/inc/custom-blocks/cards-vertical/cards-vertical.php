@@ -31,8 +31,7 @@ if ( ! empty( $block['align'] ) ) {
 }
 $args['classes'] = $classes;
 
-
-if ( ! empty( $card_link ) ) {
+if ( ! empty( $card_link ) && !is_admin() ) {
   ?>
     <a href="<?php echo $card_link; ?>">
   <?php
