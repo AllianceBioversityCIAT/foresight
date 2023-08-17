@@ -1,21 +1,18 @@
 <main id="foresight-post">
 	<article class="container relative pt-8 pb-16 lg:pt-24 lg:pb-32 break-words" itemscope itemtype="http://schema.org/BlogPosting">
-		<div>
-			<div class="flex gap-1">
-				Posted by <span itemprop="author">{{ post.author }}</span> on 
-				<time itemprop="datePublished" datetime="{{ post.post_date }}">{{ post.post_date|date("Y-m-d") }}</time>
-				<div class="ml-2">{{ function('do_shortcode', '[posts_like_dislike id='~ post.id ~']') }}</div>
-			</div>
+		<h1 class="text-[28px] font-bold">{{ post.title }}</h1>
+		<div class="flex gap-1 text-xs mt-4">
+			Posted by <span itemprop="author">{{ post.author }}</span> on 
+			<time itemprop="datePublished" datetime="{{ post.post_date }}">{{ post.post_date|date("Y-m-d") }}</time>
+			<div class="ml-2">{{ function('do_shortcode', '[posts_like_dislike id='~ post.id ~']') }}</div>
 		</div>
-		<div class="post-tag mb-8 flex-grow">
+		<div class="post-tag mb-8 mt-2 flex-grow text-xs">
 				{% for tag in post.terms( {query:{taxonomy:'post_tag', orderby:'name', order: 'ASC'}}) %}
-					<small class="bg-purple px-2 rounded-xl mr-2">
-						<a class="text-white break-words" href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ tag.name }}%22">
+						<a class="bg-purple px-2 rounded-xl mr-2 text-white break-words" href="/search?{{ constant('ALGOLIA_INDEX') }}[query]=%22{{ tag.name }}%22">
 							{{ tag.name }}
 						</a>
-					</small>
 				{% endfor %}
-		</div>	
+		</div>
 		<div class="article-body" itemprop="articleBody">
 			{{ post.content }}
 		</div>
