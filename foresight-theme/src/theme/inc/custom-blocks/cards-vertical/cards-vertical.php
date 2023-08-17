@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Testimonial Block template.
+ * Cards vertical block template.
  *
  * @param array $block The block settings and attributes.
  */
@@ -10,9 +9,9 @@ $args = [];
 
 // Load values and assign defaults.
 $image_ID = get_field( 'for_card_image' );
-$card_title = !empty(get_field( 'for_card_title' )) ? get_field( 'for_card_title' ) : 'Enter your title here or leave blank';
-$card_subtitle = !empty(get_field( 'for_card_subtitle' )) ? get_field( 'for_card_subtitle' ) : 'Enter your subtitle here or leave blank';
-$card_description = !empty(get_field( 'for_card_description' )) ? get_field( 'for_card_description' ) : 'Enter your description here or leave blank';
+$card_title = !empty(get_field( 'for_card_title' )) ? get_field( 'for_card_title' ) : 'Enter your title here';
+$card_subtitle = !empty(get_field( 'for_card_subtitle' )) ? get_field( 'for_card_subtitle' ) : 'Enter your subtitle here';
+$card_description = !empty(get_field( 'for_card_description' )) ? get_field( 'for_card_description' ) : 'Enter your description here';
 $card_link = get_field( 'for_card_link' );
 
 // Create id attribute allowing for custom "anchor" value.
