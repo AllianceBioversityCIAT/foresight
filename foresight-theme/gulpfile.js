@@ -111,7 +111,7 @@ function scaffolding() {
 function watchTask() {
     // Watch Php files.
     gulp.watch(
-        buildConfig.sources.sourceFolder + '/**/*.{php,twig}',
+        buildConfig.sources.sourceFolder + '/**/*.{php,twig,json}',
         gulp.series(scaffolding, cssTask)
     )
 
