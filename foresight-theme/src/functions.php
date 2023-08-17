@@ -305,6 +305,11 @@ require get_template_directory() . '/theme/inc/customizer/customizer.php';
 require get_template_directory() . '/theme/menu/social-menu.php';
 
 /**
+ * Custom gutenberg blocks.
+ */
+require get_theme_file_path('/theme/inc/custom-blocks/custom-blocks.php');
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
