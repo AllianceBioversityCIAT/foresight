@@ -1,0 +1,16 @@
+{
+  "name": "for/button",
+  "title": "Button",
+  "description": "A custom button block.",
+  "category": "foresight",
+  "editorStyle": [
+    "file:../../../../style.css"
+  ],
+  "icon": "button",
+  "keywords": ["button", "action", "content"],
+  "acf": {
+      "mode": "preview",
+      "renderTemplate": "button.php"
+  },
+  "align": "full"
+}
