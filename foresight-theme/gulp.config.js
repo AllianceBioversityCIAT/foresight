@@ -56,7 +56,6 @@ module.exports = {
             '*/',
             ' ',
         ],
-        iconFont: './src/static/images/icons/*.svg',
     },
     destination: {
         destFolder: destinationFolder,
@@ -64,7 +63,6 @@ module.exports = {
         principalCSSFiles: destinationFolder + '/',
         allImgFiles: destinationFolder + '/static/images/',
         allLibFiles: destinationFolder + '/static/lib/',
-        iconFont: destinationFolder + '/static/lib/fonts/',
         buildPackage: 'dist',
     },
 }
