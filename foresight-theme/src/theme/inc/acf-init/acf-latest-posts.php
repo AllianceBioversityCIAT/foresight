@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Latest Post
+ * This function records fields for the acf.
+ */
 function register_custom_acf_field_latest_posts() {
   if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		return;

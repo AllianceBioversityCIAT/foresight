@@ -1,6 +1,6 @@
 <?php
 /**
- * Published year field for Posts and Publications
+ * Partners Page
  * This function records fields for the acf.
  */
 function register_custom_acf_fields_page_partners() {
