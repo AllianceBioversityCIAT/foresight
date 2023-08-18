@@ -1,3 +1,14 @@
+# =========================================================================
+#
+#   This source code is the confidential, proprietary information of
+#   CIAT Foresigth., you may not disclose such Information,
+#   and may only use it in accordance with the terms of the license
+#   agreement you entered into with CIAT Foresigth.
+#  
+#   2023:CIAT Foresigth - Cafeto Software S.A.S
+#   All Rights Reserved.
+#
+# ==========================================================================
 name: Build and Test
 on:
   push:
@@ -7,7 +18,7 @@ on:
 
 jobs:
   build:
-    name: Build Wordpress Theme
+    name: Build Wordpress Theme to Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
