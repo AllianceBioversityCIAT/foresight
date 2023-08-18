@@ -50,23 +50,6 @@
 		mb-2;
 	}
 
-	#foresight-post 
-	article 
-	.article-body{
-		@apply
-		flex
-		flex-col
-		space-y-5;
-	}
-
-	#foresight-page 
-	.article-body {
-		@apply
-		flex
-		flex-col
-		space-y-5;
-	}
-
 	/* begin menus */
 	.item_top_menu {
 		@apply
