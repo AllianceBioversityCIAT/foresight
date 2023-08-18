@@ -5,6 +5,10 @@
   background-color: white;
 }
 
+#login {
+  margin-right: 9%;
+}
+
 #login h1 {
   display: none;
 }
@@ -152,5 +156,9 @@ div#intro {
 @media screen and (max-width: 782px) {
   #login .privacy-policy-page-link {
     margin-bottom: 100px;
+  }
+  #login {
+    margin-right: auto;
+    margin-left: auto;
   }
 }

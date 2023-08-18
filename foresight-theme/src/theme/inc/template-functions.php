@@ -860,11 +860,11 @@ add_filter('wpseo_primary_term_taxonomies', function ($all_taxonomies, $post_typ
 /**
  * Change logo for wp-login
  */
-function foresight_login_logo() {
+function foresight_login_css() {
 	wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/static/css/login.css' );
 
 }
-add_action( 'login_enqueue_scripts', 'foresight_login_logo' );
+add_action( 'login_enqueue_scripts', 'foresight_login_css' );
 
 /**
  * This function adds content to the login.
