@@ -32,7 +32,7 @@ $args['classes'] = $classes;
 
 if ( ! empty( $card_link ) && !is_admin() ) {
   ?>
-    <a href="<?php echo $card_link; ?>">
+    <a href="<?php echo $card_link; ?>" target="_blank">
   <?php
 }
 ?>
