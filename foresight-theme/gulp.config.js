@@ -43,11 +43,10 @@ module.exports = {
             '!src/static/js/**',
             '!src/static/images/**',
         ],
-        version: 'src/static/sass/variables-site/_version.scss',
         banner: [
             '/*!',
             'Theme Name: ' + package.name,
-            'Description:' + package.description,
+            'Description: ' + package.description,
             'Author: ' + package.author,
             'Version: ' + package.version,
             'Tags: ' + package.keywords.join(' '),

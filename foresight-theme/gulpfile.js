@@ -4,8 +4,6 @@ var buildConfig = require('./gulp.config'),
     fs = require('fs'),
     babel = require('gulp-babel'),
     header = require('gulp-header'),
-    sass = require('gulp-sass'),
-    rtlcss = require('gulp-rtlcss'),
     postcss = require('gulp-postcss'),
     autoprefixer = require('gulp-autoprefixer'),
     cssnano = require('cssnano'),
@@ -17,7 +15,6 @@ var buildConfig = require('./gulp.config'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     del = require('del'),
-    bump = require('gulp-bump'),
     zip = require('gulp-zip'),
     tailwindcss = require('tailwindcss'),
     atImport = require('postcss-import'),
@@ -40,7 +37,6 @@ function cssTask() {
         .pipe(mode.development(sourcemaps.init()))
         .pipe(plumber({ errorHandler: onError }))
         .pipe(header(buildConfig.sources.banner.join('\n')))
-        .pipe(sass())
         .pipe(postcss([atImport, tailwindcss, autoprefixer, cssnano]))
         .pipe(mode.development(sourcemaps.write('/')))
         .pipe(gulp.dest(buildConfig.destination.destFolder))
@@ -131,7 +127,7 @@ function watchTask() {
 
     // Watch images files.
     gulp.watch(
-        buildConfig.sources.sourceFolder + '/static/images/**/*.{png,jpg,gif}',
+        buildConfig.sources.sourceFolder + '/static/images/**/*.{png,jpg,svg,gif}',
         imagesTask
     )
 }
@@ -144,18 +140,6 @@ function watchTask() {
 function clean(cb) {
     del.sync([buildConfig.destination.destFolder + '/**/**'], { force: true })
     cb()
-}
-
-function prerelease() {
-    return gulp
-        .src('./package.json')
-        .pipe(bump({ type: 'prerelease' }))
-        .pipe(gulp.dest('./'))
-}
-
-function updateWpVersion(cb) {
-    var banner = buildConfig.sources.banner.join('\n')
-    fs.writeFile(buildConfig.sources.version, banner, cb)
 }
 
 function package() {
@@ -184,4 +168,4 @@ const reload = gulp.series(build, gulp.parallel(watchTask))
 exports.watch = reload
 exports.build = build
 exports.default = build
-exports.package = gulp.series(updateWpVersion, build, package, prerelease)
+exports.package = gulp.series(build, package)
