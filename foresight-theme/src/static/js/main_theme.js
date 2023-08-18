@@ -74,17 +74,34 @@ if (slider) {
         })
     }
 
-    $('.carousel-full-slick').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true,
-        autoplay: false,
-        autoplaySpeed: 3000,
-        speed: 1000,
-        dots: true,
-        prevArrow: $('.caroulse-full-prev'),
-        nextArrow: $('.caroulse-full-next'),
-    })
+    if ($('.for-carousel-slick').length) {
+        $('.for-carousel-slick').each(function (key, item) {
+            console.log(key)
+            var sliderIdName = 'for-carousel-slick-' + key
+            var sliderIdPrev = 'caroulse-full-prev' + key
+            var sliderIdNext = 'caroulse-full-next' + key
+            this.id = sliderIdName
+            $('.caroulse-full-prev')[key].id = sliderIdPrev
+            $('.caroulse-full-next')[key].id = sliderIdNext
+
+            var sliderId = '#' + sliderIdName
+            var sliderIdPrev = '#' + sliderIdPrev
+            var sliderIdNext = '#' + sliderIdNext
+
+            $(sliderId).slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                autoplay: false,
+                autoplaySpeed: 3000,
+                speed: 1000,
+                dots: true,
+                adaptiveHeight: true,
+                prevArrow: $(sliderIdPrev),
+                nextArrow: $(sliderIdNext),
+            })
+        })
+    }
 
     $('.cards-slick-slider').slick({
         slidesToShow: 4,

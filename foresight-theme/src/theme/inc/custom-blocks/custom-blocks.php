@@ -20,6 +20,7 @@ function cwp_acf_load_blocks() {
   $custom_gutenberg_blocks = array(
     array('folder' => 'cards-vertical', 'block' => 'cards-vertical'),
     array('folder' => 'button', 'block' => 'button'),
+    array('folder' => 'carousel', 'block' => 'carousel'),
     // 'my-first-custom-ss-block',
   );
 

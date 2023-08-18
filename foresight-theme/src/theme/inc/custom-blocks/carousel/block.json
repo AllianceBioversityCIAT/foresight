@@ -1,0 +1,16 @@
+{
+  "name": "for/carousel",
+  "title": "Carousel",
+  "description": "A custom carousel posts block.",
+  "category": "foresight",
+  "editorStyle": [
+    "file:../../../../style.css"
+  ],
+  "icon": "<svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='752.000000pt' height='752.000000pt' viewBox='0 0 752.000000 752.000000' preserveAspectRatio='xMidYMid meet'><g transform='translate(0.000000,752.000000) scale(0.100000,-0.100000)'fill='#000000' stroke='none'><path d='M3010 3870 l0 -1270 750 0 750 0 0 1270 0 1270 -750 0 -750 0 0 -1270z m1230 0 l0 -1000 -480 0 -480 0 0 1000 0 1000 480 0 480 0 0 -1000z'/><path d='M2250 3870 l0 -970 300 0 300 0 0 970 0 970 -300 0 -300 0 0 -970z'/><path d='M4670 3870 l0 -970 300 0 300 0 0 970 0 970 -300 0 -300 0 0 -970z'/><path d='M1690 3870 l0 -760 200 0 200 0 0 760 0 760 -200 0 -200 0 0 -760z'/><path d='M5430 3870 l0 -760 200 0 200 0 0 760 0 760 -200 0 -200 0 0 -760z'/></g></svg>",
+  "keywords": ["slider", "carousel", "content"],
+  "acf": {
+      "mode": "preview",
+      "renderTemplate": "carousel.php"
+  },
+  "align": "full"
+}

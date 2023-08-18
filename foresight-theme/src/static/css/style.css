@@ -46,6 +46,10 @@
   background-color: white;
 }
 
+.carousel-full-slick.component-carousel .slick-dots li.slick-active button {
+  background-color: #1F1F1F;
+}
+
 .carousel-full-slick .slick-dots li button::before {
   content: none;
 }
