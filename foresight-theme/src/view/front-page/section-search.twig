@@ -1,11 +1,11 @@
 <section class="relative pt-24 pb-28 bg-cover bg-center bg-no-repeat before:block before:absolute  before:bg-black-100 before:opacity-50 before:w-full before:h-full before:top-0 before:left-0" style="background-image: url('{{ theme.link }}/static/images/search-foresight.jpg')">
   <div class="container mx-auto px-4">
     <h2 class="font-montserrat text-center mx-auto text-4xl font-bold text-yellow-dark mb-10 drop-shadow-lg md:w-full md:text-left md:mx-0 md:text-6xl md:m-20">Search Foresight Material</h2>
-    <form class="flex flex-col" id="frm-search" action="/" method="GET"> 
+    <form class="flex flex-col" id="frm-popular-search" action="/" method="GET"> 
     <div class="field-group flex flex-row mb-6  relative w-full md:w-6/12 ">
         <label for="s" class="sr-only">Search</label>
         <input type="text" id="s" name="s" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 py-3" placeholder="" required>
-        <button type="button" onclick="event.preventDefault();this.closest('form').submit();" class="inline-flex items-center py-2.5 px-3 text-sm uppercase font-medium text-black bg-yellow border border-yellow hover:bg-yellow-dark focus:ring-4 focus:outline-none focus:ring-yellow-dark ">
+        <button type="submit" id="btn-popular-search" class="inline-flex items-center py-2.5 px-3 text-sm uppercase font-medium text-black bg-yellow border border-yellow hover:bg-yellow-dark focus:ring-4 focus:outline-none focus:ring-yellow-dark ">
             Search
         </button>
     </div>

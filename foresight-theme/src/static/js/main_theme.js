@@ -151,6 +151,19 @@ if (slider) {
         })
     }
 
+    if ( $('#frm-popular-search').length ){
+        $( "#frm-popular-search" ).on( "submit", function( event ) {
+            event.preventDefault();
+            const btn = this.elements['btn-popular-search'];
+            const keyword = this.elements['s'].value.trim();
+            if(keyword){
+                console.log(keyword);
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> SEARCHING...';
+                this.submit();
+            }
+        });
+    }
     /**
      * This function performs an ajax query to render the html result on the page.
      */
