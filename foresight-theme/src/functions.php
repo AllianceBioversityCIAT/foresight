@@ -376,7 +376,9 @@ if ( !function_exists( 'foresight_popular_searches' ) ) :
 
 		if ( $searches ){
 			foreach ( $searches as $key => $value ) {
-				$output .= '<option value="' . $value[ 'term' ] . '">'.$value[ 'term' ].'</option>';
+				if( !empty($value[ 'term' ]) ){
+					$output .= '<option value="' . $value[ 'term' ] . '">'.$value[ 'term' ].'</option>';
+				}
 			}
 		} else {
 			$output .= '<option value="">Nothing yet</option>';
