@@ -1,3 +1,14 @@
+# =========================================================================
+#
+#   This source code is the confidential, proprietary information of
+#   CIAT Foresigth., you may not disclose such Information,
+#   and may only use it in accordance with the terms of the license
+#   agreement you entered into with CIAT Foresigth.
+#  
+#   2023:CIAT Foresigth - Cafeto Software S.A.S
+#   All Rights Reserved.
+#
+# ==========================================================================
 name: Deploy to Foresight WP Engine
 on:
   push:
@@ -12,6 +23,7 @@ on:
 jobs:
   build:
     name: Build Wordpress Theme
+    # The build process will start if, and only if, a push is made to the main branch, or, if code is merged after a pull request.
     if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     steps:
@@ -35,6 +47,7 @@ jobs:
             cd /home/runner/work/foresight/foresight/foresight-plugin-algolia/src
             composer update
             cd ..
+            # INSTALL PLUGIN DEPENDENCIES
             npm install
             npm install --global gulp-cli
             gulp build
@@ -56,6 +69,9 @@ jobs:
           name: theme-build
           path: foresight-theme/build/*
 
+# =========================================================================================
+#                            DEPLOY TO DEVELOPMENT ENVIRONMENT                            |
+# =========================================================================================
   deploy-dev:
     name: Deploy to Development
     environment:
@@ -68,6 +84,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       
+      # DOWNLOAD THEME BUILDED FILES
       - name: Downloading build Artifact  
         uses: actions/download-artifact@v3
         with:
@@ -75,7 +92,8 @@ jobs:
       - name: Display structure of downloading files
         run: |
             tree
-
+      
+      # DOWNLOAD PLUGIN BUILDED FILES
       - name: Downloading build Artifact  
         uses: actions/download-artifact@v3
         with:
@@ -89,10 +107,12 @@ jobs:
         with:
           node-version: 14  
 
+      # INSTANTSEARCH SERVICE IS COMPILED IN EACH ENVIRONMENT UNLIKE THEMES, PLUGINS, 
+      # BECAUSE INSTANTSEARCH REQUIRES DIFFERENT ENVIRONMENT VARIABLES FOR EACH ENVIRONMENT.    
       - name: Build instantsearch
         run: |
             cd foresight-instantsearch
-            # Create and add environment variables on .env
+            # CREATE AND ADD ENVIRONMENT VARAIBLES TO ".env"
             touch .env
             echo ALGOLIA_APPLICATION_ID=${{ vars.ALGOLIA_APPLICATION_ID }} >> .env
             echo ALGOLIA_SEARCH_KEY=${{ vars.ALGOLIA_SEARCH_KEY }} >> .env
@@ -101,7 +121,7 @@ jobs:
             echo ALGOLIA_INDEX_ORDER_BY_YEAR_DESC=${{ vars.ALGOLIA_INDEX_ORDER_BY_YEAR_DESC }} >> .env
             echo SDG_PATH_URL=${{ vars.SDG_PATH_URL }} >> .env
             cat .env
-            # Install dependencies
+            # INSTALL DEPENDENCIES
             sudo apt install -y jq
             echo '{"dest": "../foresight-cgiar/static"}' > config.json
             cat config.json
@@ -109,6 +129,8 @@ jobs:
             npm run build
             tree ..
       
+      # CONNECT TO WP ENGIN REPOSITORY WITH SSH - THIS STEP ONLY WORKS ON GITHUB ACTIONS, 
+      # WILL BE DIFERENT ON OTHER PIPELINES PLATFORMS 
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -124,11 +146,17 @@ jobs:
           # COMMIT THE COMPLETED BUILD ARTEFACT TO WPENGINE'S GIT
           cd .. && mkdir deploy && cd deploy/ && git clone ${{ secrets.GIT_REMOTE }} .
           rm -rf * && mkdir -p wp-content/themes && mkdir -p wp-content/plugins
+          # MOVE THEME TO WP ENGINE REPO
           mv /home/runner/work/foresight/foresight/foresight-cgiar wp-content/themes
           mv /home/runner/work/foresight/foresight/algolia_foresight wp-content/plugins
+          # MOVE PLUGIN TO WP ENGINE REPO
           git add . && git commit -m "Deploy from GitHub Actions"
           git push origin master
           tree ..
+
+# =========================================================================================
+#                              DEPLOY TO STAGING ENVIRONMENT                              |
+# =========================================================================================
 
   deploy-staging:
     name: Deploy to Staging
@@ -198,7 +226,9 @@ jobs:
             git push origin master
             tree ..
 
-
+# =========================================================================================
+#                             DEPLOY TO PRODUCTION ENVIRONMENT                            |
+# =========================================================================================
   deploy-prod:
     name: Deploy to Production
     environment:
@@ -245,6 +275,7 @@ jobs:
             npm run build
             tree ..
 
+      # CONNECT TO WP ENGIN REPOSITORY WITH SSH - THIS STEP ONLY WORKS ON GITHUB ACTIONS, WILL BE DIFERENT ON OTHER PIPELINES PLATFORMS     
       - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
