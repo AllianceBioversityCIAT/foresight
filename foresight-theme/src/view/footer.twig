@@ -1,6 +1,8 @@
 {% set footer_logo = Image( site.theme.theme_mod('theme_footer_logo')) %}
 {% set footer_about = site.theme.theme_mod('theme_footer_about') %}
-{% set footer_newsletter = site.theme.theme_mod('theme_footer_newsletter') %}
+{% set footer_newsletter_link = site.theme.theme_mod('theme_footer_newsletter_link') %}
+{% set footer_newsletter_label = site.theme.theme_mod('theme_footer_newsletter_label') %}
+{% set footer_newsletter_button = site.theme.theme_mod('theme_footer_newsletter_button') %}
 
 <footer id="foresight-footer-section" class="bg-black w-full py-14">
   <div class="container mx-auto relative px-4">
@@ -14,11 +16,11 @@
             {{ footer_about }}
           </div>
           <h6 class="text-white mt-11 mb-5 font-bold text-lg">
-            {{ footer_title_newsletter }}
+            {{ footer_newsletter_label }}
           </h6>
             <div class="relative max-w-sm">  
-                <a href="{{ footer_newsletter }}" target="_blank" class="text-white bg-green hover:bg-green/70 text-center inline-flex items-center font-sans font-normal text-sm rounded-lg px-5 py-3 focus:outline-none">
-                  Subscribe to the Newsletter 
+                <a href="{{ footer_newsletter_link }}" target="_blank" class="text-white bg-green hover:bg-green/70 text-center inline-flex items-center font-sans font-normal text-sm rounded-lg px-5 py-3 focus:outline-none">
+                  {{footer_newsletter_button}}
                   <svg class="w-5 h-5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                   </svg>
