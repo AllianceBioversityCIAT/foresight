@@ -57,7 +57,7 @@ foreach( $carousel_repeater as $key => $val ) {
         <?php
           if ( ! empty( $val['for_card_link'] ) ) {
             ?>
-              <div class="text-left mt-4 max-md:mt-24 max-md:text-center">
+              <div class="text-left mt-4 max-md:text-center">
                 <a href="<?php echo $val['for_card_link']; ?>" class="btn-primary-large" target="_blank">
                   READ MORE
                 </a>
