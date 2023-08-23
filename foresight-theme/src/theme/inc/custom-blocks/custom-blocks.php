@@ -21,6 +21,7 @@ function cwp_acf_load_blocks() {
     array('folder' => 'cards-vertical', 'block' => 'cards-vertical'),
     array('folder' => 'button', 'block' => 'button'),
     array('folder' => 'carousel', 'block' => 'carousel'),
+    array('folder' => 'cards-grid', 'block' => 'cards-grid'),
     // 'my-first-custom-ss-block',
   );
 

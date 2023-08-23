@@ -34,7 +34,7 @@ $args['classes'] = $classes;
 ?>
 
 <div class="<?php echo esc_attr( $button_align_desktop ); ?> max-md:<?php echo esc_attr( $button_align_mobile ); ?>">
-  <a href="<?php echo $button_link; ?>" class="<?php echo esc_attr( $button_style['value'] ); ?>" target="<?php echo esc_attr( $target ); ?>">
+  <a href="<?php echo $button_link; ?>" class="<?php echo esc_attr( $button_style['value'] ); ?><?php  echo esc_attr( $args['classes'] ); ?>" target="<?php echo esc_attr( $target ); ?>">
     <?php echo esc_html( $button_title ); ?>
   </a>
 </div>
