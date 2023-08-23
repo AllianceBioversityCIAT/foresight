@@ -40,53 +40,6 @@ function register_custom_acf_fields_settings_page() {
 				'title'                 => 'Foresight',
 				'fields'                => [
 					[
-						'key'               => 'field_settings_tab_1',
-						'label'             => 'Contact',
-						'name'              => '',
-						'type'              => 'tab',
-						'instructions'      => '',
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'placement'         => 'top',
-						'endpoint'          => 1,
-					],
-					[
-						'key'               => 'field_settings_contact_us_address',
-						'name'              => 'contact_us_address',
-						'label'             => 'Address',
-						'type'              => 'text',
-						'instructions'      => '',
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '33',
-						],
-					],
-					[
-						'key'               => 'field_settings_contact_us_phone',
-						'name'              => 'contact_us_phone',
-						'label'             => 'Phone',
-						'type'              => 'text',
-						'instructions'      => '',
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '33',
-						],
-					],
-					[
-						'key'               => 'field_settings_contact_us_email',
-						'name'              => 'contact_us_email',
-						'label'             => 'Email',
-						'type'              => 'text',
-						'instructions'      => '',
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '33',
-						],
-					],
-					[
 						'key'          => 'field_recaptcha_section',
 						'label'        => 'Recaptcha',
 						'name'         => 'recaptcha_section',
