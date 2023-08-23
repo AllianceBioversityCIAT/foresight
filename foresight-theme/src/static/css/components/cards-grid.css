@@ -1,0 +1,39 @@
+@layer components {
+
+  .card-grid {
+    @apply
+    grid 
+    grid-cols-1 
+    lg:grid-cols-3 
+    grid-flow-row 
+    gap-2;
+  }
+
+  .card-item {
+    @apply
+    relative
+    min-h-[420px]
+    flex 
+    flex-col
+    justify-end;
+  }
+
+  .card-body {
+    @apply
+    absolute 
+    left-0 
+    top-0 
+    bg-black 
+    w-full 
+    h-full 
+    bg-black-100/40 
+    z-[1] 
+    group-hover:bg-black-100/70;
+  }
+
+  .card-item > h4 {
+    @apply
+    m-5 
+    z-[2];
+  }
+}

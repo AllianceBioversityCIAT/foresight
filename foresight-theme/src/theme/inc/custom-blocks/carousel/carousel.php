@@ -11,7 +11,7 @@ $args = [];
 $carousel_repeater = get_field( 'for_carousel_repeater' );
 
 // Create id attribute allowing for custom "anchor" value.
-$args['id'] = 'card-slider-' . $block['id'];
+$args['id'] = 'carousel-' . $block['id'];
 if ( ! empty($block['anchor'] ) ) {
     $id = $block['anchor'];
 }
