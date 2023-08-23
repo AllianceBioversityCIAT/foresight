@@ -207,20 +207,22 @@ add_action('save_post', 'algolia_update_post', 10, 3);
  */
 function pending_update_post($post_id, $post){
 
-	$transient_data = get_transient($post->post_name);
+	$transient_data = get_transient($post->post_title);
 
 	if ( !$transient_data ) {
-		$options_page =	get_fields( 'theme-general-settings' );
-		$email_user   = $options_page[ 'contact_us_email' ];
 		$headers[]    = 'Content-Type: text/html; charset=UTF-8';
 		$subject_user = "[".$post->post_status."] ".$post->post_title;
-		$body 		  =  'Hello Foresight, You have new content to approve. <a href="'.admin_url( 'post.php?post='.$post->ID.'&action=edit', 'https' ).'">Click here to enter</a>';
+		$body 		  = 'Hello Foresight, You have new content to approve. <a href="'.admin_url( 'post.php?post='.$post->ID.'&action=edit', 'https' ).'">Click here to enter</a>';
+		$email		  = EMAIL_NOTIFICATION;
 		
-		$response_mail_user = wp_mail( $email_user, $subject_user, $body, $headers );
-		
-		if($response_mail_user){
-			set_transient($post->post_name, true, 8 * HOUR_IN_SECONDS);
+		if ( !empty($email) ){
+			$response_mail_user = wp_mail( $email, $subject_user, $body, $headers );
+			
+			if($response_mail_user){
+				set_transient($post->post_title, true, 8 * HOUR_IN_SECONDS);
+			}
 		}
+		
 	}
 }
 
