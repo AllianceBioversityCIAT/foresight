@@ -31,7 +31,7 @@ function register_custom_acf_fields_section_about_us() {
 						'required'          => 1,
 						'conditional_logic' => 0,
 						'wrapper'           => [
-							'width' => '30',
+							'width' => '100',
 						],
 					],
 					[
@@ -43,7 +43,7 @@ function register_custom_acf_fields_section_about_us() {
 						'required'          => 1,
 						'conditional_logic' => 0,
 						'wrapper'           => [
-							'width' => '70',
+							'width' => '50',
 							'class' => '',
 							'id'    => '',
 						],
@@ -62,7 +62,7 @@ function register_custom_acf_fields_section_about_us() {
 						'required'          => 1,
 						'conditional_logic' => 0,
 						'wrapper'           => [
-							'width' => '70',
+							'width' => '50',
 							'class' => '',
 							'id'    => '',
 						],
