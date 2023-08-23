@@ -32,7 +32,7 @@
 					<ul class="flex gap-5">
 						{% for item in social_menu.items %}
               <li class="text-white border rounded-full border-white/25 w-12 h-12 justify-center flex items-center hover:bg-yellow">
-                <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a>
+                <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}" aria-label="{{item.name}}"></a>
               </li>
             {% endfor %}
 					</ul>
