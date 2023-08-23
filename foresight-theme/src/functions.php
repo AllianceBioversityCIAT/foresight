@@ -351,10 +351,11 @@ add_action( 'parse_query', 'foresight_save_keywords_search' );
 if ( function_exists( 'acf_add_options_page' ) ) {
 
 	acf_add_options_page( array(
+		'parent_slug'	  => 'options-general.php',
 		'page_title'      => 'Theme Settings',
-		'menu_title'      => 'Theme Options',
+		'menu_title'      => 'Foresight Options',
 		'menu_slug'       => 'theme-general-settings',
-		'capability'      => 'edit_publications',
+		'capability'      => 'manage_options',
 		'redirect'        => false,
 		'update_button'   => 'Save options',
 		'updated_message' => 'Options saved',
