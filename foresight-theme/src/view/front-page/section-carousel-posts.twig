@@ -1,12 +1,12 @@
 <section class="pb-16 pt-36 bg-purple">
   <div class="container relative">
-    <h3 class="text-white mb-16 max-md:text-center">Featured Stories</h3>
+    <h3 class="text-white mb-16 max-md:text-center">{{ frontPage.meta('for_carousel_title_posts') }}</h3>
     <div>
       {% include "./view/macros/carousel-full-posts.twig" %}
     </div>
     <div class="text-right mt-10 max-md:mt-24 max-md:text-center">
-      <a class="btn-primary-large">
-        VIEW ALL RESOURCES
+      <a class="btn-primary-large" href="{{ frontPage.meta('for_carousel_link_posts') }}" target="_blank">
+        {{ frontPage.meta('for_carousel_button_posts') }}
       </a>
     </div>
   </div>
