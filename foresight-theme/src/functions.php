@@ -160,19 +160,8 @@ function acf_settings_show_admin( $show_admin ) {
  */
 function foresight_theme_scripts() {
 
-	global $template;
-	$template_name = basename( $template, ".php" );
-
-	if($template_name == 'search'){
-		$template_name = 'page-search';
-	}
-
 	//Styles.
 	wp_enqueue_style( 'foresight_theme-style', get_stylesheet_uri(), array(), _S_VERSION );
-
-	if ( $GLOBALS['pagenow'] != 'wp-login.php' ) {
-		wp_enqueue_style( 'foresight_' . $template_name, get_template_directory_uri() . '/static/css/' . $template_name . '.css', array(), _S_VERSION );
-	}
 
 	// Slick
 	wp_enqueue_style( 'slick', get_template_directory_uri() . '/static/lib/slick-carousel/slick/slick.css', false, _S_VERSION );
