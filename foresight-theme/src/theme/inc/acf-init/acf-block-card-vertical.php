@@ -99,7 +99,7 @@ function register_custom_acf_fields_block_card() {
           'label' => 'Card Link',
           'name' => 'for_card_link',
           'aria-label' => '',
-          'type' => 'url',
+          'type' => 'link',
           'instructions' => '',
           'required' => 0,
           'conditional_logic' => 0,

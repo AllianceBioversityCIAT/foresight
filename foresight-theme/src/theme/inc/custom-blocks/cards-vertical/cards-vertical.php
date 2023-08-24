@@ -30,24 +30,23 @@ if ( ! empty( $block['align'] ) ) {
 }
 $args['classes'] = $classes;
 
-if ( ! empty( $card_link ) && !is_admin() ) {
+if ( ! empty( $card_link ) && !is_admin() ) { 
   ?>
-    <a href="<?php echo $card_link; ?>" target="_blank">
+    <a href="<?php echo $card_link['url'] ?? ''; ?>" target="<?php echo $card_link['target'] ?? '_self'; ?>">
   <?php
 }
 ?>
 <div id="<?php echo esc_attr( $args['id'] ); ?>" class="grid grid-cols-2 shadow-lg <?php echo esc_attr( $args['classes'] ); ?>">
   <div class="col-span-1 max-md:col-span-2">
     <?php echo wp_get_attachment_image( $image_ID, 'full', '', array( 'class' => 'w-full h-full min-h-full min-h-[371px] max-md:min-h-full max-md:h-60 object-cover object-top' ) ); ?>
-    <!-- <image class="w-full h-full min-h-[371px] max-md:min-h-full max-md:h-60 object-fill object-center" src="{{theme.link}}/static/images/slide1.jpeg" /> -->
   </div>
   <div class="col-span-1 max-md:col-span-2 bg-white px-8 pt-16 border-y border-r max-md:border-l border-[#E8E7E8] border-solid max-md:pt-10 pb-20 max-md:pb-8 flex flex-col gap-y-4 justify-center">
-    <h5 class="text-xl text-dark font-bold mb-7 max-md:mb-2">
+    <h4 class="text-xl text-dark font-bold mb-7 max-md:mb-2">
       <?php echo esc_html( $card_subtitle ); ?>
-    </h5>
-    <h4 class="text-3xl max-md:text-xl text-dark font-bold">
-      <?php echo esc_html( $card_title ); ?>
     </h4>
+    <h5 class="text-3xl max-md:text-xl text-dark font-bold">
+      <?php echo esc_html( $card_title ); ?>
+    </h5>
     <div>
       <p class="text-base">
         <?php echo esc_html( $card_description ); ?>

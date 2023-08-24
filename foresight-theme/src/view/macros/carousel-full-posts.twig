@@ -4,13 +4,13 @@
       <div>
         <div class="grid grid-cols-2 px-8">
           <div class="col-span-1 max-md:col-span-2">
-            <image class="w-full h-full min-h-[371px] max-md:min-h-full max-md:h-60 object-fill object-center" 
+            <image class="w-full h-full min-h-[371px] max-md:min-h-full max-md:h-60 object-cover object-top" 
               src="{{ Image( item.for_card_image ).src }}" srcset="{{ Image( item.for_card_image ).srcset }}"
               sizes="{{ Image( item.for_card_image ).img_sizes }}" alt="{{ Image( item.for_card_image ).title }}"/>
           </div>
           <div class="col-span-1 max-md:col-span-2 bg-white px-8 pt-16 max-md:pt-10 pb-20 max-md:pb-8 flex flex-col gap-y-4 justify-center">
-            <h5 class="text-xl text-dark font-bold mb-7 max-md:mb-2">{{ item.for_card_subtitle }}</h5>
-            <h4 class="text-3xl max-md:text-xl text-dark font-bold">{{ item.for_card_title }}</h4>
+            <h4 class="text-xl text-dark font-bold mb-7 max-md:mb-2">{{ item.for_card_subtitle }}</h4>
+            <h5 class="text-3xl max-md:text-xl text-dark font-bold">{{ item.for_card_title }}</h5>
             <div>
               <p class="text-base">
                 {{ item.for_card_description }}
