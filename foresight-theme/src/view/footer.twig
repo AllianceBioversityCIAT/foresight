@@ -15,9 +15,9 @@
           <div class="mt-4 max-w-[520px] text-white font-montserrat font-normal text-xs">
             {{ footer_about }}
           </div>
-          <h6 class="text-white mt-11 mb-5 font-bold text-lg">
+          <div class="text-white mt-11 mb-5 font-bold text-lg">
             {{ footer_newsletter_label }}
-          </h6>
+          </div>
             <div class="relative max-w-sm">  
                 <a href="{{ footer_newsletter_link }}" target="_blank" class="text-white bg-green hover:bg-green/70 text-center inline-flex items-center font-sans font-normal text-sm rounded-lg px-5 py-3 focus:outline-none">
                   {{footer_newsletter_button}}
@@ -32,7 +32,7 @@
 					<ul class="flex gap-5">
 						{% for item in social_menu.items %}
               <li class="text-white border rounded-full border-white/25 w-12 h-12 justify-center flex items-center hover:bg-yellow">
-                <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}"></a>
+                <a href="{{ item.link }}" target="{{ item.target ?? '_self' }}" class="{{ item.classes|join(' ') }}" aria-label="{{item.name}}"></a>
               </li>
             {% endfor %}
 					</ul>
