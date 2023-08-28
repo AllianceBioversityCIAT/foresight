@@ -16,21 +16,22 @@ Before start project is neccesary install the following dependencies in your sys
 ## Installation
 ```bash
 # Clone the repository
-$ git@github.com:AllianceBioversityCIAT/foresight.git
+$ git clone https://github.com/AllianceBioversityCIAT/foresight.git
 
 # Install the Gulp CLI
 $ npm install --global gulp-cli
 
 # Install the dependencies
+$ cd foresight
 $ npm install
 ```
 
 ## Configuration 
-Create the `config.json` file, to run locally:
+Create the `config.json` file and replace the value of `<wp-data>` with the path to your local WordPress directory, if you don't already have one we recommend using [Local](https://localwp.com/)
 
 ```.config
 {
-  "dest": "/wp-data/wp-content/themes"
+  "dest": "/<wp-data>/wp-content/themes"
 }
 ```
 When creating this file you must delete the example file `config.json.sample`, the destination location requested, is to display all files processed by gulp, in the WordPress themes folder.
