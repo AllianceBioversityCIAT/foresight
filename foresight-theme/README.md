@@ -66,4 +66,4 @@ $ gulp watch --production
 ## Stay in touch
 
 - Authors - [Juan Manuel Lora] - [Miguel Buriticá] -  [Cafeto Software](https://cafeto.co/)
-- Website - [https://foresight.cgiar.org/](https://foresight.cgiar.org/)
+- Website - [https://foresight.cgiar.org/](https://foresight.cgiar.org/) 
