@@ -39,6 +39,10 @@
   margin-bottom: 40px;
 }
 
+#login form p.submit{
+  margin-top: 1rem !important;
+}
+
 #login .wp-pwd {
   display: flex;
   flex-wrap: wrap;
