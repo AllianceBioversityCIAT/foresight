@@ -1,7 +1,7 @@
 <div class="caroulse-full-container relative">
   <div class="for-carousel-slick carousel-full-slick">
     {% for item in frontPage.meta('for_carousel_posts_repeater') %}
-      <div>
+      <a href="{{ item.for_card_link.url }}" target="{{ item.for_card_link.target }}" aria-label="{{ item.for_card_link.title }}">
         <div class="grid grid-cols-2 px-8">
           <div class="col-span-1 max-md:col-span-2">
             <image class="w-full h-full min-h-[371px] max-md:min-h-full max-md:h-60 object-cover object-top" 
@@ -18,7 +18,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </a>
     {% endfor %}
 
   </div>
