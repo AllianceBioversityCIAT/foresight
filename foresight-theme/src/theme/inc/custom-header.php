@@ -4,7 +4,6 @@
  *
  * You can add an optional custom header image to header.php like so ...
  *
-	<?php the_header_image_tag(); ?>
  *
  * @link https://developer.wordpress.org/themes/functionality/custom-headers/
  *
@@ -25,7 +24,7 @@ function foresight_theme_custom_header_setup() {
 				'default-image'      => '',
 				'default-text-color' => '000000',
 				'width'              => 1920,
-				'height'             => 946,
+				'height'             => 300,
 				'flex-height'        => true,
 				'wp-head-callback'   => 'foresight_theme_header_style',
 			)
