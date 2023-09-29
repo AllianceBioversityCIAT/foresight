@@ -5,7 +5,7 @@
 
 function acf_enqueue_admin_script_foresight( $hook ) {
 
-    if ( 'toplevel_page_theme-general-settings' != $hook ) {
+    if ( 'settings_page_theme-general-settings' != $hook ) {
         return;
     }
 	
@@ -426,6 +426,7 @@ function foresight_import_zotero_cb() {
 				}
 
 				$item['data']['tags'] = $array_terms; //overwrite tags
+				$array_log['zotero_wp_conflicts'] = '';
 				
 				if( !$post_id ){ // NEW PUBLICATION
 					
