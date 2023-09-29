@@ -31,7 +31,7 @@ function register_custom_acf_fields_settings_page() {
 			$log_zotero = "<b>Last update: </b>" . $log_zotero[ 'date' ] . "<br><br>" .
 			"<ul>" . $log_zotero[ 'zotero_count' ] . "</ul>" .
 			"<b>Zotero Response: </b>" . json_encode( $log_zotero[ 'zotero_response' ] ) . '<br>' .
-			"<b>Wordpress Log: </b>" . $log_zotero[ 'zotero_wp_conflicts' ] . '';
+			"<b>Wordpress Log: </b>" . (isset($log_zotero['zotero_wp_conflicts']) ? $log_zotero['zotero_wp_conflicts'] : 'Nothing' ) . '';
 		}
 
 		acf_add_local_field_group(
